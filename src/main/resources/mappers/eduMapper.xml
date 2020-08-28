@@ -15,4 +15,10 @@
 		  FROM users
 		 WHERE userid = #{userid}
 	</select>
+	
+	<select id = "test" parameterType = "String" resultType = "com.kosmo.uni.vo.TestVO">
+		SELECT userid, username, password, enabled, authority
+		  FROM users
+		 WHERE userid = #{userid}
+	</select>
 </mapper>

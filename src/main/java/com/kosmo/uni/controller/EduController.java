@@ -43,8 +43,10 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/guest")
-	public String guest() {
+	public String guest(HttpServletRequest req, Model model) {
 		logger.info("url ==> guest");
+		
+		eduService.test(req, model);
 		
 		return "guest/guest";
 	}

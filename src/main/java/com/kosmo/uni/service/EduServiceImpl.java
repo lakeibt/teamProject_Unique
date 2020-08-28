@@ -40,4 +40,9 @@ public class EduServiceImpl implements EduService {
 		model.addAttribute("insertCnt", insertCnt);
 	}
 
+	@Override
+	public void test(HttpServletRequest req, Model model) {
+		eduDAO.test(req, model);
+	}
+
 }
