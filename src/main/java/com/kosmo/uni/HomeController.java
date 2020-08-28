@@ -39,6 +39,7 @@ public class HomeController {
 	
 	/*@RequestMapping("/guest/main")
 	public String main() {
+		sysout.println("김치~");
 		return "guest/main";
 	}*/
 	
