@@ -29,4 +29,10 @@ public class EduDAOImpl implements EduDAO {
 		TestVO tvo = sqlSession.selectOne(EduDAO + "test", "g1234");
 		System.out.println(tvo);
 	}
+
+	@Override
+	public Map<String, Object> selectUser(String id) {
+		Map<String, Object> map = sqlSession.selectOne(EduDAO + "selectUser", id);
+		return map;
+	}
 }

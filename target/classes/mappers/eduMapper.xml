@@ -11,7 +11,7 @@
 	</insert>
 	
 	<select id = "selectUser" resultType = "java.util.Map">
-		SELECT userid as username, passwd as password, name, enabled, authority
+		SELECT userid, password, username, enabled, authority
 		  FROM users
 		 WHERE userid = #{userid}
 	</select>

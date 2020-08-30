@@ -12,4 +12,6 @@ public interface EduDAO {
 
 	public void test(HttpServletRequest req, Model model);
 	
+	public Map<String, Object> selectUser(String id);
+	
 }

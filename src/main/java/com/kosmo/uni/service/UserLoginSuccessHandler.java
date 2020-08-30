@@ -27,8 +27,11 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 		request.getSession().setAttribute("memId", vo.getUserId());
 		request.getSession().setAttribute("auth", vo.getAuthorities());
 		
-		if(vo.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/manager/Mpage");
+		if(vo.getAuthorities().toString().equals("[ROLE_PROFESSOR]")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/professor/pro_main");
+			dispatcher.forward(request, response);
+		} else if(vo.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/main");
 			dispatcher.forward(request, response);
 		} else {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
