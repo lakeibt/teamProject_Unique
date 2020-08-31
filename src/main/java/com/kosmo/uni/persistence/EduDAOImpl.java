@@ -13,6 +13,7 @@ import com.kosmo.uni.vo.TestVO;
 
 @Repository
 public class EduDAOImpl implements EduDAO {
+	
 	@Autowired
 	SqlSession sqlSession;
 	
