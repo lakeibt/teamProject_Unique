@@ -81,7 +81,7 @@
 	<!-- 5. 에러처리 페이지 -->
   	<error-page>
   		<error-code>500</error-code>
-  		<location>/guest/main</location>
+  		<location>/guest/deniedTest</location>
   	</error-page>
   	
   	<!-- 6. 세션 타임 아웃 설정(120분) -->
