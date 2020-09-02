@@ -5,3 +5,7 @@
 *.class
 
 *.log
+
+target/
+
+pom.properties
