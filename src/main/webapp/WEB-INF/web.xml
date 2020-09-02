@@ -59,5 +59,34 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>  
+	<!-- 한글 안깨지게 처리 -->
+	
+	<!-- 2. 시큐리티 추가 시작 -->
+	<!-- 애플리케이션의 모든 요청을 스프링 시큐리티에서 처리하도록 하는 필터 -->
+	<!-- 보안 필터 체인 : 보안과 관련된 작업을 처리한다.
+		- 로그인 폼을 보여주거나, 접근 권한이 없는 경우 403 Forbidden(권한없음) 상태코드를 응답
+		- DelegatingFilterProxy -> FilterChainProxy -> SecurityFilterChain -> 실제 지원
+	 -->
+	<!-- <filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	<!-- 2. 시큐리티 추가 종료 -->
+	
+	<!-- 5. 에러처리 페이지 -->
+  	<error-page>
+  		<error-code>500</error-code>
+  		<location>/guest/login</location>
+  	</error-page>
+  	
+  	<!-- 6. 세션 타임 아웃 설정(120분) -->
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
 
 </web-app>

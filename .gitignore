@@ -1,0 +1,13 @@
+/target/
+
+*.properties
+
+*.class
+
+*.log
+
+target/
+
+pom.properties
+
+.settings/
