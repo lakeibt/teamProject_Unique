@@ -9,73 +9,73 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProfessorController {
 	private static final Logger logger = LoggerFactory.getLogger(ProfessorController.class);
 	
-	@RequestMapping("/professor/pro_main")
-	public String professor1() {
-		logger.info("url ==> pro_main");
+	@RequestMapping("/professor/main")
+	public String pro_main() {
+		logger.info("url ==> main");
 		
-		return "professor/pro_main";
+		return "professor/main";
 	}
 	
-	@RequestMapping("/professor/pro_main2")
-	public String professor2() {
-		logger.info("url ==> pro_main2");
+	@RequestMapping("/professor/myPage")
+	public String pro_myPage() {
+		logger.info("url ==> myPage");
 		
-		return "professor/pro_main2";
+		return "professor/myPage";
 	}
 	
-	@RequestMapping("/professor/pro_main3")
-	public String professor3() {
-		logger.info("url ==> pro_main3");
+	@RequestMapping("/professor/course")
+	public String pro_course() {
+		logger.info("url ==> course");
 		
-		return "professor/pro_main3";
+		return "professor/course";
 	}
 	
-	@RequestMapping("/professor/pro_main4")
-	public String professor4() {
-		logger.info("url ==> pro_main4");
+	@RequestMapping("/professor/course_register")
+	public String pro_course_register() {
+		logger.info("url ==> course_register");
 		
-		return "professor/pro_main4";
+		return "professor/course_register";
 	}
 	
-	@RequestMapping("/professor/pro_main5")
-	public String professor5() {
-		logger.info("url ==> pro_main5");
+	@RequestMapping("/professor/course_modify")
+	public String pro_course_modify() {
+		logger.info("url ==> course_modify");
 		
-		return "professor/pro_main5";
+		return "professor/course_modify";
 	}
 	
-	@RequestMapping("/professor/pro_main6")
-	public String professor6() {
-		logger.info("url ==> pro_main6");
+	@RequestMapping("/professor/course_delete")
+	public String pro_course_delete() {
+		logger.info("url ==> course_delete");
 		
-		return "professor/pro_main6";
+		return "professor/course_delete";
 	}
 	
-	@RequestMapping("/professor/pro_main7")
-	public String professor7() {
-		logger.info("url ==> pro_main7");
+	@RequestMapping("/professor/score")
+	public String pro_score() {
+		logger.info("url ==> score");
 		
-		return "professor/pro_main7";
+		return "professor/score";
 	}
 	
-	@RequestMapping("/professor/pro_main8")
-	public String professor8() {
-		logger.info("url ==> pro_main8");
+	@RequestMapping("/professor/score_register")
+	public String pro_score_register() {
+		logger.info("url ==> score_register");
 		
-		return "professor/pro_main8";
+		return "professor/score_register";
 	}
 	
-	@RequestMapping("/professor/pro_main9")
-	public String professor9() {
-		logger.info("url ==> pro_main9");
+	@RequestMapping("/professor/score_modify")
+	public String pro_score_modify() {
+		logger.info("url ==> score_modify");
 		
-		return "professor/pro_main9";
+		return "professor/score_modify";
 	}
 	
-	@RequestMapping("/professor/pro_main10")
-	public String professor10() {
-		logger.info("url ==> pro_main10");
+	@RequestMapping("/professor/note")
+	public String pro_note() {
+		logger.info("url ==> note");
 		
-		return "professor/pro_main10";
+		return "professor/note";
 	}
 }

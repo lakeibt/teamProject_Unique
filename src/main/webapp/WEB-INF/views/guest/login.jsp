@@ -5,6 +5,7 @@
 <html>
 
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -41,7 +42,7 @@
 
 <body>
 
-  <%@ include file = "../include/p_header.jsp" %>
+  <%@ include file = "../include/header.jsp" %>
 
   <main id="main">
 
@@ -50,21 +51,55 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>메인 페이지 > 강의관리 > 삭제</h2>
+          <h2>메인 페이지</h2>
+          
         </div>
-		<img src="${pageContext.request.contextPath}/img/sample/교수6.JPG">
+
       </div>
     </section><!-- End Contact Section -->
     <!-- ======= Contact Section ======= -->
     <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
       
-      	
+      	<div style = "width:30%; margin:0 auto">
+      		<b style = "font-size: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;통합로그인</b>
+      	</div>
+      <div class = "container">
+      	<p style = "font-weight: normal;"><img src = "${pageContext.request.contextPath}/img/phone.png" style = "width:30px;">시스템 문의처</p>
+      	<p style = "color:#003cbc; font-size:30px; font-weight: normal;"><img src = "${pageContext.request.contextPath}/img/lock2.png" style = "width:30px;">LOGIN</p>
+      	<hr width = "100%">
+      	<form action = "${pageContext.request.contextPath}/guest/loginPro" method = "post">
+      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type = "text" name = "userid" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
+      	<input type = "password" name = "userpwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">
+      	<table style = "width:100%; margin-top:10px; margin-bottom:30px;">
+      		<tr>
+      			<td>
+      				<input type = "checkbox">학번/교직원번호 저장
+      			</td>
+      			<td style = "float:right; text-decoration: none;">
+      				<a href = "#" style = "color:black;">비밀번호 초기화</a>
+      			</td>
+      		</tr>
+      		<tr>
+      			<td colspan = "2" style = "text-align:right; text-decoration: none;">
+      				<a href = "#" style = "color:black;">학번/교직원번호 조회</a>
+      			</td>
+      		</tr>
+      		<tr>
+      			<td colspan = "2" style = "text-align:right; text-decoration: none;">
+      				<a href = "#" style = "color:black;">로그인/로그아웃 요구사항</a>
+      			</td>
+      		</tr>
+      	</table>
+      	<input type = "submit" value = "로그인" style = "width:100%; background-color: #003cbc; margin:0 auto; color: white; height:50px;">
+      	</form>
+      </div>
     </section><!-- End Contact Section -->
 
     <!-- ======= Map Section ======= -->
   </main><!-- End #main -->
 
-  <%@ include file = "../include/p_footer.jsp" %>
+  <%@ include file = "../include/footer.jsp" %>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 

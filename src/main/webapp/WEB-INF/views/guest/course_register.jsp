@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -41,7 +40,7 @@
 
 <body>
 
-  <%@ include file = "../include/p_header.jsp" %>
+  <%@ include file = "../include/header.jsp" %>
 
   <main id="main">
 
@@ -50,9 +49,9 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>메인 페이지 > 성적관리 > 등록</h2>
+          <h2>수강신청</h2>
         </div>
-		<img src="${pageContext.request.contextPath}/img/sample/교수8.JPG">
+		<img src="${pageContext.request.contextPath}/img/sample/학생3.JPG">
       </div>
     </section><!-- End Contact Section -->
     <!-- ======= Contact Section ======= -->
@@ -64,7 +63,7 @@
     <!-- ======= Map Section ======= -->
   </main><!-- End #main -->
 
-  <%@ include file = "../include/p_footer.jsp" %>
+  <%@ include file = "../include/footer.jsp" %>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 

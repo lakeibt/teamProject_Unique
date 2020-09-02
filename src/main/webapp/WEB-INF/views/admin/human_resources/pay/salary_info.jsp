@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/include/include.jsp"%>
+<%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico"
+<link rel="icon" href="${pageContext.request.contextPath}/img/sample/favicon.ico"
 	type="image/ico" />
 
 <title>급여명세</title>
@@ -61,7 +61,7 @@
 					<!-- menu profile quick info -->
 					<div class="profile clearfix">
 						<div class="profile_pic">
-							<img src="${pageContext.request.contextPath}/images/img.jpg" alt="..."
+							<img src="${pageContext.request.contextPath}/img/sample/img.jpg" alt="..."
 								class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
@@ -152,7 +152,7 @@
 								<a href="javascript:;" class="user-profile dropdown-toggle"
 								aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
 								aria-expanded="false"> <img
-									src="${pageContext.request.contextPath}/images/img.jpg" alt="">이름
+									src="${pageContext.request.contextPath}/img/sample/img.jpg" alt="">이름
 							</a>
 								<div class="dropdown-menu dropdown-usermenu pull-right"
 									aria-labelledby="navbarDropdown">
@@ -192,7 +192,7 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<img src="${pageContext.request.contextPath}/images/급여대장명세.jpg">
+				<img src="${pageContext.request.contextPath}/img/sample/급여대장명세.jpg">
 			</div>
 			<!-- /page content -->
 
