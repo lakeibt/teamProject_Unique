@@ -7,3 +7,7 @@
 *.log
 
 pom.xml
+
+target/
+
+pom.properties
