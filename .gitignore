@@ -1,11 +1,10 @@
 /target/
+
 *.properties
 
 *.class
 
 *.log
-
-pom.xml
 
 target/
 

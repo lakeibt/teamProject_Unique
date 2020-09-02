@@ -35,130 +35,71 @@ public class EduController {
 	}
 	
 	// 로그인 페이지로 이동
+	@RequestMapping("/guest/login")
+	public String gue_login() {
+		logger.info("url ==> login");
+		
+		return "guest/login";
+	}
+	
 	@RequestMapping("/guest/main")
-	public String main() {
+	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
 		
 		return "guest/main";
 	}
 	
-	@RequestMapping("/guest/guest")
-	public String guest(HttpServletRequest req, Model model) {
-		logger.info("url ==> guest");
+	@RequestMapping("/guest/myPage")
+	public String gue_myPage() {
+		logger.info("url ==> myPage");
 		
-		eduService.test(req, model);
-		
-		return "guest/guest";
+		return "guest/myPage";
 	}
 	
-	@RequestMapping("/guest/main3")
-	public String main3() {
-		logger.info("url ==> main3");
+	@RequestMapping("/guest/myPage_modify")
+	public String gue_myPage_modify() {
+		logger.info("url ==> myPage_modify");
 		
-		return "guest/main3";
+		return "guest/myPage_modify";
 	}
 	
-	@RequestMapping("/guest/main4")
-	public String main4() {
-		logger.info("url ==> main4");
+	@RequestMapping("/guest/course_register")
+	public String gue_course_register() {
+		logger.info("url ==> course_register");
 		
-		return "guest/main4";
+		return "guest/course_register";
 	}
 	
-	@RequestMapping("/guest/main5")
-	public String main5() {
-		logger.info("url ==> main5");
+	@RequestMapping("/guest/course_timeTable")
+	public String gue_course_timeTable() {
+		logger.info("url ==> course_timeTable");
 		
-		return "guest/main5";
+		return "guest/course_timeTable";
 	}
 	
-	@RequestMapping("/guest/main6")
-	public String main6() {
-		logger.info("url ==> main6");
+	@RequestMapping("/guest/course")
+	public String gue_course() {
+		logger.info("url ==> course");
 		
-		return "guest/main6";
+		return "guest/course";
 	}
 	
-	@RequestMapping("/guest/main7")
-	public String main7() {
-		logger.info("url ==> main7");
+	@RequestMapping("/guest/score")
+	public String gue_score() {
+		logger.info("url ==> score");
 		
-		return "guest/main7";
+		return "guest/score";
 	}
 	
-	@RequestMapping("/guest/main8")
-	public String main8() {
-		logger.info("url ==> main8");
+	@RequestMapping("/guest/employment")
+	public String gue_employment() {
+		logger.info("url ==> employment");
 		
-		return "guest/main8";
-	}
-	
-	@RequestMapping("/guest/main9")
-	public String main9() {
-		logger.info("url ==> main9");
-		
-		return "guest/main9";
+		return "guest/employment";
 	}
 	
 	@RequestMapping("/guest/deniedTest")
 	public String denied() {
 		return "guest/deniedTest";
 	}
-	
-	/*
-	 * // 로그인 페이지로 이동
-	 * 
-	 * @RequestMapping("/guest/login") public String login() {
-	 * logger.info("url ==> login");
-	 * 
-	 * return "guest/login"; }
-	 * 
-	 * // 회원가입 페이지로 이동
-	 * 
-	 * @RequestMapping("/guest/signIn") public String signIn() {
-	 * logger.info("url ==> signIn");
-	 * 
-	 * return "guest/signIn"; }
-	 * 
-	 * // 회원가입 처리
-	 * 
-	 * @RequestMapping("/guest/insertUser") public String
-	 * insertUser(HttpServletRequest req, Model model) {
-	 * logger.info("url ==> insertUser");
-	 * 
-	 * eduService.insertUser(req, model);
-	 * 
-	 * return "user/login"; }
-	 * 
-	 * @RequestMapping("/guest/denied") public String denied(HttpServletRequest req,
-	 * Model model, Authentication auth) {
-	 * 
-	 * logger.info("url ==> denied"); AccessDeniedException exception =
-	 * (AccessDeniedException) req.getAttribute(WebAttributes.ACCESS_DENIED_403);
-	 * model.addAttribute("errMsg", exception);
-	 * 
-	 * return "guest/denied"; }
-	 * 
-	 * // 관리자 페이지로 이동
-	 * 
-	 * @RequestMapping("/manager/main") public String admin() {
-	 * logger.info("url => admin");
-	 * 
-	 * return "manager/main"; }
-	 * 
-	 * // 로그아웃 처리 // @RequestMapping("/guest/logout") // public String
-	 * logout(HttpSession session) { // session.invalidate(); // // return
-	 * "redirect:/"; // }
-	 * 
-	 * @RequestMapping("/guest/404") public String sa() { logger.info("url => 404");
-	 * 
-	 * return "guest/404"; }
-	 * 
-	 * @RequestMapping("/test/index6") public String test() {
-	 * 
-	 * return "test/index6"; }
-	 * 
-	 * @RequestMapping("/guest/main1") public String main1() { return "guest/main1";
-	 * }
-	 */
 }

@@ -41,7 +41,7 @@
 
 <body>
 
-  <%@ include file = "../include/header.jsp" %>
+  <%@ include file = "../include/professor_header.jsp" %>
 
   <main id="main">
 
@@ -50,9 +50,9 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>수강신청</h2>
+          <h2>메인 페이지 > 성적관리 > 등록</h2>
         </div>
-		<img src="${pageContext.request.contextPath}/img/sample/학생3.JPG">
+		<img src="${pageContext.request.contextPath}/img/sample/교수8.JPG">
       </div>
     </section><!-- End Contact Section -->
     <!-- ======= Contact Section ======= -->
@@ -64,7 +64,7 @@
     <!-- ======= Map Section ======= -->
   </main><!-- End #main -->
 
-  <%@ include file = "../include/footer.jsp" %>
+  <%@ include file = "../include/professor_footer.jsp" %>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 

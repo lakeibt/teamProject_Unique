@@ -41,7 +41,7 @@
 
 <body>
 
-  <%@ include file = "../include/p_header.jsp" %>
+  <%@ include file = "../include/professor_header.jsp" %>
 
   <main id="main">
 
@@ -64,7 +64,7 @@
     <!-- ======= Map Section ======= -->
   </main><!-- End #main -->
 
-  <%@ include file = "../include/p_footer.jsp" %>
+  <%@ include file = "../include/professor_footer.jsp" %>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
