@@ -6,6 +6,4 @@
 
 *.log
 
-target/
-
 pom.properties
