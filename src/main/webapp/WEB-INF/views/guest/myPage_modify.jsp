@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ include file = "../include/setting.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -56,7 +56,7 @@
 						<div class="row">
 							<div class="col-lg-2 d-flex flex-column justify-content-center-center">
 								<div class="icon-box">
-									<img src="https://t1.daumcdn.net/cfile/blog/117ADF4D4EF60C452C" class="img-fluid" style="width:150px;"alt>
+									<img src="${stu_photo}myPage_sample.jpg" class="img-fluid" style="width:150px;"alt>
 								</div>
 							</div>
 							<div class="col-lg-10 d-flex flex-column justify-content-center-center">

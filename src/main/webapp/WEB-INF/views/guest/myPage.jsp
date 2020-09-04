@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ include file = "../include/setting.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -60,7 +60,7 @@
 						<div class="entry">
 							<div class="member">
 								<div class="member-img">
-									<img src="https://t1.daumcdn.net/cfile/blog/117ADF4D4EF60C452C" class="img-fluid" style="width:400px;"alt>
+									<img src="${stu_photo}myPage_sample.jpg" class="img-fluid" style="width:400px;"alt>
 								</div>
 								<div class="member-info">
 									<h4>이름 어쩌고(학번 어쩌고)</h4>
