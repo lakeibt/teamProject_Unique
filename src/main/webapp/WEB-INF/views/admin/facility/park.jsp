@@ -205,7 +205,7 @@
 									<div class="col-lg-12 d-flex flex-column justify-content-center-center">
 										<div class="icon-box">
 											<div class="icon-box">
-												<form class="php-email-form">
+												<form class="php-email-form" style="height: 110px;">
 													<table class="table">
 														<tr>
 															<td align="right">
@@ -254,8 +254,8 @@
 															<td style="width:10%;">18가 1818</td>
 															<td style="width:15%;">2020.09.03</td>
 															<td style="width:15%;">09:10</td>
-															<th style="width:15%;">18:30</th>
-															<th style="width:15%;">정기주차</th>
+															<td style="width:15%;">18:30</th>
+															<td style="width:15%;">정기주차</th>
 															<th style="width:20%;">-</th>
 														</tr>
 														<tr>
@@ -263,8 +263,8 @@
 															<td style="width:10%;">11허 1111</td>
 															<td style="width:15%;">2020.09.03</td>
 															<td style="width:15%;">09:30</td>
-															<th style="width:15%;">18:00</th>
-															<th style="width:15%;">정기주차</th>
+															<td style="width:15%;">18:00</th>
+															<td style="width:15%;">정기주차</th>
 															<th style="width:20%;">-</th>
 														</tr>
 														<tr>
@@ -272,8 +272,8 @@
 															<td style="width:10%;">19라 9999</td>
 															<td style="width:15%;">2020.09.03</td>
 															<td style="width:15%;">08:34</td>
-															<th style="width:15%;">18:40</th>
-															<th style="width:15%;">일반주차</th>
+															<td style="width:15%;">18:40</th>
+															<td style="width:15%;">일반주차</th>
 															<th style="width:20%;">-</th>
 														</tr>
 													</tbody>
