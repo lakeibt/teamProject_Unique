@@ -98,6 +98,13 @@ public class EduController {
 		return "guest/employment";
 	}
 	
+	@RequestMapping("/guest/message")
+	public String gue_message() {
+		logger.info("url ==> message");
+		
+		return "guest/message";
+	}
+	
 	@RequestMapping("/guest/deniedTest")
 	public String denied() {
 		return "guest/deniedTest";
