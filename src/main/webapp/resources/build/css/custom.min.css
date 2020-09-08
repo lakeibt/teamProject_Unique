@@ -11,3 +11,11 @@
 #slash{
 	display: none;
 }
+
+#human_info_imgAdd{
+	align: center;
+	border: solid;
+	width: 250px;
+	height : 300px;
+}
+
