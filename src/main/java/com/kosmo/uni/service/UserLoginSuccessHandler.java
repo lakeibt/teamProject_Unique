@@ -28,13 +28,13 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 		request.getSession().setAttribute("auth", vo.getAuthorities());
 		
 		if(vo.getAuthorities().toString().equals("[ROLE_PROFESSOR]")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/professor/pro_main");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/professor/main");
 			dispatcher.forward(request, response);
 		} else if(vo.getAuthorities().toString().equals("[ROLE_ADMIN]")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/main");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/guest/myPage");
 			dispatcher.forward(request, response);
 		}
 		

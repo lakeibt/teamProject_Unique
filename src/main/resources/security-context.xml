@@ -22,7 +22,7 @@
 		<sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_MANAGER')" />
 	
 		<!-- 로그인폼 -->
-		<sec:form-login login-page="/guest/deniedTest" 
+		<sec:form-login login-page="/guest/login" 
 			login-processing-url="/guest/loginPro"
 			authentication-success-handler-ref="userLoginSuccessHandler"
 			authentication-failure-handler-ref="userLoginFailureHandler"
