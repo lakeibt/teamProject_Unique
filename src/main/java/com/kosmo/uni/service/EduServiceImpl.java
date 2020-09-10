@@ -23,9 +23,9 @@ public class EduServiceImpl implements EduService {
 	
 	@Override
 	public void insertUser(HttpServletRequest req, Model model) {
-		String userid = req.getParameter("userid");
-		String passwd = req.getParameter("passwd");
-		String username = req.getParameter("username");
+		String userid = req.getParameter("userID");
+		String passwd = req.getParameter("userPWD");
+		String username = req.getParameter("userName");
 		String authority = req.getParameter("authority");
 		
 		String enc_pwd = passwordEncoder.encode(passwd);

@@ -105,6 +105,18 @@ public class EduController {
 		return "guest/message";
 	}
 	
+	@RequestMapping("/guest/testSignIn")
+	public String testSignIn() {
+		return "guest/testSignIn";
+	}
+	
+	@RequestMapping("/guest/testSignInPro")
+	public String testSignInPro(HttpServletRequest req, Model model) {
+		eduService.insertUser(req, model);
+		
+		return "guest/main";
+	}
+	
 	@RequestMapping("/guest/deniedTest")
 	public String denied() {
 		return "guest/deniedTest";
