@@ -20,6 +20,13 @@ public class AdminController {
 		return "admin/main";
 	}
 	
+	@RequestMapping(value = "/admin/main")
+	public String main(HttpServletRequest req, Model model) {
+		logger.info("admin_main");
+		
+		return "admin/main";
+	}
+	
 	// ------------------------- 학사관리  -------------------------
 	// 수강관리
 	@RequestMapping(value = "/admin/degree/course")

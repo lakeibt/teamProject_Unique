@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file = "../include/setting.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,23 +14,23 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
-  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="${img}favicon.png" rel="icon">
+  <link href="${img}apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/aos/aos.css" rel="stylesheet">
+  <link href="${resources}vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${resources}vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="${resources}vendor/icofont/icofont.min.css" rel="stylesheet">
+  <link href="${resources}vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="${resources}vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="${resources}vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="${resources}vendor/aos/aos.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+  <link href="${resources}css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Moderna - v2.0.1
@@ -50,15 +51,108 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>메인 페이지 > 성적관리 > 등록</h2>
+          <h2>성적등록</h2>
+
+          <ol>
+            <li><a href="${professor}main">홈</a></li>
+            <li><a href="${professor}score">성적관리</a></li>
+            <li>성적등록</li>
+          </ol>
         </div>
-		<img src="${pageContext.request.contextPath}/img/sample/교수8.JPG">
+
       </div>
     </section><!-- End Contact Section -->
     <!-- ======= Contact Section ======= -->
     <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
-      
-      	
+    
+          <div class="container">
+      <table class="table table-sm">
+		  <thead class="thead-light">
+		    <tr align="center">
+		      <th scope="col">학번</th>
+		      <th scope="col">성명</th>
+		      <th scope="col">태도</th>
+		      <th scope="col">출석</th>
+		      <th scope="col">중간</th>
+		      <th scope="col">기말</th>
+		      <th scope="col">총점</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>김건축</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>윤미술</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		  </tbody>
+		  <tfoot>
+		  	<tr align="center">
+		  		<td colspan="7">
+		  			<button type="button" class="btn btn-info">취소</button>
+		  			<button type="button" class="btn btn-info">등록</button>
+		  		</td>
+		  	</tr>
+		  </tfoot>
+		</table>
+      	</div>
     </section><!-- End Contact Section -->
 
     <!-- ======= Map Section ======= -->
@@ -69,19 +163,19 @@
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/php-email-form/validate.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/venobox/venobox.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/counterup/counterup.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/aos/aos.js"></script>
+  <script src="${resources}vendor/jquery/jquery.min.js"></script>
+  <script src="${resources}vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="${resources}vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="${resources}vendor/php-email-form/validate.js"></script>
+  <script src="${resources}vendor/venobox/venobox.min.js"></script>
+  <script src="${resources}vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="${resources}vendor/counterup/counterup.min.js"></script>
+  <script src="${resources}vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="${resources}vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="${resources}vendor/aos/aos.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  <script src="${resources}js/main.js"></script>
 
 </body>
 
