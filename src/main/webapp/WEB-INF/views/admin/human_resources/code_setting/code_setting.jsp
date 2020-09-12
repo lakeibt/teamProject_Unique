@@ -183,7 +183,8 @@
 											</a>
 										</div>
 									</li>
-								</ul></li>
+								</ul>
+							</li>
 						</ul>
 					</nav>
 				</div>

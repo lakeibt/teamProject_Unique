@@ -51,15 +51,107 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>메인 페이지 > 성적관리 > 등록</h2>
+          <h2>성적등록</h2>
+
+          <ol>
+            <li><a href="${professor}main">홈</a></li>
+            <li><a href="${professor}score">성적관리</a></li>
+            <li>성적등록</li>
+          </ol>
         </div>
-		<img src="${img}sample/교수8.JPG">
       </div>
     </section><!-- End Contact Section -->
     <!-- ======= Contact Section ======= -->
     <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
-      
-      	
+    
+          <div class="container">
+      <table class="table table-sm">
+		  <thead class="thead-light">
+		    <tr align="center">
+		      <th scope="col">학번</th>
+		      <th scope="col">성명</th>
+		      <th scope="col">태도</th>
+		      <th scope="col">출석</th>
+		      <th scope="col">중간</th>
+		      <th scope="col">기말</th>
+		      <th scope="col">총점</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>김건축</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>윤미술</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">20202020</th>
+		      <td>한체육</td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		      <td><input class="form-control form-control-sm" type="text" placeholder=""></td>
+		    </tr>
+		  </tbody>
+		  <tfoot>
+		  	<tr align="center">
+		  		<td colspan="7">
+		  			<button type="button" class="btn btn-info">취소</button>
+		  			<button type="button" class="btn btn-info">등록</button>
+		  		</td>
+		  	</tr>
+		  </tfoot>
+		</table>
+      	</div>
     </section><!-- End Contact Section -->
 
     <!-- ======= Map Section ======= -->
