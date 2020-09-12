@@ -18,3 +18,5 @@
 <c:set var = "include" value="${pageContext.request.contextPath}/include/" />
 <c:set var = "student" value="${pageContext.request.contextPath}/student/" />
 <c:set var = "professor" value="${pageContext.request.contextPath}/professor/" />
+
+<c:set var = "bootstrap" value="${pageContext.request.contextPath}/bootstrap/" />
