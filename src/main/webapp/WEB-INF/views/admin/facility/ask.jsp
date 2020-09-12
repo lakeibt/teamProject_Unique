@@ -43,6 +43,7 @@
 
 <!-- Custom Theme Style -->
 <link href="${resources}build/css/custom.min.css" rel="stylesheet">
+<link href="${resources}css/style.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -192,7 +193,123 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<img src="${img}sample/시설문의.jpg">			
+				<section class="breadcrumbs">
+					<div class="container">
+						<!-- 쪽지 확인 페이지 -->
+						<h3>시설문의함</h3>
+						<hr> 
+						<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="margin-top: -40px;">
+							<div class="container">
+							<div class="contact">
+								<div class="row">
+									<div class="col-lg-12 d-flex flex-column justify-content-center-center">
+										<div class="icon-box">
+											<div class="icon-box">
+												<form class="php-email-form" style="height: 110px;">
+													<table class="table" >
+														<tr>
+															<td align="right">
+																<select name="parkSearch" style="padding: 8px;">      
+												                    <option value="1" >제목</option>
+												                    <option value="2" >소속</option>
+												                    <option value="3" >날짜</option>
+																</select>
+															</td>
+															<td><input class="form-control" type="text"placeholder="입력"></td>
+															<td>
+																<button class="php-email-form" type="submit">
+																	<font style="vertical-align:inherit;">검색</font>
+																</button>
+															</td>
+														</tr>
+													</table>
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 d-flex flex-column justify-content-center-center">
+										<div class="icon-box">
+											<div class="icon-box">
+											<form class="php-email-form">
+												<table class="table" style="font-size:12px;">
+													<thead>
+														<tr>
+															<th colspan="8">문의 목록</th>
+														</tr>
+													</thead>
+													<thead>
+														<tr>
+															<th style="width:10%;">번호</th>
+															<th style="width:60%;">제목</th>
+															<th style="width:15%;">소속</th>
+															<th style="width:15%;">날자</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td style="width:10%;">1</td>
+															<td style="width:60%;">이렇게</td>
+															<td style="width:15%;">건설기계과</td>
+															<td style="width:15%;">2020.10.10</th>
+														</tr>
+														<tr>
+															<td style="width:10%;">2</td>
+															<td style="width:60%;">하면</td>
+															<td style="width:15%;">건축설계과</td>
+															<td style="width:15%;">2020.10.10</th>
+														</tr>
+														<tr>
+															<td style="width:10%;">3</td>
+															<td style="width:60%;">될까요?</td>
+															<td style="width:15%;">프로그래밍과</td>
+															<td style="width:15%;">2020.10.10</th>
+														</tr>
+													</tbody>
+												</table>
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 d-flex flex-column justify-content-center-center">
+										<div class="icon-box">
+											<div class="icon-box">
+												<form class="php-email-form">
+													<table class="table" style="font-size:12px;">
+														<thead>
+															<tr>
+																<th colspan="8">내용</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<th>번호</th>
+																<td>1</td>
+																<th>제목</th>
+																<td>이렇게</td>
+																<th>발신자</th>
+																<td>건설기계과</td>
+																<th>발신일</th>
+																<td>2020.10.10</td>
+															</tr>
+															<tr>
+																<td colspan="8" style="display:table-cell; vertical-align: middle;"> <!-- 세로 중앙 정렬이 안 먹힘... -->
+																	<p class="form-control" style="width:100%; height:400px;">
+																		오우 헬파티
+																	</p>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							</div>
+						</section>
+					</div>
+				</section>
 			</div>
 			<!-- /page content -->
 
