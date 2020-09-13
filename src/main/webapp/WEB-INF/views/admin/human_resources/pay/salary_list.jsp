@@ -5,6 +5,9 @@
 <head>
 
 <script src="http://code.jquery.com/jquery-1.12.1.js"></script>
+<!-- Template Main JS File -->
+<script src="${pageContext.request.contextPath}/js/admin.js"></script>
+
 <script>
 
 $(function(){
@@ -273,7 +276,7 @@ $(function(){
 						</div>
 					</div>
 				</div>
-				<a class="btn btn-app" style="height:30px; padding:5px;">신규등록</a>
+				<a><input class="btn btn-app" name="newSalary" type="button" style="height:30px; padding:5px;" value="신규등록" onclick="newCreate();"></a>
 
 				<br>
 				

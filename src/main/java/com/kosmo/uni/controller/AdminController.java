@@ -134,7 +134,23 @@ public class AdminController {
 		logger.info("human_resources/pay/salary_list_month");
 		
 		return "admin/human_resources/pay/salary_list_month";
-	}		
+	}
+	
+	// 급여 신규 등록 - 생성 폼
+	@RequestMapping(value = "/admin/human_resources/pay/salary_new_create")
+	public String salary_new_create(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_new_create");
+		
+		return "admin/human_resources/pay/salary_new_create";
+	}
+	
+	// 급여 신규등록 - 등록 enrollSalary
+	@RequestMapping(value = "/admin/human_resources/pay/salary_enroll")
+	public String salary_enroll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_enroll");
+		
+		return "admin/human_resources/pay/salary_enroll";
+	}
 	// 사원별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_human")
 	public String salary_list_human(HttpServletRequest req, Model model) {
