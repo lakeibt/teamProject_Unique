@@ -1,5 +1,11 @@
 package com.kosmo.uni.service;
 
-public interface AdminService {
+import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.ui.Model;
+
+public interface AdminService {
+	
+	public void attendance(HttpServletRequest req, Model model);
+	
 }

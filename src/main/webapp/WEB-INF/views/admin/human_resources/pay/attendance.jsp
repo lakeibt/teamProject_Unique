@@ -1,12 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>근태관리</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<title>근태관리</title>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- bootstrap datepicker -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet" />
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script> -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<!--
+<script type="text/javascript">
+if(#startDate < #endDate){
+  alert("시작일은 종료일을 넘길 수 없습니다.");
+}
+</script> -->
 </head>
+
+<style>
+.form-control {font-size:12px;}
+.btn {
+    width:100px;
+    background-color: #68A4C4;
+    border: none;
+    color:#fff;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+</style>
 
 <body class="nav-md">
 	<div class="container body">
@@ -114,8 +146,8 @@
 							<li class="nav-item dropdown open" style="padding-left: 15px;">
 								<a href="javascript:;" class="user-profile dropdown-toggle"
 								aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${img}sample/img.jpg" alt="">이름
+								aria-expanded="false"> <img src="${img}sample/img.jpg"
+									alt="">이름
 							</a>
 								<div class="dropdown-menu dropdown-usermenu pull-right"
 									aria-labelledby="navbarDropdown">
@@ -154,20 +186,73 @@
 			<!-- /top navigation -->
 
 			<!-- page content -->
+
 			<div class="right_col" role="main">
-				<img src="${img}sample/근태관리.jpg">
+				<div class="top_menu">
+					<table class="table" style="text-align:center; font-size: 12px;">
+						<tr>
+							<td style="width: 5%"><select class="form-control">
+									<option selected>구분</option>
+									<option>지각</option>
+									<option>정상</option>
+									<option>조퇴</option>
+									<option>휴가</option>
+							</select></td>
+							<td style="width: 10%"><input class="form-control"
+								type="text" id="comNum_Name" placeholder="사번  입력"></td>
+							<td colspan=2  style="width: 15%;"><input class="form-control"
+								type="date" id="startDate"></td>
+							<td colspan=2  style="width: 15%;"><input class="form-control"
+								type="date" id="endDate"></td>
+							<td colspan=4 align="left" style="width: 55%;">
+							<%-- <button class="btn" id="btn" type="submit"><img
+								src="${img}admin/search_icon.png" width="10%"></button></td>
+								<td> --%>
+								<input type="button" class="btn" style="padding: 6px 6px;" onclick="" value="검색">
+								<input type="button" class="btn" style="padding: 6px 6px;" onclick="" value="초기화">
+								</td>
+						</tr>
+						<tr>
+							<%-- <td>번호(${search_Cnt})</td> --%>
+							<th style="width: 10%">구분</th>
+							<th style="width: 10%">사번</th>
+							<th style="width: 10%">날짜</th>
+							<th style="width: 10%">출근 시간</th>
+							<th style="width: 10%">퇴근 시간</th>
+							<th colspan="4" style="width: 10%">지각 사유</th>
+						</tr>
+						<c:if test="${search_Cnt > 0}">
+							<c:forEach var="dto" items="${dtos}">
+								<tr>
+									<c:if test="${dto.num == 1}">
+										<td style="text-align:center">출근</td>
+									</c:if>
+									<c:if test="${dto.num == 2}">
+										<td style="text-align:center">퇴근</td>
+									</c:if>
+									<c:if test="${dto.num == 3}">
+										<td style="text-align:center">지각</td>
+									</c:if>
+									<td style="text-align:center">${dto.id}</td>
+									<td><fmt:formatDate value="${dto.inDay}" pattern="yyyy-MM-dd"/></td>
+									<td><fmt:formatDate value="${dto.inTime}" pattern="HH:mm:ss"/></td>
+									<td><fmt:formatDate value="${dto.outTime}" pattern="HH:mm:ss"/></td>
+									<td colspan="4">${dto.reason}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+					</table>
+				</div>
+				<!-- /page content -->
+
+
+				<!-- footer content -->
+				<footer>
+					<div class="pull-right">황동국팀 - 관리자 페이지</div>
+					<div class="clearfix"></div>
+				</footer>
+				<!-- /footer content -->
 			</div>
-			<!-- /page content -->
-
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">황동국팀 - 관리자 페이지</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
-		</div>
-	</div>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+			<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

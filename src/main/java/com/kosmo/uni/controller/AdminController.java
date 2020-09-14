@@ -4,15 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kosmo.uni.service.AdminServiceImpl;
 
 @Controller
 public class AdminController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+	@Autowired
+	AdminServiceImpl adminService;
+	
 	@RequestMapping(value = "/admin")
 	public String home(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
@@ -96,6 +102,8 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/pay/attendance")
 	public String attendance(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/attendance");
+		
+		adminService.attendance(req, model);
 		
 		return "admin/human_resources/pay/attendance";
 	}	
