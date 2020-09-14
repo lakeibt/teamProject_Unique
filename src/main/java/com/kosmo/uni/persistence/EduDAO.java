@@ -19,4 +19,6 @@ public interface EduDAO {
 	public int studentIdCheck(String id);
 	// 학생 정보 
 	public StudentVO getStudentInfo(String id);
+	// 학생 정보 수정
+	public int updateStudentInfo(StudentVO vo);
 }

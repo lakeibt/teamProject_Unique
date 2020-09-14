@@ -62,8 +62,7 @@ public class EduController {
 	@RequestMapping("/guest/myPage_modifyPro")
 	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modifyPro");
-		
-		eduService.studentinfo(req, model);
+		eduService.studentModifyPro(req, model);
 		return "guest/myPage_modifyPro";
 	}
 	@RequestMapping("/guest/course_register")

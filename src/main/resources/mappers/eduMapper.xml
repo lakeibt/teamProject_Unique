@@ -26,4 +26,8 @@
 	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
 		SELECT * FROM student WHERE id= #{id}
 	</select>
+	<update id="updateStudentInfo" parameterType="com.kosmo.uni.vo.StudentVO">
+		UPDATE student SET tel=#{tel}, address=#{address}, 
+		de_address=#{de_address}, email=#{email} WHERE id=#{id}
+	</update>
 </mapper>

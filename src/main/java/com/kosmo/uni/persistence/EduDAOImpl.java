@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.TestVO;
 
-
 @Repository
 public class EduDAOImpl implements EduDAO {
 	
@@ -47,5 +46,11 @@ public class EduDAOImpl implements EduDAO {
 	public StudentVO getStudentInfo(String id) {
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
 		return dao.getStudentInfo(id);
+	}
+
+	@Override
+	public int updateStudentInfo(StudentVO vo) {
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dao.updateStudentInfo(vo);
 	}
 }

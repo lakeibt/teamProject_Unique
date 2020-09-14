@@ -6,6 +6,51 @@
 	<title>Contact - Moderna Bootstrap Template</title>
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+	function addressSearch() {
+		new daum.Postcode(
+			{
+				oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var fullAddr = ''; // 최종 주소 변수
+				var extraAddr = ''; // 조합형 주소 변수
+
+				// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					fullAddr = data.roadAddress;
+
+				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+					fullAddr = data.jibunAddress;
+				}
+				// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+				if (data.userSelectedType === 'R') {
+					//법정동명이 있을 경우 추가한다.
+					if (data.bname !== '') {
+						extraAddr += data.bname;
+					}
+					// 건물명이 있을 경우 추가한다.
+				if (data.buildingName !== '') {
+					extraAddr += (extraAddr !== '' ? ', '
+					+ data.buildingName : data.buildingName);
+					}
+					// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+					fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+					+ ')' : '');
+				}
+						// 주소 정보를 해당 필드에 넣는다.
+				document.getElementById('address').value = fullAddr;
+
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById('de_address').focus();
+				}
+			}).open();
+	}
+	
+</script>
 <style>
 .form-control {font-size:12px;}
 
@@ -58,7 +103,7 @@
 					<div class="col-lg-10 d-flex flex-column justify-content-center-center">
 						<div class="icon-box">
 							<div class="icon-box">
-							<form action="${guest}modify"class="php-email-form">
+							<form action="${guest}myPage_modifyPro"class="php-email-form" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<table class="table" style="font-size:12px;">
 									<thead>
@@ -89,11 +134,17 @@
 										</tr>
 										<tr>
 											<th>집 주소</th>
-											<td colspan="3"><input class="form-control" type="text" value="${vo.getAddress()}"></td>
+											<td colspan="2"><input class="form-control" id="address"type="text" name="address" value="${vo.getAddress()}"></td>
+											<th >상세주소</th>
+											<td colspan="2"><input class="form-control" id="de_address"type="text" name="de_address" value="${vo.getDe_address()}"></td>
+											<td><input class="form-control" type="button" onclick="addressSearch();" value="주소찾기"></td>
+										</tr>
+										<tr>
 											<th>휴대폰번호</th>
-											<td><input class="form-control" type="text" value="${vo.getTel()}"></td>
+											<td><input class="form-control" type="text" value="${vo.getTel()}" name="student_tel"></td>
 											<th>이메일</th>
-											<td><input class="form-control" type="text" value="${vo.getEmail()}"></td>
+											<td colspan="3"><input class="form-control" type="text"
+														value="${vo.getEmail()}" name="student_email"></td>
 										</tr>
 										<tr>
 											<th>취미/특기</th>

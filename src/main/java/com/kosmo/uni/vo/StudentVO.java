@@ -18,6 +18,7 @@ public class StudentVO {
 	private int grade;
 	private int r_code;
 	private int entrancedate;
+	private String de_address;
 	public String getId() {
 		return id;
 	}
@@ -120,6 +121,13 @@ public class StudentVO {
 	public void setEntrancedate(int entrancedate) {
 		this.entrancedate = entrancedate;
 	}
+	public String getDe_address() {
+		return de_address;
+	}
+	public void setDe_address(String de_address) {
+		this.de_address = de_address;
+	}
+	
 //	@Override
 //	public String toString() {
 //		return "StudentVO [id=" + id + ", pwd=" + pwd + ", photo=" + photo + ", name=" + name + ", eng_name=" + eng_name

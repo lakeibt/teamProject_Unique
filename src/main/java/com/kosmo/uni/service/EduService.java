@@ -11,4 +11,6 @@ public interface EduService {
 	public void test(HttpServletRequest req, Model model);
 	
 	public void studentinfo(HttpServletRequest req, Model model);
+	
+	public void studentModifyPro(HttpServletRequest req, Model model);
 }
