@@ -33,7 +33,7 @@
       	<p style = "font-weight: normal;"><img src = "${img}phone.png" style = "width:30px;">시스템 문의처</p>
       	<p style = "color:#003cbc; font-size:30px; font-weight: normal;"><img src = "${img}lock2.png" style = "width:30px;">LOGIN</p>
       	<hr width = "100%">
-      	<form action = "${path}guest/loginPro" method = "post">
+      	<form action="${path}guest/loginPro" method = "post">
       	<input type = "hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
       	<input type = "text" name = "userid" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
       	<input type = "password" name = "userpwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">

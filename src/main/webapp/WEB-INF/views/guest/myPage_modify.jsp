@@ -52,13 +52,14 @@
 				<div class="row">
 					<div class="col-lg-2 d-flex flex-column justify-content-center-center">
 						<div class="icon-box">
-							<img src="${stu_photo}myPage_sample.jpg" class="img-fluid" style="width:150px;"alt>
+							<img src="${stu_photo}${vo.getPhoto()}" class="img-fluid" style="width:150px;"alt>
 						</div>
 					</div>
 					<div class="col-lg-10 d-flex flex-column justify-content-center-center">
 						<div class="icon-box">
 							<div class="icon-box">
-							<form class="php-email-form">
+							<form action="${guest}modify"class="php-email-form">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<table class="table" style="font-size:12px;">
 									<thead>
 										<tr>
@@ -68,31 +69,31 @@
 									<tbody>
 										<tr>
 											<th>이름</th>
-											<td><input class="form-control" type="text" value="김학생" readOnly></td>
+											<td><input class="form-control" type="text" value="${vo.getName()}" readOnly></td>
 											<th>학번</th>
 											<td><input class="form-control" type="text" value="E20208090" readOnly></td>
 											<th>학과</th>
-											<td><input class="form-control" type="text" value="무슨무슨과" readOnly></td>
+											<td><input class="form-control" type="text" value="${vo.getM_code()}" readOnly></td>
 											<th>전공</th>
 											<td><input class="form-control" type="text" value="무슨무슨공학" readOnly></td>
 										</tr>
 										<tr>
 											<th>영문이름</th>
-											<td><input class="form-control" type="text" value="Kim Haksang" readOnly></td>
+											<td><input class="form-control" type="text" value="${vo.getEng_name()}" readOnly></td>
 											<th>생년월일</th>
-											<td><input class="form-control" type="text" value="001225" readOnly></td>
+											<td><input class="form-control" type="text" value="${vo.getJumin1()}" readOnly></td>
 											<th>학적상태</th>
-											<td><input class="form-control" type="text" value="재학" readOnly></td>
+											<td><input class="form-control" type="text" value="${vo.getR_code()}" readOnly></td>
 											<th>입학년도</th>
-											<td><input class="form-control" type="text" value="2020.3" readOnly></td>
+											<td><input class="form-control" type="text" value="${vo.getEntrancedate()}" readOnly></td>
 										</tr>
 										<tr>
 											<th>집 주소</th>
-											<td colspan="3"><input class="form-control" type="text" value="서울 어쩌구 저쩌구 1-234"></td>
+											<td colspan="3"><input class="form-control" type="text" value="${vo.getAddress()}"></td>
 											<th>휴대폰번호</th>
-											<td><input class="form-control" type="text" value="010-1234-5678"></td>
+											<td><input class="form-control" type="text" value="${vo.getTel()}"></td>
 											<th>이메일</th>
-											<td><input class="form-control" type="text" value="khs@naver.com"></td>
+											<td><input class="form-control" type="text" value="${vo.getEmail()}"></td>
 										</tr>
 										<tr>
 											<th>취미/특기</th>

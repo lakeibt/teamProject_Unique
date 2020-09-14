@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.EduDAO;
+import com.kosmo.uni.vo.StudentVO;
 
 @Service
 public class EduServiceImpl implements EduService {
@@ -43,6 +44,28 @@ public class EduServiceImpl implements EduService {
 	@Override
 	public void test(HttpServletRequest req, Model model) {
 		eduDAO.test(req, model);
+	}
+
+	@Override
+	public void studentinfo(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("memId");
+		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
+		int check = eduDAO.studentIdCheck(id);
+		System.out.println("회원아이디 ==> "+ id);
+		System.out.println("check : " +check);
+		//
+		Map<String,Object>  map = new HashMap<String, Object>();
+		map.put("strId", id);
+		int selectCnt =0;
+		StudentVO vo= null;
+		if(check == 1) {
+			vo = eduDAO.getStudentInfo(id);
+			System.out.println("modifyViewService=> vo : "  + vo);
+			selectCnt = 1;
+		}
+		// request나 ssesion으로 처리 결과를 저장
+		model.addAttribute("vo",vo);
+		model.addAttribute("selectCnt",selectCnt);
 	}
 
 }

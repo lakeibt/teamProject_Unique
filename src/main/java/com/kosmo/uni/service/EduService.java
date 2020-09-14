@@ -9,5 +9,6 @@ public interface EduService {
 	public void insertUser(HttpServletRequest req, Model model);
 
 	public void test(HttpServletRequest req, Model model);
-
+	
+	public void studentinfo(HttpServletRequest req, Model model);
 }
