@@ -1,68 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="${pageContext.request.contextPath}/img/sample/favicon.ico"
-	type="image/ico" />
+	<title>급여대장</title>
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+	<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
+<!-- Template Main JS File -->
+<script src="${resources}js/admin.js"></script>
 
-<title>급여대장</title>
+<script>
 
-<!-- Bootstrap -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Font Awesome -->
-<link
-	href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-<!-- NProgress -->
-<link href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css"
-	rel="stylesheet">
-<!-- iCheck -->
-<link href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css"
-	rel="stylesheet">
+$(function(){
+	$('#payroll').click(function(){
+		$.ajax({
+			url : '${pageContext.request.contextPath}/admin/human_resources/pay/payroll',  // 응답페이지  ==> 컨트롤러/basic.
+			type : 'GET',  //전송 방식("get", "post")
+			dataType : 'text',   //요청한 데이터 형식("html", "xml", "json", "text")
+			success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+				$('#pay_payroll').html(data);
+			}, 
+			error : function() {
+				alert('오류');
+			}
+		});
+	});
+});
 
-<!-- bootstrap-progressbar -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"
-	rel="stylesheet">
-<!-- JQVMap -->
-<link href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css"
-	rel="stylesheet" />
-<!-- bootstrap-daterangepicker -->
-<link
-	href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css"
-	rel="stylesheet">
-
-<!-- Custom Theme Style -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet">
+$(function(){
+	$('#payslip').click(function(){
+		$.ajax({
+			url : '${pageContext.request.contextPath}/admin/human_resources/pay/payslip',  // 응답페이지  ==> 컨트롤러/basic.
+			type : 'GET',  //전송 방식("get", "post")
+			dataType : 'text',   //요청한 데이터 형식("html", "xml", "json", "text")
+			success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+				$('#pay_payslip').html(data);
+			}, 
+			error : function() {
+				alert('오류');
+			}
+		});
+	});
+});
+</script>
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="${path}/admin" class="site_title"> <i
-							class="fa fa-cog fa-spin fa-fw" style="border: none"></i> <span
-							style="font-size: 25px">Admin Page</span></a>
+						<a href="${path}/admin" class="site_title">
+							<i class="fa fa-cog fa-spin fa-fw" style="border: none"></i>
+							<span style="font-size: 25px">Admin Page</span>
+						</a>
 					</div>
-
 					<div class="clearfix"></div>
 
 					<!-- menu profile quick info -->
 					<div class="profile clearfix">
 						<div class="profile_pic">
-							<img src="${pageContext.request.contextPath}/img/sample/img.jpg" alt="..."
-								class="img-circle profile_img">
+							<img src="${img}sample/img.jpg" alt="..." class="img-circle profile_img">
 						</div>
 						<div class="profile_info">
 							<span>Welcome,</span>
@@ -70,43 +68,40 @@
 						</div>
 					</div>
 					<!-- /menu profile quick info -->
-
-					<br />
-
+					<br>
 					<!-- sidebar menu -->
-					<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
+					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 						<div class="menu_section">
 							<h3>General</h3>
 							<ul class="nav side-menu">
-								<li><a href="${path}/admin"><i class="fa fa-home"></i>DashBorad</a></li>
-								<li><a><i class="fa fa-edit"></i> 학사관리 <span
-										class="fa fa-chevron-down"></span></a>
+								<li>
+									<a href="${path}/admin"><i class="fa fa-home"></i>DashBorad</a>
+								</li>
+								<li>
+									<a>	<i class="fa fa-edit"></i> 학사관리 
+										<span class="fa fa-chevron-down"></span>
+									</a>
 									<ul class="nav child_menu">
 										<li><a href="${path}/admin/degree/course">수강관리</a></li>
 										<li><a href="${path}/admin/degree/facility_ask">시설문의</a></li>
-									</ul></li>
-								<li><a><i class="fa fa-sitemap"></i> 인사관리 <span
-										class="fa fa-chevron-down"></span></a>
+									</ul>
+								</li>
+								<li>
+									<a>	<i class="fa fa-sitemap"></i> 인사관리 
+										<span class="fa fa-chevron-down"></span>
+									</a>
 									<ul class="nav child_menu">
 										<li><a>기초코드 설정<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li><a
-													href="${path}/admin/human_resources/code_setting/salary_setting">급/상여
-														지급일자 등록</a></li>
-												<li><a
-													href="${path}/admin/human_resources/code_setting/setting">인사/급여환경설정</a></li>
-												<li><a
-													href="${path}/admin/human_resources/code_setting/code_setting">인사기초코드등록</a></li>
+												<li><a href="${path}/admin/human_resources/code_setting/salary_setting">급/상여 지급일자 등록</a></li>
+												<li><a href="${path}/admin/human_resources/code_setting/setting">인사/급여환경설정</a></li>
+												<li><a href="${path}/admin/human_resources/code_setting/code_setting">인사기초코드등록</a></li>
 											</ul></li>
 										<li><a>인사정보<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
-												<li><a
-													href="${path}/admin/human_resources/info/human_info">인사정보등록</a></li>
-												<li><a
-													href="${path}/admin/human_resources/info/human_state">인사정보현황</a></li>
-												<li><a
-													href="${path}/admin/human_resources/info/salary_state">책정임금현황</a></li>
+												<li><a href="${path}/admin/human_resources/info/human_info">인사정보등록</a></li>
+												<li><a href="${path}/admin/human_resources/info/human_state">인사정보현황</a></li>
+												<li><a href="${path}/admin/human_resources/info/salary_state">책정임금현황</a></li>
 											</ul></li>
 										<li><a>급여관리<span class="fa fa-chevron-down"></span></a>
 											<ul class="nav child_menu">
@@ -192,7 +187,89 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<img src="${pageContext.request.contextPath}/img/sample/급여대장.jpg">
+				<div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="x_panel">
+								<div class="x_title"><h4>급여 계산/대장</h4></div>
+								<div class="x_content">
+									<table class="table">
+										<thead style="color:#73879C;">
+											<tr>
+												<th>급여구분</th>
+												<th>지급구분</th>
+												<th>대장명칭</th>
+												<th>지급일</th>
+												<th>급여계산</th>
+												<th>인원수</th>
+												<th>급여대장</th>
+												<th>명세서</th>
+												<th>지급총액</th>
+											</tr>
+										</thead>
+										<tbody style="color:grey;">
+											<tr>
+												<th scope="row">급여</th>
+												<td>정규</td>
+												<td>2020/7 정규 (급여)</td>
+												<td>2020/08/15</td>
+												<td>
+													<a class="btn btn-app" style="height:30px; padding:5px;">전체계산</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">개인별계산</a>
+												</td>
+												<td>3</td>
+												<td>
+													<a id="payroll" class="btn btn-app" style="height:30px; padding:5px;">조회</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">수정</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">확정</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">삭제</a>
+												</td>
+												<td>
+													<a id="payslip" class="btn btn-app" style="height:30px; padding:5px;">조회</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">email</a>
+												</td>
+												<td>25,500,505</td>
+											</tr>
+											<tr>
+												<th scope="row">급여</th>
+												<td>정규</td>
+												<td>2020/6 정규 (급여)</td>
+												<td>2020/07/15</td>
+												<td>
+													<a class="btn btn-app" style="height:30px; padding:5px;">전체계산</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">개인별계산</a>
+												</td>
+												<td>7</td>
+												<td>
+													<a id="payroll" class="btn btn-app" style="height:30px; padding:5px;">조회</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">수정</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">확정</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">삭제</a>
+												</td>
+												<td>
+													<a id="payslip" class="btn btn-app" style="height:30px; padding:5px;">조회</a><br>
+													<a class="btn btn-app" style="height:30px; padding:5px;">email</a>
+												</td>
+												<td>25,500,505</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a><input class="btn btn-app" name="newSalary" type="button" style="height:30px; padding:5px;" value="신규등록" onclick="newCreate();"></a>
+
+				<br>
+				
+				<div id="pay_payroll">
+					<!-- 결과 출력 위치 -->
+				</div >
+							
+				<div id="pay_payslip">
+					<!-- 결과 출력 위치 -->
+				</div >
 			</div>
 			<!-- /page content -->
 
@@ -205,48 +282,6 @@
 			<!-- /footer content -->
 		</div>
 	</div>
-
-	<!-- jQuery -->
-	<script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- FastClick -->
-	<script src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script>
-	<!-- NProgress -->
-	<script src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script>
-	<!-- Chart.js -->
-	<script src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script>
-	<!-- gauge.js -->
-	<script src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script>
-	<!-- bootstrap-progressbar -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-	<!-- iCheck -->
-	<script src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script>
-	<!-- Skycons -->
-	<script src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script>
-	<!-- Flot plugins -->
-	<script
-		src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-	<script src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
-	<!-- DateJS -->
-	<script src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
-	<!-- JQVMap -->
-	<script src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-	<!-- bootstrap-daterangepicker -->
-	<script src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-	<!-- Custom Theme Scripts -->
-	<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>
