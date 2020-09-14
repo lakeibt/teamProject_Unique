@@ -4,38 +4,8 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>About - Moderna Bootstrap Template</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
-  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Moderna - v2.0.1
-  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+	<title>Contact - Moderna Bootstrap Template</title>
+	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
 
 <body>
@@ -47,7 +17,7 @@
       <div class="logo float-left">
         <h1 class="text-light"><a href="index.html"><span>Moderna</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="${pageContext.request.contextPath}/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="index.html"><img src="${img}logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu float-right d-none d-lg-block">
@@ -105,7 +75,7 @@
 
         <div class="row">
           <div class="col-lg-6">
-            <img src="${pageContext.request.contextPath}/img/about.jpg" class="img-fluid" alt="">
+            <img src="${img}about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0">
             <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
@@ -212,7 +182,7 @@
         <div class="owl-carousel testimonials-carousel">
 
           <div class="testimonial-item">
-            <img src="${pageContext.request.contextPath}/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <img src="${img}testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
             <h3>Saul Goodman</h3>
             <h4>Ceo &amp; Founder</h4>
             <p>
@@ -223,7 +193,7 @@
           </div>
 
           <div class="testimonial-item">
-            <img src="${pageContext.request.contextPath}/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <img src="${img}testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
             <h3>Sara Wilsson</h3>
             <h4>Designer</h4>
             <p>
@@ -234,7 +204,7 @@
           </div>
 
           <div class="testimonial-item">
-            <img src="${pageContext.request.contextPath}/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+            <img src="${img}testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
             <h3>Jena Karlis</h3>
             <h4>Store Owner</h4>
             <p>
@@ -245,7 +215,7 @@
           </div>
 
           <div class="testimonial-item">
-            <img src="${pageContext.request.contextPath}/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+            <img src="${img}testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
             <h3>Matt Brandon</h3>
             <h4>Freelancer</h4>
             <p>
@@ -256,7 +226,7 @@
           </div>
 
           <div class="testimonial-item">
-            <img src="${pageContext.request.contextPath}/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+            <img src="${img}testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
             <h3>John Larson</h3>
             <h4>Entrepreneur</h4>
             <p>
@@ -360,22 +330,7 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/php-email-form/validate.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/venobox/venobox.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/counterup/counterup.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/aos/aos.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="${pageContext.request.contextPath}/js/main.js"></script>
-
+<%@ include file = "../bootstrap/guest_bootstrap_js.jsp" %>
 </body>
 
 </html>

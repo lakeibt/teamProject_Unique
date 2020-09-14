@@ -3,24 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Meta, title, CSS, favicons, etc. -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/ico" />
-
-<title>시설문의</title>
-
-<link href="${pageContext.request.contextPath}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"><!-- Font Awesome -->
-<link href="${pageContext.request.contextPath}/vendors/nprogress/nprogress.css" rel="stylesheet"><!-- NProgress -->
-<link href="${pageContext.request.contextPath}/vendors/iCheck/skins/flat/green.css" rel="stylesheet"><!-- iCheck -->
-
-<link href="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet"><!-- bootstrap-progressbar -->
-<link href="${pageContext.request.contextPath}/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" /><!-- JQVMap -->
-<link href="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"><!-- bootstrap-daterangepicker -->
-<link href="${pageContext.request.contextPath}/build/css/custom.min.css" rel="stylesheet"><!-- Custom Theme Style -->
+	<title>시설문의</title>
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
 <body class="nav-md">
 	<div class="container body">
@@ -46,6 +30,7 @@
 									</tr>
 								</thead>
 							</table>
+
 						</div>
 					</div>
 				</div>
@@ -56,39 +41,58 @@
 							<div class="row x_title"><h3>상세 페이지</h3></div>
 						</div>
 					</div>
+					<nav class="nav navbar-nav">
+						<ul class=" navbar-right">
+							<li class="nav-item dropdown open" style="padding-left: 15px;">
+								<a href="javascript:;" class="user-profile dropdown-toggle"
+								aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
+								aria-expanded="false"> <img
+									src="${img}sample/img.jpg" alt="">이름
+							</a>
+								<div class="dropdown-menu dropdown-usermenu pull-right"
+									aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="#">Profile</a> <a
+										class="dropdown-item" href="#"><i
+										class="fa fa-sign-out pull-right"></i> Log Out</a>
+								</div>
+							</li>
+
+							<li role="presentation" class="nav-item dropdown open"><a
+								href="javascript:;" class="dropdown-toggle info-number"
+								id="navbarDropdown1" data-toggle="dropdown"
+								aria-expanded="false"> <i class="fa fa-envelope-o"></i> <span
+									class="badge bg-green">6</span>
+							</a>
+								<ul class="dropdown-menu list-unstyled msg_list" role="menu"
+									aria-labelledby="navbarDropdown1">
+									<li class="nav-item"><a class="dropdown-item"> <span>
+												<span>John Smith</span> <span class="time">3 mins ago</span>
+										</span> <span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a></li>
+
+									<li class="nav-item">
+										<div class="text-center">
+											<a class="dropdown-item"> <strong>See All Alerts</strong>
+												<i class="fa fa-angle-right"></i>
+											</a>
+										</div>
+									</li>
+								</ul></li>
+						</ul>
+					</nav>
 				</div>
+			</div>
+			<!-- /top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<img src="${img}sample/시설문의리스트.jpg">
 			</div>
 			<!-- /page content -->
 			<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
 		</div>
 	</div>
-
-<script src="${pageContext.request.contextPath}/vendors/jquery/dist/jquery.min.js"></script><!-- jQuery -->
-<script src="${pageContext.request.contextPath}/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script><!-- Bootstrap -->
-<script src="${pageContext.request.contextPath}/vendors/fastclick/lib/fastclick.js"></script><!-- FastClick -->
-<script src="${pageContext.request.contextPath}/vendors/nprogress/nprogress.js"></script><!-- NProgress -->
-<script src="${pageContext.request.contextPath}/vendors/Chart.js/dist/Chart.min.js"></script><!-- Chart.js -->
-<script src="${pageContext.request.contextPath}/vendors/gauge.js/dist/gauge.min.js"></script><!-- gauge.js -->
-<script src="${pageContext.request.contextPath}/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script><!-- bootstrap-progressbar -->
-<script src="${pageContext.request.contextPath}/vendors/iCheck/icheck.min.js"></script><!-- iCheck -->
-<script src="${pageContext.request.contextPath}/vendors/skycons/skycons.js"></script><!-- Skycons -->
-
-<!-- Flot plugins -->
-<script src="${pageContext.request.contextPath}/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="${pageContext.request.contextPath}/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="${pageContext.request.contextPath}/vendors/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="${pageContext.request.contextPath}/vendors/DateJS/build/date.js"></script>
-<!-- JQVMap -->
-<script src="${pageContext.request.contextPath}/vendors/jqvmap/dist/jquery.vmap.js"></script>
-<script src="${pageContext.request.contextPath}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="${pageContext.request.contextPath}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="${pageContext.request.contextPath}/vendors/moment/min/moment.min.js"></script>
-<script src="${pageContext.request.contextPath}/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!-- Custom Theme Scripts -->
-<script src="${pageContext.request.contextPath}/build/js/custom.min.js"></script>
-
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

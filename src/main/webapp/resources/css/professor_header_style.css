@@ -1,0 +1,40 @@
+.message-box{
+	border: 1px solid #D9DEE4;
+	display: block;	
+	width: 300px;
+}
+
+.message-box span{
+	white-space: normal;
+}
+
+.message-item{
+	background-color: #f3f8fa;
+	margin: 6px 6px;
+}
+
+.dropdown-item{
+	display: block;
+	padding: 3px 3px;
+}
+
+.time{
+	position: absolute;
+    right: 25px;
+    font-size: 11px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.message{
+	display: block;
+	font-size:11px;
+}
+
+.message-new{
+	background-color: none;
+	font-size:8px;
+	position: absolute;
+    bottom: 5px;
+    left:12px;
+}

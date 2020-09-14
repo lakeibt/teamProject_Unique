@@ -1,0 +1,18 @@
+- jsp
+
+교수 헤더
+teamProject_Unique\src\main\webapp\WEB-INF\views\include\professor_header.jsp
+
+교수 페이지
+teamProject_Unique\src\main\webapp\WEB-INF\views\professor 안에 jsp 전부
+
+
+
+- css
+
+teamProject_Unique\src\main\webapp\resources\css\style.css
+
+teamProject_Unique\src\main\webapp\resources\css\profssor_header_style.css
+
+
+

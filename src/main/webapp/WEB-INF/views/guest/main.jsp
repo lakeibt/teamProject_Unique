@@ -1,44 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file = "../include/setting.jsp" %>
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Contact - Moderna Bootstrap Template</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/img/favicon.png" rel="icon">
-  <link href="${pageContext.request.contextPath}/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="${pageContext.request.contextPath}/vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Moderna - v2.0.1
-  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+	<title>Contact - Moderna Bootstrap Template</title>
+	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
-
 <body>
 
   <%@ include file = "../include/header.jsp" %>
@@ -176,7 +144,7 @@
 
 				<div class="row">
 					<div class="col-lg-6 video-box">
-						<img src="assets/img/why-us.jpg" class="img-fluid" alt=""> <a
+						<img src="${img}why-us.jpg" class="img-fluid" alt=""> <a
 							href="https://www.youtube.com/watch?v=jDDaplaOz7Q"
 							class="venobox play-btn mb-4" data-vbtype="video"
 							data-autoplay="true"></a>
@@ -230,7 +198,7 @@
 
 				<div class="row" data-aos="fade-up">
 					<div class="col-md-5">
-						<img src="assets/img/features-1.svg" class="img-fluid" alt="">
+						<img src="${img}features-1.svg" class="img-fluid" alt="">
 					</div>
 					<div class="col-md-7 pt-4">
 						<h3>Voluptatem dignissimos provident quasi corporis
@@ -249,7 +217,7 @@
 
 				<div class="row" data-aos="fade-up">
 					<div class="col-md-5 order-1 order-md-2">
-						<img src="assets/img/features-2.svg" class="img-fluid" alt="">
+						<img src="${img}features-2.svg" class="img-fluid" alt="">
 					</div>
 					<div class="col-md-7 pt-5 order-2 order-md-1">
 						<h3>Corporis temporibus maiores provident</h3>
@@ -266,7 +234,7 @@
 
 				<div class="row" data-aos="fade-up">
 					<div class="col-md-5">
-						<img src="assets/img/features-3.svg" class="img-fluid" alt="">
+						<img src="${img}features-3.svg" class="img-fluid" alt="">
 					</div>
 					<div class="col-md-7 pt-5">
 						<h3>Sunt consequatur ad ut est nulla consectetur reiciendis
@@ -287,7 +255,7 @@
 
 				<div class="row" data-aos="fade-up">
 					<div class="col-md-5 order-1 order-md-2">
-						<img src="assets/img/features-4.svg" class="img-fluid" alt="">
+						<img src="${img}features-4.svg" class="img-fluid" alt="">
 					</div>
 					<div class="col-md-7 pt-5 order-2 order-md-1">
 						<h3>Quas et necessitatibus eaque impedit ipsum animi
@@ -314,22 +282,7 @@
   <%@ include file = "../include/footer.jsp" %>
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/php-email-form/validate.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/venobox/venobox.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/counterup/counterup.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="${pageContext.request.contextPath}/vendor/aos/aos.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="${pageContext.request.contextPath}/js/main.js"></script>
-
+<%@ include file = "../bootstrap/guest_bootstrap_js.jsp" %>
 </body>
 
 </html>

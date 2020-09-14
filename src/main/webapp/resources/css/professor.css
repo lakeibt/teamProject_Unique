@@ -1,0 +1,47 @@
+.coures_plan_title_button1{
+	border: none;
+	background-color: white;
+	color: #32627b;
+	float: right;
+	font-size: 30px;
+}
+
+.coures_plan_title_button2{
+	border: none;
+	background-color: white;
+	color: #32627b;
+	float: right;
+	font-size: 30px;
+	display: none;
+}
+
+
+#course_plan_article{
+	display:none;
+}
+
+.coures_plan_plus_button{
+	border: none;
+	background-color: white;
+	color: #32627b;
+	float: right;
+}
+
+.coures_plan_minus_button{
+	border: none;
+	background-color: white;
+	color: gray;	
+}
+
+.coures_plan_minus_button_td{
+	width: 5%;
+}
+
+.coures_plan_weeks_th{
+	width: 10%;
+}
+
+.table input{
+	width: 100%;
+	
+}

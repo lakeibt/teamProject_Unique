@@ -1,15 +1,11 @@
 package com.kosmo.uni.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +30,7 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	// 로그인 페이지로 이동
+	// 로그인 페이지로 이동d
 	@RequestMapping("/guest/login")
 	public String gue_login() {
 		logger.info("url ==> login");
@@ -103,6 +99,18 @@ public class EduController {
 		logger.info("url ==> message");
 		
 		return "guest/message";
+	}
+	
+	@RequestMapping("/guest/testSignIn")
+	public String testSignIn() {
+		return "guest/testSignIn";
+	}
+	
+	@RequestMapping("/guest/testSignInPro")
+	public String testSignInPro(HttpServletRequest req, Model model) {
+		eduService.insertUser(req, model);
+		
+		return "guest/main";
 	}
 	
 	@RequestMapping("/guest/deniedTest")
