@@ -55,7 +55,6 @@
 										<thead>
 											<tr>
 												<th style="width:10%;">이수구분</th>
-												<th style="width:10%;">학년</th>
 												<th style="width:25%;">교과목명</th>
 												<th style="width:15%;">담당교수</th>
 												<th style="width:10%;">학점</th>
@@ -63,30 +62,17 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td style="width:10%;">전필</td>
-												<td style="width:10%;">1</td>
-												<td style="width:25%;">물리야 놀자!</td>
-												<td style="width:15%;">김물리</td>
-												<td style="width:10%;">3</td>
-												<td style="width:10%;">A+</td>
-											</tr>
-											<tr>
-												<td style="width:10%;">전필</td>
-												<td style="width:10%;">1</td>
-												<td style="width:25%;">AR의 이야기를 한 번 들어볼래?</td>
-												<td style="width:15%;">Mr.Ar</td>
-												<td style="width:10%;">3</td>
-												<td style="width:10%;">C</td>
-											</tr>
-											<tr>
-												<td style="width:10%;">전필</td>
-												<td style="width:10%;">3</td>
-												<td style="width:25%;">안녕!나는 유아이패스라고해!</td>
-												<td style="width:15%;">박패스</td>
-												<td style="width:10%;">3</td>
-												<td style="width:10%;">F</td>
-											</tr>
+										<c:if test="${cnt > 0}" >
+											<c:forEach var="dto" items="${dtos}">
+												<tr>
+													<td style="width:10%;">${dto.p_code}</td>
+													<td style="width:25%;">${dto.co_name}</td>
+													<td style="width:15%;">${dto.name_1}</td>
+													<td style="width:10%;">${dto.grade_1}</td>
+													<td style="width:10%;">${dto.grade_code}</td>
+												</tr>
+											</c:forEach>
+										</c:if>
 										</tbody>
 									</table>
 								</div>

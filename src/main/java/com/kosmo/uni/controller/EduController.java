@@ -80,16 +80,17 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/course")
-	public String gue_course() {
+	public String gue_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
 		
+		eduService.courseList(req, model);
 		return "guest/course";
 	}
 	
 	@RequestMapping("/guest/score")
-	public String gue_score() {
+	public String gue_score(HttpServletRequest req, Model model) {
 		logger.info("url ==> score");
-		
+		eduService.studentGradeList(req, model);
 		return "guest/score";
 	}
 	

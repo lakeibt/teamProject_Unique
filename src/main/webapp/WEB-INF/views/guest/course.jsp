@@ -34,44 +34,36 @@
 											</tr>
 										</thead>
 										<thead>
+											
 											<tr>
 												<th style="width:10%;">이수구분</th>
-												<th style="width:10%;">학년</th>
 												<th style="width:25%;">교과목명</th>
 												<th style="width:15%;">담당교수</th>
-												<th style="width:20%;">강의시간 및 강의실</th>
+												<th style="width:20%;">강의시간</th>
 												<th style="width:10%;">학점</th>
 												<th style="width:15%;">수업계획서</th>
 											</tr>
 										</thead>
 										<tbody>
+										<c:if test="${cnt > 0}" >
+											<c:forEach var="dto" items="${dtos}">
 											<tr>
-												<th style="width:10%;">전필</th>
-												<th style="width:10%;">1</th>
-												<th style="width:25%;">물리야 놀자!</th>
-												<th style="width:15%;">김물리</th>
-												<th style="width:20%;">수1-3 / 영301</th>
-												<th style="width:10%;">3</th>
-												<th style="width:15%;"><button type="submit">조회</button></th>
+												<td style="width:10%;">${dto.p_code}</td>
+												<td style="width:25%;">${dto.co_name}</td>
+												<td style="width:15%;">${dto.name_1}</td>
+												<td style="width:20%;">${dto.co_day}/${dto.le_code}-${dto.grade_1 + dto.le_code - 1}</td>
+												<td style="width:10%;">${dto.grade_1}</td>
+												<td style="width:15%;"><button type="submit">조회</button></td>
 											</tr>
-											<tr>
-												<th style="width:10%;">전필</th>
-												<th style="width:10%;">1</th>
-												<th style="width:25%;">AR의 이야기를 한 번 들어볼래?</th>
-												<th style="width:15%;">Mr.Ar</th>
-												<th style="width:20%;">월7-9 / 성302</th>
-												<th style="width:10%;">3</th>
-												<th style="width:15%;"><button type="submit">조회</button></th>
-											</tr>
-											<tr>
-												<th style="width:10%;">전필</th>
-												<th style="width:10%;">3</th>
-												<th style="width:25%;">안녕!나는 유아이패스라고해!</th>
-												<th style="width:15%;">박패스</th>
-												<th style="width:20%;">목4-6 / 중403</th>
-												<th style="width:10%;">3</th>
-												<th style="width:15%;"><button type="submit">조회</button></th>
-											</tr>
+											</c:forEach>
+											</c:if>
+											<c:if test="${cnt == 0}" >
+												<tr>
+													<td colspan="6" align="center">
+														게시글이 없습니다. 글을 작성해주세요 .!!
+													</td>
+												</tr>
+											</c:if>
 										</tbody>
 									</table>
 								</div>
