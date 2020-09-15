@@ -34,7 +34,7 @@
       	<p style = "color:#003cbc; font-size:30px; font-weight: normal;"><img src = "${img}lock2.png" style = "width:30px;">LOGIN</p>
       	<hr width = "100%">
       	<c:if test = "${sessionScope.auth == null}">
-	      	<form action = "${path}guest/loginPro" method = "post">
+	      	<form action = "${path}guest/loginPro" method = "post" style = "width:70%; margin:0 auto;">
 	      	<input type = "hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	      	<input type = "text" name = "userid" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
 	      	<input type = "password" name = "userpwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">
@@ -58,7 +58,7 @@
 	      			</td>
 	      		</tr>
 	      	</table>
-	      	<input type = "submit" value = "로그인" style = "width:100%; background-color: #003cbc; margin:0 auto; color: white; height:50px;">
+	      	<input type = "submit" value = "로그인" style = "width:100%; background-color: #0d2735; margin:0 auto; color: white; height:50px;">
 	      	</form>
       	</c:if>
       	<c:if test = "${sessionScope.auth != null}">
