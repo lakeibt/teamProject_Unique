@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -25,18 +25,21 @@ if(#startDate < #endDate){
 </head>
 
 <style>
-.form-control {font-size:12px;}
+.form-control {
+	font-size: 12px;
+}
+
 .btn {
-    width:100px;
-    background-color: #68A4C4;
-    border: none;
-    color:#fff;
-    padding: 15px 0;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    cursor: pointer;
+	width: 100px;
+	background-color: #68A4C4;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
 }
 </style>
 
@@ -188,71 +191,120 @@ if(#startDate < #endDate){
 			<!-- page content -->
 
 			<div class="right_col" role="main">
-				<div class="top_menu">
-					<table class="table" style="text-align:center; font-size: 12px;">
-						<tr>
-							<td style="width: 5%"><select class="form-control">
-									<option selected>구분</option>
-									<option>지각</option>
-									<option>정상</option>
-									<option>조퇴</option>
-									<option>휴가</option>
-							</select></td>
-							<td style="width: 10%"><input class="form-control"
-								type="text" id="comNum_Name" placeholder="사번  입력"></td>
-							<td colspan=2  style="width: 15%;"><input class="form-control"
-								type="date" id="startDate"></td>
-							<td colspan=2  style="width: 15%;"><input class="form-control"
-								type="date" id="endDate"></td>
-							<td colspan=4 align="left" style="width: 55%;">
-							<%-- <button class="btn" id="btn" type="submit"><img
-								src="${img}admin/search_icon.png" width="10%"></button></td>
-								<td> --%>
-								<input type="button" class="btn" style="padding: 6px 6px;" onclick="" value="검색">
-								<input type="button" class="btn" style="padding: 6px 6px;" onclick="" value="초기화">
-								</td>
-						</tr>
-						<tr>
-							<%-- <td>번호(${search_Cnt})</td> --%>
-							<th style="width: 10%">구분</th>
-							<th style="width: 10%">사번</th>
-							<th style="width: 10%">날짜</th>
-							<th style="width: 10%">출근 시간</th>
-							<th style="width: 10%">퇴근 시간</th>
-							<th colspan="4" style="width: 10%">지각 사유</th>
-						</tr>
-						<c:if test="${search_Cnt > 0}">
-							<c:forEach var="dto" items="${dtos}">
-								<tr>
-									<c:if test="${dto.num == 1}">
-										<td style="text-align:center">출근</td>
-									</c:if>
-									<c:if test="${dto.num == 2}">
-										<td style="text-align:center">퇴근</td>
-									</c:if>
-									<c:if test="${dto.num == 3}">
-										<td style="text-align:center">지각</td>
-									</c:if>
-									<td style="text-align:center">${dto.id}</td>
-									<td><fmt:formatDate value="${dto.inDay}" pattern="yyyy-MM-dd"/></td>
-									<td><fmt:formatDate value="${dto.inTime}" pattern="HH:mm:ss"/></td>
-									<td><fmt:formatDate value="${dto.outTime}" pattern="HH:mm:ss"/></td>
-									<td colspan="4">${dto.reason}</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</table>
+				<div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h4>근태관리</h4>
+								</div>
+								<div class="x_content">
+									<table class="table">
+										<thead style="color: #73879C;">
+											<tr>
+												<th>대상기간</th>
+												<td><select class="form-control"
+													style="float: left; width: 100px;">
+														<option selected>구분</option>
+														<option>지각</option>
+														<option>정상</option>
+														<option>조퇴</option>
+														<option>휴가</option>
+												</select>
+												<td><input class="form-control" type="text"
+													id="comNum_Name" placeholder="사번  입력"></td>
+												<td><input class="form-control" type="date"
+													id="startDate"></td>
+												<td><input class="form-control" type="date"
+													id="endDate"></td>
+												<td><input type="button" class="btn"
+													style="padding: 6px 6px;" onclick="" value="검색"> <input
+													type="button" class="btn" style="padding: 6px 6px;"
+													onclick="" value="초기화"></td>
+											</tr>
+										</thead>
+									</table>
+									<table class="table">
+										<thead style="color: #73879C;">
+											<tr>
+												<th>구분</th>
+												<th>사원번호</th>
+												<th>날짜</th>
+												<th>출근시간</th>
+												<th>퇴근시간</th>
+												<th>근무 시간</th>
+												<th>OT</th>
+												<th>특근</th>
+												<th>사유</th>
+											</tr>
+										</thead>
+										<tbody style="color: grey;">
+											<c:if test="${search_Cnt > 0}">
+												<c:forEach var="dto" items="${dtos}">
+													<tr>
+														<c:if test="${dto.num == 1}">
+															<td>출근</td>
+														</c:if>
+														<c:if test="${dto.num == 2}">
+															<td>퇴근</td>
+														</c:if>
+														<c:if test="${dto.num == 3}">
+															<td>지각</td>
+														</c:if>
+														<td>${dto.id}</td>
+														<td><fmt:formatDate value="${dto.inDay}"
+																pattern="yyyy-MM-dd" /></td>
+														<td><fmt:formatDate value="${dto.inTime}"
+																pattern="HH:mm" /></td>
+														<td><fmt:formatDate value="${dto.outTime}"
+																pattern="HH:mm" /></td>
+														<fmt:formatDate var="inTime_hour" value="${dto.inTime}"
+															pattern="HH" />
+														<fmt:formatDate var="outTime_hour" value="${dto.outTime}"
+															pattern="HH" />
+														<td>${outTime_hour-inTime_hour}</td>
+														<c:if test="${outTime_hour-inTime_hour<9}">
+															<td>0</td>
+														</c:if>
+														<c:if test="${outTime_hour-inTime_hour>=9}">
+															<td>${(outTime_hour-inTime_hour)-8}</td>
+														</c:if>
+														<fmt:formatDate var="dayOfTheWeek" value="${dto.inDay}"
+															pattern="E" />
+														<c:if
+															test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
+															<td>O</td>
+														</c:if>
+														<c:if
+															test="${dayOfTheWeek == '월' || dayOfTheWeek == '화' || dayOfTheWeek == '수' || dayOfTheWeek == '목' || dayOfTheWeek == '금'}">
+															<td>-</td>
+														</c:if>
+														<td>${dto.reason}</td>
+
+
+													</tr>
+												</c:forEach>
+											</c:if>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<!-- /page content -->
-
-
-				<!-- footer content -->
-				<footer>
-					<div class="pull-right">황동국팀 - 관리자 페이지</div>
-					<div class="clearfix"></div>
-				</footer>
-				<!-- /footer content -->
 			</div>
-			<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+			<!-- /page content -->
+			>>>>>>> 03fd849f3dc0d2ea0b1aba7b7037d09f4ac68af8
+
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">황동국팀 - 관리자 페이지</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+		<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+	</div>
 </body>
 </html>

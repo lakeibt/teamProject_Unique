@@ -11,4 +11,7 @@ public interface AdminDAO {
 	public int getAttendance_Cnt();
 	
 	public List<AdminVO> getAttendance_List(Map<String, Object> map);
+	
+	public List<AdminVO> getSalary_list_human(Map<String, Object> map);
+	
 }

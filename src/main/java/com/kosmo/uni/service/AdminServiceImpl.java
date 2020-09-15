@@ -33,4 +33,13 @@ public class AdminServiceImpl implements AdminService {
 		model.addAttribute("search_Cnt",search_Cnt);
 	}
 
+	@Override
+	public void salary_list_human(HttpServletRequest req, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<AdminVO> dtos = dao.getSalary_list_human(map);
+		System.out.println("dtos" + dtos);
+		model.addAttribute("dtos",dtos);
+	}
+
 }

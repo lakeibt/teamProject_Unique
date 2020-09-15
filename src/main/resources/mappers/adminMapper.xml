@@ -16,4 +16,16 @@
 		SELECT * FROM ATTENDANCE ORDER BY num desc
 	</select>
 
+	<select id="getSalary_list_human" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+		SELECT s.salary_inday,
+		s.sal_num,
+		s.id,
+		s.salary_month,
+		m.name,
+		m.depart
+		FROM salary s join manager m
+		ON s.id = m.id;
+	</select>
+
 </mapper>

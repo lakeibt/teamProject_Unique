@@ -31,7 +31,16 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("dao_dtos" + dtos);
 		return dtos;
 	}
-
+	
+	@Override
+	public List<AdminVO> getSalary_list_human(Map<String, Object> map) {
+		List<AdminVO> dtos = null;
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dtos = dao.getSalary_list_human(map);
+		System.out.println("dao_dtos" + dtos);
+		return dtos;
+	}
 
 
 
