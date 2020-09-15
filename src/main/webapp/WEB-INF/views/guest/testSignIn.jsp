@@ -19,7 +19,7 @@
 				<!-- 성적조회 페이지 -->
 				<section class="services" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
 					<div class="contact">
-						<form action = "${resources}guest/testSignInPro" method = "post" name = "signform" style = "margin : 0 auto; width : 500px;" onsubmit = "return signInCheck()">
+						<form action = "${guest}testSignInPro" method = "post" name = "signform" style = "margin : 0 auto; width : 500px;" onsubmit = "return signInCheck()">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 							<input type = "hidden" name = "hiddenId" value = "0">
 							<fieldset>

@@ -33,32 +33,39 @@
       	<p style = "font-weight: normal;"><img src = "${img}phone.png" style = "width:30px;">시스템 문의처</p>
       	<p style = "color:#003cbc; font-size:30px; font-weight: normal;"><img src = "${img}lock2.png" style = "width:30px;">LOGIN</p>
       	<hr width = "100%">
-      	<form action = "${path}guest/loginPro" method = "post">
-      	<input type = "hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-      	<input type = "text" name = "userid" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
-      	<input type = "password" name = "userpwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">
-      	<table style = "width:100%; margin-top:10px; margin-bottom:30px;">
-      		<tr>
-      			<td>
-      				<input type = "checkbox">학번/교직원번호 저장
-      			</td>
-      			<td style = "float:right; text-decoration: none;">
-      				<a href = "#" style = "color:black;">비밀번호 초기화</a>
-      			</td>
-      		</tr>
-      		<tr>
-      			<td colspan = "2" style = "text-align:right; text-decoration: none;">
-      				<a href = "#" style = "color:black;">학번/교직원번호 조회</a>
-      			</td>
-      		</tr>
-      		<tr>
-      			<td colspan = "2" style = "text-align:right; text-decoration: none;">
-      				<a href = "#" style = "color:black;">로그인/로그아웃 요구사항</a>
-      			</td>
-      		</tr>
-      	</table>
-      	<input type = "submit" value = "로그인" style = "width:100%; background-color: #003cbc; margin:0 auto; color: white; height:50px;">
-      	</form>
+      	<c:if test = "${sessionScope.auth == null}">
+	      	<form action = "${path}guest/loginPro" method = "post">
+	      	<input type = "hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	      	<input type = "text" name = "userid" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
+	      	<input type = "password" name = "userpwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">
+	      	<table style = "width:100%; margin-top:10px; margin-bottom:30px;">
+	      		<tr>
+	      			<td>
+	      				<input type = "checkbox">학번/교직원번호 저장
+	      			</td>
+	      			<td style = "float:right; text-decoration: none;">
+	      				<a href = "#" style = "color:black;">비밀번호 초기화</a>
+	      			</td>
+	      		</tr>
+	      		<tr>
+	      			<td colspan = "2" style = "text-align:right; text-decoration: none;">
+	      				<a href = "#" style = "color:black;">학번/교직원번호 조회</a>
+	      			</td>
+	      		</tr>
+	      		<tr>
+	      			<td colspan = "2" style = "text-align:right; text-decoration: none;">
+	      				<a href = "#" style = "color:black;">로그인/로그아웃 요구사항</a>
+	      			</td>
+	      		</tr>
+	      	</table>
+	      	<input type = "submit" value = "로그인" style = "width:100%; background-color: #003cbc; margin:0 auto; color: white; height:50px;">
+	      	</form>
+      	</c:if>
+      	<c:if test = "${sessionScope.auth != null}">
+      		<span style = "margin:0 auto;">이미 로그인되어 있습니다.</span><br>
+      		<span style = "margin:0 auto;">로그아웃하시려면 아래 버튼을 누르시면 됩니다.</span><br>
+      		<input type = "button" value = "로그아웃" style = "margin : 0 auto; color: white; background-color: #003cbc;" onClick = "window.location = '${guest}logout'">
+      	</c:if>
       </div>
     </section><!-- End Contact Section -->
 

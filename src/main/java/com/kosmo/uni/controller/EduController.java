@@ -1,6 +1,7 @@
 package com.kosmo.uni.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class EduController {
 	private static final Logger logger = LoggerFactory.getLogger(EduController.class);
 	
 	@Autowired
-	BCryptPasswordEncoder passwordEncoder;  // 비밀번호 암호화 객체
+	BCryptPasswordEncoder passwordEncoder;  // 비밀번호 암호화 객체d
 	
 	@Autowired
 	EduService eduService;
@@ -38,6 +39,13 @@ public class EduController {
 		return "guest/login";
 	}
 	
+	@RequestMapping("/guest/logout")
+	public String gue_logout(HttpSession session, HttpServletRequest req) {
+		session.invalidate();
+		
+		return "guest/main";
+	}
+	
 	@RequestMapping("/guest/main")
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
@@ -53,12 +61,18 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/myPage_modify")
-	public String gue_myPage_modify() {
+	public String gue_myPage_modify(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modify");
 		
+		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
 	}
-	
+	@RequestMapping("/guest/myPage_modifyPro")
+	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
+		logger.info("url ==> myPage_modifyPro");
+		eduService.studentModifyPro(req, model);
+		return "guest/myPage_modifyPro";
+	}
 	@RequestMapping("/guest/course_register")
 	public String gue_course_register() {
 		logger.info("url ==> course_register");

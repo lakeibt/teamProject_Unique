@@ -15,6 +15,7 @@
 			<div class="container">
 				<div class="d-flex justify-content-between align-items-center">
 					<h2>내 정보 페이지</h2>
+					
 				</div>
 			</div>
 		</section>
@@ -108,18 +109,18 @@
 											<tbody>
 												<tr>
 													<th style="width:60%">과목명</th>
-													<th style="width:20%">담당교수</th>
-													<th style="width:20%">학점</th>
+													<th style="width:24%">담당교수</th>
+													<th style="width:16%">학점</th>
 												</tr>
 												<tr>
 													<td style="width:60%">쉽고재밌게즐기는건축학</td>
-													<td style="width:20%">김건축</td>
-													<td style="width:20%">A</td>
+													<td style="width:24%">김건축</td>
+													<td style="width:16%">A</td>
 												</tr>
 												<tr>
 													<td style="width:60%">몸으로배우는모션인식AR</td>
-													<td style="width:20%">Mr.Ar</td>
-													<td style="width:20%">C++</td>
+													<td style="width:24%">Mr.Ar</td>
+													<td style="width:16%">C++</td>
 												</tr>
 											</tbody>
 										</table>
