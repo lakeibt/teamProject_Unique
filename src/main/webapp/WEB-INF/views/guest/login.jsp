@@ -64,7 +64,7 @@
       	<c:if test = "${sessionScope.auth != null}">
       		<span style = "margin:0 auto;">이미 로그인되어 있습니다.</span><br>
       		<span style = "margin:0 auto;">로그아웃하시려면 아래 버튼을 누르시면 됩니다.</span><br>
-      		<input type = "button" value = "로그아웃" style = "margin : 0 auto; color: white; background-color: #003cbc;">
+      		<input type = "button" value = "로그아웃" style = "margin : 0 auto; color: white; background-color: #003cbc;" onClick = "window.location = '${guest}logout'">
       	</c:if>
       </div>
     </section><!-- End Contact Section -->

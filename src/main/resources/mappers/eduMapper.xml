@@ -15,10 +15,19 @@
 		  FROM users
 		 WHERE userid = #{userid}
 	</select>
-	
 	<select id = "test" parameterType = "String" resultType = "com.kosmo.uni.vo.TestVO">
 		SELECT userid, username, password, enabled, authority
 		  FROM users
 		 WHERE userid = #{userid}
 	</select>
+	<select id="studentIdCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM student WHERE id=#{ id }
+	</select>
+	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
+		SELECT * FROM student WHERE id= #{id}
+	</select>
+	<update id="updateStudentInfo" parameterType="com.kosmo.uni.vo.StudentVO">
+		UPDATE student SET tel=#{tel}, address=#{address}, 
+		de_address=#{de_address}, email=#{email} WHERE id=#{id}
+	</update>
 </mapper>
