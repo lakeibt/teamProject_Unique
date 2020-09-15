@@ -1,6 +1,7 @@
 package com.kosmo.uni.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class EduController {
 	private static final Logger logger = LoggerFactory.getLogger(EduController.class);
 	
 	@Autowired
-	BCryptPasswordEncoder passwordEncoder;  // 비밀번호 암호화 객체
+	BCryptPasswordEncoder passwordEncoder;  // 비밀번호 암호화 객체d
 	
 	@Autowired
 	EduService eduService;
@@ -36,6 +37,13 @@ public class EduController {
 		logger.info("url ==> login");
 		
 		return "guest/login";
+	}
+	
+	@RequestMapping("/guest/logout")
+	public String gue_logout(HttpSession session, HttpServletRequest req) {
+		session.invalidate();
+		
+		return "guest/main";
 	}
 	
 	@RequestMapping("/guest/main")
