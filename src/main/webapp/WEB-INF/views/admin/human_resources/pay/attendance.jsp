@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +31,25 @@ $(function(){
 </script>
 </head>
 
+<style>
+.form-control {
+	font-size: 12px;
+}
+
+.btn {
+	width: 100px;
+	background-color: #68A4C4;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+}
+</style>
+
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -43,102 +64,114 @@ $(function(){
 			<!-- /top navigation -->
 
 			<!-- page content -->
+
 			<div class="right_col" role="main">
 				<div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="x_panel">
-								<div class="x_title"><h4>근태관리</h4></div>
+								<div class="x_title">
+									<h4>근태관리</h4>
+								</div>
 								<div class="x_content">
 									<table class="table">
-										<thead style="color:#73879C;">
+										<thead style="color: #73879C;">
 											<tr>
-												<th>조회기간</th>
-												<td><select class="form-control" style="float:left; width:100px;">
-													  <option value="2015">2015</option>
-													  <option value="2016">2016</option>
-													  <option value="2017">2017</option>
-													  <option value="2018">2018</option>
-													  <option value="2019">2019</option>
-													  <option value="2020" selected>2020</option>
-													  <option value="2021">2021</option>
-													  <option value="2022">2022</option>
-													  <option value="2023">2023</option>
-													</select>
-													<select class="form-control" style="float:left; width:100px;">
-													  <option value="1">1월</option>
-													  <option value="2">2월</option>
-													  <option value="3">3월</option>
-													  <option value="4">4월</option>
-													  <option value="5">5월</option>
-													  <option value="6">6월</option>
-													  <option value="7">7월</option>
-													  <option value="8">8월</option>
-													  <option value="9">9월</option>
-													  <option value="10">10월</option>
-													  <option value="11">11월</option>
-													  <option value="12">12월</option>
-													</select>
-													<select class="form-control" style="float:left; width:100px;">
-													  <option value="1">1일</option>
-													  <option value="2">2일</option>
-													  <option value="3">3일</option>
-													  <option value="4">4일</option>
-													  <option value="5">5일</option>
-													  <option value="6">6일</option>
-													  <option value="7">7일</option>
-													  <option value="8">8일</option>
-													  <option value="9">9일</optio직원n>
-													  <option value="10">10일</option>
-													  <option value="11">11일</option>
-													  <option value="12">12일</option>
-													  <option value="13">13일</option>
-													  <option value="14">14일</option>
-													  <option value="15">15일</option>
-													  <option value="16">16일</option>
-													  <option value="17">17일</option>
-													  <option value="18">18일</option>
-													  <option value="19">19일</option>
-													  <option value="20">20일</option>
-													  <option value="21">21일</option>
-													  <option value="22">22일</option>
-													  <option value="23">23일</option>
-													  <option value="24">24일</option>
-													  <option value="25">25일</option>
-													  <option value="26">26일</option>
-													  <option value="27">27일</option>
-													  <option value="28">28일</option>
-													  <option value="29">29일</option>
-													  <option value="30">30일</option>
-													  <option value="31">31일</option>
-													</select> <input class="btn btn-app" name="name" type="text" style="height:38px; padding:5px; margin-left:0px; margin-bottom:0px;" placeholder="이름">
-												<!-- <input class="btn btn-app" name="checkAD" type="button" style="height:38px; padding:5px; margin-left:0px; margin-bottom:0px;" value="조회"> -->
-												<a id="checkAD" class="btn btn-app" style="height:38px; padding:5px; margin-left:0px; margin-bottom:0px;">조회</a><br>
-												</td>
-												
+												<th>대상기간</th>
+												<td><select class="form-control"
+													style="float: left; width: 100px;">
+														<option selected>구분</option>
+														<option>지각</option>
+														<option>정상</option>
+														<option>조퇴</option>
+														<option>휴가</option>
+												</select>
+												<td><input class="form-control" type="text"
+													id="comNum_Name" placeholder="사번  입력"></td>
+												<td><input class="form-control" type="date"
+													id="startDate"></td>
+												<td><input class="form-control" type="date"
+													id="endDate"></td>
+												<td><input type="button" class="btn"
+													style="padding: 6px 6px;" onclick="" value="검색"> <input
+													type="button" class="btn" style="padding: 6px 6px;"
+													onclick="" value="초기화"></td>
 											</tr>
 										</thead>
-									
 									</table>
-									<div id="attendanceChk">
-										<!-- 결과 출력 위치 -->
-									</div>
-									
+									<table class="table">
+										<thead style="color: #73879C;">
+											<tr>
+												<th>구분</th>
+												<th>사원번호</th>
+												<th>날짜</th>
+												<th>출근시간</th>
+												<th>퇴근시간</th>
+												<th>근무 시간</th>
+												<th>OT</th>
+												<th>특근</th>
+											</tr>
+										</thead>
+										<tbody style="color: grey;">
+											<c:if test="${search_Cnt > 0}">
+												<c:forEach var="dto" items="${dtos}">
+													<tr>
+														<c:if test="${dto.num == 1}">
+															<td>출근</td>
+														</c:if>
+														<c:if test="${dto.num == 2}">
+															<td>퇴근</td>
+														</c:if>
+														<c:if test="${dto.num == 3}">
+															<td>지각</td>
+														</c:if>
+														<td>${dto.id}</td>
+														<td><fmt:formatDate value="${dto.inDay}"
+																pattern="yyyy-MM-dd" /></td>
+														<td><fmt:formatDate value="${dto.inTime}"
+																pattern="HH:mm" /></td>
+														<td><fmt:formatDate value="${dto.outTime}"
+																pattern="HH:mm" /></td>
+														<fmt:formatDate var="inTime_hour" value="${dto.inTime}"
+															pattern="HH" />
+														<fmt:formatDate var="outTime_hour" value="${dto.outTime}"
+															pattern="HH" />
+														<td>${outTime_hour-inTime_hour}</td>
+														<c:if test="${outTime_hour-inTime_hour<9}">
+															<td>0</td>
+														</c:if>
+														<c:if test="${outTime_hour-inTime_hour>=9}">
+															<td>${(outTime_hour-inTime_hour)-8}</td>
+														</c:if>
+														<fmt:formatDate var="dayOfTheWeek" value="${dto.inDay}"
+															pattern="E" />
+														<c:if
+															test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
+															<td>O</td>
+														</c:if>
+														<c:if
+															test="${dayOfTheWeek == '월' || dayOfTheWeek == '화' || dayOfTheWeek == '수' || dayOfTheWeek == '목' || dayOfTheWeek == '금'}">
+															<td>-</td>
+														</c:if>
+														<td>${dto.reason}</td>
+													</tr>
+												</c:forEach>
+											</c:if>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
 			<!-- /page content -->
-
 
 			<!-- footer content -->
 			<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
 			<!-- /footer content -->
 		</div>
+		<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 	</div>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

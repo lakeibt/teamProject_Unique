@@ -31,9 +31,8 @@
 								<table class="table">
 									<thead style="color:#73879C;">
 										<tr>
-										
 											<th>귀속연월</th>
-											<th>급여구분</th>
+											<th>구분</th>
 											<th>사원번호</th>
 											<th>성명</th>
 											<th>부서</th>
