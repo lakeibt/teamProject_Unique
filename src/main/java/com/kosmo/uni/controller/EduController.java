@@ -1,6 +1,11 @@
 package com.kosmo.uni.controller;
 
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,7 +23,7 @@ public class EduController {
 	private static final Logger logger = LoggerFactory.getLogger(EduController.class);
 	
 	@Autowired
-	BCryptPasswordEncoder passwordEncoder;  // 비밀번호 암호화 객체d
+	BCryptPasswordEncoder passwordEncoder;  // 비밀번호 암호화 객체
 	
 	@Autowired
 	EduService eduService;
@@ -68,9 +73,10 @@ public class EduController {
 		return "guest/myPage_modify";
 	}
 	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
+	public String gue_myPage_modifyPro(HttpServletRequest req, HttpServletResponse res, Model model) throws ServletException, IOException {
 		logger.info("url ==> myPage_modifyPro");
 		eduService.studentModifyPro(req, model);
+		
 		return "guest/myPage_modifyPro";
 	}
 	@RequestMapping("/guest/course_register")
