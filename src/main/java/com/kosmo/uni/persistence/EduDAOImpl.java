@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
+import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.TestVO;
+
 
 @Repository
 public class EduDAOImpl implements EduDAO {
@@ -52,5 +55,30 @@ public class EduDAOImpl implements EduDAO {
 	public int updateStudentInfo(StudentVO vo) {
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
 		return dao.updateStudentInfo(vo);
+	}
+
+	@Override
+	public int getCourseCnt() {
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dao.getCourseCnt();
+	}
+
+	@Override
+	public List<CourseVO> getCourseList(Map<String, Object> map) {
+		List<CourseVO> dtos;
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dtos = dao.getCourseList(map);
+	}
+	@Override
+	public int getGradeCnt() {
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dao.getGradeCnt();
+	}
+
+	@Override
+	public List<CourseVO> getGradeList(Map<String, Object> map) {
+		List<CourseVO> dtos;
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dtos = dao.getGradeList(map);
 	}
 }
