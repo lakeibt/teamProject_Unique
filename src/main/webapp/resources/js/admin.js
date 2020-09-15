@@ -2,7 +2,7 @@
 function newCreate() {
 	
 	var url = "salary_new_create";
-	window.open(url, "salary_new_create", "menubar=no, width=700 height=900" );
+	window.open(url, "salary_new_create", "menubar=no, width=700 height=500" );
 }
 
 
@@ -33,3 +33,4 @@ function setId(id){
 }
 
 //-------------------------------------------------------------------
+
