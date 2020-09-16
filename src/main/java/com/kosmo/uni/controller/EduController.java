@@ -92,7 +92,6 @@ public class EduController {
 		
 		return "guest/course_timeTable";
 	}
-	
 	@RequestMapping("/guest/course")
 	public String gue_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
@@ -104,10 +103,15 @@ public class EduController {
 	@RequestMapping("/guest/score")
 	public String gue_score(HttpServletRequest req, Model model) {
 		logger.info("url ==> score");
-		eduService.studentGradeList(req, model);
+		eduService.studentinfo(req, model);
 		return "guest/score";
 	}
-	
+	@RequestMapping("/guest/scoreInfo")
+	public String gue_scoreInfo(HttpServletRequest req, Model model) {
+		logger.info("url ==> scoreInfo");
+		eduService.studentGradeList(req, model);
+		return "guest/scoreInfo";
+	}
 	@RequestMapping("/guest/employment")
 	public String gue_employment() {
 		logger.info("url ==> employment");

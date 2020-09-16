@@ -58,6 +58,10 @@
 		     , c.co_name co_name
 		     , c.grade grade_1
 		     , p.name name_1
+		     , c.co_year co_year
+     		 , c.co_semester co_semester
+     		 , s.name name
+     		 , s.entrancedate entrancedate
 			  FROM STUDENT_GRADES g
 				   , STUDENT s
 				   , COURSE c
@@ -65,5 +69,7 @@
 				 WHERE g.id = s.id
 				   AND c.co_code = g.co_code
 				   AND c.p_name = p.id
+				   AND s.id = #{id}
+				   AND c.co_semester = #{value}
 	</select>
 </mapper>
