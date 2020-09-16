@@ -203,31 +203,33 @@ if(#startDate < #endDate){
 										<thead style="color: #73879C;">
 											<tr>
 												<th>대상기간</th>
-												<td><select class="form-control"
+												<!-- <td><select class="form-control"
 													style="float: left; width: 100px;">
 														<option selected>구분</option>
 														<option>지각</option>
-														<option>정상</option>
 														<option>조퇴</option>
 														<option>휴가</option>
-												</select>
-												<td><input class="form-control" type="text"
-													id="comNum_Name" placeholder="사번  입력"></td>
-												<td><input class="form-control" type="date"
-													id="startDate"></td>
-												<td><input class="form-control" type="date"
-													id="endDate"></td>
-												<td><input type="button" class="btn"
+												</select> -->
+												<!-- <td><input class="form-control" type="text"
+													id="comNum_Name" placeholder="사번  입력"></td> -->
+												<th><input class="form-control" type="date"
+													id="startDate"></th>
+												<th><input class="form-control" type="date"
+													id="endDate"></th>
+												<th><input type="button" class="btn"
 													style="padding: 6px 6px;" onclick="" value="검색"> <input
 													type="button" class="btn" style="padding: 6px 6px;"
-													onclick="" value="초기화"></td>
+													onclick="" value="초기화"></th>
 											</tr>
 										</thead>
 									</table>
+								</div>
+								<div>
 									<table class="table">
 										<thead style="color: #73879C;">
 											<tr>
-												<th>구분</th>
+												<th>출근</th>
+												<th>퇴근</th>
 												<th>사원번호</th>
 												<th>날짜</th>
 												<th>출근시간</th>
@@ -235,22 +237,29 @@ if(#startDate < #endDate){
 												<th>근무 시간</th>
 												<th>OT</th>
 												<th>특근</th>
-												<th>사유</th>
 											</tr>
 										</thead>
+									</table>
+								</div>
+								<div>
+									<table class="table">
 										<tbody style="color: grey;">
 											<c:if test="${search_Cnt > 0}">
 												<c:forEach var="dto" items="${dtos}">
 													<tr>
-														<c:if test="${dto.num == 1}">
+														<c:if test="${dto.inState == 1}">
 															<td>출근</td>
 														</c:if>
-														<c:if test="${dto.num == 2}">
-															<td>퇴근</td>
-														</c:if>
-														<c:if test="${dto.num == 3}">
+														<c:if test="${dto.inState == 2}">
 															<td>지각</td>
 														</c:if>
+														<c:if test="${dto.outState == 1}">
+															<td>퇴근</td>
+														</c:if>
+														<c:if test="${dto.outState != 1}">
+															<td>-</td>
+														</c:if>
+
 														<td>${dto.id}</td>
 														<td><fmt:formatDate value="${dto.inDay}"
 																pattern="yyyy-MM-dd" /></td>
@@ -262,26 +271,27 @@ if(#startDate < #endDate){
 															pattern="HH" />
 														<fmt:formatDate var="outTime_hour" value="${dto.outTime}"
 															pattern="HH" />
-														<td>${outTime_hour-inTime_hour}</td>
+														<c:if test="${outTime_hour-inTime_hour > 0}">
+															<td>${outTime_hour-inTime_hour}</td>
+														</c:if>
+														<c:if test="${outTime_hour-inTime_hour < 0}">
+															<td></td>
+														</c:if>
 														<c:if test="${outTime_hour-inTime_hour<9}">
-															<td>0</td>
+															<td></td>
 														</c:if>
 														<c:if test="${outTime_hour-inTime_hour>=9}">
 															<td>${(outTime_hour-inTime_hour)-8}</td>
 														</c:if>
 														<fmt:formatDate var="dayOfTheWeek" value="${dto.inDay}"
 															pattern="E" />
-														<c:if
-															test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
+														<c:if test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
 															<td>O</td>
 														</c:if>
 														<c:if
 															test="${dayOfTheWeek == '월' || dayOfTheWeek == '화' || dayOfTheWeek == '수' || dayOfTheWeek == '목' || dayOfTheWeek == '금'}">
-															<td>-</td>
+															<td></td>
 														</c:if>
-														<td>${dto.reason}</td>
-
-
 													</tr>
 												</c:forEach>
 											</c:if>

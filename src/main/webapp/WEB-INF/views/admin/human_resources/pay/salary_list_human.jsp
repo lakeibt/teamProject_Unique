@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>사원별 급/상여지급현황</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<title>사원별 급/상여지급현황</title>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
 
 <body class="nav-md">
@@ -114,8 +114,8 @@
 							<li class="nav-item dropdown open" style="padding-left: 15px;">
 								<a href="javascript:;" class="user-profile dropdown-toggle"
 								aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${img}sample/img.jpg" alt="">이름
+								aria-expanded="false"> <img src="${img}sample/img.jpg"
+									alt="">이름
 							</a>
 								<div class="dropdown-menu dropdown-usermenu pull-right"
 									aria-labelledby="navbarDropdown">
@@ -158,13 +158,14 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="x_panel">
-							<div class="x_title"><h4>2020/7 정규 (급여)</h4></div>
+							<div class="x_title">
+								<h4>사원별 급/상여지급현황</h4>
+							</div>
 							<div class="x_content">
 								<table class="table">
-									<thead style="color:#73879C;">
+									<thead style="color: #73879C;">
 										<tr>
 											<th>귀속연월</th>
-											<th>구분</th>
 											<th>사원번호</th>
 											<th>성명</th>
 											<th>부서</th>
@@ -172,50 +173,57 @@
 											<th>급여</th>
 											<th>식대</th>
 											<th>차량유지비</th>
-											<th>야간수당</th>
 											<th>특근수당(휴일)</th>
 										</tr>
 									</thead>
-									<tbody style="color:grey;">
-										<tr>
-											<th>2020/08</th>
-											<th>급여</th>
-											<th>100001</th>
-											<td>홍길동</td>
-											<td>영업부</td>
-											<td>3,300,000</td>
-											<td>3,000,000</td>
-											<td>100,000</td>
-											<td>200,000</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>2020/08</th>
-											<th>급여</th>
-											<th>100002</th>
-											<td>이민호</td>
-											<td>기술부</td>
-											<td>3,300,000</td>
-											<td>3,000,000</td>
-											<td>100,000</td>
-											<td>200,000</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>2020/08</th>
-											<th>급여</th>
-											<th>100003</th>
-											<td>김태리</td>
-											<td>기술부</td>
-											<td>3,300,000</td>
-											<td>3,000,000</td>
-											<td>100,000</td>
-											<td>200,000</td>
-											<td></td>
-											<td></td>
-										</tr>
+									<tbody style="color: grey;">
+										<c:if test="${salary_list_cnt > 0}">
+											<c:forEach var="dto" items="${dtos}">
+												<tr>
+													<td><fmt:formatDate value="${dto.salary_InDay}" pattern="YY/MM" /></td>
+													<td>${dto.id}</td>
+													<td>${dto.name}</td>
+													<td>${dto.depart_name}</td>
+													<td>${dto.sal+dto.over+dto.meals+dto.car}
+													<td>${dto.sal}</td>
+													<td>${dto.over}</td>
+													<td>${dto.meals}</td>
+													<td>${dto.car}</td>
+													
+													<!-- 기본급:1, 연장근무:2, 식대:3, 차량유지비:4 -->
+													
+													<td><fmt:formatDate value="${dto.inTime}"
+															pattern="HH:mm" /></td>
+													<td><fmt:formatDate value="${dto.outTime}"
+															pattern="HH:mm" /></td>
+													<fmt:formatDate var="inTime_hour" value="${dto.inTime}"
+														pattern="HH" />
+													<fmt:formatDate var="outTime_hour" value="${dto.outTime}"
+														pattern="HH" />
+													<c:if test="${outTime_hour-inTime_hour > 0}">
+														<td>${outTime_hour-inTime_hour}</td>
+													</c:if>
+													<c:if test="${outTime_hour-inTime_hour < 0}">
+														<td></td>
+													</c:if>
+													<c:if test="${outTime_hour-inTime_hour<9}">
+														<td></td>
+													</c:if>
+													<c:if test="${outTime_hour-inTime_hour>=9}">
+														<td>${(outTime_hour-inTime_hour)-8}</td>
+													</c:if>
+													<fmt:formatDate var="dayOfTheWeek" value="${dto.inDay}"
+														pattern="E" />
+													<c:if test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
+														<td>O</td>
+													</c:if>
+													<c:if
+														test="${dayOfTheWeek == '월' || dayOfTheWeek == '화' || dayOfTheWeek == '수' || dayOfTheWeek == '목' || dayOfTheWeek == '금'}">
+														<td></td>
+													</c:if>
+												</tr>
+											</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
 							</div>

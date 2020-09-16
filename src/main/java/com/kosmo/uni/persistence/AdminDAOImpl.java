@@ -33,6 +33,12 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
+	public int getSalary_Cnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSalary_Cnt();
+	}
+	
+	@Override
 	public List<AdminVO> getSalary_list_human(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
 		
@@ -41,7 +47,6 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("dao_dtos" + dtos);
 		return dtos;
 	}
-
 
 
 }

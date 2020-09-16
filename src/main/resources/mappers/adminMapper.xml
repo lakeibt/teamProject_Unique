@@ -16,16 +16,41 @@
 		SELECT * FROM ATTENDANCE ORDER BY num desc
 	</select>
 
+	<select id="getSalary_Cnt" resultType="int">
+		SELECT COUNT(*) as cnt
+		FROM salary
+	</select>
+
 	<select id="getSalary_list_human" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
+		<!-- SELECT s.salary_inday, s.sal_num, s.id, s.salary_month,
+		m.name, m.depart
+		FROM salary s join manager m ON s.id = m.id -->
+
+		SELECT * FROM
+		(
 		SELECT s.salary_inday,
 		s.sal_num,
 		s.id,
 		s.salary_month,
 		m.name,
-		m.depart
-		FROM salary s join manager m
-		ON s.id = m.id;
+		d.depart_name
+		FROM salary s
+		,manager m
+		,depart d
+		WHERE s.id = m.id
+		AND m.depart = d.depart
+		)
+		PIVOT
+		(
+		SUM(salary_month)
+		FOR
+		sal_num IN (1 AS sal, 2 AS over, 3 AS meals, 4 AS car)
+		)
+
+
 	</select>
+
+
 
 </mapper>
