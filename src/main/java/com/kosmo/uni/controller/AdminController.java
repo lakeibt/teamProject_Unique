@@ -185,7 +185,7 @@ public class AdminController {
 	public String salary_list_human(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_human");
 		
-		adminService.salary_list_human(req, model);
+		// adminService.salary_list_human(req, model);
 		
 		return "admin/human_resources/pay/salary_list_human";
 	}		
