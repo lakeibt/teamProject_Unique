@@ -16,7 +16,13 @@ public class CourseVO {
 	private int grade_1;
 	private String name_1;
 	private String grade_code;
-	
+	private int entrancedate;
+	public int getEntrancedate() {
+		return entrancedate;
+	}
+	public void setEntrancedate(int entrancedate) {
+		this.entrancedate = entrancedate;
+	}
 	public String getGrade_code() {
 		return grade_code;
 	}

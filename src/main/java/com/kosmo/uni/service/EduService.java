@@ -17,4 +17,5 @@ public interface EduService {
 	public void courseList(HttpServletRequest req, Model model);
 	// 성적 조회
 	public void studentGradeList(HttpServletRequest req, Model model);
+	
 }

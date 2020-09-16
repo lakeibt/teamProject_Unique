@@ -188,7 +188,10 @@ public class EduServiceImpl implements EduService {
 		// 5-1단계. 글갯수 구하기
 		cnt = eduDAO.getGradeCnt();
 		System.out.println("cnt => " + cnt);
-		
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("id :" + id );
+		int value = Integer.parseInt(req.getParameter("value"));
+		System.out.println("value :" + value );
 		pageNum=req.getParameter("pageNum");
 		
 		if(pageNum == null) {
@@ -214,6 +217,8 @@ public class EduServiceImpl implements EduService {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", start);
 			map.put("end", end);
+			map.put("id", id);
+			map.put("value", value);
 			// 5-2단계. 게시글 목록 조회
 			List<CourseVO> dtos = eduDAO.getGradeList(map);
 			model.addAttribute("dtos", dtos);
