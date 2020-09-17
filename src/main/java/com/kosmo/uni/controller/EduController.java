@@ -2,10 +2,8 @@ package com.kosmo.uni.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -73,7 +71,7 @@ public class EduController {
 		return "guest/myPage_modify";
 	}
 	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, HttpServletResponse res, Model model) throws ServletException, IOException {
+	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) throws ServletException, IOException {
 		logger.info("url ==> myPage_modifyPro");
 		eduService.studentModifyPro(req, model);
 		
