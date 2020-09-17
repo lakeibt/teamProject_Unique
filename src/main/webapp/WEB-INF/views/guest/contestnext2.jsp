@@ -12,6 +12,11 @@
  		Document doc2 = Jsoup.connect("https://www.wevity.com/" + url).get();
 %>
 
+<%
+		Elements posts = doc2.body().getElementsByClass("contest-detail");
+		Elements file = posts.select("div");
+%>
+
 <div class="col-lg-12 d-flex flex-column justify-content-center-center">
 	<div class="icon-box">
 		<table class="table" style="font-size:12px;">
