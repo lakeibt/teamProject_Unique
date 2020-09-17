@@ -107,7 +107,9 @@ public class EduController {
 	@RequestMapping("/guest/scoreInfo")
 	public String gue_scoreInfo(HttpServletRequest req, Model model) {
 		logger.info("url ==> scoreInfo");
+		
 		eduService.studentGradeList(req, model);
+		
 		return "guest/scoreInfo";
 	}
 	@RequestMapping("/guest/employment")
