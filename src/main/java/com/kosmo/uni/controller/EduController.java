@@ -107,9 +107,7 @@ public class EduController {
 	@RequestMapping("/guest/scoreInfo")
 	public String gue_scoreInfo(HttpServletRequest req, Model model) {
 		logger.info("url ==> scoreInfo");
-		
 		eduService.studentGradeList(req, model);
-		
 		return "guest/scoreInfo";
 	}
 	@RequestMapping("/guest/employment")
@@ -117,34 +115,6 @@ public class EduController {
 		logger.info("url ==> employment");
 		
 		return "guest/employment";
-	}
-	
-	@RequestMapping("/guest/employmentnext")
-	public String gue_employmentnext() {
-		logger.info("url ==> employmentnext");
-		
-		return "guest/employmentnext";
-	}
-	
-	@RequestMapping("/guest/contest")
-	public String gue_contest() {
-		logger.info("url ==> contest");
-		
-		return "guest/contest";
-	}
-	
-	@RequestMapping("/guest/contestnext")
-	public String gue_contestnext() {
-		logger.info("url ==> contestnext");
-		
-		return "guest/contestnext";
-	}
-	
-	@RequestMapping("/guest/contestnext2")
-	public String gue_contestnext2() {
-		logger.info("url ==> contestnext2");
-		
-		return "guest/contestnext2";
 	}
 	
 	@RequestMapping("/guest/message")
@@ -170,10 +140,4 @@ public class EduController {
 	public String denied() {
 		return "guest/deniedTest";
 	}
-	
-	@RequestMapping("/guest/ttttt")
-	public String ttttt() {
-		return "guest/ttttt";
-	}
-	
 }
