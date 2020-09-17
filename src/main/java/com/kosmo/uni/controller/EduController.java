@@ -2,8 +2,10 @@ package com.kosmo.uni.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -71,7 +73,7 @@ public class EduController {
 		return "guest/myPage_modify";
 	}
 	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) throws ServletException, IOException {
+	public String gue_myPage_modifyPro(HttpServletRequest req, HttpServletResponse res, Model model) throws ServletException, IOException {
 		logger.info("url ==> myPage_modifyPro");
 		eduService.studentModifyPro(req, model);
 		
@@ -117,6 +119,34 @@ public class EduController {
 		return "guest/employment";
 	}
 	
+	@RequestMapping("/guest/employmentnext")
+	public String gue_employmentnext() {
+		logger.info("url ==> employmentnext");
+		
+		return "guest/employmentnext";
+	}
+	
+	@RequestMapping("/guest/contest")
+	public String gue_contest() {
+		logger.info("url ==> contest");
+		
+		return "guest/contest";
+	}
+	
+	@RequestMapping("/guest/contestnext")
+	public String gue_contestnext() {
+		logger.info("url ==> contestnext");
+		
+		return "guest/contestnext";
+	}
+	
+	@RequestMapping("/guest/contestnext2")
+	public String gue_contestnext2() {
+		logger.info("url ==> contestnext2");
+		
+		return "guest/contestnext2";
+	}
+	
 	@RequestMapping("/guest/message")
 	public String gue_message() {
 		logger.info("url ==> message");
@@ -140,4 +170,10 @@ public class EduController {
 	public String denied() {
 		return "guest/deniedTest";
 	}
+	
+	@RequestMapping("/guest/ttttt")
+	public String ttttt() {
+		return "guest/ttttt";
+	}
+	
 }
