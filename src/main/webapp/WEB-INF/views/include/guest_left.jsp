@@ -11,7 +11,7 @@
 					<div class="col-lg-12 entries">
 						<div style="background-color:#0d2735;">
 							<div class="sidebar" style="margin:0px;">
-								<div class="sidebar-title"><a href="#">Categories</a></div>
+								<div class="sidebar-title">Categories</div>
 								<hr style="border-top:2px dashed #f3f8fa;">
 								<div class="sidebar-item categories">
 									<ul>
@@ -25,7 +25,11 @@
 											</ul>
 										</li>
 										<li><a href="${guest}score">성적조회</a></li>
-										<li><a href="${guest}employment">취업지원</a></li>
+										<li><a href="#">커리어지원</a>
+											<ul style="margin-left:30px;">
+												<li><a href="${guest}employment">취업지원</a></li>
+												<li><a href="${guest}contest">공조전지원</a></li>
+											</ul>
 										<li><a href="${guest}message">쪽지 </a></li>
 									</ul>
 								</div>
