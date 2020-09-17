@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
+<%@ page import="org.jsoup.Jsoup" %>
+<%@ page import="org.jsoup.nodes.Document" %>
+<%@ page import="org.jsoup.nodes.Element" %>
+<%@ page import="org.jsoup.select.Elements" %>
+
+<%
+        request.setCharacterEncoding("utf-8");
+		String url = request.getParameter("url");
+ 		Document doc2 = Jsoup.connect("https://www.wevity.com/" + url).get();
+%>
+
 <div class="col-lg-12 d-flex flex-column justify-content-center-center">
 	<div class="icon-box">
 		<table class="table" style="font-size:12px;">

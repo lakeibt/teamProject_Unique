@@ -13,13 +13,13 @@
 <body>
 <%
         // 파싱할 사이트를 적어준다(해당 사이트에 대한 태그를 다 긁어옴)
- 	Document doc2 = Jsoup.connect("http://www.playdb.co.kr/magazine/magazine_temp.asp?Page=1&kindno=2&sReqList=&stext=&sort=1").get();
+ 	Document doc2 = Jsoup.connect("https://www.wevity.com/?c=find&s=1&gub=1").get();
 %>
 <%
         //System.out.println(doc2.data());
         //System.out.println(doc2.body());
         // list 속성안에 li 요소 데이터들을 긁어온다
-        Elements posts = doc2.body().getElementsByClass("list");
+        Elements posts = doc2.body().getElementsByClass("ms-list");
         //System.out.println(doc2.getElementsByClass("list"));
         Elements file = posts.select("li");
         // System.out.println(posts.select("li"));
@@ -34,11 +34,20 @@
 %>
 			<%=e.select(".tit a").text()%> <br>
 			<%=e.select(".tit a").attr("href")%> <br>
-			<%=e.select(".thumb img").attr("src")%> <br>
-			<%=e.select(".txt").text()%> <br><br><br>
+			<%=e.select(".organ").text()%> <br>
+			<% String day = e.select(".day").text();
+				String day2 = "";
+				if(day.substring(day.length()-3, day.length()).equals("접수중")) {
+					day2 = day.substring(0, day.length()-4);					
+				} else if(day.substring(day.length()-4, day.length()).equals("접수예정") || day.substring(day.length()-4, day.length()).equals("마감임박")) {
+					day2 = day.substring(0, day.length()-5);
+				} else {
+					day2 = day;
+				}
+			%>
+			<%= day2 %><br><br>
 <%
         }
 %>
-
 </body>
 </html>
