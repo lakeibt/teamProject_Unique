@@ -12,7 +12,6 @@
 		String param1 = request.getParameter("param");
 		String num = request.getParameter("num");
  		Document doc2 = Jsoup.connect("https://www.wevity.com/?c=find&s=1&gub=1&cidx=" + param1 +"&gp="+ num).get();
- 		System.out.println(param1+"가나다라마바사"+num);
 %>
 
 <%
@@ -26,7 +25,7 @@
 %>
 		<% if(i == 0) {i++; continue;} %>
 		<tr>
-			<td style="width:70%"><a href="#" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
+			<td style="width:70%"><a id="other" href="#" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
 			<td id="detail" style="width:20%"><%=e.select(".organ").text()%></td>
 			<% String day = e.select(".day").text();
 				String day2 = "";

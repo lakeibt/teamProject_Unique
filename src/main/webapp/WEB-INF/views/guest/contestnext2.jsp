@@ -24,7 +24,7 @@
 		</div>
 		<div style="width: 60%; float: right;">
 			<h4><%=file.select(".tit-area h6").text()%></h4>
-			<table class="table" style="font-size:14px;">
+			<table id="target" class="table" style="font-size:14px;">
 				<tbody>
 					<tr>
 						<th width="20%">분야</th>
