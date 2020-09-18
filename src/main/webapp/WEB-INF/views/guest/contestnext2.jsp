@@ -55,7 +55,7 @@
 					</tr>
 					<tr>
 						<th>홈페이지</th>
-						<td><a href="<%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%>"><%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%></a></td>
+						<td><a href="<%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%>" target = "_blank"><%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%></a></td>
 					</tr>
 				</tbody>
 			</table>

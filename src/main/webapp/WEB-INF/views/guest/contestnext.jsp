@@ -24,8 +24,8 @@
 %>
 		<% if(i == 0) {i++; continue;} %>
 		<tr>
-			<td style="width:70%"><a href="#" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
-			<td id="detail" style="width:20%"><%=e.select(".organ").text()%></td>
+			<td style="width:60%"><a href="#" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
+			<td id="detail" style="width:30%"><%=e.select(".organ").text()%></td>
 			<% String day = e.select(".day").text();
 				String day2 = "";
 				if(day.substring(day.length()-3, day.length()).equals("접수중")) {
