@@ -21,7 +21,7 @@
 								<th>식대</th>
 								<th>차량유지비</th>
 								<th>야간수당</th>
-								<th>특근수당(휴일)</th>
+								<th>총합계</th>
 							</tr>
 						</thead>
 						<tbody style="color:grey;">
@@ -33,7 +33,7 @@
 								<td>100,000</td>
 								<td>200,000</td>
 								<td></td>
-								<td></td>
+								<td>3,300,000</td>
 							</tr>
 							<tr>
 								<th>100002</th>
@@ -43,7 +43,7 @@
 								<td>100,000</td>
 								<td>200,000</td>
 								<td></td>
-								<td></td>
+								<td>5,300,000</td>
 							</tr>
 							<tr>
 								<th>100003</th>
@@ -53,7 +53,7 @@
 								<td>100,000</td>
 								<td>200,000</td>
 								<td></td>
-								<td></td>
+								<td>7,300,000</td>
 							</tr>
 						</tbody>
 					</table>

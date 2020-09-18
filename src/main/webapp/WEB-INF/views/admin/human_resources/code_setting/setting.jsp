@@ -32,7 +32,7 @@
 									<table class="table">
 										<thead style="color: #73879C;">
 											<tr>
-												<th>대상직급</th>
+												<th>대상직위</th>
 												<th>기본급</th>
 												<th>연봉</th>
 												<th>비고</th>

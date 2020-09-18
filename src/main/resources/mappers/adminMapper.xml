@@ -25,7 +25,12 @@
 		m.name,
 		m.depart
 		FROM salary s join manager m
-		ON s.id = m.id;
+		ON s.id = m.id
 	</select>
+	
+	<insert id="salary_input" parameterType="java.util.Map">
+		INSERT INTO salary_input
+		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
+	</insert>
 
 </mapper>

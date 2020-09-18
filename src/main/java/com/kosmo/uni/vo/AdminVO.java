@@ -16,6 +16,7 @@ public class AdminVO {
 	private String name;			//이름
 	private String depart;			//부서
 	private int sal_total;			//총급여
+	private int Payments_division;  // 지급 구분
 	
 	
 	public int getNum() {
@@ -84,6 +85,12 @@ public class AdminVO {
 	}
 	public void setSal_total(int sal_total) {
 		this.sal_total = sal_total;
+	}
+	public int getPayments_division() {
+		return Payments_division;
+	}
+	public void setPayments_division(int payments_division) {
+		Payments_division = payments_division;
 	}
 	
 
