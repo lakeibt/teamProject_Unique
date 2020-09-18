@@ -19,7 +19,7 @@
         Elements posts = doc2.body().getElementsByClass("ms-list");
         Elements file = posts.select("li");
 %>
-<table class="table" style="font-size: 13px; margin-top: -18px;">
+<table class="table" style="font-size: 15px; margin-top: -18px;">
 <%
 		int i = 0;
         for(Element e : file){
