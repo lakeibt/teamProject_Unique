@@ -117,9 +117,10 @@ function content_callback() {
 
 function content1(var1) {
 	console.log(var1);
+	var1= var1.replace(/&/g,"%26").replace(/\+/g,"%2B");
    var param = "url=" + var1;
    
-   sendRequest(content_callback1,"contestnext2", "get", param);
+   sendRequest(content_callback1,"contestnext2", "post", param);
 }
 function content_callback1() {
    var result = document.getElementById("coninfo_detail");

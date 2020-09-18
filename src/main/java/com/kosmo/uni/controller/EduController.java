@@ -144,6 +144,8 @@ public class EduController {
 	public String gue_contestnext2() {
 		logger.info("url ==> contestnext2");
 		
+		
+		
 		return "guest/contestnext2";
 	}
 	
@@ -172,7 +174,8 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/ttttt")
-	public String ttttt() {
+	public String ttttt(HttpServletRequest req, Model model) {
+		
 		return "guest/ttttt";
 	}
 	

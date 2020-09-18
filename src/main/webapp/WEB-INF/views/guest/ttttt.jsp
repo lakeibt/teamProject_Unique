@@ -19,26 +19,17 @@
         Elements posts = doc2.body().getElementsByClass("contest-detail");
         Elements file = posts.select("div");
 %>
-
-<%
-        for(Element e : file){
-%>
-			<%=e.select(".tit-area h6").text()%> <br>
-			<%=e.select(".thumb img").attr("src")%> <br>
-			<% String title = e.select(".info .cd-info-list li:eq(0)").text(); String title2 = title.substring(3); %>
-			<%= title2 %><br>
-			<%-- <%= titlee %><br> --%>
-			<%=e.select(".info .cd-info-list li:eq(1)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(2)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(3)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(4)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(5)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(6)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(7)").text()%> <br>
-			<%=e.select(".info .cd-info-list li:eq(8)").text()%> <br><br>
-			<%=e.select(".article .comm-desc").text()%> <br><br>
-<%
-        }
-%>
+		<img src = "https://www.wevity.com<%=file.select(".thumb img").attr("src")%>"><br>
+			<%=file.select(".tit-area h6").text()%> <br>
+			<%=file.select(".thumb img").attr("src")%> <br>
+			<%=file.select(".info .cd-info-list li:eq(0)").text().substring(2)%><br> 
+			<%=file.select(".info .cd-info-list li:eq(1)").text().substring(4)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(2)").text().substring(5)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(3)").text().substring(5)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(4)").text().substring(4)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(5)").text().substring(4)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(6)").text().substring(5)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%> <br>
+			<%=file.select(".info .cd-info-list li:eq(8)").text().substring(4)%> <br><br>
 </body>
 </html>
