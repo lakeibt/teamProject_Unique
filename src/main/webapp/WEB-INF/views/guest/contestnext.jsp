@@ -10,7 +10,9 @@
         // 파싱할 사이트를 적어준다(해당 사이트에 대한 태그를 다 긁어옴)
         request.setCharacterEncoding("utf-8");
 		String param1 = request.getParameter("param");
- 		Document doc2 = Jsoup.connect("https://www.wevity.com/?c=find&s=1&gub=1&cidx=" + param1).get();
+		String num = request.getParameter("num");
+ 		Document doc2 = Jsoup.connect("https://www.wevity.com/?c=find&s=1&gub=1&cidx=" + param1 +"&gp="+ num).get();
+ 		System.out.println(param1+"가나다라마바사"+num);
 %>
 
 <%

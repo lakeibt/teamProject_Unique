@@ -12,34 +12,54 @@
  		Document doc2 = Jsoup.connect("https://www.wevity.com/" + url).get();
 %>
 
+<%
+        Elements posts = doc2.body().getElementsByClass("contest-detail");
+        Elements file = posts.select("div");
+%>
+
 <div class="col-lg-12 d-flex flex-column justify-content-center-center">
-	<div class="icon-box">
-		<table class="table" style="font-size:12px;">
-			<thead>
-				<tr>
-					<th colspan="8">내용</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>번호</th>
-					<td>1</td>
-					<th>제목</th>
-					<td>(주)일등 상반기 정규직 채용 공고 안내</td>
-					<th>기업/기관</th>
-					<td>(주)일등</td>
-					<th>발신일</th>
-					<td>2020.09.03</td>
-				</tr>
-				<tr>
-					<td colspan="8" style="display:table-cell; vertical-align: middle;">
-						<p class="form-control" style="width:100%; height:400px;">
-						내용 어쩌고 저쩌고 와랄랄라 <br><br><br>
-						<a href="#">더보기 ></a>
-						</p>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="icon-box" style="padding-top: 50px;">
+		<div style="width: 40%; float: left;">
+		<img src = "https://www.wevity.com<%=file.select(".thumb img").attr("src")%>" style="width: 70%"><br>
+		</div>
+		<div style="width: 60%; float: right;">
+			<h4><%=file.select(".tit-area h6").text()%></h4>
+			<table class="table" style="font-size:12px;">
+				<tbody>
+					<tr>
+						<th width="15%">분야</th>
+						<td><%=file.select(".info .cd-info-list li:eq(0)").text().substring(2)%></td>
+					</tr>
+					<tr>
+						<th>응모대상</th>
+						<td><%=file.select(".info .cd-info-list li:eq(1)").text().substring(4)%></td>
+					</tr>
+					<tr>
+						<th>주최/주관</th>
+						<td><%=file.select(".info .cd-info-list li:eq(2)").text().substring(5)%></td>
+					</tr>
+					<tr>
+						<th>후원/협찬</th>
+						<td><%=file.select(".info .cd-info-list li:eq(3)").text().substring(5)%></td>
+					</tr>
+					<tr>
+						<th>접수기간</th>
+						<td><%=file.select(".info .cd-info-list li:eq(4)").text().substring(4)%></td>
+					</tr>
+					<tr>
+						<th>총 상금</th>
+						<td><%=file.select(".info .cd-info-list li:eq(5)").text().substring(4)%></td>
+					</tr>
+					<tr>
+						<th>1등 상금</th>
+						<td><%=file.select(".info .cd-info-list li:eq(6)").text().substring(5)%></td>
+					</tr>
+					<tr>
+						<th>홈페이지</th>
+						<td><a href="<%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%>"><%=file.select(".info .cd-info-list li:eq(7)").text().substring(4)%></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
