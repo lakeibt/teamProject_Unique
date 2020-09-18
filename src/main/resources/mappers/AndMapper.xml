@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.kosmo.uni.persistence.AndDAO">
+
+	<select id="confirmIdPwd" resultType="java.util.Map" parameterType = "String">
+		SELECT USERID, USERNAME, PASSWORD, ENABLED, AUTHORITY FROM USERS WHERE USERID=#{id}
+	</select>
+	
+	<select id="getMemberInfo" resultType="com.kosmo.uni.vo.Member">
+		SELECT USERID, USERNAME, AUTHORITY FROM USERS WHERE USERID=#{id}
+	</select>
+
+</mapper>
