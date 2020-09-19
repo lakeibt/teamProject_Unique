@@ -22,7 +22,11 @@
 						<li><a href="${guest}course_timeTable">시간표조회</a></li>
 					</ul></li>
 				<li><a href="${guest}score">성적조회</a></li>
-				<li><a href="${guest}employment">취업지원</a></li>
+				<li class="drop-down"><a href="#">커리어지원</a>
+					<ul>
+						<li><a href="${guest}employment">취업지원</a></li>
+						<li><a href="${guest}contest">공모전지원</a></li>
+					</ul></li>
 				<c:if test = "${sessionScope.auth == null}">
 					<li><a href="${guest}login">로그인</a></li>
 				</c:if>

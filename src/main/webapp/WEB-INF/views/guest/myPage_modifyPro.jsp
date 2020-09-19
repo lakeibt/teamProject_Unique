@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정처리</title>
-<script src="${script}script.js"></script>
+<%-- <script src="${script}script.js"></script> --%>
 </head>
 <body>
 <c:if test="${updateCnt == 0}">

@@ -1,6 +1,8 @@
 package com.kosmo.uni.vo;
 
-public class StudentVO {
+import java.sql.Timestamp;
+
+public class Manager {
 	private String id;
 	private String pwd;
 	private String photo;
@@ -14,12 +16,11 @@ public class StudentVO {
 	private String tel;
 	private String email;
 	private String address;
-	private String m_code;
-	private int grade;
-	private int r_code;
+	private String depart;
+	private String rank;
+	private Timestamp r_code;
 	private int entrancedate;
 	
-	private String de_address;
 	public String getId() {
 		return id;
 	}
@@ -98,22 +99,22 @@ public class StudentVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getM_code() {
-		return m_code;
+	public String getDepart() {
+		return depart;
 	}
-	public void setM_code(String m_code) {
-		this.m_code = m_code;
+	public void setDepart(String depart) {
+		this.depart = depart;
 	}
-	public int getGrade() {
-		return grade;
+	public String getRank() {
+		return rank;
 	}
-	public void setGrade(int grade) {
-		this.grade = grade;
+	public void setRank(String rank) {
+		this.rank = rank;
 	}
-	public int getR_code() {
+	public Timestamp getR_code() {
 		return r_code;
 	}
-	public void setR_code(int r_code) {
+	public void setR_code(Timestamp r_code) {
 		this.r_code = r_code;
 	}
 	public int getEntrancedate() {
@@ -122,18 +123,4 @@ public class StudentVO {
 	public void setEntrancedate(int entrancedate) {
 		this.entrancedate = entrancedate;
 	}
-	public String getDe_address() {
-		return de_address;
-	}
-	public void setDe_address(String de_address) {
-		this.de_address = de_address;
-	}
-	
-//	@Override
-//	public String toString() {
-//		return "StudentVO [id=" + id + ", pwd=" + pwd + ", photo=" + photo + ", name=" + name + ", eng_name=" + eng_name
-//				+ ", jumin1=" + jumin1 + ", jumin2=" + jumin2 + ", gender=" + gender + ", frgn=" + frgn + ", nation="
-//				+ nation + ", tel=" + tel + ", email=" + email + ", addres=" + addres + ", m_code=" + m_code
-//				+ ", grade=" + grade + ", r_code=" + r_code + ", entrancedate=" + entrancedate + "]";
-//	}
-}
+}	

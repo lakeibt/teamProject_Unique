@@ -53,14 +53,21 @@ public class AdminController {
 
 	// ------------------------- 인사관리 -------------------------
 	// ------------------------ 기본코드설정 ------------------------
-	// 인사기초코드등록
+	// 인사기초코드
 	@RequestMapping(value = "/admin/human_resources/code_setting/code_setting")
 	public String code_setting(HttpServletRequest req, Model model) {
 		logger.info("human_resources/code_setting/code_setting");
 
 		return "admin/human_resources/code_setting/code_setting";
 	}
-
+	// 
+	@RequestMapping(value = "/admin/human_resources/code_setting/code_rankList")
+	public String code_rankList(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/code_rankList");
+		
+		return "admin/human_resources/code_setting/code_rankList";
+	}
+	
 	// 인사/급여환경설정
 	@RequestMapping(value = "/admin/human_resources/code_setting/setting")
 	public String setting(HttpServletRequest req, Model model) {
@@ -123,6 +130,14 @@ public class AdminController {
 		return "admin/human_resources/pay/attendance_Search";
 	}
 
+	//근태 조회 
+	@RequestMapping(value = "/admin/human_resources/pay/attendanceChk")
+	public String attendanceChk(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/attendanceChk");
+		
+		return "admin/human_resources/pay/attendanceChk";
+	}	
+	
 	// 급여등록
 	@RequestMapping(value = "/admin/human_resources/pay/salary")
 	public String salary(HttpServletRequest req, Model model) {

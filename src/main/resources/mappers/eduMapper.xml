@@ -30,4 +30,46 @@
 		UPDATE student SET tel=#{tel}, address=#{address}, 
 		de_address=#{de_address}, email=#{email} WHERE id=#{id}
 	</update>
+	<select id="getCourseCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM course
+	</select>
+	<select id="getCourseList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.CourseVO">
+		SELECT c.p_code p_code
+    		, c.co_code co_code
+    		, c.co_day co_day
+    		, c.co_name co_name
+     		, c.le_code le_code
+     		, c.grade grade_1
+     		, p.name name_1
+		  		FROM STUDENT_COURSE sc
+		   			, STUDENT s
+		   			, COURSE c
+		   			, PROFESSOR p
+		 			WHERE sc.id = s.id
+				    AND sc.co_code = c.co_code
+				    AND c.p_name = p.id
+	</select>
+	<select id="getGradeCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM student_grades
+	</select>
+	<select id="getGradeList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.CourseVO">
+		SELECT g.grades_code grade_code
+		     , c.p_code p_code
+		     , c.co_name co_name
+		     , c.grade grade_1
+		     , p.name name_1
+		     , c.co_year co_year
+     		 , c.co_semester co_semester
+     		 , s.name name
+     		 , s.entrancedate entrancedate
+			  FROM STUDENT_GRADES g
+				   , STUDENT s
+				   , COURSE c
+				   , PROFESSOR p
+				 WHERE g.id = s.id
+				   AND c.co_code = g.co_code
+				   AND c.p_name = p.id
+				   AND s.id = #{id}
+				   AND c.co_semester = #{value}
+	</select>
 </mapper>
