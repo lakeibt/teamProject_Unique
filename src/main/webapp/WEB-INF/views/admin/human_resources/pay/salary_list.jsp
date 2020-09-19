@@ -26,7 +26,7 @@ $(function(){
 		});
 	});
 });
-
+	
 $(function(){
 	$('#payslip').click(function(){
 		$.ajax({

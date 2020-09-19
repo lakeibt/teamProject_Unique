@@ -1,27 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>근태관리</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- bootstrap datepicker -->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
-	rel="stylesheet" />
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script> -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-<!--
-<script type="text/javascript">
-if(#startDate < #endDate){
-  alert("시작일은 종료일을 넘길 수 없습니다.");
-}
-</script> -->
+<!-- Template Main JS File -->
+<script src="${resources}js/admin.js"></script>
+<script>
+	var st;
+	var et;
+	$(function() {
+		$('#attendance_Search')
+				.click(
+						function() {
+							console.log(st);
+							console.log(et);
+							$
+									.ajax({
+										url : "${pageContext.request.contextPath}/admin/human_resources/pay/attendance_Search", // 응답페이지  ==> 컨트롤러/basic.
+										data : {
+											"st" : st,
+											"et" : et
+										},
+										type : 'GET', //전송 방식("get", "post")
+										dataType : 'text',//요청한 데이터 형식("html", "xml", "json", "text")
+										success : function(data) { //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+											$('#attendance').html(data);
+										},
+										error : function(request, status, error) {
+											console.log("st : " + typeof (st))
+											console.log("et : " + typeof (et))
+											console.log("@code : "
+													+ request.status);
+											console.log("@message : "
+													+ request.responseText);
+											console.log("@error : " + error);
+										}
+									});
+						});
+	});
+
+	function startSelect() {
+		st = document.getElementById("startDate").value;
+		console.log(st);
+	}
+
+	function endSelect() {
+		et = document.getElementById("endDate").value;
+		console.log(et);
+	}
+</script>
 </head>
 
 <style>
@@ -201,33 +232,25 @@ if(#startDate < #endDate){
 								<div class="x_content">
 									<table class="table">
 										<thead style="color: #73879C;">
-											<tr>
+											<tr align="center">
 												<th>대상기간</th>
-												<!-- <td><select class="form-control"
-													style="float: left; width: 100px;">
-														<option selected>구분</option>
-														<option>지각</option>
-														<option>조퇴</option>
-														<option>휴가</option>
-												</select> -->
-												<!-- <td><input class="form-control" type="text"
-													id="comNum_Name" placeholder="사번  입력"></td> -->
 												<th><input class="form-control" type="date"
-													id="startDate"></th>
+													id="startDate" onchange="startSelect()"></th>
 												<th><input class="form-control" type="date"
-													id="endDate"></th>
+													id="endDate" onchange="endSelect()"></th>
 												<th><input type="button" class="btn"
-													style="padding: 6px 6px;" onclick="" value="검색"> <input
-													type="button" class="btn" style="padding: 6px 6px;"
-													onclick="" value="초기화"></th>
+													style="padding: 6px 6px;" id="attendance_Search" value="검색">
+													<input type="button" class="btn" style="padding: 6px 6px;"
+													onclick="location.reload();" value="초기화"></th>
 											</tr>
 										</thead>
 									</table>
 								</div>
-								<div>
+								<div id="attendance">
+									<!-- 출력 위치 -->
 									<table class="table">
 										<thead style="color: #73879C;">
-											<tr>
+											<tr align="center">
 												<th>출근</th>
 												<th>퇴근</th>
 												<th>사원번호</th>
@@ -239,14 +262,10 @@ if(#startDate < #endDate){
 												<th>특근</th>
 											</tr>
 										</thead>
-									</table>
-								</div>
-								<div>
-									<table class="table">
-										<tbody style="color: grey;">
+										<tbody id="attendance_Search" style="color: grey;">
 											<c:if test="${search_Cnt > 0}">
 												<c:forEach var="dto" items="${dtos}">
-													<tr>
+													<tr align="center">
 														<c:if test="${dto.inState == 1}">
 															<td>출근</td>
 														</c:if>
@@ -259,14 +278,18 @@ if(#startDate < #endDate){
 														<c:if test="${dto.outState != 1}">
 															<td>-</td>
 														</c:if>
-
 														<td>${dto.id}</td>
 														<td><fmt:formatDate value="${dto.inDay}"
 																pattern="yyyy-MM-dd" /></td>
 														<td><fmt:formatDate value="${dto.inTime}"
 																pattern="HH:mm" /></td>
-														<td><fmt:formatDate value="${dto.outTime}"
-																pattern="HH:mm" /></td>
+														<c:if test="${empty dto.outTime}">
+															<td>-</td>
+														</c:if>
+														<c:if test="${not empty dto.outTime}">
+															<td><fmt:formatDate value="${dto.outTime}"
+																	pattern="HH:mm" /></td>
+														</c:if>
 														<fmt:formatDate var="inTime_hour" value="${dto.inTime}"
 															pattern="HH" />
 														<fmt:formatDate var="outTime_hour" value="${dto.outTime}"
@@ -275,10 +298,10 @@ if(#startDate < #endDate){
 															<td>${outTime_hour-inTime_hour}</td>
 														</c:if>
 														<c:if test="${outTime_hour-inTime_hour < 0}">
-															<td></td>
+															<td>-</td>
 														</c:if>
 														<c:if test="${outTime_hour-inTime_hour<9}">
-															<td></td>
+															<td>-</td>
 														</c:if>
 														<c:if test="${outTime_hour-inTime_hour>=9}">
 															<td>${(outTime_hour-inTime_hour)-8}</td>
@@ -290,7 +313,7 @@ if(#startDate < #endDate){
 														</c:if>
 														<c:if
 															test="${dayOfTheWeek == '월' || dayOfTheWeek == '화' || dayOfTheWeek == '수' || dayOfTheWeek == '목' || dayOfTheWeek == '금'}">
-															<td></td>
+															<td>-</td>
 														</c:if>
 													</tr>
 												</c:forEach>
@@ -304,8 +327,6 @@ if(#startDate < #endDate){
 				</div>
 			</div>
 			<!-- /page content -->
-			>>>>>>> 03fd849f3dc0d2ea0b1aba7b7037d09f4ac68af8
-
 
 			<!-- footer content -->
 			<footer>
