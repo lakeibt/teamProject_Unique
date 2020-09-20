@@ -23,10 +23,10 @@
 		</div>
 		<div style="width: 60%; float: right;">
 			<h4><%=file.select(".tit-area h6").text()%></h4>
-			<table class="table" style="font-size:12px;">
+			<table id="target" class="table" style="font-size:14px;">
 				<tbody>
 					<tr>
-						<th width="15%">분야</th>
+						<th width="20%">분야</th>
 						<td><%=file.select(".info .cd-info-list li:eq(0)").text().substring(2)%></td>
 					</tr>
 					<tr>
