@@ -70,31 +70,30 @@ public class EduServiceImpl implements EduService {
 	@Override
 	public void studentModifyPro(HttpServletRequest req, Model model) {
 		StudentVO vo = new StudentVO();
-		vo.setId((String) req.getSession().getAttribute("memId"));
-		String tel = req.getParameter("student_tel");
-		vo.setTel(tel);
-		// email
-		String email = req.getParameter("student_email");
-		String address = req.getParameter("address");
-		String De_address = req.getParameter("de_address");
-		vo.setEmail(email);
-		vo.setAddress(address);
-		vo.setDe_address(De_address);
-		int updateCnt = eduDAO.updateStudentInfo(vo);
+		int updateCnt = 0;
+		
+		if(req.getParameter("student_tel") == null) {
+			model.addAttribute("updateCnt", updateCnt);
+		} else {
+			vo.setId((String) req.getSession().getAttribute("memId"));
+			String tel = req.getParameter("student_tel");
+			vo.setTel(tel);
+			// email
+			String email = req.getParameter("student_email");
+			String address = req.getParameter("address");
+			String De_address = req.getParameter("de_address");
+			vo.setEmail(email);
+			vo.setAddress(address);
+			vo.setDe_address(De_address);
+			updateCnt = eduDAO.updateStudentInfo(vo);
+		}
 		// request나 ssesion으로 처리 결과를 저장
-		model.addAttribute("updateCnt", updateCnt);
 		System.out.println("updateCnt: " + updateCnt);
+		model.addAttribute("updateCnt", updateCnt);
 	}
 
 	@Override
 	public void courseList(HttpServletRequest req, Model model) {
-		// 3단계. 화면으로부터 입력받은 값을 받아온다.
-		/*
-		 * 페이지     num    rowNum =>   start   end
-		 * 1p    30~26     1~5		   1     5
-		 * 6p    25~21     6~10        6     10
-		 */
-		// 페이징
 		int pageSize = 10;   // 한 페이지당 출력할 글 갯수
 		int pageBlock = 3;  // 한 블럭당 페이지 갯수
 		
@@ -108,18 +107,11 @@ public class EduServiceImpl implements EduService {
 		int startPage= 0;  // 시작 페이지
 		int endPage =0;    // 마지막  페이지
 		
-		// 4단계. 다형성 적용, 싱글톤 방식으로 dao 객체 생성
-		// 5-1단계. 글갯수 구하기
 		cnt = eduDAO.getCourseCnt();
-		System.out.println("cnt => " + cnt);
+		pageNum = req.getParameter("pageNum");
 		
-		pageNum=req.getParameter("pageNum");
+		if(pageNum == null) pageNum ="1";
 		
-		if(pageNum == null) {
-			
-			pageNum ="1";  // 첫페이지를 1페이지로 지정
-		}
-		// 글 30건 기준
 		currentPage = Integer.parseInt(pageNum);  // 현재페이지 : 1
 		
 		// 페이지 갯수 6 = (30 / 5) + (0)
@@ -130,10 +122,11 @@ public class EduServiceImpl implements EduService {
 		start = (currentPage - 1) * pageSize +1;
 		// 현재 페이지 마지막 글번호(페이지별)
 		// 5 = 1 +5 -1;
-		end = start +pageSize -1;
+		end = start + pageSize -1;
 		//출력용 글번호
 		// 30 = 30 -(1-1) *5;
-		number = cnt -(currentPage - 1) *pageSize;
+		number = cnt -(currentPage - 1) * pageSize;
+		
 		if(cnt > 0) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", start);
@@ -143,15 +136,18 @@ public class EduServiceImpl implements EduService {
 			model.addAttribute("dtos", dtos);
 			// (1 / 3) *3 + 1;
 			startPage = (currentPage / pageBlock) * pageBlock + 1;
-			if (currentPage % pageBlock == 0)
-				startPage -= pageBlock;
+			
+			if (currentPage % pageBlock == 0) startPage -= pageBlock;
+				
 			// 마지막페이지
 			endPage = startPage + pageBlock - 1;
-			if (endPage > pageCount)
-				endPage = pageCount;
+			
+			if (endPage > pageCount) endPage = pageCount;
+				
 			model.addAttribute("cnt", cnt); // 글갯수
 			model.addAttribute("number", number); // 출력용 글번호
 			model.addAttribute("pageNum", pageNum); // 페이지 번호
+			
 			if (cnt > 0) {
 				model.addAttribute("startPage", startPage); // 시작페이지
 				model.addAttribute("endPage", endPage); // 마지막페이지
@@ -161,16 +157,20 @@ public class EduServiceImpl implements EduService {
 			}
 		}
 	}
+	
+	@Override
+	public void course_syllabus(HttpServletRequest req, Model model) {
+		String code = req.getParameter("code");
+		
+		Map<String, Object> syllabus_info = eduDAO.getCourseSyllabusInfo(code); // 강의계획서 정보(강의코드, 담당교수 등/학점 기준표)
+		Map<String, Object> syllabus_list = eduDAO.getCourseSyllabusList(code); // 강의계획서 주차 리스트(1주차, 2주차, .., 12주차)
+		
+		model.addAttribute("info", syllabus_info);
+		model.addAttribute("list", syllabus_list);
+	}
 
 	@Override
 	public void studentGradeList(HttpServletRequest req, Model model) {
-		// 3단계. 화면으로부터 입력받은 값을 받아온다.
-		/*
-		 * 페이지     num    rowNum =>   start   end
-		 * 1p    30~26     1~5		   1     5
-		 * 6p    25~21     6~10        6     10
-		 */
-		// 페이징
 		int pageSize = 10;   // 한 페이지당 출력할 글 갯수
 		int pageBlock = 3;  // 한 블럭당 페이지 갯수
 		

@@ -41,13 +41,30 @@
      		, c.le_code le_code
      		, c.grade grade_1
      		, p.name name_1
-		  		FROM STUDENT_COURSE sc
-		   			, STUDENT s
-		   			, COURSE c
-		   			, PROFESSOR p
-		 			WHERE sc.id = s.id
-				    AND sc.co_code = c.co_code
-				    AND c.p_name = p.id
+  		FROM STUDENT_COURSE sc
+   			, STUDENT s
+   			, COURSE c
+   			, PROFESSOR p
+		WHERE sc.id = s.id
+	    AND sc.co_code = c.co_code
+	    AND c.p_name = p.id
+	</select>
+	<select id="getCourseSyllabusInfo" parameterType="String" resultType="java.util.Map">
+		SELECT C.CO_NAME c_name, P.NAME p_name, P.TEL tel
+			 , G.ATTEND attend, G.MIDTERM midterm, G.FINALS finals, G.ASSIGN_REPORT report, G.ASSIGN_TEAM team
+		FROM COURSE C, PROFESSOR P, GRADE_POINT G
+		WHERE C.CO_CODE = G.CO_CODE
+		AND C.P_NAME = P.ID
+		AND C.CO_CODE = #{code}
+	</select>
+	<select id="getCourseSyllabusList" parameterType="String" resultType="java.util.Map">
+		SELECT S.SUBJECT subject
+			 , S.WEEK_1 week1, S.WEEK_2 week2, S.WEEK_3 week3, S.WEEK_4 week4, S.WEEK_5 week5, S.WEEK_6 week6
+			 , S.WEEK_7 week7, S.WEEK_8 week8, S.WEEK_9 week9, S.WEEK_10 week10, S.WEEK_11 week11, S.WEEK_12 week12
+		FROM COURSE C, PROFESSOR P, SYLLABUS S
+		WHERE C.CO_CODE = S.CO_CODE
+		AND C.P_NAME = P.ID
+		AND C.CO_CODE = #{code}
 	</select>
 	<select id="getGradeCnt" resultType="int">
 		SELECT COUNT(*) as cnt FROM student_grades

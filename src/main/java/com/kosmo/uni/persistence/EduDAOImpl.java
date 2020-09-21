@@ -69,6 +69,21 @@ public class EduDAOImpl implements EduDAO {
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
 		return dtos = dao.getCourseList(map);
 	}
+
+	@Override
+	public Map<String, Object> getCourseSyllabusInfo(String code) {
+		Map<String, Object> dtos;
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dtos = dao.getCourseSyllabusInfo(code);
+	}
+	
+	@Override
+	public Map<String, Object> getCourseSyllabusList(String code) {
+		Map<String, Object> dtos;
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dtos = dao.getCourseSyllabusList(code);
+	}
+	
 	@Override
 	public int getGradeCnt() {
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
