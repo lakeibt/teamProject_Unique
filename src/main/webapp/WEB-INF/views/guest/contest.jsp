@@ -4,10 +4,21 @@
 <html>
 <script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
 <script src="/uni/resources/js/request.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <head>
 	<title>Contact - Moderna Bootstrap Template</title>
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
+<script>
+jQuery(document).ready(function($) {
+	$(".scroll").click(function(event){
+		var offset = $("#coninfo_detail" + event).offset();
+		var winH = $(window).height();
+		event.preventDefault();
+		$('html,body').animate({scrollTop : (offset.top - winH/2)}, 500);
+	});
+});
+</script>
 <style>
 .form-control {font-size:15px;}
 

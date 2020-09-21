@@ -18,5 +18,5 @@ public interface AdminService {
 	
 	public void month_Search(HttpServletRequest req, Model model);
 	
-	
+	public void course_list(HttpServletRequest req, Model model);
 }

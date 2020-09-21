@@ -90,12 +90,52 @@ public class EduController {
 		
 		return "guest/score";
 	}
-	
+	@RequestMapping("/guest/scoreInfo")
+	public String gue_scoreInfo(HttpServletRequest req, Model model) {
+		logger.info("url ==> scoreInfo");
+		eduService.studentGradeList(req, model);
+		return "guest/scoreInfo";
+	}
 	@RequestMapping("/guest/employment")
 	public String gue_employment() {
 		logger.info("url ==> employment");
 		
 		return "guest/employment";
+	}
+	
+	@RequestMapping("/guest/employmentnext")
+	public String gue_employmentnext() {
+		logger.info("url ==> employmentnext");
+		
+		return "guest/employmentnext";
+	}
+	
+	@RequestMapping("/guest/employmentnext2")
+	public String gue_employmentnext2() {
+		logger.info("url ==> employmentnext2");
+		
+		return "guest/employmentnext2";
+	}
+	
+	@RequestMapping("/guest/contest")
+	public String gue_contest() {
+		logger.info("url ==> contest");
+		
+		return "guest/contest";
+	}
+	
+	@RequestMapping("/guest/contestnext")
+	public String gue_contestnext() {
+		logger.info("url ==> contestnext");
+		
+		return "guest/contestnext";
+	}
+	
+	@RequestMapping("/guest/contestnext2")
+	public String gue_contestnext2() {
+		logger.info("url ==> contestnext2");
+		
+		return "guest/contestnext2";
 	}
 	
 	@RequestMapping("/guest/message")

@@ -4,7 +4,7 @@ public class CourseVO {
 	private String co_code;
 	private String co_name;
 	private String m_code;
-	private String p_code;
+	private String p_code; 
 	private int limit_num;
 	private int co_num;
 	private int grade;

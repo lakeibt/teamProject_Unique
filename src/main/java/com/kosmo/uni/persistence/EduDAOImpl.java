@@ -64,10 +64,9 @@ public class EduDAOImpl implements EduDAO {
 	}
 
 	@Override
-	public List<CourseVO> getCourseList(Map<String, Object> map) {
-		List<CourseVO> dtos;
+	public List<CourseVO> getCourseList() {
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
-		return dtos = dao.getCourseList(map);
+		return dao.getCourseList();
 	}
 
 	@Override
@@ -95,5 +94,11 @@ public class EduDAOImpl implements EduDAO {
 		List<CourseVO> dtos;
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
 		return dtos = dao.getGradeList(map);
+	}
+
+	@Override
+	public List<CourseVO> getCourseList(Map<String, Object> map) {
+		System.out.println("getCourseList");
+		return null;
 	}
 }
