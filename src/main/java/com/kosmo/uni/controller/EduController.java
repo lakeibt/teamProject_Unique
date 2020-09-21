@@ -6,7 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +26,7 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리
+	// HomeController.java는 주석처리d
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
@@ -31,19 +34,12 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	// 로그인 페이지로 이동d
+	// 로그인 페이지로 이동
 	@RequestMapping("/guest/login")
 	public String gue_login() {
 		logger.info("url ==> login");
 		
 		return "guest/login";
-	}
-	
-	@RequestMapping("/guest/logout")
-	public String gue_logout(HttpSession session, HttpServletRequest req) {
-		session.invalidate();
-		
-		return "guest/main";
 	}
 	
 	@RequestMapping("/guest/main")
@@ -61,25 +57,10 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/myPage_modify")
-	public String gue_myPage_modify(HttpServletRequest req, Model model) {
+	public String gue_myPage_modify() {
 		logger.info("url ==> myPage_modify");
 		
-		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
-	}
-	
-	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
-		logger.info("url ==> myPage_modifyPro");
-		
-		eduService.studentModifyPro(req, model);
-		try {
-			return "guest/myPage_modifyPro";
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			return "guest/myPage_modifyPro";
-		}
 	}
 	
 	@RequestMapping("/guest/course_register")
@@ -97,33 +78,17 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/course")
-	public String gue_course(HttpServletRequest req, Model model) {
+	public String gue_course() {
 		logger.info("url ==> course");
 		
-		eduService.courseList(req, model);
 		return "guest/course";
 	}
 	
-	@RequestMapping("/guest/course_syllabus")
-	public String gue_course_syllabus(HttpServletRequest req, Model model) {
-		logger.info("url ==> course_syllabus");
-		
-		eduService.course_syllabus(req, model);
-		return "guest/course_syllabus";
-	}
-	
 	@RequestMapping("/guest/score")
-	public String gue_score(HttpServletRequest req, Model model) {
+	public String gue_score() {
 		logger.info("url ==> score");
-		eduService.studentinfo(req, model);
+		
 		return "guest/score";
-	}
-	
-	@RequestMapping("/guest/scoreInfo")
-	public String gue_scoreInfo(HttpServletRequest req, Model model) {
-		logger.info("url ==> scoreInfo");
-		eduService.studentGradeList(req, model);
-		return "guest/scoreInfo";
 	}
 	
 	@RequestMapping("/guest/employment")
@@ -131,34 +96,6 @@ public class EduController {
 		logger.info("url ==> employment");
 		
 		return "guest/employment";
-	}
-	
-	@RequestMapping("/guest/employmentnext")
-	public String gue_employmentnext() {
-		logger.info("url ==> employmentnext");
-		
-		return "guest/employmentnext";
-	}
-	
-	@RequestMapping("/guest/contest")
-	public String gue_contest() {
-		logger.info("url ==> contest");
-		
-		return "guest/contest";
-	}
-	
-	@RequestMapping("/guest/contestnext")
-	public String gue_contestnext() {
-		logger.info("url ==> contestnext");
-		
-		return "guest/contestnext";
-	}
-	
-	@RequestMapping("/guest/contestnext2")
-	public String gue_contestnext2() {
-		logger.info("url ==> contestnext2");
-		
-		return "guest/contestnext2";
 	}
 	
 	@RequestMapping("/guest/message")
@@ -184,11 +121,4 @@ public class EduController {
 	public String denied() {
 		return "guest/deniedTest";
 	}
-	
-	@RequestMapping("/guest/ttttt")
-	public String ttttt(HttpServletRequest req, Model model) {
-		
-		return "guest/ttttt";
-	}
-	
 }
