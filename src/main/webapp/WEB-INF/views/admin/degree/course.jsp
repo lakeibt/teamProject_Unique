@@ -151,7 +151,7 @@
 								<tfoot>
 									<tr>
 										<td colspan="8">
-											<a class="btn btn-app" style="height:80%; float:right;">강의등록</a>
+											<a class="btn btn-app" style="height:80%; float:right;">강의등록 / 수정</a>
 										</td>
 									</tr>
 								</tfoot>
