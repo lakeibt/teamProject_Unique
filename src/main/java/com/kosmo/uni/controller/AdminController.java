@@ -39,8 +39,48 @@ public class AdminController {
 	public String course(HttpServletRequest req, Model model) {
 		logger.info("degree/course");
 		
+		adminService.course_list(req, model);
+		
 		return "admin/degree/course";
 	}
+	
+	//강의등록
+	@RequestMapping(value = "/admin/degree/coursenext")
+	public String coursenext(HttpServletRequest req, Model model) {
+		logger.info("degree/coursenext");
+		
+		return "admin/degree/coursenext";
+	}
+	
+	//강의수정
+	@RequestMapping(value = "/admin/degree/coursenext2")
+	public String coursenext2(HttpServletRequest req, Model model) {
+		logger.info("degree/coursenext2");
+		
+		
+		return "admin/degree/coursenext2";
+	}
+	
+	//강의등록 완료
+	@RequestMapping(value = "/admin/degree/coursewm")
+	public String coursewm(HttpServletRequest req, Model model) {
+		logger.info("degree/coursewm");
+		
+		model.addAttribute("cnt", 0);
+		
+		return "admin/degree/coursewm";
+	}
+	
+	//강의수정 완료
+	@RequestMapping(value = "/admin/degree/coursewm2")
+	public String coursewm2(HttpServletRequest req, Model model) {
+		logger.info("degree/coursewm2");
+		
+		model.addAttribute("cnt", 0);
+		
+		return "admin/degree/coursewm2";
+	}
+	
 	// 시설문의
 	@RequestMapping(value = "/admin/degree/facility_ask")
 	public String facility_ask(HttpServletRequest req, Model model) {

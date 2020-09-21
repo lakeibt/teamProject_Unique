@@ -25,8 +25,8 @@ public interface EduDAO {
 	public int updateStudentInfo(StudentVO vo);
 	// 강의 목록 갯수
 	public int getCourseCnt();
-	// 강의 목록
-	public List<CourseVO> getCourseList(Map<String, Object> map);
+	// 강의 목록 (admin페이지)
+	public List<CourseVO> getCourseList();
 	// 성적 목록 갯수
 	public int getGradeCnt();
 	// 성적 목록
