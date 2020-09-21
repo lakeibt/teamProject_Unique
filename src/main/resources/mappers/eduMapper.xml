@@ -48,6 +48,9 @@
 		 			WHERE sc.id = s.id
 				    AND sc.co_code = c.co_code
 				    AND c.p_name = p.id
+				    AND s.m_code = c.m_code
+				    AND s.id = #{id}
+				    
 	</select>
 	<select id="getGradeCnt" resultType="int">
 		SELECT COUNT(*) as cnt FROM student_grades
@@ -71,5 +74,15 @@
 				   AND c.p_name = p.id
 				   AND s.id = #{id}
 				   AND c.co_semester = #{value}
+	</select>
+	<select id="getDay" resultType="com.kosmo.uni.vo.StudentStudyListVO">
+		SELECT *
+		  FROM day
+	</select>
+	<select id="getStudyCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM student_study
+	</select>
+	<select id="getStudyList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.StudentStudyListVO">
+		SELECT * FROM student_study WHERE id = #{id}
 	</select>
 </mapper>

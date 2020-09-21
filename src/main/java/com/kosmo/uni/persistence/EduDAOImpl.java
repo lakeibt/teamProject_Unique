@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.TestVO;
 
@@ -80,5 +81,24 @@ public class EduDAOImpl implements EduDAO {
 		List<CourseVO> dtos;
 		EduDAO dao = sqlSession.getMapper(EduDAO.class);
 		return dtos = dao.getGradeList(map);
+	}
+
+	@Override
+	public List<StudentStudyListVO> getDay() {
+		List<StudentStudyListVO> dtos;
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dtos = dao.getDay();
+	}
+	@Override
+	public int getStudyCnt() {
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dao.getStudyCnt();
+	}
+
+	@Override
+	public List<StudentStudyListVO> getStudyList(Map<String, Object> map) {
+		List<StudentStudyListVO> dtos;
+		EduDAO dao = sqlSession.getMapper(EduDAO.class);
+		return dtos = dao.getStudyList(map);
 	}
 }

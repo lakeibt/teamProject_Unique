@@ -73,9 +73,10 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/course_timeTable")
-	public String gue_course_timeTable() {
+	public String gue_course_timeTable(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_timeTable");
 		
+		eduService.studentList(req, model);
 		return "guest/course_timeTable";
 	}
 	@RequestMapping("/guest/course")
