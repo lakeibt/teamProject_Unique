@@ -19,5 +19,6 @@ public interface EduService {
 	public void course_syllabus(HttpServletRequest req, Model model);
 	// 성적 조회
 	public void studentGradeList(HttpServletRequest req, Model model);
-	
+	// 수강 시간표 
+	public void studentList(HttpServletRequest req, Model model);
 }

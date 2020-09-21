@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
 
 public interface EduDAO {
@@ -37,4 +38,10 @@ public interface EduDAO {
 	public int getGradeCnt();
 	// 성적 목록
 	public List<CourseVO> getGradeList(Map<String, Object> map);
+	// 요일
+	public List<StudentStudyListVO> getDay();
+	// 학생 강의 갯수
+	public int getStudyCnt();
+	// 학생 강의 목록
+	public List<StudentStudyListVO> getStudyList(Map<String, Object> map);
 }

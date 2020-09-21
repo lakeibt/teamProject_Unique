@@ -68,7 +68,7 @@
 		                           console.log(value);
 		                           var param = "value=" + value;
 		                           
-		                           sendRequest(content_callback,"scoreInfo", "get", param);
+		                           sendRequest(content_callback,"${guest}scoreInfo", "get", param);
 		                           console.log(param);
 		                        }
 		                        function content_callback() {

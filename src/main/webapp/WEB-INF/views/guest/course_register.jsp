@@ -4,8 +4,10 @@
 <html>
 
 <head>
+	<meta charset="utf-8"/>
 	<title>Contact - Moderna Bootstrap Template</title>
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
+	
 </head>
 <body>
 	<%@ include file="../include/header.jsp"%>
@@ -117,6 +119,7 @@
 
 		<!-- ======= Map Section ======= -->
 	</main>
+	
 	<!-- End #main -->
 	<%@ include file="../include/footer.jsp"%>
 

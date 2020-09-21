@@ -47,12 +47,14 @@
             , c.le_code le_code
      		, p.name name_1
   		FROM STUDENT_COURSE sc
-   			, STUDENT s
-   			, COURSE c
-   			, PROFESSOR p
-		WHERE sc.id = s.id
-	    AND sc.co_code = c.co_code
-	    AND c.p_name = p.id
+		   			, STUDENT s
+		   			, COURSE c
+		   			, PROFESSOR p
+		 			WHERE sc.id = s.id
+				    AND sc.co_code = c.co_code
+				    AND c.p_name = p.id
+				    AND s.m_code = c.m_code
+				    AND s.id = #{id}
 	</select>
 	<select id="getCourseSyllabusInfo" parameterType="String" resultType="java.util.Map">
 		SELECT C.CO_NAME c_name, P.NAME p_name, P.TEL tel
@@ -93,5 +95,15 @@
 				   AND c.p_name = p.id
 				   AND s.id = #{id}
 				   AND c.co_semester = #{value}
+	</select>
+	<select id="getDay" resultType="com.kosmo.uni.vo.StudentStudyListVO">
+		SELECT *
+		  FROM day
+	</select>
+	<select id="getStudyCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM student_study
+	</select>
+	<select id="getStudyList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.StudentStudyListVO">
+		SELECT * FROM student_study WHERE id = #{id}
 	</select>
 </mapper>

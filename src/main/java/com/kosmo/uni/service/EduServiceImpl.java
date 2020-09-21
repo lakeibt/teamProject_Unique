@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
 
 
@@ -108,9 +109,10 @@ public class EduServiceImpl implements EduService {
 		int endPage =0;    // 마지막  페이지
 		
 		cnt = eduDAO.getCourseCnt();
-		pageNum = req.getParameter("pageNum");
-		
-		if(pageNum == null) pageNum ="1";
+		System.out.println("cnt => " + cnt);
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("id :" + id );
+		pageNum=req.getParameter("pageNum");
 		
 		currentPage = Integer.parseInt(pageNum);  // 현재페이지 : 1
 		
@@ -131,6 +133,7 @@ public class EduServiceImpl implements EduService {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", start);
 			map.put("end", end);
+			map.put("id",id);
 			// 5-2단계. 게시글 목록 조회
 			List<CourseVO> dtos = eduDAO.getCourseList(map);
 			model.addAttribute("dtos", dtos);
@@ -241,5 +244,20 @@ public class EduServiceImpl implements EduService {
 				model.addAttribute("currentPage", currentPage);// 현재페이지
 			}
 		}
+	}
+
+	@Override
+	public void studentList(HttpServletRequest req, Model model) {
+		int cnt=0;
+		cnt = eduDAO.getStudyCnt();
+		String id = (String) req.getSession().getAttribute("memId");
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		System.out.println("cnt => " + cnt);
+		List<StudentStudyListVO> dtos = eduDAO.getStudyList(map);
+		model.addAttribute("dtos", dtos);
+		System.out.println("dtos:" + dtos);
+		model.addAttribute("cnt", cnt);
+		
 	}
 }
