@@ -42,6 +42,13 @@ public class EduController {
 		return "guest/login";
 	}
 	
+	@RequestMapping("/guest/logout")
+	public String gue_logout(HttpSession session, HttpServletRequest req) {
+		session.invalidate();
+		
+		return "guest/main";
+	}
+	
 	@RequestMapping("/guest/main")
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
@@ -57,9 +64,10 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/myPage_modify")
-	public String gue_myPage_modify() {
+	public String gue_myPage_modify(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modify");
 		
+		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
 	}
 	
@@ -79,16 +87,17 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/course")
-	public String gue_course() {
+	public String gue_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
 		
+		eduService.courseList(req, model);
 		return "guest/course";
 	}
 	
 	@RequestMapping("/guest/score")
-	public String gue_score() {
+	public String gue_score(HttpServletRequest req, Model model) {
 		logger.info("url ==> score");
-		
+		eduService.studentinfo(req, model);
 		return "guest/score";
 	}
 	@RequestMapping("/guest/scoreInfo")
