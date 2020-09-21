@@ -70,6 +70,12 @@ public class EduController {
 		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
 	}
+	@RequestMapping("/guest/myPage_modifyPro")
+	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
+		logger.info("url ==> myPage_modifyPro");
+		eduService.studentModifyPro(req, model);
+		return "guest/myPage_modifyPro";
+	}
 	
 	@RequestMapping("/guest/course_register")
 	public String gue_course_register() {
@@ -92,6 +98,13 @@ public class EduController {
 		
 		eduService.courseList(req, model);
 		return "guest/course";
+	}
+	@RequestMapping("/guest/course_syllabus")
+	public String gue_course_syllabus(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_syllabus");
+		
+		eduService.course_syllabus(req, model);
+		return "guest/course_syllabus";
 	}
 	
 	@RequestMapping("/guest/score")
@@ -170,5 +183,11 @@ public class EduController {
 	@RequestMapping("/guest/deniedTest")
 	public String denied() {
 		return "guest/deniedTest";
+	}
+	
+	@RequestMapping("/guest/ttttt")
+	public String ttttt(HttpServletRequest req, Model model) {
+		
+		return "guest/ttttt";
 	}
 }
