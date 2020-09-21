@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVo;
-import com.spring.lego.vo.MemberVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -87,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		// 5-1단계. 글 갯수 구하기
-		cnt = dao.getMemeberCnt();
+		// cnt = dao.getMemeberCnt();
 		System.out.println("cnt : " + cnt);
 
 		pageNum = req.getParameter("pageNum");
@@ -125,8 +124,8 @@ public class AdminServiceImpl implements AdminService {
 			map.put("start", start);
 			map.put("end", end);
 			System.out.println("map : " + map);
-			List<MemberVO> mtos = dao.getArticleList(map);
-			model.addAttribute("mtos", mtos);
+			// List<MemberVO> mtos = dao.getArticleList(map);
+			// model.addAttribute("mtos", mtos);
 		}
 		// 6단계. request나 session에 처리결과를 저장 (jsp에 전달)
 		// 시작 페이지
