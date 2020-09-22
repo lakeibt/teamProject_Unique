@@ -22,9 +22,6 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminDAO dao;
 	
-	@Autowired
-	EduDAO dao2;
-
 	@Override
 	public void attendance(HttpServletRequest req, Model model) {
 		int search_Cnt = 0;
@@ -279,11 +276,11 @@ public class AdminServiceImpl implements AdminService {
 	public void course_list(HttpServletRequest req, Model model) {
 		int course_Cnt = 0;
 		
-		course_Cnt = dao2.getCourseCnt();
+		course_Cnt = dao.getCourseCnt();
 		
 		System.out.println("course_Cnt : " + course_Cnt);
 		
-		List<CourseVO> dtos = dao2.getCourseList();
+		List<CourseVO> dtos = dao.getCourseList();
 		System.out.println("dtos" + dtos);
 		model.addAttribute("dtos",dtos);
 		model.addAttribute("course_Cnt",course_Cnt);

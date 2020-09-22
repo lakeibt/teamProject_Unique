@@ -97,8 +97,8 @@ jQuery(document).ready(function($) {
 								<table class="table" style="font-size:15px;">
 									<tbody>
 										<tr>
-											<th style="width:70%">공모전명</th>
-											<th style="width:20%">주최사</th>
+											<th style="width:60%">공모전명</th>
+											<th style="width:30%">주최사</th>
 											<th style="width:10%">현재현황</th>
 										</tr>
 									</tbody>

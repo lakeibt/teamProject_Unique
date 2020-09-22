@@ -70,6 +70,7 @@ public class EduController {
 		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
 	}
+	
 	@RequestMapping("/guest/myPage_modifyPro")
 	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modifyPro");

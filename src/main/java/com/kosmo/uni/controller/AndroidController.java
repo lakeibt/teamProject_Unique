@@ -25,7 +25,7 @@ public class AndroidController {
 	
 	//	앱 로그인
 		@ResponseBody	// 웹(스프링)에서 안드로이드로 값(json)을 전달하기 위한 어노테이션
-		@RequestMapping("androidSignIn")
+		@RequestMapping("/androidSignIn")
 		public Map<String, String> androidSignIn(HttpServletRequest req){
 			log.info("androidSignIn()");
 			
@@ -64,7 +64,7 @@ public class AndroidController {
 	
 	// 앱 마이페이지
 	@ResponseBody
-	@RequestMapping("androidMyPageMain")
+	@RequestMapping("/androidMyPageMain")
 	public Map<String, Object> androidMyPageMain(HttpServletRequest req) {
 		log.info("androidMyPageMain()");
 	
