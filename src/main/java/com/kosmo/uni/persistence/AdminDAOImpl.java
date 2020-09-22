@@ -21,7 +21,19 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getAttendance_Cnt();
 	}
-
+	
+	@Override
+	public int getAttendance_Search_Cnt(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		
+		for (String key : map.keySet()) {
+			String value = String.valueOf(map.get(key));
+			System.out.println("[key]:" + key + ", [value]:" + value);
+		}
+		
+		return dao.getAttendance_Search_Cnt(map);
+	}
+	
 	@Override
 	public List<AdminVO> getAttendance_List(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
@@ -39,13 +51,11 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		dtos = dao.getAttendance_List_Search(map);
 
-		System.out.println("dao_dtos" + dtos);
-
 		for (String key : map.keySet()) {
-			String value = (String) map.get(key);
+			String value = String.valueOf(map.get(key));
 			System.out.println("[key]:" + key + ", [value]:" + value);
 		}
-
+		
 		return dtos;
 	}
 

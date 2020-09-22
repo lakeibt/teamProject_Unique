@@ -10,28 +10,56 @@
 		SELECT COUNT(*) as cnt
 		FROM ATTENDANCE
 	</select>
+	
+	<select id="getAttendance_Search_Cnt" parameterType="java.util.Map" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) as cnt
+		FROM ATTENDANCE
+		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
+		]]>
+	</select>
 
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT * FROM ATTENDANCE
+		<![CDATA[
+		SELECT * 
+			FROM (SELECT num, id, inday, intime, outtime, instate, 
+			             outstate, rowNum rNum  
+			        FROM (
+			               SELECT * FROM attendance
+			                ORDER BY num   
+			             )  
+			      ) 
+			WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+
 	</select>
 
 	<select id="getAttendance_List_Search"
 		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
 		<![CDATA[
-		SELECT * FROM ATTENDANCE
-		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
+		SELECT * 
+			FROM (SELECT num, id, inday, intime, outtime, instate, 
+			             outstate, rowNum rNum  
+			        FROM (
+			               SELECT * FROM attendance
+			                ORDER BY num   
+			             )  
+			      ) 
+			WHERE rNum >= #{start} AND rNum <= #{end}
+		AND TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
 		]]>
 	</select>
 
 	<select id="getSalary_Cnt" resultType="int">
-		SELECT COUNT(*) as cnt
+		SELECT COUNT(*)/4 as cnt
 		FROM salary
 
 	</select>
 
 	<select id="getSalary_list_human" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
+		<![CDATA[
 		SELECT * FROM
 		(
 		SELECT s.salary_inday,
@@ -45,6 +73,7 @@
 		,depart d
 		WHERE s.id = m.id
 		AND m.depart = d.depart
+		order by salary_inday
 		)
 		PIVOT
 		(
@@ -52,6 +81,9 @@
 		FOR
 		sal_num IN (1 AS sal, 2 AS over, 3 AS meals, 4 AS car)
 		)
+        WHERE ROWNUM >= #{start} AND ROWNUM <= #{end}
+		]]>
+		
 	</select>
 
 	<select id="getSalary_list_human_Search"

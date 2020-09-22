@@ -11,6 +11,8 @@ public interface AdminDAO {
 	
 	public int getAttendance_Cnt();
 	
+	public int getAttendance_Search_Cnt(Map<String, Object> map);
+	
 	public List<AdminVO> getAttendance_List(Map<String, Object> map);
 	
 	public List<AdminVO> getAttendance_List_Search(Map<String, Object> map);
