@@ -11,13 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.AdminDAO;
+import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminDAO dao;
+	
+	@Autowired
+	EduDAO dao2;
 
 	@Override
 	public void attendance(HttpServletRequest req, Model model) {
@@ -134,6 +139,21 @@ public class AdminServiceImpl implements AdminService {
 		
 		model.addAttribute("dtos", dtos);
 		model.addAttribute("salary_list_cnt", salary_list_cnt);
+	}
+
+	@Override
+	public void course_list(HttpServletRequest req, Model model) {
+		int course_Cnt = 0;
+		
+		course_Cnt = dao2.getCourseCnt();
+		
+		System.out.println("course_Cnt : " + course_Cnt);
+		
+		List<CourseVO> dtos = dao2.getCourseList();
+		System.out.println("dtos" + dtos);
+		model.addAttribute("dtos",dtos);
+		model.addAttribute("course_Cnt",course_Cnt);
+		
 	}
 
 }

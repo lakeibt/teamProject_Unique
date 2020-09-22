@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
 
 
@@ -112,7 +113,8 @@ public class EduServiceImpl implements EduService {
 		// 5-1단계. 글갯수 구하기
 		cnt = eduDAO.getCourseCnt();
 		System.out.println("cnt => " + cnt);
-		
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("id :" + id );
 		pageNum=req.getParameter("pageNum");
 		
 		if(pageNum == null) {
@@ -138,6 +140,7 @@ public class EduServiceImpl implements EduService {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", start);
 			map.put("end", end);
+			map.put("id",id);
 			// 5-2단계. 게시글 목록 조회
 			List<CourseVO> dtos = eduDAO.getCourseList(map);
 			model.addAttribute("dtos", dtos);
@@ -160,6 +163,17 @@ public class EduServiceImpl implements EduService {
 				model.addAttribute("currentPage", currentPage);// 현재페이지
 			}
 		}
+	}
+	
+	@Override
+	public void course_syllabus(HttpServletRequest req, Model model) {
+		String code = req.getParameter("code");
+		
+		Map<String, Object> syllabus_info = eduDAO.getCourseSyllabusInfo(code); // 강의계획서 정보(강의코드, 담당교수 등/학점 기준표)
+		Map<String, Object> syllabus_list = eduDAO.getCourseSyllabusList(code); // 강의계획서 주차 리스트(1주차, 2주차, .., 12주차)
+		
+		model.addAttribute("info", syllabus_info);
+		model.addAttribute("list", syllabus_list);
 	}
 
 	@Override
@@ -241,5 +255,20 @@ public class EduServiceImpl implements EduService {
 				model.addAttribute("currentPage", currentPage);// 현재페이지
 			}
 		}
+	}
+
+	@Override
+	public void studentList(HttpServletRequest req, Model model) {
+		int cnt=0;
+		cnt = eduDAO.getStudyCnt();
+		String id = (String) req.getSession().getAttribute("memId");
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		System.out.println("cnt => " + cnt);
+		List<StudentStudyListVO> dtos = eduDAO.getStudyList(map);
+		model.addAttribute("dtos", dtos);
+		System.out.println("dtos:" + dtos);
+		model.addAttribute("cnt", cnt);
+		
 	}
 }

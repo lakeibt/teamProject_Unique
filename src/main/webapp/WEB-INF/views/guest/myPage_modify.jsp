@@ -49,34 +49,12 @@
 				}
 			}).open();
 	}
-	
 </script>
 <style>
-.form-control {font-size:12px;}
-
-.btn {
-
-    width:100px;
-
-    background-color: #68A4C4;
-
-    border: none;
-
-    color:#fff;
-
-    padding: 15px 0;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    display: inline-block;
-
-    font-size: 15px;
-
-    cursor: pointer;
-
-}
+.form-control { font-size:12px; }
+.btn { 
+	width:100px; background-color: #68A4C4; border: none; color:#fff; padding: 15px 0; text-align: center; text-decoration: none;
+	display: inline-block; font-size: 15px; cursor: pointer; }
 </style>
 <body>
 	<%@ include file="../include/header.jsp"%>
@@ -93,76 +71,99 @@
 		<%@ include file="../include/guest_left.jsp"%>
 		<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="width:60%; display:inline-block; position:relative; vertical-align:top;">
 			<div class="container">
-			<div class="contact">
-				<div class="row">
-					<div class="col-lg-2 d-flex flex-column justify-content-center-center">
-						<div class="icon-box">
-							<img src="${stu_photo}${vo.getPhoto()}" class="img-fluid" style="width:150px;"alt>
+				<div class="contact">
+					<div class="row">
+						<div class="col-lg-2 d-flex flex-column justify-content-center-center">
+							<div class="icon-box">
+								<img src="${stu_photo}${vo.getPhoto()}" class="img-fluid" style="width:150px;"alt>
+							</div>
+						</div>
+						<div class="col-lg-10 d-flex flex-column justify-content-center-center">
+							<div class="icon-box">
+								<div class="icon-box">
+								<form action="${guest}myPage_modifyPro" name="stuInfoForm" class="php-email-form" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+									<table class="table" style="font-size:12px;">
+										<thead>
+											<tr>
+												<th colspan="8">학생정보</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th>이름</th>
+												<td><input class="form-control" type="text" value="${vo.getName()}" readOnly></td>
+												<th>학번</th>
+												<td><input class="form-control" type="text" value="E20208090" readOnly></td>
+												<th>학과</th>
+												<td><input class="form-control" type="text" value="${vo.getM_code()}" readOnly></td>
+												<th>전공</th>
+												<td><input class="form-control" type="text" value="무슨무슨공학" readOnly></td>
+											</tr>
+											<tr>
+												<th>영문이름</th>
+												<td><input class="form-control" type="text" value="${vo.getEng_name()}" readOnly></td>
+												<th>생년월일</th>
+												<td><input class="form-control" type="text" value="${vo.getJumin1()}" readOnly></td>
+												<th>학적상태</th>
+												<td><input class="form-control" type="text" value="${vo.getR_code()}" readOnly></td>
+												<th>입학년도</th>
+												<td><input class="form-control" type="text" value="${vo.getEntrancedate()}" readOnly></td>
+											</tr>
+											<tr>
+												<th>집 주소</th>
+												<td colspan="6"><input class="form-control" id="address"type="text" name="address" value="${vo.getAddress()}"></td>
+												<td><button class="php-email-form" type="button" style="margin:0px;" onclick="addressSearch();">주소찾기</button></td>
+											</tr>
+											<tr>
+												<th>상세주소</th>
+												<td colspan="7"><input class="form-control" id="de_address"type="text" name="de_address" value="${vo.getDe_address()}"></td>
+											</tr>
+											<tr>
+												<th>휴대폰번호</th>
+												<td colspan="3"><input class="form-control" type="text" value="${vo.getTel()}" name="student_tel"></td>
+												<th>이메일</th>
+												<td colspan="3"><input class="form-control" type="text" value="${vo.getEmail()}" name="student_email"></td>
+															
+											</tr>
+										</tbody>
+									</table>
+									<script>
+										function submit() {
+											var form = document.stuInfoForm;
+											form.submit();
+										}
+									</script>
+									<div class="text-center">
+									<button class="php-email-form" type="submit" onclick="submit();">
+										<font style="vertical-align:inherit;">
+											<font style="vertical-align:inherit;">정보수정</font>
+										</font>
+									</button>
+								</div>
+								</form>
+							</div>
 						</div>
 					</div>
+					<div class="col-lg-2 d-flex flex-column justify-content-center-center"><div class="icon-box"></div></div>
 					<div class="col-lg-10 d-flex flex-column justify-content-center-center">
 						<div class="icon-box">
 							<div class="icon-box">
-							<form action="${guest}myPage_modifyPro"class="php-email-form" method="post">
+							<form action="" class="php-email-form" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								<table class="table" style="font-size:12px;">
-									<thead>
-										<tr>
-											<th colspan="8">학생정보</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th>이름</th>
-											<td><input class="form-control" type="text" value="${vo.getName()}" readOnly></td>
-											<th>학번</th>
-											<td><input class="form-control" type="text" value="E20208090" readOnly></td>
-											<th>학과</th>
-											<td><input class="form-control" type="text" value="${vo.getM_code()}" readOnly></td>
-											<th>전공</th>
-											<td><input class="form-control" type="text" value="무슨무슨공학" readOnly></td>
-										</tr>
-										<tr>
-											<th>영문이름</th>
-											<td><input class="form-control" type="text" value="${vo.getEng_name()}" readOnly></td>
-											<th>생년월일</th>
-											<td><input class="form-control" type="text" value="${vo.getJumin1()}" readOnly></td>
-											<th>학적상태</th>
-											<td><input class="form-control" type="text" value="${vo.getR_code()}" readOnly></td>
-											<th>입학년도</th>
-											<td><input class="form-control" type="text" value="${vo.getEntrancedate()}" readOnly></td>
-										</tr>
-										<tr>
-											<th>집 주소</th>
-											<td colspan="2"><input class="form-control" id="address"type="text" name="address" value="${vo.getAddress()}"></td>
-											<th >상세주소</th>
-											<td colspan="2"><input class="form-control" id="de_address"type="text" name="de_address" value="${vo.getDe_address()}"></td>
-											<td><input class="form-control" type="button" onclick="addressSearch();" value="주소찾기"></td>
-										</tr>
-										<tr>
-											<th>휴대폰번호</th>
-											<td><input class="form-control" type="text" value="${vo.getTel()}" name="student_tel"></td>
-											<th>이메일</th>
-											<td colspan="3"><input class="form-control" type="text"
-														value="${vo.getEmail()}" name="student_email"></td>
-										</tr>
-										<tr>
-											<th>취미/특기</th>
-											<td><input class="form-control" type="text" value="잠자기, 놀기, 자기"></td>
-											<th>동아리 가입 여부</th>
-											<td><input class="form-control" type="text" value="무"></td>
-											<th>종교</th>
-											<td><input class="form-control" type="text" value="무교"></td>
-											<th>상담여부</th>
-											<td><input class="form-control" type="text" value="무"></td>
-										</tr>
-									</tbody>
 									<thead>
 										<tr>
 											<th colspan="8">상담 기초 조사지</th>
 										</tr>
 									</thead>
 									<tbody>
+										<tr>
+											<th colspan="2">취미/특기</th>
+											<td colspan="2"><input class="form-control" type="text" value="자기"></td>
+											<td colspan="2"><input class="form-control" type="text" value="먹기"></td>
+											<td colspan="2"><input class="form-control" type="text" value="놀기"></td>
+										</tr>
 										<tr>
 											<th colspan="2">졸업 후 계획</th>
 											<td colspan="6"><input class="form-control" type="text" value="취업"></td>
@@ -190,20 +191,19 @@
 											<td colspan="6"><input class="form-control" type="text" value=""></td>
 										</tr>
 										<tr>
-											<th colspan="2">학생생활상담소에 요청하고 싶은 프로그램이 있다면?</th>
+											<th colspan="2">학생생활상담소에 요청하고 싶은 <br>프로그램이 있다면?</th>
 											<td colspan="6"><input class="form-control" type="text" value=""></td>
 										</tr>
 									</tbody>
 								</table>
-								
-									<div class="text-center">
-										<button class="php-email-form" type="submit">
-											<font style="vertical-align:inherit;">
-												<font style="vertical-align:inherit;">정보수정</font>
-											</font>
-										</button>
-									</div>
-								</form>
+								<div class="text-center">
+									<button class="php-email-form" type="submit">
+										<font style="vertical-align:inherit;">
+											<font style="vertical-align:inherit;">상담신청</font>
+										</font>
+									</button>
+								</div>
+							</form>
 							</div>
 						</div>
 					</div>
