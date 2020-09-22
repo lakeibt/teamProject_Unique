@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 
 public interface AdminDAO {
 
@@ -26,5 +27,8 @@ public interface AdminDAO {
 	
 	public List<AdminVO> getSalary_list_month_Search(Map<String, Object> map);
 	
+	public int getCourseCnt();
+
+	public List<CourseVO> getCourseList();
 	
 }

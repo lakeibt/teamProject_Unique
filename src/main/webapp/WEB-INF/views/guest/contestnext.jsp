@@ -17,14 +17,14 @@
         Elements posts = doc2.body().getElementsByClass("ms-list");
         Elements file = posts.select("li");
 %>
-<table class="table" style="font-size: 13px; margin-top: -18px;">
+<table class="table" style="font-size: 15px; margin-top: -18px;">
 <%
 		int i = 0;
         for(Element e : file){
 %>
 		<% if(i == 0) {i++; continue;} %>
 		<tr>
-			<td style="width:70%"><a href="#" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
+			<td style="width:70%"><a id="other" href="#coninfo_detail" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
 			<td id="detail" style="width:20%"><%=e.select(".organ").text()%></td>
 			<% String day = e.select(".day").text();
 				String day2 = "";

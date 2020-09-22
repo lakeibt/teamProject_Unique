@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -112,6 +113,18 @@ public class AdminDAOImpl implements AdminDAO {
 		return dtos;
 	}
 	
+	@Override
+	public int getCourseCnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getCourseCnt();
+	}
+
+	@Override
+	public List<CourseVO> getCourseList() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getCourseList();
+	}
+
 	
 
 }

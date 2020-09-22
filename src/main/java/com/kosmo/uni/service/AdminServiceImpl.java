@@ -11,14 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.AdminDAO;
+import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminDAO dao;
-
+	
 	@Override
 	// 급여 - 전체리스트
 	public void attendance(HttpServletRequest req, Model model) {
@@ -630,6 +632,21 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("end", end); // 현재페이지
 
 		}
+	}
+
+	@Override
+	public void course_list(HttpServletRequest req, Model model) {
+		int course_Cnt = 0;
+		
+		course_Cnt = dao.getCourseCnt();
+		
+		System.out.println("course_Cnt : " + course_Cnt);
+		
+		List<CourseVO> dtos = dao.getCourseList();
+		System.out.println("dtos" + dtos);
+		model.addAttribute("dtos",dtos);
+		model.addAttribute("course_Cnt",course_Cnt);
+		
 	}
 
 }

@@ -4,12 +4,23 @@
 <html>
 <script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
 <script src="/uni/resources/js/request.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <head>
 	<title>Contact - Moderna Bootstrap Template</title>
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
+<script>
+jQuery(document).ready(function($) {
+	$(".scroll").click(function(event){
+		var offset = $("#coninfo_detail" + event).offset();
+		var winH = $(window).height();
+		event.preventDefault();
+		$('html,body').animate({scrollTop : (offset.top - winH/2)}, 500);
+	});
+});
+</script>
 <style>
-.form-control {font-size:12px;}
+.form-control {font-size:15px;}
 
 #btn1{
     border-top-left-radius: 5px;
@@ -29,7 +40,7 @@
     border: 1px solid #1E4356;
     background-color: rgba(0,0,0,0);
     color: #1E4356;
-    padding: 5px 15px;
+    padding: 3px 20px;
 }
 #btn_group button:hover{
     color:white;
@@ -54,10 +65,10 @@
 				<div class="row">
 					<div class="col-lg-12 d-flex flex-column justify-content-center-center">
 						<div class="icon-box">
-							<table class="table" style="font-size:13px;">
+							<table class="table" style="font-size:15px;">
 								<tr>
 									<td colspan="6">
-										<select id="select1" class="form-control" style="width:30%; float:right;" onchange="content(0)">
+										<select id="select1" class="form-control" style="width:30%; float:right; font-size:15px;" onchange="content(0)">
 											<option selected disabled>분야를 선택하세요</option>
 											<option value="1">기획/아이디어</option>
 											<option value="2">광고/마케팅</option>
@@ -83,11 +94,11 @@
 					<div class="row">
 						<div class="col-lg-12 d-flex flex-column justify-content-center-center">
 							<div class="icon-box">
-								<table class="table" style="font-size:12px;">
+								<table class="table" style="font-size:15px;">
 									<tbody>
 										<tr>
-											<th style="width:70%">공모전명</th>
-											<th style="width:20%">주최사</th>
+											<th style="width:60%">공모전명</th>
+											<th style="width:30%">주최사</th>
 											<th style="width:10%">현재현황</th>
 										</tr>
 									</tbody>
@@ -134,6 +145,9 @@ function content(num) {
    var value = yourSelect.options[yourSelect.selectedIndex].value;
    console.log("v : " + value);
    console.log("n : " + num);
+   if(value == '분야를 선택하세요') {
+	   alert('분야를 선택하세요');
+   }
    var param = "param=" + value + "&"+ "num="+ num ;
    
    sendRequest(content_callback,"contestnext", "get", param);
@@ -151,11 +165,9 @@ function content_callback() {
 }
 
 function content1(var1) {
-	console.log(var1);
-	var1= var1.replace(/&/g,"%26").replace(/\+/g,"%2B");
+   var1= var1.replace(/&/g,"%26").replace(/\+/g,"%2B");
    var param = "url=" + var1;
-   
-   sendRequest(content_callback1,"contestnext2", "post", param);
+   sendRequest(content_callback1,"contestnext2", "get", param);
 }
 function content_callback1() {
    var result = document.getElementById("coninfo_detail");

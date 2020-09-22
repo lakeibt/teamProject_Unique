@@ -1,17 +1,15 @@
 package com.kosmo.uni.controller;
 
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +26,7 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리
+	// HomeController.java는 주석처리d
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
@@ -36,7 +34,7 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	// 로그인 페이지로 이동d
+	// 로그인 페이지로 이동
 	@RequestMapping("/guest/login")
 	public String gue_login() {
 		logger.info("url ==> login");
@@ -72,13 +70,14 @@ public class EduController {
 		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
 	}
+	
 	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, HttpServletResponse res, Model model) throws ServletException, IOException {
+	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modifyPro");
 		eduService.studentModifyPro(req, model);
-		
 		return "guest/myPage_modifyPro";
 	}
+	
 	@RequestMapping("/guest/course_register")
 	public String gue_course_register() {
 		logger.info("url ==> course_register");
@@ -87,17 +86,26 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/course_timeTable")
-	public String gue_course_timeTable() {
+	public String gue_course_timeTable(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_timeTable");
 		
+		eduService.studentList(req, model);
 		return "guest/course_timeTable";
 	}
+	
 	@RequestMapping("/guest/course")
 	public String gue_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
 		
 		eduService.courseList(req, model);
 		return "guest/course";
+	}
+	@RequestMapping("/guest/course_syllabus")
+	public String gue_course_syllabus(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_syllabus");
+		
+		eduService.course_syllabus(req, model);
+		return "guest/course_syllabus";
 	}
 	
 	@RequestMapping("/guest/score")
@@ -126,6 +134,13 @@ public class EduController {
 		return "guest/employmentnext";
 	}
 	
+	@RequestMapping("/guest/employmentnext2")
+	public String gue_employmentnext2() {
+		logger.info("url ==> employmentnext2");
+		
+		return "guest/employmentnext2";
+	}
+	
 	@RequestMapping("/guest/contest")
 	public String gue_contest() {
 		logger.info("url ==> contest");
@@ -143,8 +158,6 @@ public class EduController {
 	@RequestMapping("/guest/contestnext2")
 	public String gue_contestnext2() {
 		logger.info("url ==> contestnext2");
-		
-		
 		
 		return "guest/contestnext2";
 	}
@@ -178,5 +191,4 @@ public class EduController {
 		
 		return "guest/ttttt";
 	}
-	
 }
