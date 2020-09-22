@@ -22,7 +22,9 @@
 
   <!-- Template Main CSS File -->
   <link href="${resources}css/style.css" rel="stylesheet">
-
+  
+  <!-- professor CSS File -->
+  <link href="${resources}css/professor.css" rel="stylesheet">
   <!-- =======================================================
   * Template Name: Moderna - v2.0.1
   * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/

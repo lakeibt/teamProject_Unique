@@ -39,7 +39,7 @@
 						</li>
 						<li class="message-item">
 							<div class="text-center">
-								<a class="dropdown-item"> <strong>전체 보기</strong>
+								<a class="dropdown-item" href="${professor}messageList"> <strong>전체 보기</strong>
 									<i class="fa fa-angle-right"></i>
 								</a>
 							</div>

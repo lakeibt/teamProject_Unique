@@ -67,7 +67,7 @@
 		- 로그인 폼을 보여주거나, 접근 권한이 없는 경우 403 Forbidden(권한없음) 상태코드를 응답
 		- DelegatingFilterProxy -> FilterChainProxy -> SecurityFilterChain -> 실제 지원
 	 -->
-	<!-- <filter>
+<!-- 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
