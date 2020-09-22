@@ -26,8 +26,6 @@
 							$('#month').html(data);
 						},
 						error : function(request, status, error) {
-							console.log("sm : " + typeof (sm))
-							console.log("em : " + typeof (em))
 							console.log("@code : "+ request.status);
 							console.log("@message : "+ request.responseText);
 							console.log("@error : " + error);
@@ -73,7 +71,6 @@
 
 			<!-- top navigation -->
 			<div class="top_nav">
-<<<<<<< HEAD
 				<div class="nav_menu">
 					<div class="nav toggle">
 						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
@@ -119,9 +116,6 @@
 						</ul>
 					</nav>
 				</div>
-=======
-				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
->>>>>>> 0c05460ba43e2e94127667ec2a02bcfef2ac7629
 			</div>
 			<!-- /top navigation -->
 
@@ -143,8 +137,8 @@
 											<th><input class="form-control" type="month" id="endMonth"
 												onchange="endMonthSelect()"></th>
 											<th><input type="button" class="btn"
-												style="padding: 6px 6px;" id="month_Search" value="검색">
-												<input type="button" class="btn" style="padding: 6px 6px;"
+												style="padding: 6px 6px;" id="month_Search" value="검색"
+												onclick="humanSearch()"><input type="button" class="btn" style="padding: 6px 6px;"
 												onclick="location.reload();" value="초기화"></th>
 										</tr>
 									</thead>
@@ -185,14 +179,43 @@
 										</c:if>
 									</tbody>
 								</table>
+								<table style="width: 1000px" align="center">
+										<tr>
+											<th align="center">
+												<!-- 게시글이 있으면 --> <c:if test="${salary_list_cnt > 0}">
+													<!-- 처음[◀◀] /  이전블록[◀]  , 특수문자 : 한글상태 ㅁ+한자키-->
+													<c:if test="${startPage > pageBlock}">
+														<a href="salary_list_month"> [◀◀] </a>
+														<a href="salary_list_month?pageNum=${startPage - pageBlock}">
+															[◀] </a>
+													</c:if>
+
+													<!-- 블록내의 페이지 번호 -->
+													<c:forEach var="i" begin="${startPage}" end="${endPage}">
+														<c:if test="${i == currentPage}">
+															<span><a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a></span>
+														</c:if>
+														<c:if test="${i != currentPage}">
+															<a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a>
+														</c:if>
+													</c:forEach>
+
+													<!-- 다음블록[▶] / 마지막[▶▶] -->
+													<c:if test="${pageCount > endPage}">
+														<a href="salary_list_month?pageNum=${startPage + pageBlock}">
+															[▶]</a>
+														<a href="salary_list_month?pageNum=${pageCount}"> [▶▶]</a>
+													</c:if>
+												</c:if>
+											</th>
+										</tr>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- /page content -->
-
-
 			<!-- footer content -->
 			<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
 			<!-- /footer content -->

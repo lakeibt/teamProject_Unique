@@ -130,14 +130,6 @@ public class AdminController {
 		return "admin/human_resources/pay/attendance_Search";
 	}
 
-	//근태 조회 
-	@RequestMapping(value = "/admin/human_resources/pay/attendanceChk")
-	public String attendanceChk(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/attendanceChk");
-		
-		return "admin/human_resources/pay/attendanceChk";
-	}	
-	
 	// 급여등록
 	@RequestMapping(value = "/admin/human_resources/pay/salary")
 	public String salary(HttpServletRequest req, Model model) {
@@ -220,6 +212,8 @@ public class AdminController {
 		logger.info("human_resources/pay/salary_list_human");
 
 		adminService.salary_list_human(req, model);
+
+		// adminService.salary_list_human(req, model);
 
 		return "admin/human_resources/pay/salary_list_human";
 	}
