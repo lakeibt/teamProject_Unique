@@ -36,7 +36,7 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	// 로그인 페이지로 이동d
+	// 로그인 페이지로 이동
 	@RequestMapping("/guest/login")
 	public String gue_login() {
 		logger.info("url ==> login");
@@ -72,6 +72,7 @@ public class EduController {
 		eduService.studentinfo(req, model);
 		return "guest/myPage_modify";
 	}
+	
 	@RequestMapping("/guest/myPage_modifyPro")
 	public String gue_myPage_modifyPro(HttpServletRequest req, HttpServletResponse res, Model model) throws ServletException, IOException {
 		logger.info("url ==> myPage_modifyPro");
