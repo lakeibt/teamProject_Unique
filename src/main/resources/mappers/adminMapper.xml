@@ -32,5 +32,22 @@
 		INSERT INTO salary_input
 		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
 	</insert>
+	
+	<select id="getSalaryCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM SALARY_input
+	</select>
+	
+	<select id="getSalaryList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryInputVO">
+		<![CDATA[
+		SELECT * 
+			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
+	        , salary_inday, payments_month, salary_name, rowNUM rNum 
+			FROM ( SELECT * FROM salary_input ORDER BY salary_input_num ASC)) 
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
 
+	<select id="getAdminCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM manager
+	</select>
 </mapper>

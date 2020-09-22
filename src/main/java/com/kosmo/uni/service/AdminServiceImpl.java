@@ -12,8 +12,7 @@ import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
-import com.kosmo.uni.vo.SalaryInputVo;
-import com.spring.lego.vo.MemberVO;
+import com.kosmo.uni.vo.SalaryInputVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -70,7 +69,7 @@ public class AdminServiceImpl implements AdminService {
 		// 3단계. 화면으로부터 입력받은 값을 받아온다.
 
 		// 페이징 처리 (최신글 부터 5건씩 출력)
-		int pageSize = 10; // 한페이지당 출력할 글 갯수
+		int pageSize = 2; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한블럭당 페이지 갯수
 
 		int cnt = 0; // 글갯수
@@ -87,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		// 5-1단계. 글 갯수 구하기
-		cnt = dao.getMemeberCnt();
+		cnt = dao.getSalaryCnt();
 		System.out.println("cnt : " + cnt);
 
 		pageNum = req.getParameter("pageNum");
@@ -125,7 +124,8 @@ public class AdminServiceImpl implements AdminService {
 			map.put("start", start);
 			map.put("end", end);
 			System.out.println("map : " + map);
-			List<MemberVO> mtos = dao.getArticleList(map);
+			List<SalaryInputVO> mtos = dao.getSalaryList(map);
+			System.out.println("mtos : " + mtos);
 			model.addAttribute("mtos", mtos);
 		}
 		// 6단계. request나 session에 처리결과를 저장 (jsp에 전달)
@@ -141,6 +141,9 @@ public class AdminServiceImpl implements AdminService {
 		if (endPage > pageCount)
 			endPage = pageCount;
 
+		int adminCnt = dao.getAdminCnt();
+		model.addAttribute("adminCnt", adminCnt); // 직원수 
+		
 		System.out.println("endPage : " + endPage);
 		System.out.println("====================");
 
@@ -155,7 +158,21 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("pageCount", pageCount); // 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
+	}
+	
+	@Override
+	public void salaryInput(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		int payments_division = Integer.parseInt(req.getParameter("payments_division"));
+		System.out.println("salary_input_num : " + salary_input_num);
+		System.out.println("payments_division : " + payments_division);
 		
+		Map <String, Object> map = new HashMap<>();
+		map.put("salary_input_num", salary_input_num);
+		map.put("payments_division", payments_division);
+		
+		//dao.getSelectList(map);
+		//List<SalaryInputVO> mtos = dao.getSalaryList(map);
 		
 	}
 

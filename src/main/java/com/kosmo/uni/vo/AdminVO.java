@@ -12,7 +12,7 @@ public class AdminVO {
 	private String reason;		//사유 (삭제 예정)
 	
 	private Timestamp salary_InDay;	//지급일
-	private int sal_Num;			//급여코드
+	private int sal_Num;			//급여코드 - 정규 비정규 
 	private String name;			//이름
 	private String depart;			//부서
 	private int sal_total;			//총급여

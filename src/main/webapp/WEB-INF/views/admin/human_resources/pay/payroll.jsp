@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="x_panel">
-				<div class="x_title"><h4>2020/7 정규 (급여)</h4></div>
+				<div class="x_title" style="padding-bottom: 40px;"><h4 style="width: 300px; float:left;">2020/7 정규 (급여)</h4><a class="btn btn-app" style="height:30px; padding:5px; float:right;">수정</a></div>
 				<div class="x_content">
 					<table class="table">
 						<thead style="color:#73879C;">

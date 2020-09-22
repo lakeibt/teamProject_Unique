@@ -2,17 +2,23 @@ package com.kosmo.uni.vo;
 
 import java.sql.Timestamp;
 
-public class SalaryInputVo {
+public class SalaryInputVO {
 	private int salary_input_num;  //번호 - 시퀀스 1 증가
-	private int salary_division;   //급여 구분
-	private int Payments_division;  // 지급 구분
+	private int salary_division;   //급여 구분 - 급여 / 상여
+	private int payments_division;  // 지급 구분 - 정규/ 비정규/ 교수
 	private Timestamp payments_start;  //지급 시작 기간
 	private Timestamp payments_end;   //지급 종료 기간
 	private Timestamp salary_inday;   //지급일
-	private Timestamp payments_month;  //지급연월
+	private String payments_month;  //지급연월
 	private String salary_name; //급여대장 명칭
+	private int salary_confirm; // 급여 확정 코드
 	
-	
+	public int getSalary_confirm() {
+		return salary_confirm;
+	}
+	public void setSalary_confirm(int salary_confirm) {
+		this.salary_confirm = salary_confirm;
+	}
 	public int getSalary_input_num() {
 		return salary_input_num;
 	}
@@ -25,11 +31,12 @@ public class SalaryInputVo {
 	public void setSalary_division(int salary_division) {
 		this.salary_division = salary_division;
 	}
+
 	public int getPayments_division() {
-		return Payments_division;
+		return payments_division;
 	}
 	public void setPayments_division(int payments_division) {
-		Payments_division = payments_division;
+		this.payments_division = payments_division;
 	}
 	public Timestamp getPayments_start() {
 		return payments_start;
@@ -49,10 +56,10 @@ public class SalaryInputVo {
 	public void setSalary_inday(Timestamp salary_inday) {
 		this.salary_inday = salary_inday;
 	}
-	public Timestamp getPayments_month() {
+	public String getPayments_month() {
 		return payments_month;
 	}
-	public void setPayments_month(Timestamp payments_month) {
+	public void setPayments_month(String payments_month) {
 		this.payments_month = payments_month;
 	}
 	public String getSalary_name() {
@@ -61,8 +68,5 @@ public class SalaryInputVo {
 	public void setSalary_name(String salary_name) {
 		this.salary_name = salary_name;
 	}
-	
-	
-	
 	
 }
