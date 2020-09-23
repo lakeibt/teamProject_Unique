@@ -6,8 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 public class UserVO extends User{
-	private String userId;
-	private String userName;
+	private String Id;
+	private String Name;
 	
 	// 두 생성자 중 첫번째 선택, 마지막 매개변수에 String userid 추가
 	// super는 부모 User 클래스
@@ -16,30 +16,30 @@ public class UserVO extends User{
 			Collection<? extends GrantedAuthority> authorities, String userid) {
 		super(id, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		
-		this.userId = id;
-		this.userName = userid;
+		this.Id = id;
+		this.Name = userid;
 	}
 
 	// getter, setter, toString 추가
 	public String getUserId() {
-		return userId;
+		return Id;
 	}
 
 	public void setUserid(String userId) {
-		this.userId = userId;
+		this.Id = userId;
 	}
 
 	@Override
 	public String toString() {
-		return "UserVO [userId=" + userId + "]";
+		return "UserVO [userId=" + Id + "]";
 	}
 
 	public String getUserName() {
-		return userName;
+		return Name;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.Name = userName;
 	}
 
 }

@@ -26,7 +26,7 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리d
+	// HomeController.java는 주석처리
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
@@ -181,9 +181,11 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	@RequestMapping("/guest/deniedTest")
+	@RequestMapping("/guest/denied")
 	public String denied() {
-		return "guest/deniedTest";
+		logger.info("url ==> denied");
+		
+		return "guest/denied";
 	}
 	
 	@RequestMapping("/guest/ttttt")

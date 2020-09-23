@@ -16,7 +16,7 @@
 			<div class="d-flex justify-content-between align-items-center">
 				<h2>서울대학교 > 통합로그인</h2>
 				<ol>
-					<li><a href="index.html">Home</a></li>
+					<li><a href="${guest}main">Home</a></li>
 					<li>Contact</li>
 				</ol>
 			</div>

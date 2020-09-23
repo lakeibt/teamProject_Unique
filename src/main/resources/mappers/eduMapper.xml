@@ -15,6 +15,22 @@
 		  FROM users
 		 WHERE userid = #{userid}
 	</select>
+	<select id = "selectSUser" resultType = "java.util.Map">
+		SELECT ID, PWD, NAME
+		  FROM STUDENT
+		 WHERE ID = #{userid}
+	</select>
+	<select id = "selectPUser" resultType = "java.util.Map">
+		SELECT ID, PWD, NAME
+		  FROM PROFESSOR
+		 WHERE ID = #{userid}
+	</select>
+	<select id = "selectAUser" resultType = "java.util.Map">
+		SELECT ID, PWD, NAME
+		  FROM MANAGER
+		 WHERE ID = #{userid}
+	</select>
+	
 	<select id = "test" parameterType = "String" resultType = "com.kosmo.uni.vo.TestVO">
 		SELECT userid, username, password, enabled, authority
 		  FROM users
