@@ -28,7 +28,6 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 		System.out.println("로그인 성공");
 		String msg = authentication.getName() + "님 환영합니다.";
 		request.setAttribute("msg", msg);
-		request.getSession().setAttribute("name", authentication.getName());
 		request.getSession().setAttribute("memId", vo.getUserId());
 		request.getSession().setAttribute("auth", vo.getAuthorities());
 		

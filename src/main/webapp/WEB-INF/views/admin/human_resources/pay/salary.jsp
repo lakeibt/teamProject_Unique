@@ -23,8 +23,7 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<form action="salary_enroll" method="post" name="salary_"
-						onsubmit="confirmIdCheck();">
+				<form action="salary_enroll" method="post" name="salary_input">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						<div class="row">
 						<div class="col-md-12">
@@ -37,109 +36,35 @@
 											
 											<tr>
 												<th>급여구분</th>
-												<td><select class="form-control" style="float:left; width:100px;">
-													  <option value="급여">급여</option>
-													  <option value="상여">상여</option>
+												<td><select class="form-control" style="float:left; width:100px;" name="salary_division">
+													  <option value="1">급여</option>
+													  <option value="2">상여</option>
 													</select></td>
 											</tr>
 											<tr>
 												<th>지급구분</th>
-												<td><select class="form-control" style="float:left; width:100px;">
-													  <option value="정규">정규</option>
-													  <option value="비정규">비정규</option>
+												<td><select class="form-control" style="float:left; width:100px;" name="payments_division">
+													  <option value="1">정규</option>
+													  <option value="2">비정규</option>
+													  <option value="3">교수</option>
 													</select></td>
 											</tr>
 											<tr>
 												<th>대상기간</th>
-												<td><select class="form-control" style="float:left; width:100px;">
-													  <option value="2015">2015</option>
-													  <option value="2016">2016</option>
-													  <option value="2017">2017</option>
-													  <option value="2018">2018</option>
-													  <option value="2019">2019</option>
-													  <option value="2020" selected>2020</option>
-													  <option value="2021">2021</option>
-													  <option value="2022">2022</option>
-													  <option value="2023">2023</option>
-													</select>
-													<select class="form-control" style="float:left; width:100px;">
-													  <option value="1">1월</option>
-													  <option value="2">2월</option>
-													  <option value="3">3월</option>
-													  <option value="4">4월</option>
-													  <option value="5">5월</option>
-													  <option value="6">6월</option>
-													  <option value="7">7월</option>
-													  <option value="8">8월</option>
-													  <option value="9">9월</option>
-													  <option value="10">10월</option>
-													  <option value="11">11월</option>
-													  <option value="12">12월</option>
-													</select>
-													<input class="form-control" type="text" value="01" size="2" style="width:100px; margin:0px; float:left;">
-													<a style="margin-top:8px; margin-left:5px; margin-right:5px; float:left;">~</a> 
-													<select class="form-control" style="float:left; width:100px;">
-													  <option value="2015">2015</option>
-													  <option value="2016">2016</option>
-													  <option value="2017">2017</option>
-													  <option value="2018">2018</option>
-													  <option value="2019">2019</option>
-													  <option value="2020" selected>2020</option>
-													  <option value="2021">2021</option>
-													  <option value="2022">2022</option>
-													  <option value="2023">2023</option>
-													</select>
-													<select class="form-control" style="float:left; width:100px;">
-													  <option value="1">1월</option>
-													  <option value="2">2월</option>
-													  <option value="3">3월</option>
-													  <option value="4">4월</option>
-													  <option value="5">5월</option>
-													  <option value="6">6월</option>
-													  <option value="7">7월</option>
-													  <option value="8">8월</option>
-													  <option value="9">9월</option>
-													  <option value="10">10월</option>
-													  <option value="11">11월</option>
-													  <option value="12">12월</option>
-													</select>
-													<input class="form-control input-sm" type="text" value="30" size="2" style="width:100px;">
-													</td>
+												<td><input class="form-control" type="date"
+													id="startDate" style="float:left; width:250px;" name="payments_start"><a style="margin-top:8px; margin-left:5px; margin-right:5px; float:left;">~</a> 
+													
+													<input class="form-control" type="date"
+													id="endDate" style="float:left; width:250px;" name="payments_end"></td>
 											</tr>
 											<tr>
 												<th>지급일</th>
-												<td><select class="form-control" style="float:left; width:100px;">
-													  <option value="2015">2015</option>
-													  <option value="2016">2016</option>
-													  <option value="2017">2017</option>
-													  <option value="2018">2018</option>
-													  <option value="2019">2019</option>
-													  <option value="2020" selected>2020</option>
-													  <option value="2021">2021</option>
-													  <option value="2022">2022</option>
-													  <option value="2023">2023</option>
-													</select>
-													<select class="form-control" style="float:left; width:100px;">
-													  <option value="1">1월</option>
-													  <option value="2">2월</option>
-													  <option value="3">3월</option>
-													  <option value="4">4월</option>
-													  <option value="5">5월</option>
-													  <option value="6">6월</option>
-													  <option value="7">7월</option>
-													  <option value="8">8월</option>
-													  <option value="9">9월</option>
-													  <option value="10">10월</option>
-													  <option value="11">11월</option>
-													  <option value="12">12월</option>
-													  
-													</select>
-													<input class="form-control input-sm" type="text" value="15" size="2" style="width:100px;">
-													</td>
+												<td><input class="form-control" type="date"
+													id="tranceDate" style="float:left; width:250px;" name="salary_inday"></td>
 											</tr>
 											<tr>
 												<th>지급연월</th>
-												<td><select class="form-control" style="float:left; width:100px;">
+												<td><select class="form-control" style="float:left; width:100px;" name="payments_month_01">
 													  <option value="2015">2015</option>
 													  <option value="2016">2016</option>
 													  <option value="2017">2017</option>
@@ -150,7 +75,7 @@
 													  <option value="2022">2022</option>
 													  <option value="2023">2023</option>
 													</select>
-													<select class="form-control" style="float:left; width:100px;">
+													<select class="form-control" style="float:left; width:100px;" name="payments_month_02">
 													  <option value="1">1월</option>
 													  <option value="2">2월</option>
 													  <option value="3">3월</option>
@@ -168,7 +93,7 @@
 											</tr>
 											<tr>
 												<th>급여대장명칭</th>
-												<td><input class="form-control input-sm" type="text"></td>
+												<td><input class="form-control input-sm" type="text" name="salary_name"></td>
 											</tr>
 											<tr align="center">
 												<td style="algin:center;"><input class="form-control input-sm" type="submit" style="float:left; width:100px;"

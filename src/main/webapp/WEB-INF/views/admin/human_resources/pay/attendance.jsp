@@ -12,13 +12,22 @@
 <script>
 	var st;
 	var et;
-	
+	var startNum;
+	var cnt;
+	var pageNum = $
+	{
+		pageNum
+	}
+	console.log("pageNum > " + pageNum)
 	$(function() {
 		$('#attendance_Search')
 				.click(
 						function() {
-							console.log(st);
-							console.log(et);
+							cnt = $
+							{
+								cnt
+							}
+							console.log("cnt : " + cnt);
 							$
 									.ajax({
 										url : "${pageContext.request.contextPath}/admin/human_resources/pay/attendance_Search", // 응답페이지  ==> 컨트롤러/basic.
@@ -53,7 +62,6 @@
 		et = document.getElementById("endDate").value;
 		console.log(et);
 	}
-
 </script>
 </head>
 
@@ -132,8 +140,8 @@
 												<th>특근</th>
 											</tr>
 										</thead>
-										<tbody id="attendance_Search" style="color: grey;">
-											<c:if test="${search_Cnt > 0}">
+										<tbody id="attendance_Search1" style="color: grey;">
+											<c:if test="${cnt >= 0}">
 												<c:forEach var="dto" items="${dtos}">
 													<tr align="center">
 														<c:if test="${dto.inState == 1}">
@@ -190,19 +198,53 @@
 											</c:if>
 										</tbody>
 									</table>
+									<table style="width: 1000px" align="center">
+										<tr align="center">
+											<th align="center">
+												<!-- 게시글이 있으면 --> <c:if test="${cnt > 0}">
+													<!-- 처음[◀◀] /  이전블록[◀]  , 특수문자 : 한글상태 ㅁ+한자키-->
+													<c:if test="${startPage > pageBlock}">
+														<a href="attendance"> [◀◀] </a>
+														<a href="attendance?pageNum=${startPage - pageBlock}">
+															[◀] </a>
+													</c:if>
+
+													<!-- 블록내의 페이지 번호 -->
+													<c:forEach var="i" begin="${startPage}" end="${endPage}">
+														<c:if test="${i == currentPage}">
+															<span><a href="attendance?pageNum=${i}"><input
+																	type="button" value="${i}"></a></span>
+														</c:if>
+														<c:if test="${i != currentPage}">
+															<a href="attendance?pageNum=${i}"><input
+																type="button" value="${i}"></a>
+														</c:if>
+													</c:forEach>
+
+													<!-- 다음블록[▶] / 마지막[▶▶] -->
+													<c:if test="${pageCount > endPage}">
+														<a href="attendance?pageNum=${startPage + pageBlock}">
+															[▶]</a>
+														<a href="attendance?pageNum=${pageCount}"> [▶▶]</a>
+													</c:if>
+												</c:if>
+											</th>
+										</tr>
+									</table>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /page content -->
-
-			<!-- footer content -->
-			<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
-			<!-- /footer content -->
 		</div>
-		<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+		<!-- /page content -->
+
+		<!-- footer content -->
+		<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
+		<!-- /footer content -->
+	</div>
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 	</div>
 </body>
 </html>

@@ -12,11 +12,20 @@ public interface AdminService {
 	
 	public void salary_list_human(HttpServletRequest req, Model model);
 	
+	//급여등록 - 신규생성 
+	public void salary_input(HttpServletRequest req, Model model);
+	
 	public void human_Search(HttpServletRequest req, Model model);
 	
 	public void salary_list_month(HttpServletRequest req, Model model);
 	
 	public void month_Search(HttpServletRequest req, Model model);
 	
+	public void course_list(HttpServletRequest req, Model model);
 	
+	//급여대장 리스트 출력
+	public void salaryList(HttpServletRequest req, Model model);
+	
+	//급여장 전체 계산 
+	public void salaryInput(HttpServletRequest req, Model model);
 }

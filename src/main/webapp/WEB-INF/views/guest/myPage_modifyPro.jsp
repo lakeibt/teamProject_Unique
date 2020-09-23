@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정처리</title>
-<%-- <script src="${script}script.js"></script> --%>
 </head>
 <body>
 <c:if test="${updateCnt == 0}">
 		<script type="text/javascript">
 			alert("오류");
+			window.location='${guest}myPage_modify';
 		</script>
 	</c:if>
 	<c:if test="${updateCnt != 0}">

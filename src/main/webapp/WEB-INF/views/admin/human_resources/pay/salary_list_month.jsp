@@ -26,8 +26,6 @@
 							$('#month').html(data);
 						},
 						error : function(request, status, error) {
-							console.log("sm : " + typeof (sm))
-							console.log("em : " + typeof (em))
 							console.log("@code : "+ request.status);
 							console.log("@message : "+ request.responseText);
 							console.log("@error : " + error);
@@ -73,7 +71,51 @@
 
 			<!-- top navigation -->
 			<div class="top_nav">
-				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
+				<div class="nav_menu">
+					<div class="nav toggle">
+						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+					</div>
+					<nav class="nav navbar-nav">
+						<ul class=" navbar-right">
+							<li class="nav-item dropdown open" style="padding-left: 15px;">
+								<a href="javascript:;" class="user-profile dropdown-toggle"
+								aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
+								aria-expanded="false"> <img src="${img}sample/img.jpg"
+									alt="">이름
+							</a>
+								<div class="dropdown-menu dropdown-usermenu pull-right"
+									aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="#">Profile</a> <a
+										class="dropdown-item" href="#"><i
+										class="fa fa-sign-out pull-right"></i> Log Out</a>
+								</div>
+							</li>
+
+							<li role="presentation" class="nav-item dropdown open"><a
+								href="javascript:;" class="dropdown-toggle info-number"
+								id="navbarDropdown1" data-toggle="dropdown"
+								aria-expanded="false"> <i class="fa fa-envelope-o"></i> <span
+									class="badge bg-green">6</span>
+							</a>
+								<ul class="dropdown-menu list-unstyled msg_list" role="menu"
+									aria-labelledby="navbarDropdown1">
+									<li class="nav-item"><a class="dropdown-item"> <span>
+												<span>John Smith</span> <span class="time">3 mins ago</span>
+										</span> <span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a></li>
+
+									<li class="nav-item">
+										<div class="text-center">
+											<a class="dropdown-item"> <strong>See All Alerts</strong>
+												<i class="fa fa-angle-right"></i>
+											</a>
+										</div>
+									</li>
+								</ul></li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 			<!-- /top navigation -->
 
@@ -95,8 +137,8 @@
 											<th><input class="form-control" type="month" id="endMonth"
 												onchange="endMonthSelect()"></th>
 											<th><input type="button" class="btn"
-												style="padding: 6px 6px;" id="month_Search" value="검색">
-												<input type="button" class="btn" style="padding: 6px 6px;"
+												style="padding: 6px 6px;" id="month_Search" value="검색"
+												onclick="humanSearch()"><input type="button" class="btn" style="padding: 6px 6px;"
 												onclick="location.reload();" value="초기화"></th>
 										</tr>
 									</thead>
@@ -136,6 +178,37 @@
 											</c:forEach>
 										</c:if>
 									</tbody>
+								</table>
+								<table style="width: 1000px" align="center">
+										<tr>
+											<th align="center">
+												<!-- 게시글이 있으면 --> <c:if test="${salary_list_cnt > 0}">
+													<!-- 처음[◀◀] /  이전블록[◀]  , 특수문자 : 한글상태 ㅁ+한자키-->
+													<c:if test="${startPage > pageBlock}">
+														<a href="salary_list_month"> [◀◀] </a>
+														<a href="salary_list_month?pageNum=${startPage - pageBlock}">
+															[◀] </a>
+													</c:if>
+
+													<!-- 블록내의 페이지 번호 -->
+													<c:forEach var="i" begin="${startPage}" end="${endPage}">
+														<c:if test="${i == currentPage}">
+															<span><a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a></span>
+														</c:if>
+														<c:if test="${i != currentPage}">
+															<a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a>
+														</c:if>
+													</c:forEach>
+
+													<!-- 다음블록[▶] / 마지막[▶▶] -->
+													<c:if test="${pageCount > endPage}">
+														<a href="salary_list_month?pageNum=${startPage + pageBlock}">
+															[▶]</a>
+														<a href="salary_list_month?pageNum=${pageCount}"> [▶▶]</a>
+													</c:if>
+												</c:if>
+											</th>
+										</tr>
 								</table>
 							</div>
 						</div>

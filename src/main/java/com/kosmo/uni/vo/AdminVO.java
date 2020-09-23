@@ -13,7 +13,7 @@ public class AdminVO {
 	private int outState;		//퇴근
 	
 	private Timestamp salary_InDay;	//지급일
-	private int sal_Num;			//급여코드
+	private int sal_Num;			//급여코드 - 정규 비정규 
 	private String name;			//이름
 	private String depart_name;			//부서
 	private int sal_total;			//총급여
@@ -21,6 +21,8 @@ public class AdminVO {
 	private int over;				//야근수당
 	private int meals;				//식대
 	private int car;				//차량유지비
+	private int Payments_division;  // 지급 구분
+	
 	
 	public int getNum() {
 		return num;
@@ -118,6 +120,12 @@ public class AdminVO {
 	}
 	public void setCar(int car) {
 		this.car = car;
+	}
+	public int getPayments_division() {
+		return Payments_division;
+	}
+	public void setPayments_division(int payments_division) {
+		Payments_division = payments_division;
 	}
 	
 

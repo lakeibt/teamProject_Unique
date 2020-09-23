@@ -1,14 +1,12 @@
 package com.kosmo.uni.vo;
 
-import java.sql.Timestamp;
-
 public class Member {
 	// member_tbl
 	private String userid;
 	private String password;
 	private String authority;
 	private String photo;
-	private String name;
+	private String username;
 	private String eng_name;
 	private int jumin1;
 	private int jumin2;
@@ -37,10 +35,10 @@ public class Member {
 		this.password = pwd;
 	}
 	public String getName() {
-		return name;
+		return username;
 	}
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
 	}
 	public String getPhoto() {
 		return photo;

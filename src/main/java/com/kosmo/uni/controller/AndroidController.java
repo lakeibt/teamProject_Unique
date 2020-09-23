@@ -23,9 +23,10 @@ public class AndroidController {
 	@Autowired
 	AndDAO andDao;
 	
+	
 	//	앱 로그인
 		@ResponseBody	// 웹(스프링)에서 안드로이드로 값(json)을 전달하기 위한 어노테이션
-		@RequestMapping("androidSignIn")
+		@RequestMapping("/android/androidSignIn")
 		public Map<String, String> androidSignIn(HttpServletRequest req){
 			log.info("androidSignIn()");
 			
@@ -53,6 +54,10 @@ public class AndroidController {
 				out.put("username", map.get("USERNAME"));
 				out.put("authority", map.get("AUTHORITY"));
 				out.put("password", map.get("PASSWORD"));
+				System.out.println("id : " + map.get("USERID"));
+				System.out.println("pwd : " +  map.get("PASSWORD"));
+				System.out.println("name : " +  map.get("USERNAME"));
+				System.out.println("authority : " + map.get("AUTHORITY"));
 			} else {
 				log.info("로그인 실패");
 				out.put("member_id", null);
@@ -64,7 +69,7 @@ public class AndroidController {
 	
 	// 앱 마이페이지
 	@ResponseBody
-	@RequestMapping("androidMyPageMain")
+	@RequestMapping("/android/androidMyPageMain")
 	public Map<String, Object> androidMyPageMain(HttpServletRequest req) {
 		log.info("androidMyPageMain()");
 	
@@ -83,7 +88,9 @@ public class AndroidController {
 		map.put("data1", m.getId());
 		map.put("data2", m.getName());
 		map.put("data3", m.getAuthority());
-		map.put("member", m);
+		System.out.println("m.id : " + m.getId());
+		System.out.println("m.name : " + m.getName());
+		System.out.println("m.authority : " + m.getAuthority());
 	
 		return map;
 	}

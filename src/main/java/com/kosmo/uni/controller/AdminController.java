@@ -39,10 +39,49 @@ public class AdminController {
 	@RequestMapping(value = "/admin/degree/course")
 	public String course(HttpServletRequest req, Model model) {
 		logger.info("degree/course");
-
+		
+		adminService.course_list(req, model);
+		
 		return "admin/degree/course";
 	}
-
+	
+	//강의등록
+	@RequestMapping(value = "/admin/degree/coursenext")
+	public String coursenext(HttpServletRequest req, Model model) {
+		logger.info("degree/coursenext");
+		
+		return "admin/degree/coursenext";
+	}
+	
+	//강의수정
+	@RequestMapping(value = "/admin/degree/coursenext2")
+	public String coursenext2(HttpServletRequest req, Model model) {
+		logger.info("degree/coursenext2");
+		
+		
+		return "admin/degree/coursenext2";
+	}
+	
+	//강의등록 완료
+	@RequestMapping(value = "/admin/degree/coursewm")
+	public String coursewm(HttpServletRequest req, Model model) {
+		logger.info("degree/coursewm");
+		
+		model.addAttribute("cnt", 0);
+		
+		return "admin/degree/coursewm";
+	}
+	
+	//강의수정 완료
+	@RequestMapping(value = "/admin/degree/coursewm2")
+	public String coursewm2(HttpServletRequest req, Model model) {
+		logger.info("degree/coursewm2");
+		
+		model.addAttribute("cnt", 0);
+		
+		return "admin/degree/coursewm2";
+	}
+	
 	// 시설문의
 	@RequestMapping(value = "/admin/degree/facility_ask")
 	public String facility_ask(HttpServletRequest req, Model model) {
@@ -60,7 +99,6 @@ public class AdminController {
 
 		return "admin/human_resources/code_setting/code_setting";
 	}
-
 	// 
 	@RequestMapping(value = "/admin/human_resources/code_setting/code_rankList")
 	public String code_rankList(HttpServletRequest req, Model model) {
@@ -121,14 +159,6 @@ public class AdminController {
 		return "admin/human_resources/pay/attendance";
 	}
 
-	//근태 조회 
-	@RequestMapping(value = "/admin/human_resources/pay/attendanceChk")
-	public String attendanceChk(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/attendanceChk");
-		
-		return "admin/human_resources/pay/attendanceChk";
-	}	
-
 	// 근태관리 - 조회
 	@RequestMapping(value = "/admin/human_resources/pay/attendance_Search")
 	public String salary_search(HttpServletRequest req, Model model) {
@@ -143,7 +173,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/pay/salary")
 	public String salary(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary");
-
+		
 		return "admin/human_resources/pay/salary";
 	}
 
@@ -151,7 +181,9 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list")
 	public String salary_list(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list");
-
+		
+		adminService.salaryList(req, model);
+		
 		return "admin/human_resources/pay/salary_list";
 	}
 
@@ -161,6 +193,16 @@ public class AdminController {
 		logger.info("human_resources/pay/thisM_list");
 
 		return "admin/human_resources/pay/payroll";
+	}
+	
+	// 급여대장 - 전체 계산 
+	@RequestMapping(value = "/admin/human_resources/pay/salaryTotalinput")
+	public String salaryTotalinput(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salaryTotalinput");
+		
+		adminService.salaryInput(req, model);
+		adminService.salaryList(req, model);
+		return "admin/human_resources/pay/salary_list";
 	}
 
 	// 급여대장 - 급여명세서
@@ -211,7 +253,9 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/pay/salary_enroll")
 	public String salary_enroll(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_enroll");
-
+		
+		adminService.salary_input(req, model);
+		
 		return "admin/human_resources/pay/salary_enroll";
 	}
 
@@ -220,13 +264,9 @@ public class AdminController {
 	public String salary_list_human(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_human");
 
-		
-		// adminService.salary_list_human(req, model);
-		
-
-
 		adminService.salary_list_human(req, model);
 
+		// adminService.salary_list_human(req, model);
 
 		return "admin/human_resources/pay/salary_list_human";
 	}
@@ -265,6 +305,5 @@ public class AdminController {
 
 		return "admin/facility/ask";
 	}
-	
 
 }

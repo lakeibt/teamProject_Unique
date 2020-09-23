@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Contact - Moderna Bootstrap Template</title>
+	<title>로그인</title>
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
 <body>
@@ -14,9 +14,9 @@
 	<section class="breadcrumbs">
 		<div class="container">
 			<div class="d-flex justify-content-between align-items-center">
-				<h2>USB > 통합로그인</h2>
+				<h2>서울대학교 > 통합로그인</h2>
 				<ol>
-					<li><a href="index.html">Home</a></li>
+					<li><a href="${guest}main">Home</a></li>
 					<li>Contact</li>
 				</ol>
 			</div>
@@ -62,9 +62,11 @@
 		      	</form>
 	      	</c:if>
 	      	<c:if test = "${sessionScope.auth != null}">
-	      		<span style = "margin:0 auto;">이미 로그인되어 있습니다.</span><br>
-	      		<span style = "margin:0 auto;">로그아웃하시려면 아래 버튼을 누르시면 됩니다.</span><br>
-	      		<input type = "button" value = "로그아웃" style = "margin : 0 auto; color: white; background-color: #003cbc;" onClick = "window.location = '${guest}logout'">
+	      		<div style = "margin:0 auto; padding-top:30px;">
+		      		<p style = "text-align: center; font-size: 20px; font-weight: bold;">귀하는 로그인되어 있는 상태입니다.</p><br>
+		      		<p style = "text-align: center; font-size: 20px; font-weight: bold;">로그아웃하시려면 아래 버튼을 누르시면 됩니다.</p><br>
+	      		</div>
+	      		<input type = "button" value = "로그아웃" style = "height:50px; width:100%; margin : 0 auto; color: white; background-color: #0d2735;" onClick = "window.location = '${guest}logout'">
 	      	</c:if>
 	      </div>
       </div>
