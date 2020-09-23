@@ -38,7 +38,7 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/main");
 			dispatcher.forward(request, response);
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/guest/myPage");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/student/myPage");
 			dispatcher.forward(request, response);
 		}
 		

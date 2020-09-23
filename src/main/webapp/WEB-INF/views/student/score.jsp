@@ -6,7 +6,7 @@
 <script src="/uni/resources/js/request.js"></script>
 <head>
 	<title>Contact - Moderna Bootstrap Template</title>
-	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
+	<%@ include file = "../bootstrap/student_bootstrap.jsp" %>
 </head>
 <body>
 
@@ -22,7 +22,7 @@
 			</div>
 		</section>
 		<!-- 성적조회 페이지 -->
-		<%@ include file="../include/guest_left.jsp"%>
+		<%@ include file="../include/student_left.jsp"%>
 		<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="width:60%; display:inline-block; position:relative; vertical-align:top;">
 			<div class="contact">
 				<form class="php-email-form" style="background:rgba(0,0,0,0);">
@@ -68,7 +68,7 @@
 		                           console.log(value);
 		                           var param = "value=" + value;
 		                           
-		                           sendRequest(content_callback,"${guest}scoreInfo", "get", param);
+		                           sendRequest(content_callback,"${student}scoreInfo", "get", param);
 		                           console.log(param);
 		                        }
 		                        function content_callback() {
@@ -100,6 +100,6 @@
 	<%@ include file="../include/footer.jsp"%>
 
 	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-<%@ include file = "../bootstrap/guest_bootstrap_js.jsp" %>
+<%@ include file = "../bootstrap/student_bootstrap_js.jsp" %>
 </body>
 </html>

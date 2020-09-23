@@ -5,7 +5,7 @@
 
 <head>
 	<title>Contact - Moderna Bootstrap Template</title>
-	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
+	<%@ include file = "../bootstrap/student_bootstrap.jsp" %>
 </head>
 <body>
 	<%@ include file="../include/header.jsp"%>
@@ -21,7 +21,7 @@
 		</section>
 		<!-- End Contact Section -->
 		<!-- ======= Contact Section ======= -->
-		<%@ include file="../include/guest_left.jsp"%>
+		<%@ include file="../include/student_left.jsp"%>
 		<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="width:60%; display:inline-block; position:relative; vertical-align:top;">
 			<!-- 학생 메인 페이지 -->
 			<section class="services">
@@ -132,7 +132,7 @@
 				</div>
 			</section>
 		</section>
-		<%-- <%@ include file="../include/guest_right.jsp"%> --%>
+		<%-- <%@ include file="../include/student_right.jsp"%> --%>
 		<!-- End Contact Section -->
 		<!-- ======= Map Section ======= -->
 	</main>
@@ -141,6 +141,6 @@
 	<%@ include file="../include/footer.jsp"%>
 
 	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-<%@ include file = "../bootstrap/guest_bootstrap_js.jsp" %>
+<%@ include file = "../bootstrap/student_bootstrap_js.jsp" %>
 </body>
 </html>

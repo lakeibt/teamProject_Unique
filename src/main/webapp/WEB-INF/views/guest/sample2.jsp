@@ -78,6 +78,15 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:void(0)">Icons</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
           <div class="collapse navbar-collapse justify-content-end">
             <form class="navbar-form">
               <div class="input-group no-border">
@@ -130,39 +139,26 @@
         <div class="container-fluid">
           <div class="container-fluid">
             <div class="card card-plain">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">Material Design Icons</h4>
+                <p class="card-category">Handcrafted by our friends from
+                  <a target="_blank" href="https://design.google.com/icons/">Google</a>
+                </p>
+              </div>
               <div class="row">
                 <div class="col-md-12">
-                
-                	<div class="container">
-				<div class="d-flex justify-content-between align-items-center">
-					<h2>시간표 조회</h2>
-				</div>
-			</div>
-
-<div class="container">
-				<table class="table" style="border:1px solid lightgrey; text-align:center; font-size:13px;" rules="all">
-					<tbody>
-						<tr style="background-color:#1e4356; color:white">
-							<td style="width:15%">교시/시간</td>
-							<td style="width:17%">월요일</td>
-							<td style="width:17%">화요일</td>
-							<td style="width:17%">수요일</td>
-							<td style="width:17%">목요일</td>
-							<td style="width:17%">금요일</td>
-						</tr>
-						
-						<c:forEach var="dto" items="${dtos}" varStatus="status">
-							<c:if test="${status.index + 1 == dto.getSt_code()}">
-								<tr>
-									<td style="background-color:#1e4356; color:white">${status.index+1}교시<br>${status.index+1+8}:00-${status.index+1+9}:00</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-							
-					</tbody>
-				</table>
-			</div>
-                
+                  <div class="card-body">
+                    <div class="iframe-container d-none d-lg-block">
+                      <iframe src="https://design.google.com/icons/">
+                        <p>Your browser does not support iframes.</p>
+                      </iframe>
+                    </div>
+                    <div class="col-md-12 d-none d-sm-block d-md-block d-lg-none d-block d-sm-none text-center ml-auto mr-auto">
+                      <h5 class="card-description">The icons are visible on Desktop mode inside an iframe. Since the iframe is not working on Mobile and Tablets please visit the icons on their original page on Google. Check the
+                        <a href="https://design.google.com/icons/" target="_blank">Material Icons</a>
+                      </h5>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -230,22 +226,22 @@
         <li class="header-title">Images</li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${assets}img/sidebar-1.jpg" alt="">
+            <img src="../assets/img/sidebar-1.jpg" alt="">
           </a>
         </li>
         <li class="active">
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${assets}img/sidebar-2.jpg" alt="">
+            <img src="../assets/img/sidebar-2.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${assets}img/sidebar-3.jpg" alt="">
+            <img src="../assets/img/sidebar-3.jpg" alt="">
           </a>
         </li>
         <li>
           <a class="img-holder switch-trigger" href="javascript:void(0)">
-            <img src="${assets}img/sidebar-4.jpg" alt="">
+            <img src="../assets/img/sidebar-4.jpg" alt="">
           </a>
         </li>
         <li class="button-container">
@@ -275,7 +271,7 @@
       </ul>
     </div>
   </div>
-  <%@ include file = "../bootstrap/guest_bootstrap_js2.jsp" %>
+   <%@ include file = "../bootstrap/guest_bootstrap_js2.jsp" %>
 </body>
 
 </html>
