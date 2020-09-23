@@ -46,11 +46,6 @@ public class EduServiceImpl implements EduService {
 	}
 
 	@Override
-	public void test(HttpServletRequest req, Model model) {
-		eduDAO.test(req, model);
-	}
-
-	@Override
 	public void studentinfo(HttpServletRequest req, Model model) {
 		String id = (String) req.getSession().getAttribute("memId");
 		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.

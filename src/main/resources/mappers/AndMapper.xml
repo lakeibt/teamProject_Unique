@@ -5,12 +5,20 @@
     
 <mapper namespace="com.kosmo.uni.persistence.AndDAO">
 
-	<select id="confirmIdPwd" resultType="java.util.Map" parameterType = "String">
-		SELECT USERID, USERNAME, PASSWORD, ENABLED, AUTHORITY FROM USERS WHERE USERID=#{id}
+	<select id="confirmIdPwdStu" resultType="java.util.Map" parameterType = "String">
+		SELECT id, name, pwd FROM S_STUDENT WHERE id=#{id}
 	</select>
 	
-	<select id="getMemberInfo" resultType="com.kosmo.uni.vo.Member">
-		SELECT USERID, USERNAME, AUTHORITY FROM USERS WHERE USERID=#{id}
+	<select id="confirmIdPwdAdm" resultType="java.util.Map" parameterType = "String">
+		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id}
+	</select>
+	
+	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
+		SELECT id, name, pwd FROM S_STUDENT WHERE id=#{id}
+	</select>
+	
+	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.Manager">
+		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id} 
 	</select>
 
 </mapper>

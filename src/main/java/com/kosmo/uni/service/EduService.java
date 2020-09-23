@@ -8,7 +8,6 @@ public interface EduService {
 
 	public void insertUser(HttpServletRequest req, Model model);
 
-	public void test(HttpServletRequest req, Model model);
 	// 학생 정보 조회
 	public void studentinfo(HttpServletRequest req, Model model);
 	// 학생 정보 수정
