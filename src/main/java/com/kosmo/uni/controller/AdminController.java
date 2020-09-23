@@ -143,6 +143,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/pay/payroll")
 	public String thisM_list(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/thisM_list");
+		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
 	}
 	
@@ -168,7 +169,7 @@ public class AdminController {
 		logger.info("human_resources/pay/salary_info");
 		
 		return "admin/human_resources/pay/salary_info";
-	}		
+	}
 	// 월별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_month")
 	public String salary_list_month(HttpServletRequest req, Model model) {

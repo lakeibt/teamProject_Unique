@@ -11,22 +11,28 @@
 <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
 
 <script>
-
-$(function(){
+$(document).ready(function(){
 	$('#payroll').click(function(){
-		$.ajax({
-			url : '${pageContext.request.contextPath}/admin/human_resources/pay/payroll',  // 응답페이지  ==> 컨트롤러/basic.
-			type : 'GET',  //전송 방식("get", "post")
-			dataType : 'text',   //요청한 데이터 형식("html", "xml", "json", "text")
-			success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
-				$('#pay_payroll').html(data);
-			}, 
-			error : function() {
-				alert('오류');
-			}
-		});
-	});
+		selectSalary();
+	})
 });
+
+function selectSalary(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/admin/human_resources/pay/payroll',  // 응답페이지  ==> 컨트롤러/basic.
+		type : 'GET',  //전송 방식("get", "post")
+		data : {
+			salary_input_num:$("#salaryNum").val()
+		},   //요청한 데이터 형식("html", "xml", "json", "text")
+		success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+			$('#pay_payroll').html(data);
+		}, 
+		error : function() {
+			alert('오류');
+		}
+	});
+}
+	
 
 $(function(){
 	$('#payslip').click(function(){
@@ -120,9 +126,7 @@ $(function(){
 														<c:if test="${atos.salary_confirm==1}">
 															<td><a class="btn btn-app" 
 																style="height: 30px; padding: 5px;"
-																onclick="salTotalIn('${atos.salary_input_num}','${atos.payments_division}');">전체계산</a><br> <a
-																class="btn btn-app" style="height: 30px; padding: 5px;">개인별계산</a>
-															</td>
+																onclick="salTotalIn('${atos.salary_input_num}');">급여계산</a>
 														</c:if>
 														<c:if test="${atos.salary_confirm!=1}">
 															<td><a style="color: red;">급여 확정</a><br></td>
