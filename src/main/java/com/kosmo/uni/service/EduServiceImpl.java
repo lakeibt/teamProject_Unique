@@ -16,7 +16,6 @@ import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
 
-
 @Service
 public class EduServiceImpl implements EduService {
 
@@ -43,11 +42,6 @@ public class EduServiceImpl implements EduService {
 
 		int insertCnt = eduDAO.insertUser(map);
 		model.addAttribute("insertCnt", insertCnt);
-	}
-
-	@Override
-	public void test(HttpServletRequest req, Model model) {
-		eduDAO.test(req, model);
 	}
 
 	@Override

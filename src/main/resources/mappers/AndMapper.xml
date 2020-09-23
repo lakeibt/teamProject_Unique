@@ -6,11 +6,11 @@
 <mapper namespace="com.kosmo.uni.persistence.AndDAO">
 
 	<select id="confirmIdPwd" resultType="java.util.Map" parameterType = "String">
-		SELECT USERID, USERNAME, PASSWORD, ENABLED, AUTHORITY FROM USERS WHERE USERID=#{id}
+		SELECT USERID, USERNAME, PASSWORD, ENABLED, AUTHORITY FROM S_STUDENT WHERE USERID=#{id}
 	</select>
 	
 	<select id="getMemberInfo" resultType="com.kosmo.uni.vo.Member">
-		SELECT USERID, USERNAME, AUTHORITY FROM USERS WHERE USERID=#{id}
+		SELECT USERID, USERNAME, AUTHORITY FROM S_STUDENT WHERE USERID=#{id}
 	</select>
 
 </mapper>

@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
-import com.kosmo.uni.vo.TestVO;
-
 
 @Repository
 public class EduDAOImpl implements EduDAO {
@@ -28,12 +26,6 @@ public class EduDAOImpl implements EduDAO {
 	public int insertUser(Map<String, String> map) {
 		int cnt = sqlSession.insert(EduDAO + "insertUser", map);
 		return cnt;
-	}
-
-	@Override
-	public void test(HttpServletRequest req, Model model) {
-		TestVO tvo = sqlSession.selectOne(EduDAO + "test", "g1234");
-		System.out.println(tvo);
 	}
 
 	@Override

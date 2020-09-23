@@ -127,6 +127,13 @@ public class EduController {
 		return "guest/employment";
 	}
 	
+	@RequestMapping("/guest/sample")
+	public String gue_sample() {
+		logger.info("url ==> sample");
+		
+		return "guest/sample";
+	}
+	
 	@RequestMapping("/guest/employmentnext")
 	public String gue_employmentnext() {
 		logger.info("url ==> employmentnext");
