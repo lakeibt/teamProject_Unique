@@ -7,14 +7,14 @@
 	<c:if test = "${cnt == 0}">
 		<script type = "text/javascript">
 			alert("강의등록오류");
-			window.history.back();
+			window.lacation="${admin}degree/course";
 		</script>
 	</c:if>
 	
 	<c:if test = "${cnt != 0}">
 		<script type = "text/javascript">
 			alert("강의등록이 완료되었습니다");
-			window.history.back();
+			window.location="${admin}degree/course";
 		</script>
 	</c:if>
 </body>

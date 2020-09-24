@@ -14,8 +14,17 @@ public class CourseVO {
 	private int le_code;
 	private String professor;
 	private int grade_1;
-	private String name_1;
+	private String p_name;
 	private String grade_code;
+	private int school_year;
+	
+	
+	public int getSchool_year() {
+		return school_year;
+	}
+	public void setSchool_year(int school_year) {
+		this.school_year = school_year;
+	}
 	private int entrancedate;
 	public int getEntrancedate() {
 		return entrancedate;
@@ -35,11 +44,11 @@ public class CourseVO {
 	public void setGrade_1(int grade_1) {
 		this.grade_1 = grade_1;
 	}
-	public String getName_1() {
-		return name_1;
+	public String getP_name() {
+		return p_name;
 	}
-	public void setName_1(String name_1) {
-		this.name_1 = name_1;
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
 	}
 	public String getCo_code() {
 		return co_code;

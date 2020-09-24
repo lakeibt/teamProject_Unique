@@ -46,4 +46,12 @@ public interface AdminDAO {
 
 	public List<CourseVO> getCourseList();
 	
+	public int classDelete(String code);
+	
+	public int classInsert(CourseVO vo);
+	
+	public CourseVO classInfo(String code);
+	
+	public int classmodClear(CourseVO vo);
+	
 }
