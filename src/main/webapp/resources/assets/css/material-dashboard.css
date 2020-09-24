@@ -19551,8 +19551,8 @@ Copyright (c) 2015 Daniel Eden
   }
 }
 
-.dark-edition {
-  background-color: #1a2035;
+.dark-edition {	/* 배경색 */
+  background-color: #F3F8FA;
 }
 
 .dark-edition .btn,
@@ -20436,8 +20436,8 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .sidebar .sidebar-background:after,
 .dark-edition .sidebar {
-  background: #1f283e;
-  opacity: .94;
+  background: #1E4356;	/* 사이드바 배경색 */
+  opacity: .81;
 }
 
 .dark-edition .sidebar[data-background-color="black"] .nav li:not(.active) a,
