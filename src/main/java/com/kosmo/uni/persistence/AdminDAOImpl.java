@@ -161,6 +161,29 @@ public class AdminDAOImpl implements AdminDAO {
 		return dao.getCourseList();
 	}
 
+	@Override
+	public int classDelete(String code) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classDelete(code);
+	}
+
+	@Override
+	public int classInsert(CourseVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classInsert(vo);
+	}
+
+	@Override
+	public CourseVO classInfo(String code) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classInfo(code);
+	}
+
+	@Override
+	public int classmodClear(CourseVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classmodClear(vo);
+	}
 	
 
 }

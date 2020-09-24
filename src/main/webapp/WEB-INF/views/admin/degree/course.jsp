@@ -4,6 +4,33 @@
 <html>
 <script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
 <script src="/uni/resources/js/request.js"></script>
+<script type="text/javascript">
+$(function(){
+    
+    // 질문유형을 선택한다.
+    chnQnaType('0' , '0');
+});
+
+function chnQnaType(type , select) {
+    
+    $('#schQnaType').empty();
+    
+    if(type == 'CO') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+        $('#schQnaType').append("<option value='김교수'>김교수</option>");
+    } else if (type == 'BE') { 
+    	$('#schQnaType').append("<option selected disabled>교수님를 선택하세요</option>");
+    	$('#schQnaType').append("<option value='김뷰티'>김뷰티</option>");
+    }
+    
+    document.getElementById("schQnaType").style.display = "";
+    
+    if ($.trim(select) != "") {
+        $('#select1').val(type);
+        $('#schQnaType').val(select);
+    }
+}
+</script>
 <head>
 	<title>수강관리</title>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
@@ -61,6 +88,7 @@
 										<th>과목코드</th>
 										<th>과목명</th>
 										<th>학과코드</th>
+										<th>학년</th>
 										<th>이수구분</th>
 										<th>제한인원</th>
 										<th>수강인원</th>
@@ -76,16 +104,17 @@
 								<c:forEach var="dto" items="${dtos}">
 									<tr>
 										<td>${dto.co_code}</td>
-										<td><a href="#" onclick="content2()">${dto.co_name}</a></td>
+										<td><a href="#" onclick="content2('${dto.co_code}')">${dto.co_name}</a></td>
 										<td>${dto.m_code}</td>
+										<td>${dto.school_year}</td>
 										<td>${dto.p_code}</td>
 										<td>${dto.limit_num}</td>
 										<td>${dto.co_num}</td>
-										<td>${dto.grade_1}</td>
+										<td>${dto.grade}</td>
 										<td>${dto.co_year} / ${dto.co_semester}</td>
 										<td>${dto.co_day} / ${dto.le_code}</td>
-										<td>${dto.name_1}</td>
-										<td><input type="button" id="select1" class="btn" style="float:right; padding: 6px 6px;" onclick="content3()" value="삭제"></td>
+										<td>${dto.p_name}</td>
+										<td><input type="button" id="select1" class="btn" style="float:right; padding: 6px 6px;" onclick="content3('${dto.co_code}')" value="삭제"></td>
 									</tr>
 								</c:forEach>
 								</c:if>
@@ -126,10 +155,10 @@ function content() {
 	   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
 	}
 	
-function content2() {
-	   var param = "param=" + 1;
+function content2(code) {
+	   var co_code = "co_code=" + code;
 	   
-	   sendRequest(content_callback2,"coursenext2", "get", param);
+	   sendRequest(content_callback2,"coursenext2", "get", co_code);
 	}
 	function content_callback2() {
 	   var result = document.getElementById("courseinfo");
@@ -142,10 +171,10 @@ function content2() {
 	      } else result.innerHTML = "Error!";
 	   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
 	}
-function content3() {
+function content3(code) {
 	var del = confirm("삭제하시겠습니까?");
 	if(del == true){
-		  window.location= 'coursewm2';
+		window.location="classdelete?co_code="+code;
 		}
 	}
 </script>

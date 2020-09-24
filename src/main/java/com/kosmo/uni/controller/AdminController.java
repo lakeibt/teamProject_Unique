@@ -45,7 +45,7 @@ public class AdminController {
 		return "admin/degree/course";
 	}
 	
-	//강의등록
+	//강의등록 클릭
 	@RequestMapping(value = "/admin/degree/coursenext")
 	public String coursenext(HttpServletRequest req, Model model) {
 		logger.info("degree/coursenext");
@@ -53,11 +53,14 @@ public class AdminController {
 		return "admin/degree/coursenext";
 	}
 	
-	//강의수정
+	//강의수정 클릭
 	@RequestMapping(value = "/admin/degree/coursenext2")
 	public String coursenext2(HttpServletRequest req, Model model) {
 		logger.info("degree/coursenext2");
 		
+		adminService.classmod(req, model);
+		String co_code = req.getParameter("co_code");
+		model.addAttribute("co_code",co_code);
 		
 		return "admin/degree/coursenext2";
 	}
@@ -67,7 +70,8 @@ public class AdminController {
 	public String coursewm(HttpServletRequest req, Model model) {
 		logger.info("degree/coursewm");
 		
-		model.addAttribute("cnt", 0);
+		adminService.classinput(req, model);
+		adminService.course_list(req, model);
 		
 		return "admin/degree/coursewm";
 	}
@@ -77,9 +81,22 @@ public class AdminController {
 	public String coursewm2(HttpServletRequest req, Model model) {
 		logger.info("degree/coursewm2");
 		
-		model.addAttribute("cnt", 0);
+		adminService.classmodClear(req, model);
 		
 		return "admin/degree/coursewm2";
+	}
+	
+	//강의삭제
+	@RequestMapping(value = "/admin/degree/classdelete")
+	public String classdelete(HttpServletRequest req, Model model) {
+		logger.info("degree/classdelete");
+		
+		String co_code = req.getParameter("co_code");
+		model.addAttribute("co_code", co_code);
+		adminService.classdelete(req, model);
+		adminService.course_list(req, model);
+		
+		return "admin/degree/course";
 	}
 	
 	// 시설문의
