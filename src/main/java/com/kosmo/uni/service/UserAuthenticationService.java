@@ -40,14 +40,40 @@ public class UserAuthenticationService implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		Map<String, Object> user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectUser", userId);
-		System.out.println("로그인 체크 ==> " + userId);
-		
-		System.out.println(user.get("USERID"));
-		System.out.println(user.get("PASSWORD"));
-		System.out.println(user.get("USERNAME"));
-		System.out.println(user.get("ENABLED"));
-		System.out.println(user.get("AUTHORITY"));
+		Map<String, Object> user = null;
+		if(userId.charAt(0) == 's') {
+			System.out.println("학생 로그인");
+			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectSUser", userId);
+			System.out.println("로그인 체크 ==> " + userId);
+			
+			System.out.println(user.get("ID"));
+			System.out.println(user.get("PWD"));
+			System.out.println(user.get("NAME"));
+			user.put("AUTHORITY", "ROLE_STUDENT");
+			System.out.println(user.get("AUTHORITY"));
+		} else if(userId.charAt(0) == 'p') {
+			System.out.println("교수 로그인");
+			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectPUser", userId);
+			System.out.println("로그인 체크 ==> " + userId);
+			
+			System.out.println(user.get("ID"));
+			System.out.println(user.get("PWD"));
+			System.out.println(user.get("NAME"));
+			user.put("AUTHORITY", "ROLE_PROFESSOR");
+			System.out.println(user.get("AUTHORITY"));
+		} else if(userId.charAt(0) == 'a') {
+			System.out.println("관리자 로그인");
+			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectAUser", userId);
+			System.out.println("로그인 체크 ==> " + userId);
+			
+			System.out.println(user.get("ID"));
+			System.out.println(user.get("PWD"));
+			System.out.println(user.get("NAME"));
+			user.put("AUTHORITY", "ROLE_ADMIN");
+			System.out.println(user.get("AUTHORITY"));
+		} else {
+			System.out.println("형식에 맞지 않는 아이디입니다.");
+		}
 		
 		// 인증실패시 인위적으로 예외 발생
 		if(user == null) throw new UsernameNotFoundException(userId);
@@ -58,20 +84,17 @@ public class UserAuthenticationService implements UserDetailsService {
 
 		authority.add(new SimpleGrantedAuthority(user.get("AUTHORITY").toString()));
 	
-		System.out.println(user.get("USERID").toString());
-		System.out.println(user.get("PASSWORD").toString());
-		System.out.println((Integer)Integer.valueOf(user.get("ENABLED").toString()) == 1);
+		System.out.println(user.get("ID").toString());
+		System.out.println(user.get("PWD").toString());
+		System.out.println(user.get("NAME").toString());
 		System.out.println(authority);
-		System.out.println(user.get("USERNAME").toString());
 		
 		// 오라클에서는 필드명을 대문자로 취급
 		// 오라클에서는 BigInteger 관련 오류가 발생할수 있으므로 아래와 같이 처리
 		// 사용자가 입력한 값과 테이블의 USERNAME(=id), PASSWORD(아래)를 비교해서
 		// 비밀번호가 불일치시 UserLoginFailureHandler, 일치시 UserLoginSuccessHandler
 		// 스프링 시큐리티에서 체크하는 아래 필드로 select시에 별칭을 줌, 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리
-		return new UserVO(user.get("USERID").toString(),
-				user.get("PASSWORD").toString(),
-				(Integer)Integer.valueOf(user.get("ENABLED").toString()) == 1,
-				true, true, true, authority, user.get("USERNAME").toString());
+		return new UserVO(user.get("ID").toString(), user.get("PWD").toString(),
+				true, true, true, true, authority, user.get("NAME").toString());
 	}
 }

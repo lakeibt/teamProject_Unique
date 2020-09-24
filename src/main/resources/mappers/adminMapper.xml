@@ -10,159 +10,40 @@
 		SELECT COUNT(*) as cnt
 		FROM ATTENDANCE
 	</select>
-	
-	<select id="getAttendance_Search_Cnt" parameterType="java.util.Map" resultType="int">
-		<![CDATA[
-		SELECT COUNT(*) as cnt
-		FROM ATTENDANCE
-		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
-		]]>
-	</select>
 
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		<![CDATA[
-		SELECT * 
-			FROM (SELECT num, id, inday, intime, outtime, instate, 
-			             outstate, rowNum rNum  
-			        FROM (
-			               SELECT * FROM attendance
-			                ORDER BY num   
-			             )  
-			      ) 
-			WHERE rNum >= #{start} AND rNum <= #{end}
-		]]>
-
-	</select>
-
-	<select id="getAttendance_List_Search"
-		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
-		<![CDATA[
-		SELECT * 
-			FROM (SELECT num, id, inday, intime, outtime, instate, 
-			             outstate, rowNum rNum  
-			        FROM (
-			               SELECT * FROM attendance
-			                ORDER BY num   
-			             )  
-			      ) 
-			WHERE rNum >= #{start} AND rNum <= #{end}
-		AND TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
-		]]>
-	</select>
-
-	<select id="getSalary_Cnt" resultType="int">
-		SELECT COUNT(*)/4 as cnt
-		FROM salary
-
+		SELECT * FROM ATTENDANCE ORDER BY num desc
 	</select>
 
 	<select id="getSalary_list_human" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		<![CDATA[
-		SELECT * FROM
-		(
 		SELECT s.salary_inday,
 		s.sal_num,
 		s.id,
 		s.salary_month,
 		m.name,
-		d.depart_name
-		FROM salary s
-		,manager m
-		,depart d
-		WHERE s.id = m.id
-		AND m.depart = d.depart
-		order by salary_inday
-		)
-		PIVOT
-		(
-		SUM(salary_month)
-		FOR
-		sal_num IN (1 AS sal, 2 AS over, 3 AS meals, 4 AS car)
-		)
-        WHERE ROWNUM >= #{start} AND ROWNUM <= #{end}
-		]]>
-		
+		m.depart
+		FROM a_salary s join a_admin m
+		ON s.id = m.id
 	</select>
-
-	<select id="getSalary_list_human_Search"
-		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT * FROM
-		(
-		SELECT
-		s.salary_inday,
-		s.sal_num,
-		s.id,
-		s.salary_month,
-		m.name,
-		d.depart_name
-		FROM
-		salary s
-		,manager m
-		,depart d
-		WHERE s.id = m.id
-		AND m.depart = d.depart
-		AND m.name =#{name,jdbcType=VARCHAR}
-		)
-		PIVOT
-		(
-		SUM(salary_month)
-		FOR
-		sal_num IN (1 AS sal, 2 AS over, 3 AS meals, 4 AS car)
-		)
+	
+	<insert id="salary_input" parameterType="java.util.Map">
+		INSERT INTO a_salary_input
+		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
+	</insert>
+	
+	<select id="getSalaryCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM a_salary_input
 	</select>
-
-	<select id="getSalary_list_month" parameterType="java.util.Map"
-		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT * FROM
-		(
-		SELECT s.salary_inday,
-		s.sal_num,
-		s.id,
-		s.salary_month,
-		m.name,
-		d.depart_name
-		FROM salary s
-		,manager m
-		,depart d
-		WHERE s.id = m.id
-		AND m.depart = d.depart
-		)
-		PIVOT
-		(
-		SUM(salary_month)
-		FOR
-		sal_num IN (1 AS sal, 2 AS over, 3 AS meals, 4 AS car)
-		)
-	</select>
-
-	<select id="getSalary_list_month_Search"
-		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
+	
+	<select id="getSalaryList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryInputVO">
 		<![CDATA[
-		SELECT * FROM
-		(
-		SELECT
-		s.salary_inday,
-		s.sal_num,
-		s.id,
-		s.salary_month,
-		m.name,
-		d.depart_name
-		FROM
-		salary s
-		,manager m
-		,depart d
-		WHERE s.id = m.id
-		AND m.depart = d.depart
-		AND TO_CHAR(s.salary_inday,'YYYY-MM') >=#{sm,jdbcType=VARCHAR} AND TO_CHAR(s.salary_inday,'YYYY-MM') <=#{em,jdbcType=VARCHAR}
-		)
-		PIVOT
-		(
-		SUM(salary_month)
-		FOR
-		sal_num IN (1 AS sal, 2 AS over, 3 AS meals, 4 AS car)
-		)
+		SELECT * 
+			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
+	        , salary_inday, payments_month, salary_name, rowNUM rNum 
+			FROM ( SELECT * FROM a_salary_input ORDER BY salary_input_num ASC)) 
+		WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
 	</select>
 	
@@ -190,5 +71,24 @@
 				    AND sc.co_code = c.co_code
 	</select>
 
-
+	<select id="getAdminCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM a_admin
+	</select>
+	
+	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
+		SELECT m.id, m.name, m.rank, m.depart, 
+				s.salary_input_num, s.payments_division, 
+				s.salary_name, ss.salary, s.salary_inday, m.car
+		  FROM a_salary_input s 
+		  Join a_admin m
+		    ON s.payments_division = m.Payments_division
+		  JOIN a_salaryset ss
+		    on ss.Rank = m.rank
+		 where s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select * from a_variableCost where cost = #{cost}
+	</select>
+	
 </mapper>

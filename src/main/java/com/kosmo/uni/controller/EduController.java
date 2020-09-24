@@ -26,7 +26,7 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리d
+	// HomeController.java는 주석처리
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
@@ -56,118 +56,20 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	@RequestMapping("/guest/myPage")
-	public String gue_myPage() {
-		logger.info("url ==> myPage");
+	@RequestMapping("/guest/sample")
+	public String gue_sample() {
+		logger.info("url ==> sample");
 		
-		return "guest/myPage";
+		return "guest/sample";
 	}
 	
-	@RequestMapping("/guest/myPage_modify")
-	public String gue_myPage_modify(HttpServletRequest req, Model model) {
-		logger.info("url ==> myPage_modify");
+	@RequestMapping("/guest/sample2")
+	public String gue_sample2() {
+		logger.info("url ==> sample2");
 		
-		eduService.studentinfo(req, model);
-		return "guest/myPage_modify";
+		return "guest/sample2";
 	}
 	
-	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
-		logger.info("url ==> myPage_modifyPro");
-		eduService.studentModifyPro(req, model);
-		return "guest/myPage_modifyPro";
-	}
-	
-	@RequestMapping("/guest/course_register")
-	public String gue_course_register() {
-		logger.info("url ==> course_register");
-		
-		return "guest/course_register";
-	}
-	
-	@RequestMapping("/guest/course_timeTable")
-	public String gue_course_timeTable(HttpServletRequest req, Model model) {
-		logger.info("url ==> course_timeTable");
-		
-		eduService.studentList(req, model);
-		return "guest/course_timeTable";
-	}
-	
-	@RequestMapping("/guest/course")
-	public String gue_course(HttpServletRequest req, Model model) {
-		logger.info("url ==> course");
-		
-		eduService.courseList(req, model);
-		return "guest/course";
-	}
-	@RequestMapping("/guest/course_syllabus")
-	public String gue_course_syllabus(HttpServletRequest req, Model model) {
-		logger.info("url ==> course_syllabus");
-		
-		eduService.course_syllabus(req, model);
-		return "guest/course_syllabus";
-	}
-	
-	@RequestMapping("/guest/score")
-	public String gue_score(HttpServletRequest req, Model model) {
-		logger.info("url ==> score");
-		eduService.studentinfo(req, model);
-		return "guest/score";
-	}
-	@RequestMapping("/guest/scoreInfo")
-	public String gue_scoreInfo(HttpServletRequest req, Model model) {
-		logger.info("url ==> scoreInfo");
-		eduService.studentGradeList(req, model);
-		return "guest/scoreInfo";
-	}
-	@RequestMapping("/guest/employment")
-	public String gue_employment() {
-		logger.info("url ==> employment");
-		
-		return "guest/employment";
-	}
-	
-	@RequestMapping("/guest/employmentnext")
-	public String gue_employmentnext() {
-		logger.info("url ==> employmentnext");
-		
-		return "guest/employmentnext";
-	}
-	
-	@RequestMapping("/guest/employmentnext2")
-	public String gue_employmentnext2() {
-		logger.info("url ==> employmentnext2");
-		
-		return "guest/employmentnext2";
-	}
-	
-	@RequestMapping("/guest/contest")
-	public String gue_contest() {
-		logger.info("url ==> contest");
-		
-		return "guest/contest";
-	}
-	
-	@RequestMapping("/guest/contestnext")
-	public String gue_contestnext() {
-		logger.info("url ==> contestnext");
-		
-		return "guest/contestnext";
-	}
-	
-	@RequestMapping("/guest/contestnext2")
-	public String gue_contestnext2() {
-		logger.info("url ==> contestnext2");
-		
-		return "guest/contestnext2";
-	}
-	
-	@RequestMapping("/guest/message")
-	public String gue_message() {
-		logger.info("url ==> message");
-		
-		return "guest/message";
-	}
 	
 	@RequestMapping("/guest/testSignIn")
 	public String testSignIn() {
@@ -181,9 +83,11 @@ public class EduController {
 		return "guest/main";
 	}
 	
-	@RequestMapping("/guest/deniedTest")
+	@RequestMapping("/guest/denied")
 	public String denied() {
-		return "guest/deniedTest";
+		logger.info("url ==> denied");
+		
+		return "guest/denied";
 	}
 	
 	@RequestMapping("/guest/ttttt")

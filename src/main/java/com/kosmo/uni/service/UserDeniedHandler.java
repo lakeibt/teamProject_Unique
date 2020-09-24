@@ -20,7 +20,7 @@ public class UserDeniedHandler implements AccessDeniedHandler {
 
 		request.setAttribute("errMsg", "관리자만 접근할 수 있는 페이지입니다.");
 		System.out.println("거부");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/guest/deniedTest");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/guest/denied");
 		dispatcher.forward(request, response);
 	}
 
