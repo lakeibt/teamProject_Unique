@@ -43,35 +43,5 @@
 
 .table input{
 	width: 100%;
-}
-
-.btn_message_close{
-	border: none;
-	background-color: white;
-	color: gray;
-	float: right;
-	font-size: 20px;
-	margin-bottom: 20px;
-}
-
-.message_select{
-	color: gray;
-	float: right;
-	font-size: 12px;
-	margin-bottom: 20px;
-	width: 100px;
-	height: 30px;
-}
-
-#message_sendform_btn{
-	margin-top: 30px;
-}
-
-
-#message_form_tbody{
-	vertical-align: middle;	
-}
-
-##message_form_tbody input{
-
+	
 }

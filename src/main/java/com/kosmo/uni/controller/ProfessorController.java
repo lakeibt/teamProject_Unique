@@ -123,7 +123,12 @@ public class ProfessorController {
 	}	
 	
 	
-	
+	@RequestMapping("/professor/sample")
+	public String sample(HttpServletRequest req, Model model) {
+		logger.info("url ==> sample");
+		
+		return "professor/sample";
+	}
 	
 	
 	

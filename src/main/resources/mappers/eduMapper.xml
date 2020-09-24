@@ -10,32 +10,22 @@
 			VALUES(#{userid}, #{passwd}, #{username}, 1, #{authority})
 	</insert>
 	
-	<select id = "selectUser" resultType = "java.util.Map">
-		SELECT userid, password, username, enabled, authority
-		  FROM users
-		 WHERE userid = #{userid}
-	</select>
 	<select id = "selectSUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
-		  FROM STUDENT
+		  FROM S_STUDENT
 		 WHERE ID = #{userid}
 	</select>
 	<select id = "selectPUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
-		  FROM PROFESSOR
+		  FROM P_PROFESSOR
 		 WHERE ID = #{userid}
 	</select>
 	<select id = "selectAUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
-		  FROM MANAGER
+		  FROM A_ADMIN
 		 WHERE ID = #{userid}
 	</select>
 	
-	<select id = "test" parameterType = "String" resultType = "com.kosmo.uni.vo.TestVO">
-		SELECT userid, username, password, enabled, authority
-		  FROM users
-		 WHERE userid = #{userid}
-	</select>
 	<select id="studentIdCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM student WHERE id=#{ id }
 	</select>

@@ -7,29 +7,29 @@
 <mapper namespace = "com.kosmo.uni.persistence.ProfessorDAO">
 	
 	<select id="getMessageCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) as cnt FROM message where receiver_id = #{id}
+		SELECT COUNT(*) as cnt FROM p_message where receiver_id = #{id}
 	</select>
 	
 	<select id="getMessageCnt_send" parameterType="String" resultType="int">
-		SELECT COUNT(*) as cnt FROM message where sender_id = #{id}
+		SELECT COUNT(*) as cnt FROM p_message where sender_id = #{id}
 	</select>
 	
 	<select id="getMessageList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
 	<![CDATA[
 		SELECT * FROM (SELECT num, title, content, m_code, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
-		  FROM (SELECT * FROM message where receiver_id = #{id})) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT * FROM p_message where receiver_id = #{id})) WHERE rNum >= #{start} AND rNum <= #{end}
 	]]>
 	</select>	
 	
 	<select id="getMessageList_send" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
 	<![CDATA[
 		SELECT * FROM (SELECT num, title, content, m_code, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
-		  FROM (SELECT * FROM message where sender_id = #{id})) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT * FROM p_message where sender_id = #{id})) WHERE rNum >= #{start} AND rNum <= #{end}
 	]]>
 	</select>
 	
 	<select id="getMessage" parameterType="int" resultType="com.kosmo.uni.vo.MessageVO">
-		SELECT * FROM message WHERE num = #{num}
+		SELECT * FROM p_message WHERE num = #{num}
 	</select>
 
 </mapper>

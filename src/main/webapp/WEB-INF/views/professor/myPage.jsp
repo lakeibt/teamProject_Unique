@@ -1,116 +1,127 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file = "../include/setting.jsp" %>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Contact - Moderna Bootstrap Template</title>
-	<%@ include file = "../bootstrap/professor_bootstrap.jsp" %>
+  <title>
+    [유일대]
+  </title>
+  <%@ include file = "../bootstrap/guest_bootstrap2.jsp" %>
 </head>
 
-<body>
+<body class="dark-edition">
+  <div class="wrapper ">
+	<%@ include file = "../include/professor_sidebar.jsp" %>
 
-  <%@ include file = "../include/professor_header.jsp" %>
 
-  <main id="main">
-
-    <!-- ======= Contact Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
-			<div class="d-flex justify-content-between align-items-center">
-				<h2>내 정보</h2>
-				<ol>
-				  	<li><a href="${professor}main">홈</a></li>
-				    <li>내 정보</li>
-			    </ol>
-			</div>
-		</div>
-    </section><!-- End Contact Section -->
-    <!-- ======= Contact Section ======= -->
-    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
-					<div class="container">
-					<div class="contact">
-						<div class="row">
-							<div class="col-lg-12 d-flex flex-column justify-content-center-center">
-								<div class="icon-box">
-									<div class="icon-box">
-									<form class="php-email-form">
-										<table class="table" style="font-size:12px;">
-											<thead>
-												<tr>
-													<th colspan="9">김건설님의 정보</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<th>사진</th>
-													<td><img src="${stu_photo}myPage_sample.jpg" class="img-fluid" style="width:150px"></td>
-												</tr>
-												<tr>
-													<th>이름</th>
-													<td><input class="form-control" type="text" value="김건축" readOnly></td>
-													<th>영문이름</th>
-													<td><input class="form-control" type="text" value="build kim" readOnly></td>
-													<td colspan="5"></td>
-												</tr>
-												<tr>
-													<th>교번</th>
-													<td><input class="form-control" type="text" value="E20208090" readOnly></td>
-													<th>학과</th>
-													<td><input class="form-control" type="text" value="무슨무슨과" readOnly></td>
-													<th>전공</th>
-													<td><input class="form-control" type="text" value="무슨무슨공학" readOnly></td>
-													<td colspan="3"></td>
-												</tr>
-												<tr>
-													<th>직책</th>
-													<td><input class="form-control" type="text" value="교수" readOnly></td>
-													<th>생년월일</th>
-													<td><input class="form-control" type="text" value="001225" readOnly></td>
-													<th>입학년도</th>
-													<td><input class="form-control" type="text" value="2020.3" readOnly></td>
-													<td colspan="3"></td>
-												</tr>
-												<tr>
-													<th>휴대폰번호</th>
-													<td><input class="form-control" type="text" value="010-1234-5678"></td>
-													<th>이메일</th>
-													<td><input class="form-control" type="text" value="khs@naver.com"></td>
-													<td colspan="5"></td>
-												</tr>
-												<tr>
-													<th>집주소</th>
-													<td colspan="3"><input class="form-control" type="text" value="서울 어쩌구 저쩌구 1-234"></td>
-													<td colspan="5"></td>
-												</tr>
-											</tbody>
-										</table>
-										
-											<div class="text-center">
-												<button class="php-email-form" type="submit">
-													<font style="vertical-align:inherit;">
-														<font style="vertical-align:inherit;">정보수정</font>
-													</font>
-												</button>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					</div>      
-      	
-    </section><!-- End Contact Section -->
-
-    <!-- ======= Map Section ======= -->
-  </main><!-- End #main -->
-
-  <%@ include file = "../include/professor_footer.jsp" %>
-
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-<%@ include file = "../bootstrap/professor_bootstrap_js.jsp" %>
+    <div class="main-panel">
+      
+      <%@ include file = "../include/professor_header.jsp" %>
+      
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">김건설님의 정보</h4>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="row" style="margin:20px 0;">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <p>교번</p>                        	
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-4">
+                        <div class="form-group">
+                        <p>이름</p>
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-4">
+                        <div class="form-group">
+                        <p>영문이름</p>
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row" style="margin:20px 0;" style="height: 45px; margin-top: 0px;">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                        <p>학과</p>
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                        <p>전공</p>
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                        <p>직책</p>
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      </div>
+                      <div class="row" style="margin:20px 0;" >
+	                      <div class="col-md-6">
+	                        <div class="form-group">
+	                          <p>생년월일</p>
+	                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+	                        </div>
+	                      </div>
+	                       <div class="col-md-6">
+	                        <div class="form-group">
+	                          <p>이메일</p>
+	                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+	                        </div>
+	                      </div>
+                      </div>
+                      <div class="row" style="margin:20px 0;">
+                       <div class="col-md-12">
+                        <div class="form-group">
+                          <p>집주소</p>
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;">
+                        </div>
+                      </div>
+                      </div>
+                   
+                    <button type="submit" class="btn btn-primary pull-right">정보 수정</button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card card-profile">
+                <div class="card-avatar">
+                  <a href="#pablo">
+                    <img class="img" src="${assets}img/faces/marc.jpg" />
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h6 class="card-category">교수 / 컴퓨터공학과</h6>
+                  <h4 class="card-title">김컴퓨</h4>
+                  <a href="#pablo" class="btn btn-primary btn-round">사진수정</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+ <%@ include file = "../bootstrap/guest_bootstrap_js2.jsp" %>
 </body>
 
 </html>
