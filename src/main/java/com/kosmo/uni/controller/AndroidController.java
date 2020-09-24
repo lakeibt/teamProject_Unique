@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.AndDAO;
-import com.kosmo.uni.vo.Member;
+import com.kosmo.uni.vo.Manager;
+import com.kosmo.uni.vo.StudentVO;
 
 @Controller
 public class AndroidController {
@@ -30,37 +31,55 @@ public class AndroidController {
 		public Map<String, String> androidSignIn(HttpServletRequest req){
 			log.info("androidSignIn()");
 			
+			
 			// 안드로이드에서 전달할 값
 			String id = req.getParameter("id");
 			String pwd = req.getParameter("pwd");
+			
+			Map<String, String> out = new HashMap<String, String>();
 			
 			System.out.println(id);
 			System.out.println(pwd);
 			
 			// 로그인
-			HashMap<String, String> map = andDao.confirmIdPwd(id);
-			System.out.println("--------------");
-			System.out.println(map.get("USERID"));
-			System.out.println(map.get("USERNAME"));
-			System.out.println(map.get("PASSWORD"));
-			System.out.println(map.get("ENABLED"));
-			System.out.println(map.get("AUTHORITY"));
-			
-			// 웹에서 안드로이드로 전달할 값
-			Map<String, String> out = new HashMap<String, String>();
-			if(checkPass(pwd, map.get("PASSWORD"))) {
-				log.info("로그인 성공 : " + map.get("USERID"));
-				out.put("member_id", id);
-				out.put("username", map.get("USERNAME"));
-				out.put("authority", map.get("AUTHORITY"));
-				out.put("password", map.get("PASSWORD"));
-				System.out.println("id : " + map.get("USERID"));
-				System.out.println("pwd : " +  map.get("PASSWORD"));
-				System.out.println("name : " +  map.get("USERNAME"));
-				System.out.println("authority : " + map.get("AUTHORITY"));
-			} else {
-				log.info("로그인 실패");
-				out.put("member_id", null);
+			if(id.substring(0,1).equals("s")) {
+				HashMap<String, String> map = andDao.confirmIdPwdStu(id);
+				System.out.println("--------------");
+				System.out.println(map.get("ID"));
+				System.out.println(map.get("NAME"));
+				System.out.println(map.get("PWD"));
+				// 웹에서 안드로이드로 전달할 값
+				if(checkPass(pwd, map.get("PWD"))) {
+					log.info("로그인 성공 : " + map.get("ID"));
+					out.put("id", id);
+					out.put("name", map.get("NAME"));
+					out.put("pwd", map.get("PWD"));
+					System.out.println("id : " + map.get("ID"));
+					System.out.println("pwd : " +  map.get("PWD"));
+					System.out.println("name : " +  map.get("NAME"));
+				} else {
+					log.info("로그인 실패");
+					out.put("id", null);
+				}
+			} else if(id.substring(0,1).equals("a")) {
+				HashMap<String, String> map = andDao.confirmIdPwdAdm(id);
+				System.out.println("--------------");
+				System.out.println(map.get("ID"));
+				System.out.println(map.get("NAME"));
+				System.out.println(map.get("PWD"));
+				// 웹에서 안드로이드로 전달할 값
+				if(checkPass(pwd, map.get("PWD"))) {
+					log.info("로그인 성공 : " + map.get("ID"));
+					out.put("id", id);
+					out.put("name", map.get("NAME"));
+					out.put("pwd", map.get("PWD"));
+					System.out.println("id : " + map.get("ID"));
+					System.out.println("pwd : " +  map.get("PWD"));
+					System.out.println("name : " +  map.get("NAME"));
+				} else {
+					log.info("로그인 실패");
+					out.put("id", null);
+				}
 			}
 			
 			return out;
@@ -72,26 +91,35 @@ public class AndroidController {
 	@RequestMapping("/android/androidMyPageMain")
 	public Map<String, Object> androidMyPageMain(HttpServletRequest req) {
 		log.info("androidMyPageMain()");
-	
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// 안드로이드에서 전달한 id값
 		String id = req.getParameter("id");
 		
 		System.out.println("id : " + id);
+		System.out.println("서브스트링 값 : "+ id.substring(0,1));
 		
 		// 회원정보 조회
-		Member m = andDao.getMemberInfo(id);
+		if(id.substring(0,1).equals("s")) {
+			StudentVO s = andDao.getStudentInfo(id);
+			System.out.println("s : " + s);
+			
+			map.put("data1", s.getId());
+			map.put("data2", s.getName());
+			System.out.println("m.id : " + s.getId());
+			System.out.println("m.name : " + s.getName());
+			
+		} else if(id.substring(0,1).equals("a")) {
+			Manager m = andDao.getAdminInfo(id);
+			System.out.println("m : " + m);
+			
+			map.put("data1", m.getId());
+			map.put("data2", m.getName());
+			System.out.println("m.id : " + m.getId());
+			System.out.println("m.name : " + m.getName());
+			
+		} 
 		
-		System.out.println("m : " + m);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("data1", m.getId());
-		map.put("data2", m.getName());
-		map.put("data3", m.getAuthority());
-		System.out.println("m.id : " + m.getId());
-		System.out.println("m.name : " + m.getName());
-		System.out.println("m.authority : " + m.getAuthority());
-	
 		return map;
 	}
 	
