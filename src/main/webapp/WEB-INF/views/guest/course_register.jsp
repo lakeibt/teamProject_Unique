@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file = "../include/setting.jsp" %>
+<%@ include file = "../include/guest_setting.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -7,9 +7,11 @@
 	<meta charset="utf-8"/>
 	<title>Contact - Moderna Bootstrap Template</title>
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
-	
 </head>
 <body>
+
+
+	
 	<%@ include file="../include/header.jsp"%>
 	<main id="main">
 		<!-- ======= Contact Section ======= -->

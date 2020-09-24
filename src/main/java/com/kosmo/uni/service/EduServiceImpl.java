@@ -54,16 +54,14 @@ public class EduServiceImpl implements EduService {
 	public void studentinfo(HttpServletRequest req, Model model) {
 		String id = (String) req.getSession().getAttribute("memId");
 		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
-		int check = eduDAO.studentIdCheck(id);
+		System.out.println("memid : " + id);
 		//
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("strId", id);
+		map.put("id", id);
 		int selectCnt = 0;
 		StudentVO vo = null;
-		if (check == 1) {
 			vo = eduDAO.getStudentInfo(id);
 			selectCnt = 1;
-		}
 		model.addAttribute("vo", vo);
 		model.addAttribute("selectCnt", selectCnt);
 	}
