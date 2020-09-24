@@ -24,13 +24,47 @@
 		s.salary_month,
 		m.name,
 		m.depart
-		FROM salary s join manager m
+		FROM a_salary s join a_admin m
 		ON s.id = m.id
 	</select>
 	
 	<insert id="salary_input" parameterType="java.util.Map">
-		INSERT INTO salary_input
+		INSERT INTO a_salary_input
 		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
 	</insert>
+	
+	<select id="getSalaryCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM a_salary_input
+	</select>
+	
+	<select id="getSalaryList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryInputVO">
+		<![CDATA[
+		SELECT * 
+			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
+	        , salary_inday, payments_month, salary_name, rowNUM rNum 
+			FROM ( SELECT * FROM a_salary_input ORDER BY salary_input_num ASC)) 
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
 
+	<select id="getAdminCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM a_admin
+	</select>
+	
+	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
+		SELECT m.id, m.name, m.rank, m.depart, 
+				s.salary_input_num, s.payments_division, 
+				s.salary_name, ss.salary, s.salary_inday, m.car
+		  FROM a_salary_input s 
+		  Join a_admin m
+		    ON s.payments_division = m.Payments_division
+		  JOIN a_salaryset ss
+		    on ss.Rank = m.rank
+		 where s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select * from a_variableCost where cost = #{cost}
+	</select>
+	
 </mapper>

@@ -143,11 +143,19 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/pay/payroll")
 	public String thisM_list(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/thisM_list");
-		
-		
-		
+		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
-	}	
+	}
+	
+	// 급여대장 - 전체 계산 
+	@RequestMapping(value = "/admin/human_resources/pay/salaryTotalinput")
+	public String salaryTotalinput(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salaryTotalinput");
+		
+		adminService.salaryInput(req, model);
+		adminService.salaryList(req, model);
+		return "admin/human_resources/pay/salary_list";
+	}
 	// 급여대장 - 급여명세서
 	@RequestMapping(value = "/admin/human_resources/pay/payslip")
 	public String salary_payslip(HttpServletRequest req, Model model) {
@@ -161,7 +169,7 @@ public class AdminController {
 		logger.info("human_resources/pay/salary_info");
 		
 		return "admin/human_resources/pay/salary_info";
-	}		
+	}
 	// 월별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_month")
 	public String salary_list_month(HttpServletRequest req, Model model) {

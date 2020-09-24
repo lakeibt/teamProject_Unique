@@ -12,7 +12,8 @@ import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
-import com.kosmo.uni.vo.SalaryInputVo;
+import com.kosmo.uni.vo.SalaryInputVO;
+import com.kosmo.uni.vo.SalaryVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -69,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
 		// 3단계. 화면으로부터 입력받은 값을 받아온다.
 
 		// 페이징 처리 (최신글 부터 5건씩 출력)
-		int pageSize = 10; // 한페이지당 출력할 글 갯수
+		int pageSize = 2; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한블럭당 페이지 갯수
 
 		int cnt = 0; // 글갯수
@@ -86,7 +87,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		
 		// 5-1단계. 글 갯수 구하기
-		// cnt = dao.getMemeberCnt();
+		cnt = dao.getSalaryCnt();
 		System.out.println("cnt : " + cnt);
 
 		pageNum = req.getParameter("pageNum");
@@ -124,8 +125,9 @@ public class AdminServiceImpl implements AdminService {
 			map.put("start", start);
 			map.put("end", end);
 			System.out.println("map : " + map);
-			// List<MemberVO> mtos = dao.getArticleList(map);
-			// model.addAttribute("mtos", mtos);
+			List<SalaryInputVO> mtos = dao.getSalaryList(map);
+			System.out.println("mtos : " + mtos);
+			model.addAttribute("mtos", mtos);
 		}
 		// 6단계. request나 session에 처리결과를 저장 (jsp에 전달)
 		// 시작 페이지
@@ -140,6 +142,9 @@ public class AdminServiceImpl implements AdminService {
 		if (endPage > pageCount)
 			endPage = pageCount;
 
+		int adminCnt = dao.getAdminCnt();
+		model.addAttribute("adminCnt", adminCnt); // 직원수 
+		
 		System.out.println("endPage : " + endPage);
 		System.out.println("====================");
 
@@ -154,8 +159,40 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("pageCount", pageCount); // 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
+	}
+	
+	@Override
+	public void salaryInput(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		System.out.println("salary_input_num : " + salary_input_num);
 		
-		
+		Map <String, Object> map = new HashMap<>();
+		map.put("salary_input_num", salary_input_num);
+
+		List<SalaryVO> stos = dao.getSelectList(map);
+		System.out.println("stos.size() : " +stos.size());
+
+		for(int i = 0; i < stos.size(); i++) {
+			SalaryVO sal = stos.get(i);
+			int car = 1;
+			if(sal.getCar() == car) {
+				int cost = sal.getCar();
+				SalaryVO vo = dao.getSelectCar(cost);
+				sal.setCost(vo.getCost());
+				sal.setMeal(vo.getMeal());
+				sal.setContract_vehicle(vo.getContract_vehicle());
+				System.out.println("cost : " +sal);
+			} else {
+				int cost0 = sal.getCar();
+				SalaryVO vo = dao.getSelectCar(cost0);
+				sal.setCost(vo.getCost());
+				sal.setMeal(vo.getMeal());
+				sal.setContract_vehicle(vo.getContract_vehicle());
+				System.out.println("cost0 : " +sal);
+			}
+		}
+		System.out.println("stos : " + stos);
+		model.addAttribute("stos", stos);
 	}
 
 }

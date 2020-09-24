@@ -14,4 +14,7 @@ public interface AdminService {
 	
 	//급여대장 리스트 출력
 	public void salaryList(HttpServletRequest req, Model model);
+	
+	//급여장 전체 계산 
+	public void salaryInput(HttpServletRequest req, Model model);
 }
