@@ -15,6 +15,7 @@ import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.SalaryInputVO;
+import com.kosmo.uni.vo.SalaryVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -755,17 +756,35 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void salaryInput(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
-		int payments_division = Integer.parseInt(req.getParameter("payments_division"));
 		System.out.println("salary_input_num : " + salary_input_num);
-		System.out.println("payments_division : " + payments_division);
 		
 		Map <String, Object> map = new HashMap<>();
 		map.put("salary_input_num", salary_input_num);
-		map.put("payments_division", payments_division);
-		
-		//dao.getSelectList(map);
-		//List<SalaryInputVO> mtos = dao.getSalaryList(map);
-		
+
+		List<SalaryVO> stos = dao.getSelectList(map);
+		System.out.println("stos.size() : " +stos.size());
+
+		for(int i = 0; i < stos.size(); i++) {
+			SalaryVO sal = stos.get(i);
+			int car = 1;
+			if(sal.getCar() == car) {
+				int cost = sal.getCar();
+				SalaryVO vo = dao.getSelectCar(cost);
+				sal.setCost(vo.getCost());
+				sal.setMeal(vo.getMeal());
+				sal.setContract_vehicle(vo.getContract_vehicle());
+				System.out.println("cost : " +sal);
+			} else {
+				int cost0 = sal.getCar();
+				SalaryVO vo = dao.getSelectCar(cost0);
+				sal.setCost(vo.getCost());
+				sal.setMeal(vo.getMeal());
+				sal.setContract_vehicle(vo.getContract_vehicle());
+				System.out.println("cost0 : " +sal);
+			}
+		}
+		System.out.println("stos : " + stos);
+		model.addAttribute("stos", stos);
 	}
 
 	@Override

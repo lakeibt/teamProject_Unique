@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.SalaryVO;
 
 public interface AdminDAO {
 
@@ -29,6 +30,11 @@ public interface AdminDAO {
 	public int getSalaryCnt();
 
 	public List<SalaryInputVO> getSalaryList(Map<String, Object> map);
+	//연봉 계산
+	public List<SalaryVO> getSelectList(Map<String, Object> map);
+	//차량 소유 검색 후 식대, 차량유지비 검색
+	
+	public SalaryVO getSelectCar(int cost);
 	
 	public List<AdminVO> getSalary_list_human_Search(Map<String, Object> map);
 	

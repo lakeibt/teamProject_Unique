@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.SalaryVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -122,9 +123,27 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
+	public List<SalaryVO> getSelectList(Map<String, Object> map) {
+		List<SalaryVO> stos = null;
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		stos = dao.getSelectList(map);
+		System.out.println("getSalaryList : " + stos);
+		return stos;
+	}
+
+	@Override
+	public SalaryVO getSelectCar(int cost) {
+		SalaryVO vo = null;
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		vo = dao.getSelectCar(cost);
+		System.out.println("getSelectCar : " + vo);
+		return vo;
+	}
+
+	@Override
 	public List<AdminVO> getSalary_list_month(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
-
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		dtos = dao.getSalary_list_human(map);
 		System.out.println("dao_dtos" + dtos);
