@@ -5,11 +5,6 @@
    	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    	  
 <mapper namespace = "com.kosmo.uni.persistence.EduDAO">
-	<insert id = "insertUser" parameterType = "java.util.Map">
-		INSERT INTO users(userid, password, username, enabled, authority)
-			VALUES(#{userid}, #{passwd}, #{username}, 1, #{authority})
-	</insert>
-	
 	<select id = "selectUser" resultType = "java.util.Map">
 		SELECT userid, password, username, enabled, authority
 		  FROM users
@@ -17,17 +12,17 @@
 	</select>
 	<select id = "selectSUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
-		  FROM STUDENT
+		  FROM S_STUDENT
 		 WHERE ID = #{userid}
 	</select>
 	<select id = "selectPUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
-		  FROM PROFESSOR
+		  FROM P_PROFESSOR
 		 WHERE ID = #{userid}
 	</select>
 	<select id = "selectAUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
-		  FROM MANAGER
+		  FROM A_ADMIN
 		 WHERE ID = #{userid}
 	</select>
 	

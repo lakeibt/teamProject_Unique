@@ -46,7 +46,7 @@ public class EduController {
 	public String gue_logout(HttpSession session, HttpServletRequest req) {
 		session.invalidate();
 		
-		return "guest/main";
+		return "guest/login";
 	}
 	
 	@RequestMapping("/guest/main")

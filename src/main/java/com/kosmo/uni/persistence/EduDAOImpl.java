@@ -29,8 +29,20 @@ public class EduDAOImpl implements EduDAO {
 	}
 
 	@Override
-	public Map<String, Object> selectUser(String id) {
-		Map<String, Object> map = sqlSession.selectOne(EduDAO + "selectUser", id);
+	public Map<String, Object> selectSUser(String id) {
+		Map<String, Object> map = sqlSession.selectOne(EduDAO + "selectSUser", id);
+		return map;
+	}
+	
+	@Override
+	public Map<String, Object> selectPUser(String id) {
+		Map<String, Object> map = sqlSession.selectOne(EduDAO + "selectPUser", id);
+		return map;
+	}
+	
+	@Override
+	public Map<String, Object> selectAUser(String id) {
+		Map<String, Object> map = sqlSession.selectOne(EduDAO + "selectAUser", id);
 		return map;
 	}
 }
