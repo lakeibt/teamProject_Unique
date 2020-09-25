@@ -8,17 +8,34 @@
 
 	<select id="getAttendance_Cnt" resultType="int">
 		SELECT COUNT(*) as cnt
-		FROM ATTENDANCE
+		FROM A_NFC
 	</select>
 
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT * FROM ATTENDANCE ORDER BY num desc
+		<![CDATA[
+		SELECT num, id, tagintime, tagouttime,pnum ,rNum 
+		FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
+    	FROM ( 
+        SELECT *FROM A_NFC n
+        JOIN A_ADMIN a
+        on n.pnum = a.tel))
+		WHERE rNum >=#{start} AND rNum <=#{end}
+    	]]>
+	</select>
+	
+	<select id="getAttendance_List_Search"
+		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
+		<![CDATA[
+		SELECT * FROM A_NFC
+		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
+		]]>
 	</select>
 
 	<select id="getSalary_list_human" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT s.salary_inday,
+		SELECT 
+		s.salary_inday,
 		s.sal_num,
 		s.id,
 		s.salary_month,

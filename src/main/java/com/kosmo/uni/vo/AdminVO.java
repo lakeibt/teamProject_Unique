@@ -6,16 +6,14 @@ public class AdminVO {
 
 	private int num;			//시퀀스
 	private String id;			//사원번호
-	private Timestamp inDay;	//출근일
-	private Timestamp inTime;	//출근시간
-	private Timestamp outTime;	//퇴근시간
-	private int inState;		//출근 or 지각
-	private int outState;		//퇴근
+	private String pnum;			//휴대폰번호
+	private String tagintime;	//출근시간
+	private String tagouttime;	//퇴근시간
 	
 	private Timestamp salary_InDay;	//지급일
 	private int sal_Num;			//급여코드 - 정규 비정규 
 	private String name;			//이름
-	private String depart_name;			//부서
+	private String depart_name;		//부서
 	private int sal_total;			//총급여
 	private int sal;				//월급
 	private int over;				//야근수당
@@ -36,36 +34,25 @@ public class AdminVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Timestamp getInDay() {
-		return inDay;
+	public String getPnum() {
+		return pnum;
 	}
-	public void setInDay(Timestamp inDay) {
-		this.inDay = inDay;
+	public void setPnum(String pnum) {
+		this.pnum = pnum;
 	}
-	public Timestamp getInTime() {
-		return inTime;
+	public String getTagintime() {
+		return tagintime;
 	}
-	public void setInTime(Timestamp inTime) {
-		this.inTime = inTime;
+	public void setTagintime(String tagintime) {
+		this.tagintime = tagintime;
 	}
-	public Timestamp getOutTime() {
-		return outTime;
+	public String getTagouttime() {
+		return tagouttime;
 	}
-	public void setOutTime(Timestamp outTime) {
-		this.outTime = outTime;
+	public void setTagouttime(String tagouttime) {
+		this.tagouttime = tagouttime;
 	}
-	public int getInState() {
-		return inState;
-	}
-	public void setInState(int inState) {
-		this.inState = inState;
-	}
-	public int getOutState() {
-		return outState;
-	}
-	public void setOutState(int outState) {
-		this.outState = outState;
-	}
+	
 	
 	public Timestamp getSalary_InDay() {
 		return salary_InDay;
