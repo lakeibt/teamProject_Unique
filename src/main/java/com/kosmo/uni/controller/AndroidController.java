@@ -150,7 +150,7 @@ public class AndroidController {
 		System.out.println("phonenum : " +phonenum);
 		System.out.println("tagid : " +tagid);
 		
-		HashMap<String, String> going = new HashMap<String, String>();
+		Map<String, String> going = new HashMap<String, String>();
 		going.put("phonenum", phonenum);
 		going.put("today", today);
 		
@@ -162,7 +162,7 @@ public class AndroidController {
 			//04F459A2816B80 <== 출근 스티커 아이디값
 			if(phonenum != null && tagid.equals("04F459A2816B80") ) {
 				
-				HashMap<String, String> going2 = new HashMap<String, String>();
+				Map<String, String> going2 = new HashMap<String, String>();
 				going2.put("phonenum", phonenum);
 				going2.put("today", today);
 				//전화번호 서버로 보내기

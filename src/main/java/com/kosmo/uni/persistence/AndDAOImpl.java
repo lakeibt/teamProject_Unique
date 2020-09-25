@@ -47,7 +47,7 @@ public class AndDAOImpl implements AndDAO{
 	}
 	
 	@Override
-	public int whatNfc(HashMap<String, String> map) {
+	public int whatNfc(Map<String, String> map) {
 		AndDAO dao = sqlSession.getMapper(AndDAO.class);
 		return dao.whatNfc(map);
 	}
@@ -59,7 +59,7 @@ public class AndDAOImpl implements AndDAO{
 	}
 
 	@Override
-	public int byeNfc(HashMap<String, String> map) {
+	public int byeNfc(Map<String, String> map) {
 		AndDAO dao = sqlSession.getMapper(AndDAO.class);
 		return dao.byeNfc(map);
 	}

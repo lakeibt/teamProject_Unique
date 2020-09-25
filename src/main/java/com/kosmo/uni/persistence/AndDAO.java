@@ -20,11 +20,11 @@ public interface AndDAO {
 	public Manager getAdminInfo(String id);
 	
 	//nfc 오늘 날짜에 있는지 없는지 체크
-	public int whatNfc(HashMap<String, String> map);
+	public int whatNfc(Map<String, String> map);
 	
 	//nfc 처음 정보
 	public int hiNfc(String pnum);
 	
 	//nfc 퇴근 정보
-	public int byeNfc(HashMap<String, String> map);
+	public int byeNfc(Map<String, String> map);
 }
