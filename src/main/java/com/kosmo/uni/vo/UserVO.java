@@ -8,16 +8,18 @@ import org.springframework.security.core.userdetails.User;
 public class UserVO extends User{
 	private String Id;
 	private String Name;
+	private String Photo;
 	
 	// 두 생성자 중 첫번째 선택, 마지막 매개변수에 String userid 추가
 	// super는 부모 User 클래스
 	public UserVO(String id, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
-			Collection<? extends GrantedAuthority> authorities, String userid) {
+			Collection<? extends GrantedAuthority> authorities, String userid, String photo) {
 		super(id, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		
 		this.Id = id;
 		this.Name = userid;
+		this.Photo = photo;
 	}
 
 	// getter, setter, toString 추가
@@ -40,6 +42,14 @@ public class UserVO extends User{
 
 	public void setUserName(String userName) {
 		this.Name = userName;
+	}
+
+	public String getPhoto() {
+		return Photo;
+	}
+
+	public void setPhoto(String photo) {
+		Photo = photo;
 	}
 
 }

@@ -16,7 +16,7 @@
 		 WHERE ID = #{userid}
 	</select>
 	<select id = "selectAUser" resultType = "java.util.Map">
-		SELECT ID, PWD, NAME
+		SELECT ID, PWD, PHOTO, NAME
 		  FROM A_ADMIN
 		 WHERE ID = #{userid}
 	</select>
