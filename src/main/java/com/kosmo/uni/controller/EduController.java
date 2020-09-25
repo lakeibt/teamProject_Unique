@@ -79,9 +79,9 @@ public class EduController {
 	}
 	
 	@RequestMapping("/guest/course_register")
-	public String gue_course_register() {
+	public String gue_course_register(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_register");
-		
+		eduService.courseList(req, model);
 		return "guest/course_register";
 	}
 	
@@ -89,7 +89,7 @@ public class EduController {
 	public String gue_course_timeTable(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_timeTable");
 		
-		eduService.studentList(req, model);
+		eduService.studentTimeTable(req, model);
 		return "guest/course_timeTable";
 	}
 	
@@ -97,15 +97,24 @@ public class EduController {
 	public String gue_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
 		
-		eduService.courseList(req, model);
+		eduService.studentList(req, model);
 		return "guest/course";
 	}
+	
 	@RequestMapping("/guest/course_syllabus")
 	public String gue_course_syllabus(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_syllabus");
 		
 		eduService.course_syllabus(req, model);
 		return "guest/course_syllabus";
+	}
+
+	@RequestMapping("/guest/course_syllabus2")
+	public String gue_course_syllabus2(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_syllabus2");
+		
+		eduService.course_syllabus(req, model);
+		return "guest/course_syllabus2";
 	}
 	
 	@RequestMapping("/guest/score")

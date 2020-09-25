@@ -13229,7 +13229,7 @@ fieldset[disabled][disabled] .has-rose .form-control,
 
 .bmd-form-group:not(.has-success):not(.has-danger) [class^='bmd-label'].bmd-label-floating,
 .bmd-form-group:not(.has-success):not(.has-danger) [class*=' bmd-label'].bmd-label-floating {
-  color: #AAAAAA;
+  color: #000000;
 }
 
 .bmd-form-group [class^='bmd-label'],
@@ -13716,9 +13716,11 @@ fieldset[disabled] .form-group .form-control {
   margin-bottom: 20px;
   height: auto !important;
   color: #555;
-  background-color: #fff !important;
+  background-color: #1f283e;
+  opacity: .94;
   box-shadow: 0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15);
 }
+/* check */
 
 .navbar .dropdown-item:hover,
 .navbar .dropdown-item:focus {
@@ -13967,9 +13969,10 @@ fieldset[disabled] .form-group .form-control {
 }
 
 .navbar.navbar-transparent {
-  background-color: transparent !important;
+  background-color: #1f283e;
   box-shadow: none;
 }
+/* check */
 
 .navbar .notification {
   position: absolute;
@@ -14785,7 +14788,7 @@ h2.title {
 .dropdown-menu li>a {
   position: relative;
   width: auto;
-  display: flex;
+  /*display: flex;*/
   flex-flow: nowrap;
   align-items: center;
   color: #333;
@@ -17302,8 +17305,9 @@ label {
 .card.bg-primary,
 .card.card-rotate.bg-primary .front,
 .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  background: linear-gradient(60deg, #1f283e, #1f283e);
 }
+/* check */
 
 .card .card-header-info .card-icon,
 .card .card-header-info .card-text,
@@ -19552,7 +19556,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition {
-  background-color: #1a2035;
+  background-color: #f1f4f6;
 }
 
 .dark-edition .btn,
@@ -19683,8 +19687,8 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .btn.btn-primary {
   color: #fff;
-  background-color: #913f9e;
-  border-color: #913f9e;
+  background-color: #1f283e;
+  border-color: #1f283e;
   box-shadow: 0 2px 2px 0 rgba(145, 63, 158, 0.14), 0 3px 1px -2px rgba(145, 63, 158, 0.2), 0 1px 5px 0 rgba(145, 63, 158, 0.12);
 }
 
@@ -19698,7 +19702,7 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .btn.btn-primary.focus,
 .dark-edition .btn.btn-primary:hover {
   color: #fff;
-  background-color: #9b43a9;
+  background-color: #1f283e;
   border-color: #692e72;
 }
 
@@ -20537,8 +20541,9 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .card {
-  background: #202940;
+  background: white;
 }
+/* check */
 
 .dark-edition .card .card-header.card-header-text .card-title,
 .dark-edition .card .card-header.card-header-icon .card-title {
@@ -20550,20 +20555,20 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .card .card-body {
-  color: #8b92a9;
+  color: #000000;
 }
 
 .dark-edition .card .card-body .card-category+.card-title {
-  color: #fff;
+  color: #000000;
 }
 
 .dark-edition .card .card-body .card-category,
 .dark-edition .card .card-body .card-title {
-  color: #8b92a9;
+  color: #000000;
 }
 
 .dark-edition .card .card-body .card-description {
-  color: #606477;
+  color: #000000;
 }
 
 .dark-edition .card .card-body+.card-footer .stats,
@@ -20620,8 +20625,9 @@ Copyright (c) 2015 Daniel Eden
 .dark-edition .card.bg-primary,
 .dark-edition .card.card-rotate.bg-primary .front,
 .dark-edition .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #7b1fa2, #913f9e);
+  background: linear-gradient(60deg, #1f283e, #1f283e);
 }
+/* check */
 
 .dark-edition .primary-link {
   background-image: linear-gradient(60deg, #7b1fa2, #913f9e) !important;
@@ -20670,16 +20676,24 @@ Copyright (c) 2015 Daniel Eden
   border-top: 1px solid rgba(180, 180, 180, 0.1);
 }
 
+
 .dark-edition .table>thead>tr>th,
 .dark-edition .table>tbody>tr>th,
 .dark-edition .table>tfoot>tr>th,
 .dark-edition .table>thead>tr>td,
 .dark-edition .table>tbody>tr>td,
 .dark-edition .table>tfoot>tr>td {
-  color: #8b92a9;
-  border-color: rgba(180, 180, 180, 0.1);
+  color:black;
+  border-color:;
 }
+/* check */
 
+.dark-edition .table>thead>tr>th{
+	font-weight:bold;
+	border-top: ;
+	border-bottom: 1px solid black;
+}
+/* check */
 .dark-edition .table-hover tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.075);
 }
@@ -20711,7 +20725,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .form-check.form-check-radio .form-check-label .circle .check {
-  background-color: #fff;
+  background-color: #000000;
 }
 
 .dark-edition .nav-tabs .nav-item .nav-link {
@@ -20753,7 +20767,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .form-control {
-  color: #fff;
+  color: #000000;
 }
 
 .dark-edition .form-control::-moz-placeholder {
@@ -20770,7 +20784,7 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .bmd-form-group:not(.has-success):not(.has-danger) [class^='bmd-label'].bmd-label-floating,
 .dark-edition .bmd-form-group:not(.has-success):not(.has-danger) [class*=' bmd-label'].bmd-label-floating {
-  color: #a9afbbd1;
+  color: #000000;
 }
 
 .dark-edition .form-group label {
@@ -20779,7 +20793,7 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition [class^='bmd-label'],
 .dark-edition [class*=' bmd-label'] {
-  color: #999999;
+  color: #000000;
 }
 
 .dark-edition .form-control,
@@ -20931,11 +20945,11 @@ fieldset[disabled][disabled] .dark-edition .form-control,
 
 .dark-edition .is-focused [class^='bmd-label'],
 .dark-edition .is-focused [class*=' bmd-label'] {
-  color: #9c27b0;
+  color: #000000;
 }
 
 .dark-edition .is-focused .bmd-label-placeholder {
-  color: #999999;
+  color: #000000;
 }
 
 .dark-edition .is-focused .form-control {
@@ -21988,7 +22002,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 
 .dark-edition a {
-  color: #fff;
+  color: #000000;
 }
 
 .dark-edition.offline-doc .brand .description {

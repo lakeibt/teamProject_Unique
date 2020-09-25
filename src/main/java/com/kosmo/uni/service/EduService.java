@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 public interface EduService {
-
 	public void insertUser(HttpServletRequest req, Model model);
 	// 학생 정보 조회
 	public void studentinfo(HttpServletRequest req, Model model);
@@ -18,5 +17,7 @@ public interface EduService {
 	// 성적 조회
 	public void studentGradeList(HttpServletRequest req, Model model);
 	// 수강 시간표 
+	public void studentTimeTable(HttpServletRequest req, Model model);
+	// 학생 강의 목록
 	public void studentList(HttpServletRequest req, Model model);
 }
