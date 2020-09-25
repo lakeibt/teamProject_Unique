@@ -52,12 +52,10 @@
 									});
 						});
 	});
-
 	function startSelect() {
 		st = document.getElementById("startDate").value;
 		console.log(st);
 	}
-
 	function endSelect() {
 		et = document.getElementById("endDate").value;
 		console.log(et);
@@ -69,7 +67,6 @@
 .form-control {
 	font-size: 12px;
 }
-
 .btn {
 	width: 100px;
 	background-color: #68A4C4;
@@ -136,53 +133,41 @@
 												<th>출근시간</th>
 												<th>퇴근시간</th>
 												<th>근무 시간</th>
+												<th>특근</th>
 											</tr>
 										</thead>
 										<tbody id="attendance_Search1" style="color: grey;">
 											<c:if test="${cnt >= 0}">
 												<c:forEach var="dto" items="${dtos}">
 													<tr align="center">
-														<c:if test="${dto.inState == 1}">
+														<c:if test="${!empty dto.tagintime}">
 															<td>출근</td>
 														</c:if>
-														<c:if test="${dto.inState == 2}">
-															<td>지각</td>
-														</c:if>
-														<c:if test="${dto.outState == 1}">
+														<c:if test="${!empty dto.tagouttime}">
 															<td>퇴근</td>
 														</c:if>
-														<c:if test="${dto.outState != 1}">
+														<c:if test="${empty dto.tagouttime}">
 															<td>-</td>
 														</c:if>
 														<td>${dto.id}</td>
-														<td><fmt:formatDate value="${dto.inDay}"
-																pattern="yyyy-MM-dd" /></td>
-														<td><fmt:formatDate value="${dto.inTime}"
-																pattern="HH:mm" /></td>
-														<c:if test="${empty dto.outTime}">
-															<td>-</td>
-														</c:if>
-														<c:if test="${not empty dto.outTime}">
-															<td><fmt:formatDate value="${dto.outTime}"
-																	pattern="HH:mm" /></td>
-														</c:if>
-														<fmt:formatDate var="inTime_hour" value="${dto.inTime}"
+														<fmt:parseDate var="intime" value="${dto.tagintime}" pattern="yyyyMMddHHmm" />
+														<fmt:parseDate var="outtime" value="${dto.tagouttime}" pattern="yyyyMMddHHmm" />
+														<!-- 날짜 -->
+														<td><fmt:formatDate value="${intime}" pattern="yyyy-MM-dd" /></td> 
+														<!-- 출근시간 -->
+														<td><fmt:formatDate value="${intime}" pattern="HH:mm" /></td>
+														<!-- 퇴근시간 -->
+														<td><fmt:formatDate value="${outtime}" pattern="HH:mm" /></td>
+														<fmt:formatDate var="it" value="${intime}"
 															pattern="HH" />
-														<fmt:formatDate var="outTime_hour" value="${dto.outTime}"
+														<fmt:formatDate var="ot" value="${outtime}"
 															pattern="HH" />
-														<c:if test="${outTime_hour-inTime_hour > 0}">
-															<td>${outTime_hour-inTime_hour}</td>
+														<fmt:parseNumber var="i" type="number" value="${it}" />
+														<fmt:parseNumber var="o" type="number" value="${ot}" />
+														<c:if test="${o-i > 0}">
+															<td>${o-i} 시간</td>
 														</c:if>
-														<c:if test="${outTime_hour-inTime_hour < 0}">
-															<td>-</td>
-														</c:if>
-														<c:if test="${outTime_hour-inTime_hour<9}">
-															<td>-</td>
-														</c:if>
-														<c:if test="${outTime_hour-inTime_hour>=9}">
-															<td>${(outTime_hour-inTime_hour)-8}</td>
-														</c:if>
-														<fmt:formatDate var="dayOfTheWeek" value="${dto.inDay}"
+														<fmt:formatDate var="dayOfTheWeek" value="${intime}"
 															pattern="E" />
 														<c:if test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
 															<td>O</td>
@@ -210,11 +195,11 @@
 													<!-- 블록내의 페이지 번호 -->
 													<c:forEach var="i" begin="${startPage}" end="${endPage}">
 														<c:if test="${i == currentPage}">
-															<span><a href="attendance?pageNum=${i}"><input class="btn"
+															<span><a href="attendance?pageNum=${i}"><input
 																	type="button" value="${i}"></a></span>
 														</c:if>
 														<c:if test="${i != currentPage}">
-															<a href="attendance?pageNum=${i}"><input class="btn"
+															<a href="attendance?pageNum=${i}"><input
 																type="button" value="${i}"></a>
 														</c:if>
 													</c:forEach>

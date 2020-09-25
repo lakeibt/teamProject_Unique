@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
+import com.kosmo.uni.vo.nfcVO;
 
 
 @Repository
@@ -44,7 +45,24 @@ public class AndDAOImpl implements AndDAO{
 		Manager m = dao.getAdminInfo(id);
 		return m;
 	}
-
 	
+	@Override
+	public int whatNfc(HashMap<String, String> map) {
+		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		return dao.whatNfc(map);
+	}
+
+	@Override
+	public int hiNfc(String pnum) {
+		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		return dao.hiNfc(pnum);
+	}
+
+	@Override
+	public int byeNfc(HashMap<String, String> map) {
+		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		return dao.byeNfc(map);
+	}
+
 
 }
