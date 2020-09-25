@@ -94,4 +94,19 @@
 		le_code = #{le_code}, p_name = #{p_name}, school_year = #{school_year} WHERE co_code = #{co_code}
 	</update>
 	
+	<select id="getParkingCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM A_PARKING
+	</select>
+	
+	<select id="getParkingList" resultType="com.kosmo.uni.vo.ParkVO">
+		SELECT * FROM A_PARKING ORDER BY num desc
+	</select>
+	
+	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
+		SELECT * FROM A_PARKING WHERE PINTIME LIKE '%'||#{date}||'%'
+	</select>
+	
+	<select id="getCarNumList" resultType="com.kosmo.uni.vo.ParkVO">
+		SELECT * FROM A_PARKING WHERE CARNUM LIKE '%'||#{date}||'%'
+	</select>
 </mapper>

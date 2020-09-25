@@ -303,8 +303,20 @@ public class AdminController {
 	@RequestMapping(value = "/admin/facility/park")
 	public String park(HttpServletRequest req, Model model) {
 		logger.info("facility/park");
+		
+		adminService.parkingList(req, model);
 
 		return "admin/facility/park";
+	}
+	
+	// 주차검색
+	@RequestMapping(value = "/admin/facility/parknext")
+	public String parknext(HttpServletRequest req, Model model) {
+		logger.info("facility/parknext");
+
+		adminService.parkSearchList(req, model);
+		
+		return "admin/facility/parknext";
 	}
 
 	// 시설물 관리 리스트

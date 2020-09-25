@@ -136,8 +136,6 @@
 												<th>출근시간</th>
 												<th>퇴근시간</th>
 												<th>근무 시간</th>
-												<th>OT</th>
-												<th>특근</th>
 											</tr>
 										</thead>
 										<tbody id="attendance_Search1" style="color: grey;">
@@ -212,11 +210,11 @@
 													<!-- 블록내의 페이지 번호 -->
 													<c:forEach var="i" begin="${startPage}" end="${endPage}">
 														<c:if test="${i == currentPage}">
-															<span><a href="attendance?pageNum=${i}"><input
+															<span><a href="attendance?pageNum=${i}"><input class="btn"
 																	type="button" value="${i}"></a></span>
 														</c:if>
 														<c:if test="${i != currentPage}">
-															<a href="attendance?pageNum=${i}"><input
+															<a href="attendance?pageNum=${i}"><input class="btn"
 																type="button" value="${i}"></a>
 														</c:if>
 													</c:forEach>
