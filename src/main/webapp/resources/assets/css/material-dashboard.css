@@ -19555,8 +19555,8 @@ Copyright (c) 2015 Daniel Eden
   }
 }
 
-.dark-edition {	/* 배경색 */
-  background-color: #F3F8FA;
+/* .dark-edition {	배경색
+  background-color: #F3F8FA; */
 .dark-edition {
   background-color: #f1f4f6;
 }
