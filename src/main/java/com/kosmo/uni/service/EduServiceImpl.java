@@ -43,4 +43,5 @@ public class EduServiceImpl implements EduService {
 		int insertCnt = eduDAO.insertUser(map);
 		model.addAttribute("insertCnt", insertCnt);
 	}
+
 }

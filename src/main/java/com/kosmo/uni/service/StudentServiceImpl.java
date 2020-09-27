@@ -32,8 +32,6 @@ public class StudentServiceImpl implements StudentService{
 		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
 		int check = stuDAO.studentIdCheck(id);
 		//
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("strId", id);
 		int selectCnt = 0;
 		StudentVO vo = null;
 		if (check == 1) {
