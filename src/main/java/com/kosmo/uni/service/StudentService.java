@@ -19,4 +19,6 @@ public interface StudentService {
 	public void studentList(HttpServletRequest req, Model model);
 	// 수강 시간표 
 	public void studentTimeTable(HttpServletRequest req, Model model);
+	// 마이페이지 학생 정보 조회
+	public void studentSimpleInfo(HttpServletRequest req, Model model);
 }

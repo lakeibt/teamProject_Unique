@@ -36,4 +36,6 @@ public interface StudentDAO {
 		public List<Map<String, Object>> getStudyList(String id);
 		// 학생 강의 시간표
 		public List<Map<String, Object>> getTimeTable(String id);
+		// 마이페이지 학생 정보
+		public Map<String, Object> getStudentSimpleInfo(String id);
 }

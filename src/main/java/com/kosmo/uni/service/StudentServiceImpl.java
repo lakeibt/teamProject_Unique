@@ -216,4 +216,28 @@ public class StudentServiceImpl implements StudentService{
 		model.addAttribute("dto", dtos);
 		model.addAttribute("cnt", cnt);
 	}
+
+	@Override
+	public void studentSimpleInfo(HttpServletRequest req, Model model) {
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("세션 : " + (String) req.getSession().getAttribute("memId"));
+		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
+		int check = stuDAO.studentIdCheck(id);
+		//
+		int selectCnt = 0;
+		Map<String, Object> vo = null;
+		if (check == 1) {
+			vo = stuDAO.getStudentSimpleInfo(id);
+			selectCnt = 1;
+		}
+		System.out.println(vo.get("NAME"));
+		System.out.println(vo.get("ENG_NAME"));
+		System.out.println(vo.get("PHOTO"));
+		System.out.println(vo.get("NUM"));
+		System.out.println(vo.get("M_NAME"));
+		System.out.println(vo.get("EMAIL"));
+		System.out.println(vo.get("GRADE"));
+		model.addAttribute("vo", vo);
+		model.addAttribute("selectCnt", selectCnt);
+	}
 }

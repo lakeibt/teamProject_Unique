@@ -51,9 +51,9 @@ function addressSearch() {
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <body class="dark-edition">
 <div class="wrapper">
-	<%@ include file="../student/student_sidebar.jsp"%>
+	<%@ include file="../include/student_sidebar.jsp"%>
 	<div class="main-panel">
-	<%@ include file="../student/student_header.jsp"%>
+	<%@ include file="../include/student_header.jsp"%>
 		<div class="content">
 			<div class="container-fluid">
 				<!-- 메인 페이지 Start -->

@@ -123,9 +123,9 @@ function chnQnaType(type , select) {
 </script>
 <body class="dark-edition">
 <div class="wrapper">
-	<%@ include file="../student/student_sidebar.jsp"%>
+	<%@ include file="../include/student_sidebar.jsp"%>
     <div class="main-panel">
-	<%@ include file="../student/student_header.jsp"%>
+	<%@ include file="../include/student_header.jsp"%>
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">

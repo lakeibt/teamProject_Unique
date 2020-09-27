@@ -8,9 +8,9 @@
 </head>
 <body class="dark-edition">
 <div class="wrapper">
-	<%@ include file="../student/student_sidebar.jsp"%>
+	<%@ include file="../include/student_sidebar.jsp"%>
 	<div class="main-panel">
-	<%@ include file="../student/student_header.jsp"%>
+	<%@ include file="../include/student_header.jsp"%>
 		<div class="content">
 			<div class="container-fluid">
 				<!-- 메인 페이지 Start -->
@@ -18,12 +18,14 @@
 					<div class="col-xl-2 col-lg-12">
 						<div class="card card-profile" style="height:580px;">
 							<div class="card-avatar">
-								<img class="img" src="${stu_photo}myPage_sample.jpg">
+								<img class="img" src="${stu_photo}${vo.get('PHOTO')}">
 							</div>
 							<div class="card-body">
-								<h4 class="card-title">이름(학번)</h4>
-								<h6 class="card-category">전공학과</h6>
-								<p class="card-description">블라블라 어쩌고</p>
+								<h4 class="card-title">${vo.get('NAME')}(${vo.get('NUM')})</h4>
+								<h6 class="card-category">${vo.get('ENG_NAME')}</h6>
+								<h6 class="card-category">${vo.get('EMAIL')}</h6>
+								<h6 class="card-category">${vo.get('M_NAME')}</h6>
+								<p class="card-description">${vo.get('GRADE')}학년</p>
 							</div>
 						</div>
 					</div>

@@ -11,6 +11,13 @@
 	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
 		SELECT * FROM S_STUDENT WHERE id = #{id}
 	</select>
+	<select id="getStudentSimpleInfo" resultType="java.util.Map">
+		SELECT NAME, ENG_NAME, PHOTO, SUBSTR(ID, 2) as NUM, A.M_NAME, EMAIL, GRADE
+		  FROM S_STUDENT S
+			 , A_MAJOR A
+		 WHERE id = #{id}
+		   AND S.M_CODE = A.M_CODE
+	</select>
 	<update id="updateStudentInfo" parameterType="com.kosmo.uni.vo.StudentVO">
 		UPDATE S_STUDENT SET tel=#{tel}, address=#{address}, de_address=#{de_address}, email=#{email} WHERE id=#{id}
 	</update>
