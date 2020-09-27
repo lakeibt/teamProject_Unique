@@ -32,14 +32,6 @@
 		]]>
 	</select>
 	
-	<select id="getAttendance_List_Search"
-		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
-		<![CDATA[
-		SELECT * FROM A_NFC
-		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
-		]]>
-	</select>
-	
 	<select id="getSalary_list_human" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
 		SELECT 

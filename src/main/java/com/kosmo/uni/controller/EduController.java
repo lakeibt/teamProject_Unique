@@ -26,7 +26,7 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리
+	// HomeController.java는 주석처리d
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
