@@ -936,7 +936,5 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("dtos",dtos);
 			model.addAttribute("parkCnt",parkCnt);
 		}
-		
 	}
-
 }

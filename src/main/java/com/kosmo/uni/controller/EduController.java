@@ -49,7 +49,6 @@ public class EduController {
 	@RequestMapping("/guest/main")
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
-		
 		return "guest/login";
 	}
 	

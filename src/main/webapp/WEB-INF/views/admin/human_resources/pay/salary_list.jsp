@@ -125,7 +125,9 @@ $(function(){
 														<c:if test="${atos.salary_confirm==1}">
 															<td><a class="btn btn-app" 
 																style="height: 30px; padding: 5px;"
-																onclick="salTotalIn('${atos.salary_input_num}');">급여계산</a>
+																onclick="salTotalIn('${atos.salary_input_num}','${atos.payments_division}');">전체계산</a><br> <a
+																class="btn btn-app" style="height: 30px; padding: 5px;">개인별계산</a>
+															</td>
 														</c:if>
 														<c:if test="${atos.salary_confirm!=1}">
 															<td><a style="color: red;">급여 확정</a><br></td>

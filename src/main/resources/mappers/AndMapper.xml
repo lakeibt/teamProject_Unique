@@ -4,7 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.kosmo.uni.persistence.AndDAO">
-
 	<select id="confirmIdPwdStu" resultType="java.util.Map" parameterType = "String">
 		SELECT id, name, pwd FROM S_STUDENT WHERE id=#{id}
 	</select>
@@ -18,7 +17,7 @@
 	</select>
 	
 	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.Manager">
-		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id} 
+		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id}
 	</select>
 
 	<select id="whatNfc" parameterType="java.util.Map" resultType="int">

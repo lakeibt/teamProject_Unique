@@ -58,7 +58,7 @@
 		<![CDATA[
 		SELECT * 
 			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
-	        , salary_inday, payments_month, salary_name, rowNUM rNum 
+	        , salary_inday, payments_month, salary_name, rowNUM rNum
 			FROM ( SELECT * FROM A_SALARY_INPUT ORDER BY salary_input_num ASC))
 		WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>

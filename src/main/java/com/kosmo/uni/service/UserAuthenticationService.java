@@ -70,7 +70,6 @@ public class UserAuthenticationService implements UserDetailsService {
 		List<GrantedAuthority> authority = new ArrayList<GrantedAuthority>();
 
 		authority.add(new SimpleGrantedAuthority(user.get("AUTHORITY").toString()));
-		System.out.println("!!");
 		// 오라클에서는 필드명을 대문자로 취급
 		// 오라클에서는 BigInteger 	관련 오류가 발생할수 있으므로 아래와 같이 처리
 		// 사용자가 입력한 값과 테이블의 USERNAME(=id), PASSWORD(아래)를 비교해서
