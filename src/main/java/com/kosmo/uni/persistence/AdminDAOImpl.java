@@ -43,6 +43,11 @@ public class AdminDAOImpl implements AdminDAO {
 
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		dtos = dao.getAttendance_List(map);
+		
+		for (String key : map.keySet()) {
+			String value = String.valueOf(map.get(key));
+			System.out.println("[key]:" + key + ", [value]:" + value);
+		}
 
 		return dtos;
 	}
