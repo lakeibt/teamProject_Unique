@@ -16,7 +16,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="${student}coures">
+				<a class="nav-link" href="${student}course">
 					<i class="material-icons">library_books</i>
 					<p>수강목록</p>
 				</a>

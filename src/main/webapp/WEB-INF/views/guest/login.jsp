@@ -8,9 +8,9 @@
 </head>
 <body class="dark-edition">
 	<div class="wrapper ">
-		<%@ include file="../guest/student_sidebar.jsp"%>
+		<%@ include file="../student/student_sidebar.jsp"%>
 		<div class="main-panel">
-		<%@ include file="../guest/student_header.jsp"%>
+		<%@ include file="../student/student_header.jsp"%>
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
@@ -30,8 +30,8 @@
 									<c:if test="${sessionScope.auth == null}">
 										<form action="${path}guest/loginPro" method="post" style="width: 100%; margin: 0 auto;">
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-											<input type="text" name="userid" placeholder="학번/교직원번호" style="width: 100%; height: 50px; margin: 3px;">
-											<input type="password" name="userpwd" placeholder="비밀번호" style="width: 100%; height: 50px; margin: 3px;">
+											<input type="text" name="id" placeholder="학번/교직원번호" style="width: 100%; height: 50px; margin: 3px;">
+											<input type="password" name="pwd" placeholder="비밀번호" style="width: 100%; height: 50px; margin: 3px;">
 											<table style="width: 100%; margin-top: 10px; margin-bottom: 30px;">
 												<tr>
 													<td><input type="checkbox">학번/교직원번호 저장</td>

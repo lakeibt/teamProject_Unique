@@ -18,7 +18,7 @@
 <div class="col-lg-12">
 	<div class="row" style="padding-top: 50px;">
 		<div class="col-lg-4">
-			<img src = "https://www.wevity.com<%=file.select(".thumb img").attr("src")%>" style="width: 50%"><br>
+			<img src = "https://www.wevity.com<%=file.select(".thumb img").attr("src")%>" style="height: 95%"><br>
 		</div>
 		<div class="col-lg-8">
 			<h4><%=file.select(".tit-area h6").text()%></h4>

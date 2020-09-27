@@ -118,12 +118,12 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		return "student/course_syllabus";
 	}
 	
-	@RequestMapping("/guest/course_syllabus2")
+	@RequestMapping("/student/course_syllabus2")
 	public String gue_course_syllabus2(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_syllabus2");
 		
 		stuService.course_syllabus(req, model);
-		return "guest/course_syllabus2";
+		return "student/course_syllabus2";
 	}
 	
 	@RequestMapping("/student/score")

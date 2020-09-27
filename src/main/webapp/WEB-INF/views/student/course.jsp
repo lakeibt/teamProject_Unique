@@ -60,7 +60,7 @@
 									<script type="text/javascript">
 									function content(code) {
 										var param = "code=" + code;
-										sendRequest(content_callback, "${guest}course_syllabus", "get", param);
+										sendRequest(content_callback, "${student}course_syllabus", "get", param);
 									}
 									function content_callback() {
 										var result = document.getElementById("info");

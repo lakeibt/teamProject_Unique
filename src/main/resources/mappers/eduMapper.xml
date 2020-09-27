@@ -3,12 +3,12 @@
    	  
 <mapper namespace = "com.kosmo.uni.persistence.EduDAO">
 	<select id = "selectSUser" resultType = "java.util.Map">
-		SELECT ID, PWD, NAME
+		SELECT ID, PWD, PHOTO, NAME
 		  FROM S_STUDENT
 		 WHERE ID = #{id}
 	</select>
 	<select id = "selectPUser" resultType = "java.util.Map">
-		SELECT ID, PWD, NAME
+		SELECT ID, PWD, PHOTO, NAME
 		  FROM P_PROFESSOR
 		 WHERE ID = #{id}
 	</select>

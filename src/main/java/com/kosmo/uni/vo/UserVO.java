@@ -27,8 +27,8 @@ public class UserVO extends User{
 		return Id;
 	}
 
-	public void setUserid(String userId) {
-		this.Id = userId;
+	public void setUserid(String Id) {
+		this.Id = Id;
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public class UserVO extends User{
 		return Name;
 	}
 
-	public void setUserName(String userName) {
-		this.Name = userName;
+	public void setUserName(String Name) {
+		this.Name = Name;
 	}
 
 	public String getPhoto() {

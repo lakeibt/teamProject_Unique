@@ -8,8 +8,8 @@
 </head>
 <body class="dark-edition">
 <div class="wrapper">
-	<%@ include file="../guest/student_sidebar.jsp"%>
-	<%@ include file="../guest/student_header.jsp"%>
+	<%@ include file="../student/student_sidebar.jsp"%>
+	<%@ include file="../student/student_header.jsp"%>
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">

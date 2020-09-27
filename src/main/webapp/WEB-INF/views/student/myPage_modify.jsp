@@ -51,9 +51,9 @@ function addressSearch() {
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <body class="dark-edition">
 <div class="wrapper">
-	<%@ include file="../guest/student_sidebar.jsp"%>
+	<%@ include file="../student/student_sidebar.jsp"%>
 	<div class="main-panel">
-	<%@ include file="../guest/student_header.jsp"%>
+	<%@ include file="../student/student_header.jsp"%>
 		<div class="content">
 			<div class="container-fluid">
 				<!-- 메인 페이지 Start -->
@@ -65,7 +65,7 @@ function addressSearch() {
 								<p class="card-category">개인 정보 수정에 관한 문의는 관리자에게 문의하여 주시기 바랍니다</p>
 							</div>
 							<div class="card-body" style="margin-top:25px;">
-								<form action="${guest}myPage_modifyPro" name="stuInfoForm" method="post">
+								<form action="${student}myPage_modifyPro" name="stuInfoForm" method="post">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="row">
 										<div class="col-md-3">

@@ -6,13 +6,13 @@
 <c:if test="${updateCnt == 0}">
 	<script type="text/javascript">
 		alert("오류");
-		window.location='${guest}myPage_modify';
+		window.location='${student}myPage_modify';
 	</script>
 </c:if>
 <c:if test="${updateCnt != 0}">
 	<script type="text/javascript">
 		alert("회원정보가 수정되었습니다.");
-		window.location='${guest}myPage_modify';
+		window.location='${student}myPage_modify';
 	</script>
 </c:if>
 </body>

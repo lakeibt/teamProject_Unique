@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
 										<thead class="text-primary">
 											<tr>
 												<th colspan="3">
-													<select id="select1" class="form-control" style="width:30%; float:right; font-size:15px;" onchange="content(0)">
+													<select id="select1" class="form-control" style="width:20%; float:right; font-size:15px; border:1px solid #aaa; border-radius: 5px;" onchange="content(0)">
 														<option selected disabled>분야를 선택하세요</option>
 														<option value="1">기획/아이디어</option>
 														<option value="2">광고/마케팅</option>

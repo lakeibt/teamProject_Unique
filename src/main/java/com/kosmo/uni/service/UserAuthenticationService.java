@@ -71,9 +71,8 @@ public class UserAuthenticationService implements UserDetailsService {
 				
 
 		authority.add(new SimpleGrantedAuthority(user.get("AUTHORITY").toString()));
-	
 		// 오라클에서는 필드명을 대문자로 취급
-		// 오라클에서는 BigInteger 관련 오류가 발생할수 있으므로 아래와 같이 처리
+		// 오라클에서는 BigInteger 	관련 오류가 발생할수 있으므로 아래와 같이 처리
 		// 사용자가 입력한 값과 테이블의 USERNAME(=id), PASSWORD(아래)를 비교해서
 		// 비밀번호가 불일치시 UserLoginFailureHandler, 일치시 UserLoginSuccessHandler
 		// 스프링 시큐리티에서 체크하는 아래 필드로 select시에 별칭을 줌, 테이블의 암호화된 비밀번호와 사용자가 입력한 비밀번호를 내부적으로 비교처리

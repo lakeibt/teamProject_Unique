@@ -123,9 +123,9 @@ function chnQnaType(type , select) {
 </script>
 <body class="dark-edition">
 <div class="wrapper">
-	<%@ include file="../guest/student_sidebar.jsp"%>
+	<%@ include file="../student/student_sidebar.jsp"%>
     <div class="main-panel">
-	<%@ include file="../guest/student_header.jsp"%>
+	<%@ include file="../student/student_header.jsp"%>
 		<div class="content">
 			<div class="container-fluid">
 				<div class="row">
@@ -140,17 +140,17 @@ function chnQnaType(type , select) {
 										<thead>
 											<tr>
 												<th colspan="3">
-													<select id="schQnaType" class="form-control" name="schQnaType" style="width:30%; float:right;" onchange="content()" ></select>
-													<select name="questType" class="form-control" id="select1" style="width:30%; float:right;" onChange="chnQnaType(this.value)" >
-														<option selected disabled value="0">전공을 선택하세요</option>
-													    <option value="1">어문학</option>
-														<option value="2">인문과학</option>
-														<option value="3">사회과학</option>
-														<option value="4">자연과학</option>
-														<option value="5">공학</option>
-														<option value="6">상경</option>
-														<option value="7">예/체능학</option>
-														<option value="8">의/약학</option>
+													<select id="schQnaType" class="form-control" name="schQnaType" style="width:15%; float:right; border:1px solid #aaa; border-radius: 5px;" onchange="content()" ></select>
+													<select name="questType" class="form-control" id="select1" style="width:10%; float:right; border:1px solid #aaa; border-radius: 5px; margin-right : 10px;" onChange="chnQnaType(this.value)" >
+														<option selected disabled value="0">&nbsp;전공을 선택하세요</option>
+													    <option value="1">&nbsp;어문학</option>
+														<option value="2">&nbsp;인문과학</option>
+														<option value="3">&nbsp;사회과학</option>
+														<option value="4">&nbsp;자연과학</option>
+														<option value="5">&nbsp;공학</option>
+														<option value="6">&nbsp;상경</option>
+														<option value="7">&nbsp;예/체능학</option>
+														<option value="8">&nbsp;의/약학</option>
 													</select>    
 												</th>
 											</tr>
