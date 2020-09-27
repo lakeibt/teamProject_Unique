@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
-import com.kosmo.uni.vo.nfcVO;
 
 
 @Repository

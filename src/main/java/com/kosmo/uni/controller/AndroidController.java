@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.uni.persistence.AndDAO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
-import com.kosmo.uni.vo.nfcVO;
 
 @Controller
 public class AndroidController {

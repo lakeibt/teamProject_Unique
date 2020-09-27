@@ -1,7 +1,6 @@
 package com.kosmo.uni.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.EduDAO;
-import com.kosmo.uni.vo.CourseVO;
-import com.kosmo.uni.vo.StudentStudyListVO;
-import com.kosmo.uni.vo.StudentVO;
 
 @Service
 public class EduServiceImpl implements EduService {
