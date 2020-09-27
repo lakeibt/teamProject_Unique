@@ -14,11 +14,11 @@ public class UserVO extends User{
 	// super는 부모 User 클래스
 	public UserVO(String id, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
-			Collection<? extends GrantedAuthority> authorities, String userid, String photo) {
+			Collection<? extends GrantedAuthority> authorities, String name, String photo) {
 		super(id, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
 		
 		this.Id = id;
-		this.Name = userid;
+		this.Name = name;
 		this.Photo = photo;
 	}
 

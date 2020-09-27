@@ -230,13 +230,6 @@ public class StudentServiceImpl implements StudentService{
 			vo = stuDAO.getStudentSimpleInfo(id);
 			selectCnt = 1;
 		}
-		System.out.println(vo.get("NAME"));
-		System.out.println(vo.get("ENG_NAME"));
-		System.out.println(vo.get("PHOTO"));
-		System.out.println(vo.get("NUM"));
-		System.out.println(vo.get("M_NAME"));
-		System.out.println(vo.get("EMAIL"));
-		System.out.println(vo.get("GRADE"));
 		model.addAttribute("vo", vo);
 		model.addAttribute("selectCnt", selectCnt);
 	}

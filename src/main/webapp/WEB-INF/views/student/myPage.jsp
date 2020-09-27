@@ -16,7 +16,7 @@
 				<!-- 메인 페이지 Start -->
 				<div class="row">
 					<div class="col-xl-2 col-lg-12">
-						<div class="card card-profile" style="height:580px;">
+						<div class="card card-profile" style="height:380px;">
 							<div class="card-avatar">
 								<img class="img" src="${stu_photo}${vo.get('PHOTO')}">
 							</div>
