@@ -8,16 +8,16 @@
 	<select id = "selectSUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
 		  FROM S_STUDENT
-		 WHERE ID = #{userid}
+		 WHERE ID = #{id}
 	</select>
 	<select id = "selectPUser" resultType = "java.util.Map">
 		SELECT ID, PWD, NAME
 		  FROM P_PROFESSOR
-		 WHERE ID = #{userid}
+		 WHERE ID = #{id}
 	</select>
 	<select id = "selectAUser" resultType = "java.util.Map">
 		SELECT ID, PWD, PHOTO, NAME
 		  FROM A_ADMIN
-		 WHERE ID = #{userid}
+		 WHERE ID = #{id}
 	</select>
 </mapper>

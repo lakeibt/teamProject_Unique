@@ -155,8 +155,8 @@
 	      	<c:if test = "${sessionScope.auth == null}">
 		      	<form action = "${path}guest/loginPro" method = "post" style = "width:100%; margin:0 auto;">
 		      	<input type = "hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		      	<input type = "text" name = "userid" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
-		      	<input type = "password" name = "userpwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">
+		      	<input type = "text" name = "id" placeholder = "학번/교직원번호" style = "width:100%; height:50px; margin:3px;">
+		      	<input type = "password" name = "pwd" placeholder = "비밀번호" style = "width:100%; height:50px; margin:3px;">
 		      	<table style = "width:100%; margin-top:10px; margin-bottom:30px;">
 		      		<tr>
 		      			<td>

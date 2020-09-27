@@ -28,7 +28,7 @@
 			login-processing-url="/guest/loginPro"
 			authentication-success-handler-ref="userLoginSuccessHandler"
 			authentication-failure-handler-ref="userLoginFailureHandler"
-			username-parameter="userid" password-parameter="userpwd" />
+			username-parameter="id" password-parameter="pwd" />
 	
 		<sec:session-management>
 			<!-- max-sessions="1" => 같은 브라우저의 여러 창에서 동시접속 막기 

@@ -39,24 +39,24 @@ public class UserAuthenticationService implements UserDetailsService {
 	 * 정보가 없으면 예외를 발생시키고, 있으면 해당 정보가 map(vo)로 리턴됨
 	 */
 	@Override
-	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		Map<String, Object> user = null;
-		if(userId.charAt(0) == 's') {
+		if(id.charAt(0) == 's') {
 			System.out.println("학생 로그인");
-			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectSUser", userId);
-			System.out.println("로그인 체크 ==> " + userId);
+			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectSUser", id);
+			System.out.println("로그인 체크 ==> " + id);
 			user.put("AUTHORITY", "ROLE_STUDENT");
 			System.out.println(user.get("AUTHORITY"));
-		} else if(userId.charAt(0) == 'p') {
+		} else if(id.charAt(0) == 'p') {
 			System.out.println("교수 로그인");
-			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectPUser", userId);
-			System.out.println("로그인 체크 ==> " + userId);
+			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectPUser", id);
+			System.out.println("로그인 체크 ==> " + id);
 			user.put("AUTHORITY", "ROLE_PROFESSOR");
 			System.out.println(user.get("AUTHORITY"));
-		} else if(userId.charAt(0) == 'a') {
+		} else if(id.charAt(0) == 'a') {
 			System.out.println("관리자 로그인");
-			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectAUser", userId);
-			System.out.println("로그인 체크 ==> " + userId);
+			user = sqlSession.selectOne("com.kosmo.uni.persistence.EduDAO.selectAUser", id);
+			System.out.println("로그인 체크 ==> " + id);
 			user.put("AUTHORITY", "ROLE_ADMIN");
 			System.out.println(user.get("AUTHORITY"));
 		} else {
@@ -64,7 +64,7 @@ public class UserAuthenticationService implements UserDetailsService {
 		}
 		
 		// 인증실패시 인위적으로 예외 발생
-		if(user == null) throw new UsernameNotFoundException(userId);
+		if(user == null) throw new UsernameNotFoundException(id);
 		
 		// ArrayList 먼저 import, GrantedAuthority import
 		List<GrantedAuthority> authority = new ArrayList<GrantedAuthority>();

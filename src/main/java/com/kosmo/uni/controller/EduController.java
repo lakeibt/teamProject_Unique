@@ -53,7 +53,7 @@ public class EduController {
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
 		
-		return "guest/main";
+		return "guest/login";
 	}
 	
 	@RequestMapping("/guest/sample")
