@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/setting.jsp"%>
+<!DOCTYPE html>
+<html>
+<body>
+<table class="table" style="font-size:15px;">
+	<tr>
+		<th colspan="8"><h5>검색 목록</h5></th>
+	</tr>
+	<tr>
+		<th style="width:10%;">번호</th>
+		<th style="width:20%;">차량번호</th>
+		<th style="width:20%;">날짜</th>
+		<th style="width:20%;">입차시간</th>
+		<th style="width:20%;">출차시간</th>
+	</tr>
+<c:if test="${parkCnt > 0}">
+<c:forEach var="dto" items="${dtos}">
+<c:set var="TextValue" value="${dto.pintime}"/>
+	<tr>
+		<td>${dto.num}</td>
+		<td>${dto.carnum}</td>
+		<td>${fn:substring(TextValue,0,15)}</td>
+		<td>${dto.pintime}</td>
+		<td>${dto.pouttime}</td>
+	</tr>
+</c:forEach>
+</c:if>
+</table>
+</body>
+</html>

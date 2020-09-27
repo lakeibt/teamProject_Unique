@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.SalaryVO;
 
 @Repository
@@ -204,5 +205,28 @@ public class AdminDAOImpl implements AdminDAO {
 		return dao.classmodClear(vo);
 	}
 	
+	@Override
+	public int getParkingCnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getParkingCnt();
+	}
+
+	@Override
+	public List<ParkVO> getParkingList() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getParkingList();
+	}
+
+	@Override
+	public List<ParkVO> getSearchList(String date) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSearchList(date);
+	}
+
+	@Override
+	public List<ParkVO> getCarNumList(String date) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getCarNumList(date);
+	}
 
 }

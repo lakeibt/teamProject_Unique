@@ -14,6 +14,7 @@ import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.SalaryVO;
 
@@ -898,6 +899,44 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("update_Cnt :"+update_Cnt);
 		
 		model.addAttribute("cnt", update_Cnt);
+		
+	}
+
+	@Override
+	public void parkingList(HttpServletRequest req, Model model) {
+		int parkCnt = 0;
+
+			parkCnt = dao.getParkingCnt();
+			System.out.println("parkCntSVS : " + parkCnt);
+			List<ParkVO> dtos = dao.getParkingList();
+			System.out.println("dtosSVS" + dtos);
+			model.addAttribute("dtos",dtos);
+			model.addAttribute("parkCnt",parkCnt);
+	}
+
+	@Override
+	public void parkSearchList(HttpServletRequest req, Model model) {
+		int parkCnt = 0;
+		
+		String param = req.getParameter("param");
+		String text = req.getParameter("intext");
+		System.out.println("param 값 : "+param);
+		System.out.println("text 값 : "+text);
+		if(param.equals("carnum")) {
+			parkCnt = dao.getParkingCnt();
+			System.out.println("parkCntSVS : " + parkCnt);
+			List<ParkVO> dtos = dao.getCarNumList(text);
+			System.out.println("dtosSVS" + dtos);
+			model.addAttribute("dtos",dtos);
+			model.addAttribute("parkCnt",parkCnt);
+		} else {
+			parkCnt = dao.getParkingCnt();
+			System.out.println("parkCntSVS : " + parkCnt);
+			List<ParkVO> dtos = dao.getSearchList(text);
+			System.out.println("dtosSVS" + dtos);
+			model.addAttribute("dtos",dtos);
+			model.addAttribute("parkCnt",parkCnt);
+		}
 		
 	}
 

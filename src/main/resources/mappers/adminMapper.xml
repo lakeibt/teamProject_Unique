@@ -13,9 +13,25 @@
 
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT * FROM A_NFC ORDER BY num desc
+		<![CDATA[
+		SELECT num, id, tagintime, tagouttime,pnum ,rNum 
+		FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
+    	FROM ( 
+        SELECT *FROM A_NFC n
+        JOIN A_ADMIN a
+        on n.pnum = a.tel))
+		WHERE rNum >=#{start} AND rNum <=#{end}
+    	]]>
 	</select>
-
+	
+	<select id="getAttendance_List_Search"
+		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
+		<![CDATA[
+		SELECT * FROM A_NFC
+		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
+		]]>
+	</select>
+	
 	<select id="getSalary_list_human" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
 		SELECT s.salary_inday,
@@ -94,4 +110,19 @@
 		le_code = #{le_code}, p_name = #{p_name}, school_year = #{school_year} WHERE co_code = #{co_code}
 	</update>
 	
+	<select id="getParkingCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM A_PARKING
+	</select>
+	
+	<select id="getParkingList" resultType="com.kosmo.uni.vo.ParkVO">
+		SELECT * FROM A_PARKING ORDER BY num desc
+	</select>
+	
+	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
+		SELECT * FROM A_PARKING WHERE PINTIME LIKE '%'||#{date}||'%'
+	</select>
+	
+	<select id="getCarNumList" resultType="com.kosmo.uni.vo.ParkVO">
+		SELECT * FROM A_PARKING WHERE CARNUM LIKE '%'||#{date}||'%'
+	</select>
 </mapper>

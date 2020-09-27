@@ -40,4 +40,10 @@ public interface AdminService {
 	
 	//강의수정 클릭
 	public void classmodClear(HttpServletRequest req, Model model);
+	
+	//주차리스트 출력
+	public void parkingList(HttpServletRequest req, Model model);
+	
+	//주차리스트 출력
+	public void parkSearchList(HttpServletRequest req, Model model);
 }

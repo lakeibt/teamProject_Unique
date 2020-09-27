@@ -21,4 +21,19 @@
 		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id} 
 	</select>
 
+	<select id="whatNfc" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) as cnt FROM A_NFC WHERE pnum = #{phonenum} AND TAGINTIME LIKE '%'||#{today}||'%'
+	</select>
+	
+	<insert id="hiNfc" parameterType="com.kosmo.uni.vo.nfcVO">
+		INSERT INTO A_NFC (NUM, PNUM) 
+		VALUES (NFC_SEQ.nextval, #{pnum})
+	</insert>
+	
+	<update id="byeNfc" parameterType="java.util.Map">
+		UPDATE A_NFC 
+		SET TAGOUTTIME = TO_CHAR(SYSDATE, 'YYYY/MM/DD/(DY) HH24:MI')
+		WHERE PNUM = #{phonenum}
+		AND TAGINTIME LIKE '%'||#{today}||'%'
+	</update>
 </mapper>
