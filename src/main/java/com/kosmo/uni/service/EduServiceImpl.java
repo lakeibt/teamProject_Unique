@@ -25,6 +25,7 @@ public class EduServiceImpl implements EduService {
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 
+	// 학생, 교수, 관리자 등록
 	@Override
 	public void insertUser(HttpServletRequest req, Model model) {
 		String userid = req.getParameter("userID");
@@ -43,5 +44,4 @@ public class EduServiceImpl implements EduService {
 		int insertCnt = eduDAO.insertUser(map);
 		model.addAttribute("insertCnt", insertCnt);
 	}
-
 }

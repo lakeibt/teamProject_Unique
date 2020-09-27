@@ -1,105 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file = "../include/setting.jsp" %>
+<%@ include file="../include/setting.jsp"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<title>[유일대]성적조회</title>
+<%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
 <script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
 <script src="/uni/resources/js/request.js"></script>
-<head>
-	<title>Contact - Moderna Bootstrap Template</title>
-	<%@ include file = "../bootstrap/student_bootstrap.jsp" %>
 </head>
-<body>
-
-	<%@ include file="../include/header.jsp"%>
-	
-	<main id="main">
-		<!-- ======= Contact Section ======= -->
-		<section class="breadcrumbs">
-			<div class="container">
-				<div class="d-flex justify-content-between align-items-center">
-					<h2>성적조회</h2>
-				</div>
-			</div>
-		</section>
-		<!-- 성적조회 페이지 -->
-		<%@ include file="../include/student_left.jsp"%>
-		<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="width:60%; display:inline-block; position:relative; vertical-align:top;">
-			<div class="contact">
-				<form class="php-email-form" style="background:rgba(0,0,0,0);">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-12 d-flex flex-column justify-content-center-center">
-								<div class="icon-box">
-									<table class="table" style="font-size:13px;">
-										
-										<tr>
-											<td colspan="6">
-												<select id="select1" class="form-control" style="width:30%; float:right;" onchange="content()">
-															<option selected disabled>학기를 선택하세요</option>
-															<option value="1">1학기</option>
-															<option value="2">2학기</option>
-												</select>
-												<select class="form-control" style="width:30%; float:right;">
-													<option>2020</option>		
-												</select>
-											</td>
-										</tr>
-										
-										<tr>
-											<th>학과</th>
-											<td><input class="form-control" type="text" value="${vo.m_code}" readOnly></td>
-											<th>학번</th>
-											<td><input class="form-control" type="text" value="${vo.entrancedate}" readOnly></td>
-											<th>이름</th>
-											<td><input class="form-control" type="text" value="${vo.name}" readOnly></td>
-										</tr>
+<body class="dark-edition">
+<div class="wrapper">
+	<%@ include file="../guest/student_sidebar.jsp"%>
+	<div class="main-panel">
+	<%@ include file="../guest/student_header.jsp"%>
+		<div class="content">
+			<div class="container-fluid">
+				<!-- 메인 페이지 Start -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h4 class="card-title">성적 조회</h4>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead class="text-primary">
+											<tr>
+												<th>
+													<select class="form-control">
+														<option>2020</option>		
+													</select>
+												</th>
+												<th colspan="5">
+													<select id="select1" class="form-control" onchange="content()" style="width:130px;">
+														<option selected disabled>학기를 선택하세요</option>
+														<option value="1">1학기</option>
+														<option value="2">2학기</option>
+													</select>
+												</th>
+											</tr>
+										</thead>
+										<thead class="text-primary">
+											<tr>
+												<td>학과</td>
+												<td><input class="form-control" type="text" value="${vo.m_code}" disabled></td>
+												<td>학번</td>
+												<td><input class="form-control" type="text" value="${vo.id}" disabled></td>
+												<td>이름</td>
+												<td><input class="form-control" type="text" value="${vo.name}" disabled></td>
+											</tr>
+										</thead>
 									</table>
-									<div id="info">
-								
-									</div>
+									<div id="info"></div>
+									<script type="text/javascript">
+									function content() {
+										var yourSelect = document.getElementById("select1");
+										console.log(yourSelect);
+										var value = yourSelect.options[yourSelect.selectedIndex].value;
+										console.log(value);
+										var param = "value=" + value;
+	
+										sendRequest(content_callback, "${guest}scoreInfo", "get", param);
+										console.log(param);
+									}
+	
+									function content_callback() {
+										var result = document.getElementById("info");
+										if (httpRequest.readyState == 4) {
+											if (httpRequest.status == 200) {
+												var data = httpRequest.responseText;
+												result.innerHTML = data;
+											} else result.innerHTML = "Error!";
+										} else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+									}
+									</script>
 								</div>
 							</div>
-							<script type="text/javascript">
-	   
-							function content  () {
-		                           var yourSelect = document.getElementById("select1");
-		                           console.log(yourSelect);
-		                           var value = yourSelect.options[yourSelect.selectedIndex].value;
-		                           console.log(value);
-		                           var param = "value=" + value;
-		                           
-		                           sendRequest(content_callback,"${student}scoreInfo", "get", param);
-		                           console.log(param);
-		                        }
-		                        function content_callback() {
-		                           var result = document.getElementById("info");
-		                           if(httpRequest.readyState == 4) { 
-		                              if(httpRequest.status == 200) { 
-		                                 
-		                              var data = httpRequest.responseText;
-		                              result.innerHTML = data;
-		                              
-		                              } else result.innerHTML = "Error!";
-		                           } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
-		                        }
-							</script>
-							
+
 						</div>
 					</div>
-				</form>
+				</div>
+				<!-- 메인 페이지 End -->
 			</div>
-		</section>
-		<!-- End Contact Section -->
-		<!-- ======= Contact Section ======= -->
-		<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500"></section>
-		<!-- End Contact Section -->
-
-		<!-- ======= Map Section ======= -->
-	</main>
-	<!-- End #main -->
-	<%@ include file="../include/footer.jsp"%>
-
-	<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
-<%@ include file = "../bootstrap/student_bootstrap_js.jsp" %>
+		</div>
+	</div>
+</div>
+<%@ include file="../bootstrap/guest_bootstrap_js2.jsp"%>
 </body>
 </html>

@@ -26,9 +26,11 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	// 학생 정보
 	@Override
 	public void studentinfo(HttpServletRequest req, Model model) {
 		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("세션 : " + (String) req.getSession().getAttribute("memId"));
 		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
 		int check = stuDAO.studentIdCheck(id);
 		//
@@ -61,15 +63,9 @@ public class StudentServiceImpl implements StudentService{
 		System.out.println("updateCnt: " + updateCnt);
 	}
 
+	// 강의 목록
 	@Override
 	public void courseList(HttpServletRequest req, Model model) {
-		// 3단계. 화면으로부터 입력받은 값을 받아온다.
-		/*
-		 * 페이지     num    rowNum =>   start   end
-		 * 1p    30~26     1~5		   1     5
-		 * 6p    25~21     6~10        6     10
-		 */
-		// 페이징
 		int pageSize = 10;   // 한 페이지당 출력할 글 갯수
 		int pageBlock = 3;  // 한 블럭당 페이지 갯수
 		
@@ -83,32 +79,19 @@ public class StudentServiceImpl implements StudentService{
 		int startPage= 0;  // 시작 페이지
 		int endPage =0;    // 마지막  페이지
 		
-		// 4단계. 다형성 적용, 싱글톤 방식으로 dao 객체 생성
-		// 5-1단계. 글갯수 구하기
-		cnt = stuDAO.getCourseCnt();
-		System.out.println("cnt => " + cnt);
 		String id = (String) req.getSession().getAttribute("memId");
 		System.out.println("id :" + id );
+		cnt = stuDAO.getCourseCnt();
+		System.out.println("cnt => " + cnt);
 		pageNum=req.getParameter("pageNum");
 		
-		if(pageNum == null) {
-			
-			pageNum ="1";  // 첫페이지를 1페이지로 지정
-		}
-		// 글 30건 기준
-		currentPage = Integer.parseInt(pageNum);  // 현재페이지 : 1
+		if(pageNum == null) pageNum ="1";  // 첫페이지를 1페이지로 지정
+			currentPage = Integer.parseInt(pageNum);  // 현재페이지 : 1
 		
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (cnt/pageSize) + (cnt%pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지 있으면 1 없으면 0
 		
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize +1;
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 +5 -1;
 		end = start +pageSize -1;
-		//출력용 글번호
-		// 30 = 30 -(1-1) *5;
 		number = cnt -(currentPage - 1) *pageSize;
 		if(cnt > 0) {
 			Map<String, Object> map = new HashMap<>();
@@ -116,7 +99,7 @@ public class StudentServiceImpl implements StudentService{
 			map.put("end", end);
 			map.put("id",id);
 			// 5-2단계. 게시글 목록 조회
-			List<CourseVO> dtos = stuDAO.getCourseList(map);
+			List<Map<String, Object>> dtos = stuDAO.getCourseList(map);
 			model.addAttribute("dtos", dtos);
 			// (1 / 3) *3 + 1;
 			startPage = (currentPage / pageBlock) * pageBlock + 1;
@@ -142,6 +125,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public void course_syllabus(HttpServletRequest req, Model model) {
 		String code = req.getParameter("code");
+		System.out.println(code);
 		
 		Map<String, Object> syllabus_info = stuDAO.getCourseSyllabusInfo(code); // 강의계획서 정보(강의코드, 담당교수 등/학점 기준표)
 		Map<String, Object> syllabus_list = stuDAO.getCourseSyllabusList(code); // 강의계획서 주차 리스트(1주차, 2주차, .., 12주차)
@@ -150,15 +134,9 @@ public class StudentServiceImpl implements StudentService{
 		model.addAttribute("list", syllabus_list);
 	}
 
+	// 학생 성적 목록
 	@Override
 	public void studentGradeList(HttpServletRequest req, Model model) {
-		// 3단계. 화면으로부터 입력받은 값을 받아온다.
-		/*
-		 * 페이지     num    rowNum =>   start   end
-		 * 1p    30~26     1~5		   1     5
-		 * 6p    25~21     6~10        6     10
-		 */
-		// 페이징
 		int pageSize = 10;   // 한 페이지당 출력할 글 갯수
 		int pageBlock = 3;  // 한 블럭당 페이지 갯수
 		
@@ -172,34 +150,19 @@ public class StudentServiceImpl implements StudentService{
 		int startPage= 0;  // 시작 페이지
 		int endPage =0;    // 마지막  페이지
 		
-		// 4단계. 다형성 적용, 싱글톤 방식으로 dao 객체 생성
-		// 5-1단계. 글갯수 구하기
-		cnt = stuDAO.getGradeCnt();
-		System.out.println("cnt => " + cnt);
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("id :" + id );
+		System.out.println("id :" + id);
+		cnt = stuDAO.getGradeCnt(id);
+		System.out.println("cnt => " + cnt);
 		int value = Integer.parseInt(req.getParameter("value"));
 		System.out.println("value :" + value );
 		pageNum=req.getParameter("pageNum");
 		
-		if(pageNum == null) {
-			
-			pageNum ="1";  // 첫페이지를 1페이지로 지정
-		}
-		// 글 30건 기준
+		if(pageNum == null) pageNum ="1";  // 첫페이지를 1페이지로 지정
 		currentPage = Integer.parseInt(pageNum);  // 현재페이지 : 1
-		
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (cnt/pageSize) + (cnt%pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지 있으면 1 없으면 0
-		
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize +1;
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 +5 -1;
 		end = start +pageSize -1;
-		//출력용 글번호
-		// 30 = 30 -(1-1) *5;
 		number = cnt -(currentPage - 1) *pageSize;
 		if(cnt > 0) {
 			Map<String, Object> map = new HashMap<>();
@@ -208,7 +171,7 @@ public class StudentServiceImpl implements StudentService{
 			map.put("id", id);
 			map.put("value", value);
 			// 5-2단계. 게시글 목록 조회
-			List<CourseVO> dtos = stuDAO.getGradeList(map);
+			List<Map<String, Object>> dtos = stuDAO.getGradeList(map);
 			model.addAttribute("dtos", dtos);
 			// (1 / 3) *3 + 1;
 			startPage = (currentPage / pageBlock) * pageBlock + 1;
@@ -231,18 +194,29 @@ public class StudentServiceImpl implements StudentService{
 		}
 	}
 
+	// 학생 강의 목록
 	@Override
 	public void studentList(HttpServletRequest req, Model model) {
 		int cnt=0;
-		cnt = stuDAO.getStudyCnt();
 		String id = (String) req.getSession().getAttribute("memId");
-		Map<String, Object> map = new HashMap<>();
-		map.put("id", id);
+		System.out.println("id :" + id);
+		cnt = stuDAO.getStudyCnt(id);
 		System.out.println("cnt => " + cnt);
-		List<StudentStudyListVO> dtos = stuDAO.getStudyList(map);
+		List<Map<String, Object>> dtos = stuDAO.getStudyList(id);
 		model.addAttribute("dtos", dtos);
-		System.out.println("dtos:" + dtos);
 		model.addAttribute("cnt", cnt);
-		
+	}
+	
+	// 학생 강의 시간표
+	@Override
+	public void studentTimeTable(HttpServletRequest req, Model model) {
+		int cnt=0;
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("id :" + id);
+		cnt = stuDAO.getStudyCnt(id);
+		System.out.println("cnt => " + cnt);
+		List<Map<String, Object>> dtos = stuDAO.getTimeTable(id);
+		model.addAttribute("dto", dtos);
+		model.addAttribute("cnt", cnt);
 	}
 }

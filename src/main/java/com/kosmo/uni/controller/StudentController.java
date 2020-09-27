@@ -89,9 +89,9 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 	}
 	
 	@RequestMapping("/student/course_register")
-	public String gue_course_register() {
+	public String gue_course_register(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_register");
-		
+		stuService.courseList(req, model);
 		return "student/course_register";
 	}
 	
@@ -99,7 +99,7 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 	public String gue_course_timeTable(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_timeTable");
 		
-		stuService.studentList(req, model);
+		stuService.studentTimeTable(req, model);
 		return "student/course_timeTable";
 	}
 	
@@ -116,6 +116,14 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		
 		stuService.course_syllabus(req, model);
 		return "student/course_syllabus";
+	}
+	
+	@RequestMapping("/guest/course_syllabus2")
+	public String gue_course_syllabus2(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_syllabus2");
+		
+		stuService.course_syllabus(req, model);
+		return "guest/course_syllabus2";
 	}
 	
 	@RequestMapping("/student/score")

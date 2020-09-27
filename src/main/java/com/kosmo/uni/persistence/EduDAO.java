@@ -20,5 +20,4 @@ public interface EduDAO {
 	public Map<String, Object> selectPUser(String id);
 	
 	public Map<String, Object> selectAUser(String id);
-	
 }

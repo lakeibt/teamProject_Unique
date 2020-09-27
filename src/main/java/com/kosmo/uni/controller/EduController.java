@@ -56,6 +56,14 @@ public class EduController {
 		return "guest/login";
 	}
 	
+//	@RequestMapping("/guest/course")
+//	public String gue_course(HttpServletRequest req, Model model) {
+//		logger.info("url ==> course");
+//		
+//		eduService.studentList(req, model);
+//		return "guest/course";
+//	}
+	
 	@RequestMapping("/guest/sample")
 	public String gue_sample() {
 		logger.info("url ==> sample");
