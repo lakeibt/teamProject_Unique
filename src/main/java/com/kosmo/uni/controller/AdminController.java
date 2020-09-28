@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.service.AdminServiceImpl;
 
@@ -140,6 +141,14 @@ public class AdminController {
 	}
 
 	// ------------------------- 인사정보 -------------------------
+	// 테스트
+	@RequestMapping(value = "/admin/human_resources/info/test")
+	public String test(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/test");
+
+		return "admin/human_resources/info/test";
+	}
+	
 	// 인사정보등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info")
 	public String human_info(HttpServletRequest req, Model model) {
@@ -147,6 +156,52 @@ public class AdminController {
 
 		return "admin/human_resources/info/human_info";
 	}
+	
+	// 학생 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_stu")
+	public String human_info_stu(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_stu");
+
+		model.addAttribute("option","stu");
+		
+		return "admin/human_resources/info/human_info_stu";
+	}
+	
+	// 직원 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_adm")
+	public String human_info_adm(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_adm");
+
+		model.addAttribute("option","adm");
+		adminService.departList(req, model);
+		adminService.rankList(req, model);
+		adminService.nextAdminId(req, model);
+		
+		return "admin/human_resources/info/human_info_adm";
+	}
+	
+	// 교수 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_pro")
+	public String human_info_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_pro");
+
+		model.addAttribute("option","pro");
+		
+		return "admin/human_resources/info/human_info_pro";
+	}
+
+	
+	// 등록
+	@RequestMapping(value = "/admin/human_resources/info/human_info_add")
+	public String human_info_add(MultipartHttpServletRequest req, Model model) {
+		logger.info("url ==> human_info_add");
+		
+		adminService.addHuman(req, model);
+		
+		return "admin/human_resources/info/human_info";
+	}
+	
+	
 
 	// 인사정보현황
 	@RequestMapping(value = "/admin/human_resources/info/human_state")

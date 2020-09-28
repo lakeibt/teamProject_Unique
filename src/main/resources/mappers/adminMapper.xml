@@ -126,4 +126,24 @@
 	<select id="getCarNumList" resultType="com.kosmo.uni.vo.ParkVO">
 		SELECT * FROM A_PARKING WHERE CARNUM LIKE '%'||#{date}||'%'
 	</select>
+	
+	
+	
+	<!-- 석무 -->
+	<!-- 부서 목록 -->
+	<select id="getDepartList" resultType="com.kosmo.uni.vo.DepartVO">
+		SELECT * FROM a_depart
+	</select>
+
+	<!-- 직급 목록 -->
+	<select id="getRankList" resultType="com.kosmo.uni.vo.RankVO">
+		select * FROM a_rank ORDER BY decode(rank, '총장','1','부장','2','과장','3','계장','4','주임','5','사원','6') desc
+	</select>
+	
+	<!-- 직원 다음 아이디 -->
+	<select id="getNextAdminId" resultType="String">
+		select 'a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from a_admin
+	</select>	
+	
+	
 </mapper>

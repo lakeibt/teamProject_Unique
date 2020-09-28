@@ -6,12 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kosmo.uni.persistence.ProfessorDAO;
 import com.kosmo.uni.service.ProfessorService;
 
 @Controller
@@ -20,6 +19,9 @@ public class ProfessorController {
 	
 	@Autowired
 	ProfessorService proService;
+	
+	@Autowired
+	ProfessorDAO proDAO;
 	
 	// 메인
 	@RequestMapping("/professor/main")
@@ -113,23 +115,32 @@ public class ProfessorController {
 	}
 
 	// 쪽지 상세보기
-	@RequestMapping("/professor/message")
-	public String pro_message(HttpServletRequest req, Model model) {
-		logger.info("url ==> message");
-		
-		proService.message(req, model);
-		
-		return "professor/message";
-	}
-	
-	// 쪽지 보내기 폼
 	@RequestMapping("/professor/message_form")
 	public String pro_message_form(HttpServletRequest req, Model model) {
 		logger.info("url ==> message_form");
 		
+		proService.message(req, model);
+		
 		return "professor/message_form";
-	}	
+	}
 	
+	// 쪽지 보내기 폼
+	@RequestMapping("/professor/message_send_form")
+	public String pro_message_send_form(HttpServletRequest req, Model model) {
+		logger.info("url ==> message_send_form");
+		
+		return "professor/message_send_form";
+	}	
+
+	// 쪽지 보내기
+	@RequestMapping("/professor/messageSend")
+	public int pro_messageSend(HttpServletRequest req, Model model) {
+		logger.info("url ==> messageSend");
+		
+		int insertCnt = proService.messageSend(req, model);
+		
+	return insertCnt;
+	}	
 	
 
 	

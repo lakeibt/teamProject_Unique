@@ -50,6 +50,10 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public List<MessageVO> getMessageList_notRead(Map<String, Object> map) {
 		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList_notRead", map);
 	}
+	@Override
+	public int insertMessage(MessageVO vo) {
+		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", vo);
+	}
 
 
 }

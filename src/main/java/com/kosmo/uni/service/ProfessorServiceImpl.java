@@ -170,6 +170,25 @@ public class ProfessorServiceImpl implements ProfessorService{
 		}
 		
 	}
+
+	@Override
+	public int messageSend(HttpServletRequest req, Model model) {
+		
+		String title = req.getParameter("title");
+		String receive_id = req.getParameter("receive_id");
+		String receive_name = req.getParameter("receive_name");
+		String content = req.getParameter("content");
+		
+		MessageVO vo = new MessageVO();
+		
+		vo.setTitle(title);
+		
+		int insertCnt = proDAO.insertMessage(vo);
+		
+		
+		return insertCnt;
+		
+	}
 	
 
 }

@@ -4,30 +4,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="_csrf" th:content="${_csrf.token}"/>
-<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <link href="${resources}css/professor_header_style.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
 
 //처음 불러오기
 $(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+	$.ajax({
+		url : '${professor}messageSimple',
+        type : "POST",
+        beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
+        dataType : "html",
+        success : function(data){
+        	$('.message-box').html(data);	
+        }, error : function(){
+        	alert('오류!');
+        }
+	});
 	
-	var ajaxOption = {
-            url : '${professor}messageSimple',
-            type : "GET",
-            dataType : "text",
-            success : function(data){
-            	$('.message-box').html(data);	
-            }, error : function(){
-            	alert('오류!');
-            }
-    };
 });  
 
 
 // 지우기
 function deleteMessageSend(obj) {
+
 	var div = $(obj).parent().parent();
 
 	if($('#message_card_div').is(':visible')){
@@ -45,9 +52,8 @@ function deleteMessageSend(obj) {
 		$('#message_send_div').attr('class','col-lg-12');
 	}
 
-	div.hide();
+	div.remove();
 	event.stopPropagation();
-		
 
 };
 
@@ -69,54 +75,69 @@ function deleteMessage(obj) {
 		$('#message_send_div').attr('class','col-lg-12');
 	}
 	
-	div.hide();
+	div.remove();
 	event.stopPropagation();
 };
 
 
 // 전체보기
 function messageList() {
-	$('#messageList').children().remove();
-	$("#message-form").css({"width" : '800px',
-							'padding' : '0px 20px'
-							});
-	
-	var ajaxOption = {
-               url : '${professor}messageList_form',
-               type : "GET",
-               dataType : "text"
-       };
-       
-       $.ajax(ajaxOption).done(function(data){
-    	   
-           $('#messageList').html(data);
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+	$.ajax({
+		url : '${professor}messageList_form',
+        type : "POST",
+        beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
+        dataType : "html",
+        success : function(data){
+        	$('#messageList').children().remove();
+        	$("#message-form").css({"width" : '800px',
+        							'padding' : '0px 20px'
+        							});
+        	$('#messageList').html(data);	
+        }, error : function(){
+        	alert('오류!');
+        }
 	});
-       
-       event.stopPropagation();
+	
+	event.stopPropagation();
 };
 
 //쪽지 selectBox	
 function changeList() {
-    var ajaxOption = {
-            url : '${professor}messageList_form?option=' + $('.message_select option:selected').val(),
-            type : "GET",
-            dataType : "text"
-    };
-    
-    $.ajax(ajaxOption).done(function(data){
-        $('#messageList').children().remove();
-        $('#messageList').html(data);
-    });
-    event.stopPropagation();
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");	
+	
+	$.ajax({
+        url : '${professor}messageList_form?option=' + $('.message_select option:selected').val(),
+        type : "POST",
+        beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
+        dataType : "html",
+        success : function(data){
+            $('#messageList').children().remove();
+            $('#messageList').html(data);
+        }, error : function(){
+        	alert('오류!');
+        }
+	});
+	
 };
 
 // 쪽지 상세보기
 function message_load(num) {
-	
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
 	$.ajax({
-		url : '${professor}message?num='+num,
-		type : 'GET',
-		dataType : 'text',
+		url : '${professor}message_form?num='+num,
+		type : 'POST',
+		dataType : 'html',
+		beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
 		success : function(data){
 
 			if($('#msv').val() == '1'){
@@ -146,16 +167,19 @@ function message_load(num) {
 			alert('오류!!!!');	
 		}
 	});
-	event.stopPropagation();
 };
 
 //쪽지 보내기 폼 불러오기
 function message_send(){
-	
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");	
 	$.ajax({
-		url : '${professor}message_form',
-		type : 'GET',
-		dataType : 'text',
+		url : '${professor}message_send_form',
+		type : 'POST',
+		dataType : 'html',
+		beforeSend: function (xhr) {
+	        	xhr.setRequestHeader(header, token);
+	    },
 		success : function(data){
 			
 			if($('#mv').val() == '1'){
@@ -185,7 +209,6 @@ function message_send(){
 			alert('오류!!!!');	
 		}
 	});
-	event.stopPropagation();
 };
 
 </script>

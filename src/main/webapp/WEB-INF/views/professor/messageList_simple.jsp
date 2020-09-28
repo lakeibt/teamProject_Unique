@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
-
+<html>
+<head>
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+</head>
+<body>
 <c:if test="${cnt > 0}">
 	<c:forEach var="dto" items="${dtos}">
 		<li class="message-item" style="padding: 5px 5px;">
@@ -37,3 +42,5 @@
 </c:if>
 
 
+</body>
+</html>

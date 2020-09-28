@@ -15,4 +15,7 @@ public interface ProfessorService {
 	// 쪽지 미리보기
 	public void messageSimple(HttpServletRequest req, Model model);
 	
+	// 쪽지 보내기
+	public int messageSend(HttpServletRequest req, Model model);
+	
 }

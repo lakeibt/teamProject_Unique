@@ -2,6 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
 
+<html>
+<head>
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+</head>
+<body>
+
 <script type="text/javascript">
 function message_send2(){
 	message_send();
@@ -11,7 +18,8 @@ function message_send2(){
 
 <div class="card" style="background-color: white;">
 	<form >
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> <select class="message_select"
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<select class="message_select"
 			onchange="changeList()">
 			<c:if test="${option  == 'receive'}">
 				<option value="receive" selected>받은 쪽지</option>
@@ -67,3 +75,6 @@ function message_send2(){
 		</table>
 	</form>
 </div>
+
+</body>
+</html>
