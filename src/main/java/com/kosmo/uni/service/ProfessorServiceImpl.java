@@ -103,4 +103,12 @@ public class ProfessorServiceImpl implements ProfessorService{
 		model.addAttribute("dto", vo);
 	}
 
+	@Override
+	public void getProfessorProfile(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("memId");
+		Map<String, Object> proProfile = proDAO.getProfessorProfile(id);
+		
+		model.addAttribute("profile", proProfile);
+	}
+
 }

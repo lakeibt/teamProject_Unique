@@ -68,6 +68,26 @@ public class EduController {
 //		return "guest/course";
 //	}
 	
+	@RequestMapping("/guest/bcrypt")
+	public String bcrypt() {
+		logger.info("url ==> bcrypt");
+		
+		return "guest/bcrypt";
+	}
+	
+	@RequestMapping("/guest/bcrypt2")
+	public String bcrypt2(HttpServletRequest req, Model model) {
+		logger.info("url ==> bcrypt2");
+		
+		String pwd = req.getParameter("pwd");
+		System.out.println(pwd);
+		String enc_pwd = passwordEncoder.encode(pwd);
+		
+		model.addAttribute("enc_pwd", enc_pwd);
+		
+		return "guest/bcrypt2";
+	}
+	
 	@RequestMapping("/guest/sample")
 	public String gue_sample() {
 		logger.info("url ==> sample");

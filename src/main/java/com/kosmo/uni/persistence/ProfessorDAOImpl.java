@@ -37,6 +37,10 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public MessageVO getMessage(int num) {
 		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessage", num);
 	}
+	@Override
+	public Map<String, Object> getProfessorProfile(String id) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getProfessorProfile", id);
+	}
 
 
 }

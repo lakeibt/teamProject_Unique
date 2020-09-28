@@ -27,9 +27,9 @@ public class ProfessorController {
 	}
 	
 	@RequestMapping("/professor/myPage")
-	public String pro_myPage() {
+	public String pro_myPage(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage");
-		
+		proService.getProfessorProfile(req, model);
 		return "professor/myPage";
 	}
 	
