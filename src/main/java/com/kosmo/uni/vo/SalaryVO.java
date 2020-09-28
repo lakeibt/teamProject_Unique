@@ -21,8 +21,16 @@ public class SalaryVO {
 	private int meal;  // 식대
 	private int contract_vehicle;  //차량유지비 
 	
+	private int salary_all_total;  // 전체 사원 급여 합계
 	
 	
+	
+	public int getSalary_all_total() {
+		return salary_all_total;
+	}
+	public void setSalary_all_total(int salary_all_total) {
+		this.salary_all_total = salary_all_total;
+	}
 	public int getCost() {
 		return cost;
 	}

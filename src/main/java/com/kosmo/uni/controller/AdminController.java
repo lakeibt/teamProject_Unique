@@ -194,22 +194,50 @@ public class AdminController {
 		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
 	}
+	// 급여대장 수정 
+	@RequestMapping(value = "/admin/human_resources/pay/salary_modify")
+	public String salary_modify(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_modify");
+		adminService.salaryModify(req, model);
+		return "admin/human_resources/pay/salary_modify";
+	}
 	
-	// 급여대장 - 전체 계산 
-	@RequestMapping(value = "/admin/human_resources/pay/salaryTotalinput")
-	public String salaryTotalinput(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salaryTotalinput");
-		
-		adminService.salaryInput(req, model);
-		adminService.salaryList(req, model);
-		return "admin/human_resources/pay/salary_list";
+	// 급여대장 수정 salaryModifyPro  salary_delete
+	@RequestMapping(value = "/admin/human_resources/pay/salary_modifyPro")
+	public String salary_modifyPro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_modifyPro");
+		adminService.salaryModifyPro(req, model);
+		return "admin/human_resources/pay/salary_modifyPro";
+	}
+	// 급여대장삭제   salary_delete
+	@RequestMapping(value = "/admin/human_resources/pay/salary_delete")
+	public String salary_delete(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_delete");
+		adminService.salary_delete(req, model);
+		return "admin/human_resources/pay/salary_delete";
+	}
+	// 급여대장 - 전체 계산 클릭시 급여 인원수 업데이트
+	@RequestMapping(value = "/admin/human_resources/pay/divisioncnt")
+	public String divisioncnt(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/divisioncnt");
+		adminService.salaryCnt(req, model);
+		return "admin/human_resources/pay/divisioncnt";
 	}
 
+	// 급여대장 - 전체 계산 클릭시토탈 업데이트
+	@RequestMapping(value = "/admin/human_resources/pay/salarytotal")
+	public String salarytotal(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salarytotal");
+		adminService.salarytotal(req, model);
+		return "admin/human_resources/pay/salarytotal";
+	}
+	
+	
 	// 급여대장 - 급여명세서
 	@RequestMapping(value = "/admin/human_resources/pay/payslip")
 	public String salary_payslip(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salary_payslip");
-
+		logger.info("human_resources/pay/payslip");
+		adminService.salary_payslip(req, model);
 		return "admin/human_resources/pay/payslip";
 	}
 
@@ -258,7 +286,7 @@ public class AdminController {
 		
 		return "admin/human_resources/pay/salary_enroll";
 	}
-
+	
 	// 사원별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_human")
 	public String salary_list_human(HttpServletRequest req, Model model) {

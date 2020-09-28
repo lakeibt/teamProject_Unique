@@ -30,7 +30,7 @@
 	
 	<insert id="salary_input" parameterType="java.util.Map">
 		INSERT INTO a_salary_input
-		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
+		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name},1,0,0)
 	</insert>
 	
 	<select id="getSalaryCnt" resultType="int">
@@ -41,8 +41,8 @@
 		<![CDATA[
 		SELECT * 
 			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
-	        , salary_inday, payments_month, salary_name, rowNUM rNum 
-			FROM ( SELECT * FROM a_salary_input ORDER BY salary_input_num ASC)) 
+	        , salary_inday, payments_month, salary_total, salary_name, division_cnt, rowNUM rNum 
+			FROM ( SELECT * FROM a_salary_input ORDER BY salary_input_num DESC)) 
 		WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
 	</select>
@@ -77,7 +77,7 @@
 	
 	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
 		SELECT m.id, m.name, m.rank, m.depart, 
-				s.salary_input_num, s.payments_division, 
+				s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total,
 				s.salary_name, ss.salary, s.salary_inday, m.car
 		  FROM a_salary_input s 
 		  Join a_admin m
@@ -89,6 +89,80 @@
 	
 	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
 		select * from a_variableCost where cost = #{cost}
+	</select>
+	
+	<select id="getDivisionCnt" resultType="int">
+		SELECT Count(*) as cnt
+		  FROM a_salary_input s 
+		  Join a_admin m
+		    ON s.payments_division = m.Payments_division
+		 where s.salary_input_num = #{salary_input_num} and s.payments_division = #{payments_division}
+	</select>
+	
+	<update id="updateDivCnt" parameterType="java.util.Map">
+		update a_salary_input
+ 		set division_cnt = #{division_cnt} where salary_input_num = #{salary_input_num}
+	</update>
+	
+	<select id="getSalaryArticle" resultType="com.kosmo.uni.vo.SalaryInputVO">
+		select salary_division, payments_division, salary_name, salary_inday, salary_input_num from a_salary_input where salary_input_num = #{salary_input_num}
+	</select>
+	
+	<update id="UpdateSalInput" parameterType="java.util.Map">
+		update a_salary_input
+		set salary_division=#{salary_division}, 
+		payments_division = #{payments_division}, 
+		salary_inday = #{salary_inday}, 
+		salary_name = #{salary_name} 
+		where salary_input_num = #{salary_input_num} 
+	</update>
+	
+	<delete id="deleteSalary" parameterType="int">
+		delete a_salary_input where salary_input_num = #{salary_input_num}
+	</delete>
+	
+	<update id="updateTotalSal" parameterType="java.util.Map">
+		update a_salary_input 
+ 		set salary_total=#{salary_total} where salary_input_num = #{salary_input_num}
+	</update>
+	
+	<update id="updateZeroTotal" parameterType="int">
+		update a_salary_input 
+		set salary_total = 0 where salary_input_num = #{salary_input_num}
+	</update>
+	<select id="selectSalSum" resultType="int">
+	 select sum(sa.salary) salary
+	   from a_salary_input s, a_admin a, a_salaryset sa
+	  where s.payments_division = a.Payments_division
+	    and sa.rank = a.rank
+	    and s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getMealCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select sum(v.meal) meal, sum(v.contract_vehicle) contract_vehicle
+		  from a_salary_input s, a_admin a, a_variablecost v
+		 where s.payments_division = a.Payments_division
+		   and a.car = v.cost
+		   and s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getPayslip" resultType="com.kosmo.uni.vo.PayslipVO">
+		SELECT m.id id,
+			   m.name name, 
+			   m.enterday enterday,
+			   m.rank rank,
+			   m.depart depart, 
+		       s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total,
+		        s.salary_name, ss.salary, s.salary_inday, m.car, v.meal, v.contract_vehicle
+		  FROM a_salary_input s ,a_admin m, a_salaryset ss, a_variablecost v
+		 where s.payments_division = m.Payments_division
+		    and ss.Rank = m.rank
+		    and m.car = v.cost
+		    and s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="salary_payslip" resultType="com.kosmo.uni.vo.SalaryVO">
+		select salary_name from a_salary_input where salary_input_num=#{salary_input_num}
 	</select>
 	
 </mapper>

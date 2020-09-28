@@ -12,6 +12,80 @@
 
 <script>
 $(document).ready(function(){
+	$('#delete').click(function(){
+		var num = $("#salaryNum").val();
+		window.location="salary_delete?salary_input_num="+num;
+		
+	})
+});
+$(document).ready(function(){
+	$('#modify').click(function(){
+		/* var num = $("#salaryNum").val();
+		window.location="salary_modify?salary_input_num="+num; */
+		modi_sal();
+	})
+});
+
+function modi_sal(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/admin/human_resources/pay/salary_modify',  // 응답페이지  ==> 컨트롤러/basic.
+		type : 'GET',  //전송 방식("get", "post")
+		data : {
+			salary_input_num:$("#salaryNum").val()
+		},  
+		success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+			$('#modifySalary').html(data);
+		}, 
+		error : function() {
+			alert('오류');
+		}
+	});
+}
+
+
+$(document).ready(function(){
+	$('#cntAndTotal').click(function(){
+		divisioncnt();
+		salarytotal();
+		
+	})
+});
+
+function divisioncnt(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/admin/human_resources/pay/divisioncnt',  // 응답페이지  ==> 컨트롤러/basic.
+		type : 'GET',  //전송 방식("get", "post")
+		data : {
+			salary_input_num:$("#salaryNum").val(),
+			payments_division:$("#divisionNum").val()
+		},   //요청한 데이터 형식("html", "xml", "json", "text")
+		success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+			$('#divi_cnt').html(data);
+		}, 
+		error : function() {
+			alert('오류');
+		}
+	});
+}
+
+function salarytotal(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/admin/human_resources/pay/salarytotal',  // 응답페이지  ==> 컨트롤러/basic.
+		type : 'GET',  //전송 방식("get", "post")
+		data : {
+			salary_input_num:$("#salaryNum").val(),
+			payments_division:$("#divisionNum").val()
+		},   //요청한 데이터 형식("html", "xml", "json", "text")
+		success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+			$('#total_all').html(data);
+		},
+		error : function() {
+			alert('오류');
+		}
+	});
+}
+
+$(document).ready(function(){
 	$('#payroll').click(function(){
 		selectSalary();
 	})
@@ -32,22 +106,7 @@ function selectSalary(){
 		}
 	});
 }
-	
-$(function(){
-	$('#payslip').click(function(){
-		$.ajax({
-			url : '${pageContext.request.contextPath}/admin/human_resources/pay/payslip',  // 응답페이지  ==> 컨트롤러/basic.
-			type : 'GET',  //전송 방식("get", "post")
-			dataType : 'text',   //요청한 데이터 형식("html", "xml", "json", "text")
-			success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
-				$('#pay_payslip').html(data);
-			}, 
-			error : function() {
-				alert('오류');
-			}
-		});
-	});
-});
+
 </script>
 </head>
 <body class="nav-md">
@@ -71,10 +130,9 @@ $(function(){
 							<div class="x_panel">
 								<div class="x_title" style="padding-bottom: 20px;">
 									<h4 style="width: 300px; float: left;">급여 계산/대장</h4>
-									<a class="btn btn-app"
-										style="height: 30px; padding: 5px; float: right;">수정</a><a
-										class="btn btn-app"
-										href="${path}admin/human_resources/pay/salary"
+									<a class="btn btn-app" style="height: 30px; padding: 5px; float: right;" id="delete">삭제</a>
+									<a class="btn btn-app" style="height: 30px; padding: 5px; float: right;" id="modify">수정</a>
+									<a class="btn btn-app" href="${path}admin/human_resources/pay/salary"
 										style="height: 30px; padding: 5px; float: right;">신규등록</a><br>
 								</div>
 								<div class="x_content">
@@ -95,11 +153,11 @@ $(function(){
 											</tr>
 										</thead>
 										<tbody style="color: grey;">
-
 											<c:if test="${cnt > 0 }">
-												
 												<c:forEach var="atos" items="${mtos}">
 													<input type="hidden" id="salaryNum" name="salaryNum" value="${atos.salary_input_num}">
+													<input type="hidden" id="divisionNum" name="divisionNum" value="${atos.payments_division}">
+													
 													<tr>
 														<td>
 														${atos.salary_input_num}
@@ -124,33 +182,38 @@ $(function(){
 																value="${atos.salary_inday}" /></td>
 														<c:if test="${atos.salary_confirm==1}">
 															<td><a class="btn btn-app" 
-																style="height: 30px; padding: 5px;"
-																onclick="salTotalIn('${atos.salary_input_num}');">급여계산</a>
+																style="height: 30px; padding: 5px;" id="cntAndTotal">급여계산</a>
 														</c:if>
 														<c:if test="${atos.salary_confirm!=1}">
 															<td><a style="color: red;">급여 확정</a><br></td>
 														</c:if>
-														<td>${adminCnt}</td>
-
+														<td>
+															<div id="divi_cnt">
+															${atos.division_cnt}
+															</div>
+														</td>
 														<c:if test="${atos.salary_confirm==1}">
 															<td><a id="payroll" class="btn btn-app"
 																style="height: 30px; padding: 5px;">조회</a><br> <a
-																class="btn btn-app" style="height: 30px; padding: 5px;">확정</a><br>
+																class="btn btn-app" style="height: 30px; padding: 5px;" onclick="salCommit();">확정</a><br>
 																<a class="btn btn-app"
-																style="height: 30px; padding: 5px;">삭제</a></td>
+																style="height: 30px; padding: 5px;" <%-- onclick="deleteSalary('${atos.salary_input_num}')" --%>>삭제</a></td>
 														</c:if>
 														<c:if test="${atos.salary_confirm!=1}">
 															<td><a class="btn btn-app"
 																style="height: 30px; padding: 5px;">삭제</a></td>
 														</c:if>
-														<td><a id="payslip" class="btn btn-app"
-															style="height: 30px; padding: 5px;">조회</a><br> <a
+														<td><a class="btn btn-app" style="height: 30px; padding: 5px;" href="${path}admin/human_resources/pay/payslip?salary_input_num=${atos.salary_input_num}">조회</a><br> <a
 															class="btn btn-app" style="height: 30px; padding: 5px;">email</a>
 														</td>
-														<td><fmt:formatNumber type="number"
-																maxFractionDigits="3" value="" /></td>
+														<td>
+															<div id="total_all">
+																<fmt:formatNumber type="number" maxFractionDigits="3" value="${atos.salary_total}"/>
+															</div>
+														</td>
 													</tr>
 												</c:forEach>
+											
 											</c:if>
 
 
@@ -202,9 +265,11 @@ $(function(){
 						</td>
 					</tr>
 				</table>
-
+			
 				<br>
-
+				<div id="modifySalary">
+					<!-- 결과 출력 위치 -->
+				</div>	
 				<div id="pay_payroll">
 					<!-- 결과 출력 위치 -->
 				</div>
