@@ -15,12 +15,12 @@
 	<!-- menu profile quick info -->
 	<div class="profile clearfix">
 		<div class="profile_pic">
-			<img src="${img}sample/img.jpg" alt="..."
+			<img src="${adm_photo}${sessionScope.photo}" alt="..."
 				class="img-circle profile_img">
 		</div>
 		<div class="profile_info">
-			<span>Welcome,</span>
-			<h2>이름</h2>
+			<span>환영합니다</span>
+			<h2>${sessionScope.name}님</h2>
 		</div>
 	</div>
 	<!-- /menu profile quick info -->

@@ -19555,6 +19555,7 @@ Copyright (c) 2015 Daniel Eden
   }
 }
 
+
 .dark-edition {
   background-color: #f1f4f6;
 }
@@ -20440,7 +20441,7 @@ Copyright (c) 2015 Daniel Eden
 
 .dark-edition .sidebar .sidebar-background:after,
 .dark-edition .sidebar {
-  background: #1f283e;
+  background: #1f283e;	/* 사이드바 배경색 */
   opacity: .94;
 }
 
@@ -20794,7 +20795,6 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition [class^='bmd-label'],
-.dark-edition [class*=' bmd-label'] {
   color: #999999;
 }
 

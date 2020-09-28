@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.AdminDAO;
-import com.kosmo.uni.persistence.EduDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.SalaryInputVO;
+import com.kosmo.uni.vo.SalaryVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -755,17 +756,35 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void salaryInput(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
-		int payments_division = Integer.parseInt(req.getParameter("payments_division"));
 		System.out.println("salary_input_num : " + salary_input_num);
-		System.out.println("payments_division : " + payments_division);
 		
 		Map <String, Object> map = new HashMap<>();
 		map.put("salary_input_num", salary_input_num);
-		map.put("payments_division", payments_division);
-		
-		//dao.getSelectList(map);
-		//List<SalaryInputVO> mtos = dao.getSalaryList(map);
-		
+
+		List<SalaryVO> stos = dao.getSelectList(map);
+		System.out.println("stos.size() : " +stos.size());
+
+		for(int i = 0; i < stos.size(); i++) {
+			SalaryVO sal = stos.get(i);
+			int car = 1;
+			if(sal.getCar() == car) {
+				int cost = sal.getCar();
+				SalaryVO vo = dao.getSelectCar(cost);
+				sal.setCost(vo.getCost());
+				sal.setMeal(vo.getMeal());
+				sal.setContract_vehicle(vo.getContract_vehicle());
+				System.out.println("cost : " +sal);
+			} else {
+				int cost0 = sal.getCar();
+				SalaryVO vo = dao.getSelectCar(cost0);
+				sal.setCost(vo.getCost());
+				sal.setMeal(vo.getMeal());
+				sal.setContract_vehicle(vo.getContract_vehicle());
+				System.out.println("cost0 : " +sal);
+			}
+		}
+		System.out.println("stos : " + stos);
+		model.addAttribute("stos", stos);
 	}
 
 	@Override
@@ -783,4 +802,139 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	@Override
+	public void classdelete(HttpServletRequest req, Model model) {
+		int delete_Cnt = 0;
+		String code = req.getParameter("co_code");
+		delete_Cnt = dao.classDelete(code);
+		model.addAttribute("delete_Cnt", delete_Cnt);
+		
+	}
+
+	@Override
+	public void classinput(HttpServletRequest req, Model model) {
+		
+		CourseVO vo = new CourseVO();
+
+		String co_name = req.getParameter("co_name");
+		String m_code = req.getParameter("m_code");
+		int school_year = Integer.parseInt(req.getParameter("school_year"));
+		String p_code = req.getParameter("p_code");
+		int co_year = Integer.parseInt(req.getParameter("co_year"));
+		int co_semester = Integer.parseInt((req.getParameter("co_semester")));
+		String co_day = req.getParameter("co_day");
+		int le_code = Integer.parseInt(req.getParameter("le_code")); 
+		int grade = Integer.parseInt(req.getParameter("grade"));
+		int limit_num = Integer.parseInt(req.getParameter("limit_num"));
+		String p_name = req.getParameter("p_name");
+		
+		vo.setCo_name(co_name);
+		vo.setM_code(m_code);
+		vo.setSchool_year(school_year);
+		vo.setP_code(p_code);
+		vo.setCo_year(co_year);
+		vo.setCo_semester(co_semester);
+		vo.setCo_day(co_day);
+		vo.setLe_code(le_code);
+		vo.setGrade(grade);
+		vo.setLimit_num(limit_num);
+		vo.setP_name(p_name);
+		System.out.println();
+		
+		int insert_Cnt = dao.classInsert(vo);
+		System.out.println("insert cnt :"+insert_Cnt);
+		
+		model.addAttribute("cnt",insert_Cnt);
+	}
+
+	@Override
+	public void classmod(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		
+		CourseVO vo = dao.classInfo(co_code);
+		model.addAttribute("vo",vo);
+		
+	}
+
+	@Override
+	public void classmodClear(HttpServletRequest req, Model model) {
+		
+		CourseVO vo = new CourseVO();
+		
+		String co_code = req.getParameter("co_code");
+		String co_name = req.getParameter("co_name");
+		String m_code = req.getParameter("m_code");
+		int school_year = Integer.parseInt(req.getParameter("school_year"));
+		String p_code = req.getParameter("p_code");
+		int co_year = Integer.parseInt(req.getParameter("co_year"));
+		int co_semester = Integer.parseInt((req.getParameter("co_semester")));
+		String co_day = req.getParameter("co_day");
+		int le_code = Integer.parseInt(req.getParameter("le_code")); 
+		int grade = Integer.parseInt(req.getParameter("grade"));
+		int limit_num = Integer.parseInt(req.getParameter("limit_num"));
+		String p_name = req.getParameter("p_name");
+		System.out.println("co_code :"+co_code);
+		System.out.println("co_name :"+co_name);
+		System.out.println("m_code :"+m_code);
+		System.out.println("school_year :"+school_year);
+		System.out.println("p_code :"+p_code);
+		
+		vo.setCo_code(co_code);
+		vo.setCo_name(co_name);
+		vo.setM_code(m_code);
+		vo.setSchool_year(school_year);
+		vo.setP_code(p_code);
+		vo.setCo_year(co_year);
+		vo.setCo_semester(co_semester);
+		vo.setCo_day(co_day);
+		vo.setLe_code(le_code);
+		vo.setGrade(grade);
+		vo.setLimit_num(limit_num);
+		vo.setP_name(p_name);
+		System.out.println();
+		
+		int update_Cnt = dao.classmodClear(vo);
+		System.out.println("update_Cnt :"+update_Cnt);
+		
+		model.addAttribute("cnt", update_Cnt);
+		
+	}
+
+	@Override
+	public void parkingList(HttpServletRequest req, Model model) {
+		int parkCnt = 0;
+
+			parkCnt = dao.getParkingCnt();
+			System.out.println("parkCntSVS : " + parkCnt);
+			List<ParkVO> dtos = dao.getParkingList();
+			System.out.println("dtosSVS" + dtos);
+			model.addAttribute("dtos",dtos);
+			model.addAttribute("parkCnt",parkCnt);
+	}
+
+	@Override
+	public void parkSearchList(HttpServletRequest req, Model model) {
+		int parkCnt = 0;
+		
+		String param = req.getParameter("param");
+		String text = req.getParameter("intext");
+		System.out.println("param 값 : "+param);
+		System.out.println("text 값 : "+text);
+		if(param.equals("carnum")) {
+			parkCnt = dao.getParkingCnt();
+			System.out.println("parkCntSVS : " + parkCnt);
+			List<ParkVO> dtos = dao.getCarNumList(text);
+			System.out.println("dtosSVS" + dtos);
+			model.addAttribute("dtos",dtos);
+			model.addAttribute("parkCnt",parkCnt);
+		} else {
+			parkCnt = dao.getParkingCnt();
+			System.out.println("parkCntSVS : " + parkCnt);
+			List<ParkVO> dtos = dao.getSearchList(text);
+			System.out.println("dtosSVS" + dtos);
+			model.addAttribute("dtos",dtos);
+			model.addAttribute("parkCnt",parkCnt);
+		}
+	}
 }

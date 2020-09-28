@@ -6,10 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,86 +43,22 @@ public class EduController {
 	public String gue_logout(HttpSession session, HttpServletRequest req) {
 		session.invalidate();
 		
-		return "guest/main";
+		return "guest/login";
 	}
 	
 	@RequestMapping("/guest/main")
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
-		
-		return "guest/main";
+		return "guest/login";
 	}
 	
-	@RequestMapping("/guest/myPage")
-	public String gue_myPage() {
-		logger.info("url ==> myPage");
-		
-		return "guest/myPage";
-	}
-	
-	@RequestMapping("/guest/myPage_modify")
-	public String gue_myPage_modify(HttpServletRequest req, Model model) {
-		logger.info("url ==> myPage_modify");
-		
-		eduService.studentinfo(req, model);
-		return "guest/myPage_modify";
-	}
-	
-	@RequestMapping("/guest/myPage_modifyPro")
-	public String gue_myPage_modifyPro(HttpServletRequest req, Model model) {
-		logger.info("url ==> myPage_modifyPro");
-		eduService.studentModifyPro(req, model);
-		return "guest/myPage_modifyPro";
-	}
-	
-	@RequestMapping("/guest/course_register")
-	public String gue_course_register() {
-		logger.info("url ==> course_register");
-		
-		return "guest/course_register";
-	}
-	
-	@RequestMapping("/guest/course_timeTable")
-	public String gue_course_timeTable(HttpServletRequest req, Model model) {
-		logger.info("url ==> course_timeTable");
-		
-		eduService.studentList(req, model);
-		return "guest/course_timeTable";
-	}
-	
-	@RequestMapping("/guest/course")
-	public String gue_course(HttpServletRequest req, Model model) {
-		logger.info("url ==> course");
-		
-		eduService.courseList(req, model);
-		return "guest/course";
-	}
-	@RequestMapping("/guest/course_syllabus")
-	public String gue_course_syllabus(HttpServletRequest req, Model model) {
-		logger.info("url ==> course_syllabus");
-		
-		eduService.course_syllabus(req, model);
-		return "guest/course_syllabus";
-	}
-	
-	@RequestMapping("/guest/score")
-	public String gue_score(HttpServletRequest req, Model model) {
-		logger.info("url ==> score");
-		eduService.studentinfo(req, model);
-		return "guest/score";
-	}
-	@RequestMapping("/guest/scoreInfo")
-	public String gue_scoreInfo(HttpServletRequest req, Model model) {
-		logger.info("url ==> scoreInfo");
-		eduService.studentGradeList(req, model);
-		return "guest/scoreInfo";
-	}
-	@RequestMapping("/guest/employment")
-	public String gue_employment() {
-		logger.info("url ==> employment");
-		
-		return "guest/employment";
-	}
+//	@RequestMapping("/guest/course")
+//	public String gue_course(HttpServletRequest req, Model model) {
+//		logger.info("url ==> course");
+//		
+//		eduService.studentList(req, model);
+//		return "guest/course";
+//	}
 	
 	@RequestMapping("/guest/sample")
 	public String gue_sample() {
@@ -134,47 +67,13 @@ public class EduController {
 		return "guest/sample";
 	}
 	
-	@RequestMapping("/guest/employmentnext")
-	public String gue_employmentnext() {
-		logger.info("url ==> employmentnext");
+	@RequestMapping("/guest/sample2")
+	public String gue_sample2() {
+		logger.info("url ==> sample2");
 		
-		return "guest/employmentnext";
+		return "guest/sample2";
 	}
 	
-	@RequestMapping("/guest/employmentnext2")
-	public String gue_employmentnext2() {
-		logger.info("url ==> employmentnext2");
-		
-		return "guest/employmentnext2";
-	}
-	
-	@RequestMapping("/guest/contest")
-	public String gue_contest() {
-		logger.info("url ==> contest");
-		
-		return "guest/contest";
-	}
-	
-	@RequestMapping("/guest/contestnext")
-	public String gue_contestnext() {
-		logger.info("url ==> contestnext");
-		
-		return "guest/contestnext";
-	}
-	
-	@RequestMapping("/guest/contestnext2")
-	public String gue_contestnext2() {
-		logger.info("url ==> contestnext2");
-		
-		return "guest/contestnext2";
-	}
-	
-	@RequestMapping("/guest/message")
-	public String gue_message() {
-		logger.info("url ==> message");
-		
-		return "guest/message";
-	}
 	
 	@RequestMapping("/guest/testSignIn")
 	public String testSignIn() {

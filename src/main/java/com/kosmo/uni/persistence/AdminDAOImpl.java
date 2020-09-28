@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.SalaryVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -41,6 +43,11 @@ public class AdminDAOImpl implements AdminDAO {
 
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		dtos = dao.getAttendance_List(map);
+		
+		for (String key : map.keySet()) {
+			String value = String.valueOf(map.get(key));
+			System.out.println("[key]:" + key + ", [value]:" + value);
+		}
 
 		return dtos;
 	}
@@ -122,9 +129,27 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
+	public List<SalaryVO> getSelectList(Map<String, Object> map) {
+		List<SalaryVO> stos = null;
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		stos = dao.getSelectList(map);
+		System.out.println("getSalaryList : " + stos);
+		return stos;
+	}
+
+	@Override
+	public SalaryVO getSelectCar(int cost) {
+		SalaryVO vo = null;
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		vo = dao.getSelectCar(cost);
+		System.out.println("getSelectCar : " + vo);
+		return vo;
+	}
+
+	@Override
 	public List<AdminVO> getSalary_list_month(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
-
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		dtos = dao.getSalary_list_human(map);
 		System.out.println("dao_dtos" + dtos);
@@ -161,6 +186,52 @@ public class AdminDAOImpl implements AdminDAO {
 		return dao.getCourseList();
 	}
 
+	@Override
+	public int classDelete(String code) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classDelete(code);
+	}
+
+	@Override
+	public int classInsert(CourseVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classInsert(vo);
+	}
+
+	@Override
+	public CourseVO classInfo(String code) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classInfo(code);
+	}
+
+	@Override
+	public int classmodClear(CourseVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.classmodClear(vo);
+	}
 	
+	@Override
+	public int getParkingCnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getParkingCnt();
+	}
+
+	@Override
+	public List<ParkVO> getParkingList() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getParkingList();
+	}
+
+	@Override
+	public List<ParkVO> getSearchList(String date) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSearchList(date);
+	}
+
+	@Override
+	public List<ParkVO> getCarNumList(String date) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getCarNumList(date);
+	}
 
 }

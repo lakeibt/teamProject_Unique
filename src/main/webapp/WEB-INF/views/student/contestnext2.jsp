@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
 <%@ page import="org.jsoup.Jsoup" %>
 <%@ page import="org.jsoup.nodes.Document" %>
@@ -7,21 +6,21 @@
 <%@ page import="org.jsoup.select.Elements" %>
 
 <%
-        request.setCharacterEncoding("utf-8");
-      String url = request.getParameter("url");
-       Document doc2 = Jsoup.connect("https://www.wevity.com/" + url).get();
+	request.setCharacterEncoding("utf-8");
+	String url = request.getParameter("url");
+	Document doc2 = Jsoup.connect("https://www.wevity.com/" + url).get();
 %>
 <%
-        Elements posts = doc2.body().getElementsByClass("contest-detail");
-        Elements file = posts.select("div");
+	Elements posts = doc2.body().getElementsByClass("contest-detail");
+	Elements file = posts.select("div");
 %>
 
-<div class="col-lg-12 d-flex flex-column justify-content-center-center">
-	<div class="icon-box" style="padding-top: 50px;">
-		<div style="width: 40%; float: left;">
-		<img src = "https://www.wevity.com<%=file.select(".thumb img").attr("src")%>" style="width: 70%"><br>
+<div class="col-lg-12">
+	<div class="row" style="padding-top: 50px;">
+		<div class="col-lg-4">
+			<img src = "https://www.wevity.com<%=file.select(".thumb img").attr("src")%>" style="height: 95%"><br>
 		</div>
-		<div style="width: 60%; float: right;">
+		<div class="col-lg-8">
 			<h4><%=file.select(".tit-area h6").text()%></h4>
 			<table id="target" class="table" style="font-size:14px;">
 				<tbody>

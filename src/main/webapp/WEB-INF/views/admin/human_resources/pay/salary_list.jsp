@@ -11,22 +11,27 @@
 <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
 
 <script>
-
-$(function(){
+$(document).ready(function(){
 	$('#payroll').click(function(){
-		$.ajax({
-			url : '${pageContext.request.contextPath}/admin/human_resources/pay/payroll',  // 응답페이지  ==> 컨트롤러/basic.
-			type : 'GET',  //전송 방식("get", "post")
-			dataType : 'text',   //요청한 데이터 형식("html", "xml", "json", "text")
-			success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
-				$('#pay_payroll').html(data);
-			}, 
-			error : function() {
-				alert('오류');
-			}
-		});
-	});
+		selectSalary();
+	})
 });
+
+function selectSalary(){
+	$.ajax({
+		url : '${pageContext.request.contextPath}/admin/human_resources/pay/payroll',  // 응답페이지  ==> 컨트롤러/basic.
+		type : 'GET',  //전송 방식("get", "post")
+		data : {
+			salary_input_num:$("#salaryNum").val()
+		},   //요청한 데이터 형식("html", "xml", "json", "text")
+		success : function(data){  //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+			$('#pay_payroll').html(data);
+		}, 
+		error : function() {
+			alert('오류');
+		}
+	});
+}
 	
 $(function(){
 	$('#payslip').click(function(){
