@@ -39,6 +39,14 @@ public class EduController {
 		return "guest/login";
 	}
 	
+	// 로그인 페이지로 이동
+	@RequestMapping("/guest/toMain")
+	public String gue_toMain() {
+		logger.info("url ==> toMain");
+		
+		return "guest/toMain";
+	}
+	
 	@RequestMapping("/guest/logout")
 	public String gue_logout(HttpSession session, HttpServletRequest req) {
 		logger.info("url ==> logout");
