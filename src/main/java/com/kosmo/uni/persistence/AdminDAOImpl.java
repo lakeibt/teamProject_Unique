@@ -19,12 +19,14 @@ public class AdminDAOImpl implements AdminDAO {
 	SqlSession sqlSession;
 
 	@Override
+	//근태관리 건수
 	public int getAttendance_Cnt() {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getAttendance_Cnt();
 	}
 	
 	@Override
+	//근태관리 검색 건수
 	public int getAttendance_Search_Cnt(Map<String, Object> map) {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		
@@ -37,6 +39,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
+	//근태관리 리스트
 	public List<AdminVO> getAttendance_List(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
 
@@ -52,6 +55,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
+	//근태관리 검색 리스트
 	public List<AdminVO> getAttendance_List_Search(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
 
@@ -67,30 +71,55 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
+	//급.상여 건수
 	public int getSalary_Cnt() {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getSalary_Cnt();
 	}
 
 	@Override
-	public List<AdminVO> getSalary_list_human(Map<String, Object> map) {
+	//급.상여 리스트
+	public List<AdminVO> getSalary_list_humanMonth(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
 
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
-		dtos = dao.getSalary_list_human(map);
+		dtos = dao.getSalary_list_humanMonth(map);
 		System.out.println("dao_dtos" + dtos);
 		return dtos;
 	}
+	
+	@Override
+	public int humanSearch_Cnt(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.humanSearch_Cnt(map);
+	}
+	
 
 	@Override
-	public List<AdminVO> getSalary_list_human_Search(Map<String, Object> map) {
+	public List<AdminVO> humanSearch_List(Map<String, Object> map) {
 		List<AdminVO> dtos = null;
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
-		dtos = dao.getSalary_list_human_Search(map);
+		dtos = dao.humanSearch_List(map);
 		System.out.println("dao_dtos" + dtos);
 		return dtos;
 	}
+	
+	@Override
+	public int monthSearch_Cnt(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.monthSearch_Cnt(map);
+	}
+	
 
+	@Override
+	public List<AdminVO> monthSearch_List(Map<String, Object> map) {
+		List<AdminVO> dtos = null;
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dtos = dao.monthSearch_List(map);
+		System.out.println("dao_dtos" + dtos);
+		return dtos;
+	}
+	
 	@Override
 	public int salary_input(Map<String, Object> map) {
 		int dtos;
@@ -146,33 +175,6 @@ public class AdminDAOImpl implements AdminDAO {
 		return vo;
 	}
 
-	@Override
-	public List<AdminVO> getSalary_list_month(Map<String, Object> map) {
-		List<AdminVO> dtos = null;
-		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
-		dtos = dao.getSalary_list_human(map);
-		System.out.println("dao_dtos" + dtos);
-		return dtos;
-	}
-
-	@Override
-	public List<AdminVO> getSalary_list_month_Search(Map<String, Object> map) {
-
-		List<AdminVO> dtos = null;
-
-		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
-		dtos = dao.getSalary_list_month_Search(map);
-
-		System.out.println("dao_dtos" + dtos);
-
-		for (String key : map.keySet()) {
-			String value = (String) map.get(key);
-			System.out.println("[key]:" + key + ", [value]:" + value);
-		}
-
-		return dtos;
-	}
-	
 	@Override
 	public int getCourseCnt() {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);

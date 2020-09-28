@@ -6,60 +6,45 @@
 <head>
 <title>근태관리</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<!-- Template Main JS File -->
-<script src="${resources}js/admin.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
 <script>
 	var st;
 	var et;
 	var startNum;
 	var cnt;
-	var pageNum = $
-	{
-		pageNum
-	}
+	var pageNum = ${pageNum}
 	console.log("pageNum > " + pageNum)
 	$(function() {
-		$('#attendance_Search')
-				.click(
-						function() {
-							cnt = $
-							{
-								cnt
-							}
-							console.log("cnt : " + cnt);
-							$
-									.ajax({
-										url : "${pageContext.request.contextPath}/admin/human_resources/pay/attendance_Search", // 응답페이지  ==> 컨트롤러/basic.
-										data : {
-											"st" : st,
-											"et" : et
-										},
-										type : 'GET', //전송 방식("get", "post")
-										dataType : 'text',//요청한 데이터 형식("html", "xml", "json", "text")
-										success : function(data) { //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
-											$('#attendance').html(data);
-										},
-										error : function(request, status, error) {
-											console.log("st : " + typeof (st))
-											console.log("et : " + typeof (et))
-											console.log("@code : "
-													+ request.status);
-											console.log("@message : "
-													+ request.responseText);
-											console.log("@error : " + error);
-										}
-									});
-						});
+		$('#attendance_Search').click(
+		function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/human_resources/pay/attendance_Search", // 응답페이지  ==> 컨트롤러/basic.
+				data : {"st" : st, "et" : et},
+				type : 'GET', //전송 방식("get", "post")
+				dataType : 'text',//요청한 데이터 형식("html", "xml", "json", "text")
+				success : function(data) { //콜백함수 - 전송에 성공하여 정상적으로 처리 된 결과가 data에 전달 된다. 
+					$('#attendance').html(data);
+				},
+				error : function(request, status, error) {
+					console.log("st : " + typeof (st))
+					console.log("et : " + typeof (et))
+					console.log("@code : "+ request.status);
+					console.log("@message : "+ request.responseText);
+					console.log("@error : " + error);
+				}
+			});
+		});
 	});
 
 	function startSelect() {
 		st = document.getElementById("startDate").value;
+		st = st.replace(/-/gi,"/");
 		console.log(st);
 	}
 
 	function endSelect() {
 		et = document.getElementById("endDate").value;
+		et = et.replace(/-/gi,"/");
 		console.log(et);
 	}
 </script>
@@ -153,22 +138,29 @@
 															<td>-</td>
 														</c:if>
 														<td>${dto.id}</td>
-														<fmt:parseDate var="intime" value="${dto.tagintime}" pattern="yyyyMMddHHmm" />
-														<fmt:parseDate var="outtime" value="${dto.tagouttime}" pattern="yyyyMMddHHmm" />
+														<fmt:parseDate var="intime" value="${dto.tagintime}" pattern="yyyy/MM/dd/(E) HH:mm" />
+														<fmt:parseDate var="outtime" value="${dto.tagouttime}" pattern="yyyy/MM/dd/(E) HH:mm" />
 														<!-- 날짜 -->
 														<td><fmt:formatDate value="${intime}" pattern="yyyy-MM-dd" /></td> 
 														<!-- 출근시간 -->
 														<td><fmt:formatDate value="${intime}" pattern="HH:mm" /></td>
 														<!-- 퇴근시간 -->
+														<c:if test="${empty outtime}">
+														<td>-</td>
+														</c:if>
+														<c:if test="${!empty outtime}">
 														<td><fmt:formatDate value="${outtime}" pattern="HH:mm" /></td>
-														<fmt:formatDate var="it" value="${intime}"
-															pattern="HH" />
-														<fmt:formatDate var="ot" value="${outtime}"
-															pattern="HH" />
+														</c:if>
+														<!-- 근무시간 -->
+														<fmt:formatDate var="it" value="${intime}" pattern="HH" />
+														<fmt:formatDate var="ot" value="${outtime}" pattern="HH" />
 														<fmt:parseNumber var="i" type="number" value="${it}" />
 														<fmt:parseNumber var="o" type="number" value="${ot}" />
-														<c:if test="${o-i > 0}">
-															<td>${o-i} 시간</td>
+														<c:if test="${empty ot}">
+															<td>-</td>
+														</c:if>
+														<c:if test="${!empty ot}">
+															<td>${o-i}시간</td>
 														</c:if>
 														<fmt:formatDate var="dayOfTheWeek" value="${intime}"
 															pattern="E" />
@@ -231,6 +223,5 @@
 		<!-- /footer content -->
 	</div>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
-	</div>
 </body>
 </html>
