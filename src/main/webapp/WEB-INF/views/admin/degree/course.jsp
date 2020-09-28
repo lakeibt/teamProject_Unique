@@ -155,17 +155,10 @@ function content() {
 	   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
 	}
 	
-<<<<<<< HEAD
 function content2(code) {
 	   var co_code = "co_code=" + code;
 	   
 	   sendRequest(content_callback2,"coursenext2", "get", co_code);
-=======
-function content2() {
-	   var param = "param=" + 1;
-	   
-	   sendRequest(content_callback2,"coursenext2", "get", param);
->>>>>>> yun
 	}
 	function content_callback2() {
 	   var result = document.getElementById("courseinfo");
@@ -178,17 +171,10 @@ function content2() {
 	      } else result.innerHTML = "Error!";
 	   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
 	}
-<<<<<<< HEAD
 function content3(code) {
 	var del = confirm("삭제하시겠습니까?");
 	if(del == true){
 		window.location="classdelete?co_code="+code;
-=======
-function content3() {
-	var del = confirm("삭제하시겠습니까?");
-	if(del == true){
-		  window.location= 'coursewm2';
->>>>>>> yun
 		}
 	}
 </script>
