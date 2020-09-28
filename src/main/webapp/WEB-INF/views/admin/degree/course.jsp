@@ -2,14 +2,38 @@
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
+<script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
+<script src="/uni/resources/js/request.js"></script>
 <head>
 	<title>수강관리</title>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
+<style>
+.btn {
+	width: 100px;
+	background-color: #68A4C4;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+}
+</style>
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
-			<%@ include file="/WEB-INF/views/include/admin_header.jsp"%>
+			<div class="col-md-3 left_col">
+				<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
+			</div>
+
+			<!-- top navigation -->
+			<div class="top_nav">
+				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
+			</div>
+			<!-- /top navigation -->
 			<!-- page content -->
 			<div class="right_col" role="main">
 				<div class="row">
@@ -23,7 +47,14 @@
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
 						<div class="dashboard_graph">
-							<div class="row x_title"><h3>수강조회</h3></div>
+							<div class="row x_title">
+								<div style="width:50%; float: left">
+									<h3>수강조회</h3>
+								</div>
+								<div style="width:50%; float: right">
+									<input type="button" id="select1" class="btn" style="float:right; padding: 6px 6px;" onclick="content()" value="새 강의 등록">
+								</div>
+							</div>
 							<table class="table">
 								<thead>
 									<tr>
@@ -36,37 +67,28 @@
 										<th>학점</th>
 										<th>년도/학기</th>
 										<th>요일/시간</th>
-										<th>강의실</th>
 										<th>담당교수</th>
+										<td></td>
 									</tr>
 								</thead>
 								<tbody>
+								<c:if test="${course_Cnt > 0}">
+								<c:forEach var="dto" items="${dtos}">
 									<tr>
-										<td>L200911</td>
-										<td>물리 물리 박물리!</td>
-										<td>M526987</td>
-										<td>전필</td>
-										<td>40</td>
-										<td>0</td>
-										<td>3</td>
-										<td>2020/1학기</td>
-										<td>월4-6</td>
-										<td>중304</td>
-										<td>박물리</td>
+										<td>${dto.co_code}</td>
+										<td><a href="#" onclick="content2()">${dto.co_name}</a></td>
+										<td>${dto.m_code}</td>
+										<td>${dto.p_code}</td>
+										<td>${dto.limit_num}</td>
+										<td>${dto.co_num}</td>
+										<td>${dto.grade_1}</td>
+										<td>${dto.co_year} / ${dto.co_semester}</td>
+										<td>${dto.co_day} / ${dto.le_code}</td>
+										<td>${dto.name_1}</td>
+										<td><input type="button" id="select1" class="btn" style="float:right; padding: 6px 6px;" onclick="content3()" value="삭제"></td>
 									</tr>
-									<tr>
-										<td>L200911</td>
-										<td>물리 물리 박물리!</td>
-										<td>M526987</td>
-										<td>전필</td>
-										<td>40</td>
-										<td>0</td>
-										<td>3</td>
-										<td>2020/1학기</td>
-										<td>월4-6</td>
-										<td>중304</td>
-										<td>박물리</td>
-									</tr>
+								</c:forEach>
+								</c:if>
 								</tbody>
 							</table>
 						</div>
@@ -75,79 +97,8 @@
 				<div style="height:40px;"></div>
 				<div class="row">
 					<div class="col-md-12 col-sm-12">
-						<div class="dashboard_graph">
-							<div class="row x_title"><h3>수강등록</h3></div>
-							<table class="table">
-								<tbody>
-									<tr>
-										<td>과목명</td>
-										<td><input class="form-control" type="text" value="AR!어디있니?"></td>
-										<td>학과코드</td>
-										<td><input class="form-control" type="text" value="L101010"></td>
-										<td>이수구분</td>
-										<td>
-											<select class="form-control">
-												<option>전필</option>
-												<option>전선</option>
-												<option>교필</option>
-												<option>교선</option>
-											</select>
-										</td>
-										<td>학점</td>
-										<td><input class="form-control" type="text" value="3"></td>
-									</tr>
-									<tr>
-										<td>년도</td>
-										<td><input class="form-control" type="text" value="2020"></td>
-										<td>학기</td>
-										<td>
-											<select class="form-control">
-												<option>1</option>
-												<option>2</option>
-											</select>
-										</td>
-										<td>요일</td>
-										<td>
-											<select class="form-control">
-												<option>월</option>
-												<option>화</option>
-												<option>수</option>
-												<option>목</option>
-												<option>금</option>
-											</select>
-										</td>
-										<td>시작시간</td>
-										<td>
-											<select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-												<option>7</option>
-												<option>8</option>
-												<option>9</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td>제한인원</td>
-										<td><input class="form-control" type="text" value="40"></td>
-										<td>강의실</td>
-										<td><input class="form-control" type="text" value="영암관302"></td>
-										<td>담당교수</td>
-										<td colspan="3"><input class="form-control" type="text" value="Mr.Ar"></td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="8">
-											<a class="btn btn-app" style="height:80%; float:right;">강의등록</a>
-										</td>
-									</tr>
-								</tfoot>
-							</table>
+						<div id="courseinfo">
+						
 						</div>
 					</div>
 				</div>
@@ -157,5 +108,46 @@
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+<script type="text/javascript">
+function content() {
+	   var param = "param=" + 1;
+	   
+	   sendRequest(content_callback,"coursenext", "get", param);
+	}
+	function content_callback() {
+	   var result = document.getElementById("courseinfo");
+	   if(httpRequest.readyState == 4) { 
+	      if(httpRequest.status == 200) { 
+	         
+	      var data = httpRequest.responseText;
+	      result.innerHTML = data;
+	      
+	      } else result.innerHTML = "Error!";
+	   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+	}
+	
+function content2() {
+	   var param = "param=" + 1;
+	   
+	   sendRequest(content_callback2,"coursenext2", "get", param);
+	}
+	function content_callback2() {
+	   var result = document.getElementById("courseinfo");
+	   if(httpRequest.readyState == 4) { 
+	      if(httpRequest.status == 200) { 
+	         
+	      var data = httpRequest.responseText;
+	      result.innerHTML = data;
+	      
+	      } else result.innerHTML = "Error!";
+	   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+	}
+function content3() {
+	var del = confirm("삭제하시겠습니까?");
+	if(del == true){
+		  window.location= 'coursewm2';
+		}
+	}
+</script>
 </body>
 </html>

@@ -8,7 +8,6 @@
 	<%@ include file = "../bootstrap/guest_bootstrap.jsp" %>
 </head>
 <body>
-
   <%@ include file = "../include/header.jsp" %>
 
   <!-- ======= Hero Section ======= -->

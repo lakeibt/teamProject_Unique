@@ -23,7 +23,6 @@
 			</div>
 		</section>
 		<!-- 수강신청 페이지 -->
-		<%@ include file="../include/guest_left.jsp"%>
 		<!-- End Contact Section -->
 		<!-- ======= Contact Section ======= -->
 		<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500"></section>

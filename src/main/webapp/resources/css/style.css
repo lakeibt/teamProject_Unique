@@ -1476,6 +1476,18 @@ section {
   background: #8dbad2;
 }
 
+.contact .php-email-form button[type="button"] {
+  background: #68A4C4;
+  border: 0;
+  padding: 10px 24px;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.contact .php-email-form button[type="button"]:hover {
+  background: #8dbad2;
+}
+
 @-webkit-keyframes animate-loading {
   0% {
     transform: rotate(0deg);

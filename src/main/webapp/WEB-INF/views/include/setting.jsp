@@ -5,6 +5,7 @@
 
 <c:set var = "resources" value = "${pageContext.request.contextPath}/resources/"/>
 <c:set var = "img" value = "${pageContext.request.contextPath}/resources/img/"/>
+<c:set var = "assets" value = "${pageContext.request.contextPath}/resources/assets/"/>
 <c:set var = "stu_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/student/"/>
 <c:set var = "pro_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/professor/"/>
 <c:set var = "man_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/manager/"/>

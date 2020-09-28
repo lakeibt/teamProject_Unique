@@ -6,9 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+	<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin.js"></script>
 </head>
-<body onload="confirmIdFocus();" align="center">
+<body class="nav-md">
 	<form action="salary_enroll" method="post" name="salary_"
 		onsubmit="confirmIdCheck();">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
@@ -37,7 +39,7 @@
 							</tr>
 							<tr>
 								<th>대상기간</th>
-								<td><select>
+								<td><select class="form-control" style="float:left; width:100px;">
 									  <option value="2015">2015</option>
 									  <option value="2016">2016</option>
 									  <option value="2017">2017</option>
@@ -48,7 +50,7 @@
 									  <option value="2022">2022</option>
 									  <option value="2023">2023</option>
 									</select>
-									<select>
+									<select class="form-control" style="float:left; width:100px;">
 									  <option value="1">1월</option>
 									  <option value="2">2월</option>
 									  <option value="3">3월</option>
@@ -62,9 +64,8 @@
 									  <option value="11">11월</option>
 									  <option value="12">12월</option>
 									</select>
-									<input class="button" type="text" value="01" size="2">
-									~
-									<select>
+									<input class="form-control" type="text" value="01" size="2" style="float:left; width:100px;">~
+									<select class="form-control" style="float:left; width:100px;">
 									  <option value="2015">2015</option>
 									  <option value="2016">2016</option>
 									  <option value="2017">2017</option>
@@ -75,7 +76,7 @@
 									  <option value="2022">2022</option>
 									  <option value="2023">2023</option>
 									</select>
-									<select>
+									<select class="form-control" style="float:left; width:100px;">
 									  <option value="1">1월</option>
 									  <option value="2">2월</option>
 									  <option value="3">3월</option>
@@ -89,12 +90,12 @@
 									  <option value="11">11월</option>
 									  <option value="12">12월</option>
 									</select>
-									<input class="button" type="text" value="30" size="2">
+									<input type="text" value="30" size="2" class="form-control" style="float:left; width:100px;">
 									</td>
 							</tr>
 							<tr>
 								<th>지급일</th>
-								<td><select>
+								<td><select class="form-control" style="float:left; width:100px;">
 									  <option value="2015">2015</option>
 									  <option value="2016">2016</option>
 									  <option value="2017">2017</option>
@@ -105,7 +106,7 @@
 									  <option value="2022">2022</option>
 									  <option value="2023">2023</option>
 									</select>
-									<select>
+									<select class="form-control" style="float:left; width:100px;">
 									  <option value="1">1월</option>
 									  <option value="2">2월</option>
 									  <option value="3">3월</option>
@@ -120,12 +121,12 @@
 									  <option value="12">12월</option>
 									  
 									</select>
-									<input class="button" type="text" value="15" size="2">
+									<input type="text" value="15" size="2" class="form-control" style="float:left; width:100px;">
 									</td>
 							</tr>
 							<tr>
 								<th>지급연월</th>
-								<td><select>
+								<td><select class="form-control" style="float:left; width:100px;">
 									  <option value="2015">2015</option>
 									  <option value="2016">2016</option>
 									  <option value="2017">2017</option>
@@ -136,7 +137,7 @@
 									  <option value="2022">2022</option>
 									  <option value="2023">2023</option>
 									</select>
-									<select>
+									<select class="form-control" style="float:left; width:100px;">
 									  <option value="1">1월</option>
 									  <option value="2">2월</option>
 									  <option value="3">3월</option>
@@ -158,8 +159,8 @@
 							</tr>
 							<tr>
 		
-								<th colspan="2"><input class="button" type="submit"
-									value="등록"> <input class="button" type="reset" value="취소">
+								<th colspan="2"><input class="form-control" style="float:left; width:100px;" type="submit" 
+									value="등록"> <input class="form-control" style="float:left; width:100px;" type="reset" value="취소">
 									
 									</th>
 							</tr>

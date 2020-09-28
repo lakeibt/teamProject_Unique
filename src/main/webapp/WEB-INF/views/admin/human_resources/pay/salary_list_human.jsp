@@ -4,103 +4,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>사원별 급/상여지급현황</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<title>사원별 급/상여지급현황</title>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- Template Main JS File -->
+<script src="${resources}js/admin.js"></script>
+<script>
+	var name;
+	$(function() {
+		$('#human_Search').click(
+			function() {
+				console.log(name);
+				$.ajax({
+					url : "${pageContext.request.contextPath}/admin/human_resources/pay/human_Search",
+					data : {"name" : name},
+					type : 'GET',
+					dataType : 'text',
+					success : function(data) { 
+						$('#human').html(data);
+					},
+					error : function(request, status, error) {
+						console.log("@code : "+ request.status);
+						console.log("@message : "+ request.responseText);
+						console.log("@error : " + error);
+					}
+				});
+			});
+	});
+
+	function humanSearch() {
+		name = document.getElementById("humanSearch_input").value;
+		console.log(humanSearch_input);
+	}
+</script>
 </head>
+<style>
+.form-control {
+	font-size: 12px;
+}
+
+.btn {
+	width: 100px;
+	background-color: #68A4C4;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+}
+</style>
 
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
-				<div class="left_col scroll-view">
-					<div class="navbar nav_title" style="border: 0;">
-						<a href="${path}admin" class="site_title"> <i
-							class="fa fa-cog fa-spin fa-fw" style="border: none"></i> <span
-							style="font-size: 25px">Admin Page</span></a>
-					</div>
-
-					<div class="clearfix"></div>
-
-					<!-- menu profile quick info -->
-					<div class="profile clearfix">
-						<div class="profile_pic">
-							<img src="${img}sample/img.jpg" alt="..."
-								class="img-circle profile_img">
-						</div>
-						<div class="profile_info">
-							<span>Welcome,</span>
-							<h2>이름</h2>
-						</div>
-					</div>
-					<!-- /menu profile quick info -->
-
-					<br />
-
-					<!-- sidebar menu -->
-					<div id="sidebar-menu"
-						class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>General</h3>
-							<ul class="nav side-menu">
-								<li><a href="${path}admin"><i class="fa fa-home"></i>DashBorad</a></li>
-								<li><a><i class="fa fa-edit"></i> 학사관리 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="${path}admin/degree/course">수강관리</a></li>
-										<li><a href="${path}admin/degree/facility_ask">시설문의</a></li>
-									</ul></li>
-								<li><a><i class="fa fa-sitemap"></i> 인사관리 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a>기초코드 설정<span class="fa fa-chevron-down"></span></a>
-											<ul class="nav child_menu">
-												<li><a
-													href="${path}admin/human_resources/code_setting/salary_setting">급/상여
-														지급일자 등록</a></li>
-												<li><a
-													href="${path}admin/human_resources/code_setting/setting">인사/급여환경설정</a></li>
-												<li><a
-													href="${path}admin/human_resources/code_setting/code_setting">인사기초코드등록</a></li>
-											</ul></li>
-										<li><a>인사정보<span class="fa fa-chevron-down"></span></a>
-											<ul class="nav child_menu">
-												<li><a
-													href="${path}admin/human_resources/info/human_info">인사정보등록</a></li>
-												<li><a
-													href="${path}admin/human_resources/info/human_state">인사정보현황</a></li>
-												<li><a
-													href="${path}admin/human_resources/info/salary_state">책정임금현황</a></li>
-											</ul></li>
-										<li><a>급여관리<span class="fa fa-chevron-down"></span></a>
-											<ul class="nav child_menu">
-												<li><a
-													href="${path}admin/human_resources/pay/attendance">근태관리</a></li>
-												<li><a href="${path}admin/human_resources/pay/salary">급여등록</a></li>
-												<li><a
-													href="${path}admin/human_resources/pay/salary_list">급여대장</a></li>
-												<li><a
-													href="${path}admin/human_resources/pay/salary_info">급여명세</a></li>
-												<li><a
-													href="${path}admin/human_resources/pay/salary_list_month">월별
-														급/상여지급현황</a></li>
-												<li><a
-													href="${path}admin/human_resources/pay/salary_list_human">사원별
-														급/상여지급현황</a></li>
-											</ul></li>
-									</ul></li>
-								<li><a><i class="fa fa-desktop"></i> 시설관리 <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="${path}admin/facility/park">차량운행 및 관리</a></li>
-										<li><a href="${path}admin/facility/list">시설물 관리 및
-												관재업무</a></li>
-										<li><a href="${path}admin/facility/ask">시설 문의 확인</a></li>
-									</ul></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /sidebar menu -->
-				</div>
+				<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 			</div>
 
 			<!-- top navigation -->
@@ -114,8 +75,8 @@
 							<li class="nav-item dropdown open" style="padding-left: 15px;">
 								<a href="javascript:;" class="user-profile dropdown-toggle"
 								aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
-								aria-expanded="false"> <img
-									src="${img}sample/img.jpg" alt="">이름
+								aria-expanded="false"> <img src="${img}sample/img.jpg"
+									alt="">이름
 							</a>
 								<div class="dropdown-menu dropdown-usermenu pull-right"
 									aria-labelledby="navbarDropdown">
@@ -158,14 +119,30 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="x_panel">
-							<div class="x_title"><h4>2020/7 정규 (급여)</h4></div>
+							<div class="x_title">
+								<h4>사원별 급/상여지급현황</h4>
+							</div>
 							<div class="x_content">
 								<table class="table">
-									<thead style="color:#73879C;">
-										<tr>
-										
+									<thead style="color: #73879C;" align="center">
+										<tr align="center">
+											<th>사원 검색</th>
+											<th><input class="form-control" type="text"
+												id="humanSearch_input"></th>
+											<th><input type="button" class="btn"
+												style="padding: 6px 6px;" id="human_Search" value="검색"
+												onclick="humanSearch()"> <input type="button"
+												class="btn" style="padding: 6px 6px;"
+												onclick="location.reload();" value="초기화"></th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							<div id="human">
+								<table class="table">
+									<thead style="color: #73879C;" align="center">
+										<tr align="center">
 											<th>귀속연월</th>
-											<th>급여구분</th>
 											<th>사원번호</th>
 											<th>성명</th>
 											<th>부서</th>
@@ -173,51 +150,59 @@
 											<th>급여</th>
 											<th>식대</th>
 											<th>차량유지비</th>
-											<th>야간수당</th>
 											<th>특근수당(휴일)</th>
 										</tr>
 									</thead>
-									<tbody style="color:grey;">
-										<tr>
-											<th>2020/08</th>
-											<th>급여</th>
-											<th>100001</th>
-											<td>홍길동</td>
-											<td>영업부</td>
-											<td>3,300,000</td>
-											<td>3,000,000</td>
-											<td>100,000</td>
-											<td>200,000</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>2020/08</th>
-											<th>급여</th>
-											<th>100002</th>
-											<td>이민호</td>
-											<td>기술부</td>
-											<td>3,300,000</td>
-											<td>3,000,000</td>
-											<td>100,000</td>
-											<td>200,000</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<th>2020/08</th>
-											<th>급여</th>
-											<th>100003</th>
-											<td>김태리</td>
-											<td>기술부</td>
-											<td>3,300,000</td>
-											<td>3,000,000</td>
-											<td>100,000</td>
-											<td>200,000</td>
-											<td></td>
-											<td></td>
-										</tr>
+									<tbody style="color: grey;">
+										<c:if test="${salary_list_cnt > 0}">
+											<c:forEach var="dto" items="${dtos}">
+												<tr align="center">
+													<td><fmt:formatDate value="${dto.salary_InDay}"
+															pattern="YY/MM" /></td>
+													<td>${dto.id}</td>
+													<td>${dto.name}</td>
+													<td>${dto.depart_name}</td>
+													<td>${dto.sal+dto.over+dto.meals+dto.car}</td>
+													<td>${dto.sal}</td>
+													<td>${dto.meals}</td>
+													<td>${dto.car}</td>
+													<td>${dto.over}</td>
+													<!-- 기본급:1, 연장근무:2, 식대:3, 차량유지비:4 -->
+												</tr>
+											</c:forEach>
+										</c:if>
 									</tbody>
+								</table>
+								<table style="width: 1000px" align="center">
+										<tr>
+											<th align="center">
+												<!-- 게시글이 있으면 --> <c:if test="${salary_list_cnt > 0}">
+													<!-- 처음[◀◀] /  이전블록[◀]  , 특수문자 : 한글상태 ㅁ+한자키-->
+													<c:if test="${startPage > pageBlock}">
+														<a href="salary_list_human"> [◀◀] </a>
+														<a href="salary_list_human?pageNum=${startPage - pageBlock}">
+															[◀] </a>
+													</c:if>
+
+													<!-- 블록내의 페이지 번호 -->
+													<c:forEach var="i" begin="${startPage}" end="${endPage}">
+														<c:if test="${i == currentPage}">
+															<span><a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a></span>
+														</c:if>
+														<c:if test="${i != currentPage}">
+															<a href="salary_list_human?pageNum=${i}"><input type="button" value="${i}"></a>
+														</c:if>
+													</c:forEach>
+
+													<!-- 다음블록[▶] / 마지막[▶▶] -->
+													<c:if test="${pageCount > endPage}">
+														<a href="salary_list_human?pageNum=${startPage + pageBlock}">
+															[▶]</a>
+														<a href="salary_list_human?pageNum=${pageCount}"> [▶▶]</a>
+													</c:if>
+												</c:if>
+											</th>
+										</tr>
 								</table>
 							</div>
 						</div>
@@ -227,13 +212,11 @@
 			<!-- /page content -->
 
 			<!-- footer content -->
-			<footer>
-				<div class="pull-right">황동국팀 - 관리자 페이지</div>
-				<div class="clearfix"></div>
-			</footer>
+				<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
 			<!-- /footer content -->
 		</div>
 	</div>
+	<!-- /page content -->
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

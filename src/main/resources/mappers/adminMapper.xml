@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.uni.persistence.AdminDAO">
+
+	<select id="getAttendance_Cnt" resultType="int">
+		SELECT COUNT(*) as cnt
+		FROM ATTENDANCE
+	</select>
+
+	<select id="getAttendance_List" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+		SELECT * FROM ATTENDANCE ORDER BY num desc
+	</select>
+
+	<select id="getSalary_list_human" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+		SELECT s.salary_inday,
+		s.sal_num,
+		s.id,
+		s.salary_month,
+		m.name,
+		m.depart
+		FROM a_salary s join a_admin m
+		ON s.id = m.id
+	</select>
+	
+	<insert id="salary_input" parameterType="java.util.Map">
+		INSERT INTO a_salary_input
+		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
+	</insert>
+	
+	<select id="getSalaryCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM a_salary_input
+	</select>
+	
+	<select id="getSalaryList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryInputVO">
+		<![CDATA[
+		SELECT * 
+			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
+	        , salary_inday, payments_month, salary_name, rowNUM rNum 
+			FROM ( SELECT * FROM a_salary_input ORDER BY salary_input_num ASC)) 
+		WHERE rNum >=#{start} AND rNum <=#{end}
+		]]>
+	</select>
+	
+	<select id="getCourseCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM course
+	</select>
+	<select id="getCourseList" resultType="com.kosmo.uni.vo.CourseVO">
+		SELECT distinct c.co_code co_code
+            , c.co_name co_name
+            , c.m_code m_code
+            , c.p_code p_code
+    		, c.limit_num limit_num
+     		, c.co_num co_num
+            , c.grade grade_1
+     		, c.co_year co_year
+            , c.co_semester co_semester
+            , c.co_day co_day
+            , c.le_code le_code
+     		, p.name name_1
+		  		FROM STUDENT_COURSE sc
+		   			, STUDENT s
+		   			, COURSE c
+		   			, PROFESSOR p
+		 			WHERE sc.id = s.id
+				    AND sc.co_code = c.co_code
+	</select>
+
+	<select id="getAdminCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM a_admin
+	</select>
+	
+	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
+		SELECT m.id, m.name, m.rank, m.depart, 
+				s.salary_input_num, s.payments_division, 
+				s.salary_name, ss.salary, s.salary_inday, m.car
+		  FROM a_salary_input s 
+		  Join a_admin m
+		    ON s.payments_division = m.Payments_division
+		  JOIN a_salaryset ss
+		    on ss.Rank = m.rank
+		 where s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select * from a_variableCost where cost = #{cost}
+	</select>
+	
+</mapper>
