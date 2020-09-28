@@ -130,10 +130,14 @@ public class ProfessorController {
 		return "professor/sample";
 	}
 	
-	
-	
-	
-	
+	@RequestMapping("/professor/myPageModify")
+	public String myPageModify(HttpServletRequest req, Model model) {
+		logger.info("url ==> myPageModify");
+		
+		proService.myPageModify(req, model);
+		
+		return "professor/myPage";
+	}
 	
 	@RequestMapping("/professor/test")
 	public String test(HttpServletRequest req, Model model) {
