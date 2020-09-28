@@ -6,6 +6,32 @@
 
 <mapper namespace="com.kosmo.uni.persistence.AdminDAO">
 
+	<select id="getInfoCnt" resultType="int">
+		SELECT COUNT(*) as cnt
+		FROM A_INFO
+	</select>
+
+	<select id="getInfoList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<![CDATA[
+		SELECT * FROM (SELECT NUM, TITLE, CONTENT, WRITER, READCNT, REG_DATE, ROWNUM R FROM 
+				      (SELECT * FROM A_INFO ORDER BY ROWNUM DESC))
+		WHERE R >= #{start} AND R <= #{end}
+    	]]>
+	</select>
+	
+	<insert id="insertInfo" parameterType="java.util.Map">
+		INSERT INTO A_INFO VALUES(INFO_SEQ.NEXTVAL, #{title}, #{content}, '관리자', 0, SYSDATE)
+	</insert>
+	
+	<update id="addCnt" parameterType="int">
+		UPDATE A_INFO SET READCNT = READCNT + 1 WHERE NUM = #{num}
+	</update>
+	
+	<select id="getContent" resultType="java.util.Map">
+		SELECT TITLE, CONTENT FROM A_INFO WHERE NUM = #{num}
+	</select>
+
 	<select id="getAttendance_Cnt" resultType="int">
 		SELECT COUNT(*) as cnt
 		FROM A_NFC

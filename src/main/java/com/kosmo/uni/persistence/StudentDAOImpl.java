@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
 
@@ -82,9 +83,9 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
-	public List<Map<String, Object>> getStudyList(String id) {
+	public List<Map<String, Object>> getStudyList(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dao.getStudyList(id);
+		return dao.getStudyList(map);
 	}
 
 	@Override
@@ -94,13 +95,36 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 	
 	@Override
-	public List<Map<String, Object>> getTimeTable(String id) {
+	public List<Map<String, Object>> getTimeTable(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dao.getTimeTable(id);
+		return dao.getTimeTable(map);
 	}
 	@Override
 	public Map<String, Object> getStudentSimpleInfo(String id) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getStudentSimpleInfo(id);
+	}
+	
+	@Override
+	public int getMessageCnt(String id) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessageCnt", id);
+	}
+	@Override
+	public int getMessageCnt_send(String id) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessageCnt_send", id);
+	}
+	
+	@Override
+	public List<MessageVO> getMessageList(Map<String, Object> map) {
+		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList", map);
+	}
+	@Override
+	public List<MessageVO> getMessageList_send(Map<String, Object> map) {
+		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList_send", map);
+	}
+
+	@Override
+	public MessageVO getMessage(int num) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessage", num);
 	}
 }

@@ -10,7 +10,15 @@ import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.SalaryVO;
 
 public interface AdminDAO {
-
+	public int getInfoCnt();
+	
+	public List<Map<String, Object>> getInfoList(Map<String, Object> map);
+	
+	public int insertInfo(Map<String, Object> map);
+	
+	public Map<String, Object> getContent(int num);
+	
+	public void addCnt(int num);
 	
 	public int getAttendance_Cnt();
 	

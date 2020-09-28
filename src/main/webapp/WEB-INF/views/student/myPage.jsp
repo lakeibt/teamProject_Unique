@@ -5,6 +5,9 @@
 <head>
 <title>[유일대]학생 메인</title>
 <%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
+<script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
+<script src="/uni/resources/js/request.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 </head>
 <body class="dark-edition">
 <div class="wrapper">
@@ -38,12 +41,12 @@
 											<span class="nav-tabs-title">취업/공모전 정보</span>
 											<ul class="nav nav-tabs" data-tabs="tabs">
 												<li class="nav-item">
-													<a class="nav-link active show" href="" data-toggle="tab">
+													<a class="nav-link active show" data-toggle="tab" onclick="contentHome1('${vo.get('M_NAME')}');">
 														<i class="material-icons">work_outline</i>취업
 													</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link active show" href="" data-toggle="tab">
+													<a class="nav-link active show" data-toggle="tab" onclick="contentHome2('${vo.get('M_NAME')}');">
 														<i class="material-icons">event</i>공모전
 													</a>
 												</li>
@@ -52,67 +55,93 @@
 									</div>
 								</div>
 								<div class="card-body">
-									<div class="table-responsive">
-										<table class="table">
-											<thead class="text-primary">
-												<tr>
-													<th style="width: 20%">글번호</th>
-													<th style="width: 40%">제목</th>
-													<th style="width: 20%">출처</th>
-													<th style="width: 20%">작성일자</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td style="width: 10%">1</td>
-													<td style="width: 60%">어쩌고 출판사 공모전</td>
-													<td style="width: 20%">뭐뭐출판</td>
-													<td style="width: 10%">2020.09.01</td>
-												</tr>
-												<tr>
-													<td style="width: 10%">2</td>
-													<td style="width: 60%">저쩌고 기업 공채 모집</td>
-													<td style="width: 20%">블라기업</td>
-													<td style="width: 10%">2020.09.01</td>
-												</tr>
-											</tbody>
-										</table>
+									<div class="table-responsive" id="coninfo" style="padding-top:40px; height:300px;">
 									</div>
 								</div>
 							</div>
 						</div>
+						<script type="text/javascript">
+						function content1(i) {
+							window.location="${student}employment";
+						}
+						function content2(i) {
+							window.location="${student}contest";
+						}
+						function contentHome1(major) {
+						   var major = major;
+						   var value = 0;
+						   var num = 1;
+						   if(major == '컴퓨터공학과') value = 25;
+						   if(major == '뷰티미용과') value = 3591;
+						   if(major == '건축학과') value = 6;
+						   if(major == '영어영문학과') value = 3017;
+						   if(major == '패션디자인학과') value = 3591;
+						   if(major == '국어국문학과') value = 2463;
+						   if(major == '일어일문학과') value = 2672;
+						   if(major == '불어불문학과') value = 3089;
+						   if(major == '기계공학과') value = 1;
+						   if(major == '생명공학과') value = 109;
+						   if(major == '시각디자인학과') value = 1439;
+						   if(major == '조소학과') value = 1424;
+						   
+						   if(value == '분야를 선택하세요') alert('분야를 선택하세요');
+						   var param = "param=" + value + "&"+ "num=" + num;
+						   sendRequest(content_callback2,"contestnext", "get", param);
+						}
+						function content_callback1() {
+						   var result = document.getElementById("coninfo");
+						   if(httpRequest.readyState == 4) { 
+						      if(httpRequest.status == 200) { 
+						      var data = httpRequest.responseText;
+						      result.innerHTML = data;
+						      } else result.innerHTML = "Error!";
+						   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+						}
+						function contentHome2(major) {
+						   var major = major;
+						   var value = 0;
+						   var num = 1;
+						   if(major == '컴퓨터공학과') value = 21;
+						   if(major == '뷰티미용과') value = 26;
+						   if(major == '건축학과') value = 24;
+						   if(major == '영어영문학과') value = 23;
+						   if(major == '패션디자인학과') value = 19;
+						   if(major == '국어국문학과') value = 23;
+						   if(major == '일어일문학과') value = 23;
+						   if(major == '불어불문학과') value = 23;
+						   if(major == '기계공학과') value = 22;
+						   if(major == '생명공학과') value = 22;
+						   if(major == '시각디자인학과') value = 26;
+						   if(major == '조소학과') value = 26;
+						   
+						   if(value == '분야를 선택하세요') alert('분야를 선택하세요');
+						   var param = "param=" + value + "&"+ "num=" + num;
+						   sendRequest(content_callback2,"contestnext", "get", param);
+						}
+						function content_callback2() {
+						   var result = document.getElementById("coninfo");
+						   if(httpRequest.readyState == 4) { 
+						      if(httpRequest.status == 200) { 
+						      var data = httpRequest.responseText;
+						      result.innerHTML = data;
+						      } else result.innerHTML = "Error!";
+						   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+						}
+						</script>
 						<div class="row">
 							<div class="col-xl-6 col-lg-12">
 								<div class="card">
 									<div class="card-header card-header-primary">
 										<h4 class="card-title">수강정보</h4>
-										<select class="form-control">
-											<option>2019-1</option>
-											<option>2019-2</option>
-											<option>2020-1</option>
-											<option>2020-2</option>
+										<select id="select" class="form-control" onchange="course()">
+											<option value="2019-1">2019-1</option>
+											<option value="2019-2">2019-2</option>
+											<option value="2020-1">2020-1</option>
+											<option value="2020-2">2020-2</option>
 										</select>
 									</div>
 									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table">
-												<thead class="text-primary">
-													<tr>
-														<th style="width: 60%">과목명</th>
-														<th style="width: 30%">담당교수</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td style="width: 60%">쉽고재밌게즐기는건축학</td>
-														<td style="width: 30%">김건축</td>
-													</tr>
-													<tr>
-														<td style="width: 60%">몸으로배우는모션인식AR</td>
-														<td style="width: 30%">Mr.Ar</td>
-													</tr>
-												</tbody>
-											</table>
+										<div class="table-responsive" id="course">
 										</div>
 									</div>
 								</div>
@@ -121,40 +150,69 @@
 								<div class="card">
 									<div class="card-header card-header-primary">
 										<h4 class="card-title">학점정보</h4>
-										<select class="form-control">
-											<option>2019-1</option>
-											<option>2019-2</option>
-											<option>2020-1</option>
-											<option>2020-2</option>
+										<select id="select1" class="form-control" onchange="score()">
+											<option value="2019-1">2019-1</option>
+											<option value="2019-2">2019-2</option>
+											<option value="2020-1">2020-1</option>
+											<option value="2020-2">2020-2</option>
 										</select>
 									</div>
 									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table">
-												<thead class="text-primary">
-													<tr>
-														<th style="width: 60%">과목명</th>
-														<th style="width: 24%">담당교수</th>
-														<th style="width: 16%">학점</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td style="width: 60%">쉽고재밌게즐기는건축학</td>
-														<td style="width: 24%">김건축</td>
-														<td style="width: 16%">A</td>
-													</tr>
-													<tr>
-														<td style="width: 60%">몸으로배우는모션인식AR</td>
-														<td style="width: 24%">Mr.Ar</td>
-														<td style="width: 16%">C++</td>
-													</tr>
-												</tbody>
-											</table>
+										<div class="table-responsive" id="info">
 										</div>
 									</div>
 								</div>
 							</div>
+							<script type="text/javascript">
+							function course() {
+								var yourSelect = document.getElementById("select");
+								var value = yourSelect.options[yourSelect.selectedIndex].value;
+								var array = value.split("-");
+								var year = array[0];
+								var semester = array[1];
+								var param = "year=" + year + "&semester=" + semester;
+
+								sendRequest(course_callback, "${student}courseInfo", "get", param);
+							}
+
+							function course_callback() {
+								var result = document.getElementById("course");
+								if (httpRequest.readyState == 4) {
+									if (httpRequest.status == 200) {
+										var data = httpRequest.responseText;
+										result.innerHTML = data;
+									} else result.innerHTML = "Error!";
+								} else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+							}
+							
+							function syllabus(code) {
+								var param = "code=" + code;
+								var settings = 'toolbar=0, status=0, menubar=0, scrollbars=yes, height=800, width=1000';
+								window.open("course_syllabus2?code="+code, '강의계획서', settings);
+							}
+							
+							function score() {
+								var yourSelect = document.getElementById("select1");
+								var value = yourSelect.options[yourSelect.selectedIndex].value;
+								var array = value.split("-");
+								var year = array[0];
+								var semester = array[1];
+								var param = "year=" + year + "&semester=" + semester;
+
+								sendRequest(content_callback, "${student}scoreInfo", "get", param);
+								console.log(param);
+							}
+
+							function content_callback() {
+								var result = document.getElementById("info");
+								if (httpRequest.readyState == 4) {
+									if (httpRequest.status == 200) {
+										var data = httpRequest.responseText;
+										result.innerHTML = data;
+									} else result.innerHTML = "Error!";
+								} else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+							}
+							</script>
 						</div>
 					</div>
 				</div>

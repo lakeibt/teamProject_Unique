@@ -23,6 +23,7 @@ public class AdminController {
 	public String home(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
 
+		adminService.info_list(req, model);
 		return "admin/main";
 	}
 
@@ -31,6 +32,29 @@ public class AdminController {
 		logger.info("admin_main");
 
 		return "admin/main";
+	}
+	// ------------------------- 공지사항(메인) -------------------------
+	@RequestMapping(value = "/admin/infoWrite")
+	public String infoWrite(HttpServletRequest req, Model model) {
+		logger.info("admin_infoWrite");
+
+		return "admin/infoWrite";
+	}
+	
+	@RequestMapping(value = "/admin/infoPro")
+	public String infoPro(HttpServletRequest req, Model model) {
+		logger.info("admin_infoPro");
+		
+		adminService.infoPro(req, model);
+		return "admin/infoPro";
+	}
+	
+	@RequestMapping(value = "/admin/content")
+	public String content(HttpServletRequest req, Model model) {
+		logger.info("admin_content");
+		
+		adminService.content(req, model);
+		return "admin/content";
 	}
 
 	// ------------------------- 학사관리 -------------------------

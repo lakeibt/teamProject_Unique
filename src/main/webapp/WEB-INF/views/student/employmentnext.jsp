@@ -4,7 +4,9 @@
 <%@ page import="org.jsoup.nodes.Document" %>
 <%@ page import="org.jsoup.nodes.Element" %>
 <%@ page import="org.jsoup.select.Elements" %>
-
+<style>
+.dark-edition a {color:black;}
+</style>
 <%
     // 파싱할 사이트를 적어준다(해당 사이트에 대한 태그를 다 긁어옴)
     request.setCharacterEncoding("utf-8");
@@ -25,7 +27,7 @@
 	<tr>
 		<td style="width:20%"><%=e.select(".coTit a").text()%></td>
 		<td id="detail" style="width:70%">
-			<a id="other" href="#coninfo_detail" class="scroll" onclick="content1('<%=e.select(".tit a").attr("href")%>')">
+			<a style="color:black;" id="other" href="#coninfo_detail" class="scroll" onclick="content1('<%=e.select(".tit a").attr("href")%>')">
 			<h5><%=e.select(".tit a").attr("title")%></h5>
 			</a><br>
 			<%=e.select(".sTit span:eq(0)").text()%> / <%=e.select(".sTit span:eq(1)").text()%> / <%=e.select(".sTit span:eq(2)").text()%> / <%=e.select(".sTit span:eq(3)").text()%><br>

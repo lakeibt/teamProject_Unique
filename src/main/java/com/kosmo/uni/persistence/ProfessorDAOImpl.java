@@ -37,6 +37,4 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public MessageVO getMessage(int num) {
 		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessage", num);
 	}
-
-
 }

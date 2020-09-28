@@ -24,6 +24,92 @@ public class AdminServiceImpl implements AdminService {
 	AdminDAO dao;
 	
 	@Override
+	public void infoPro(HttpServletRequest req, Model model) {
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("title", title);
+		map.put("content", content);
+		
+		System.out.println(title);
+		System.out.println(content);
+		
+		int insertCnt = dao.insertInfo(map);
+		model.addAttribute("insertCnt", insertCnt);
+	}
+	
+	@Override
+	public void content(HttpServletRequest req, Model model) {
+		int num = Integer.parseInt(req.getParameter("num"));
+		
+		// 조회수 증가
+		dao.addCnt(num);
+		
+		Map<String, Object> dtos = dao.getContent(num);
+		model.addAttribute("dtos", dtos);
+	}
+	
+	// 공지사항 목록
+	@Override
+	public void info_list(HttpServletRequest req, Model model) {
+		int pageSize = 5; // 한페이지당 출력할 글 갯수
+		int pageBlock = 3; // 한 블럭당 페이지 갯수
+
+		int cnt = 0; // 글갯수
+		int start = 0; // 현재 페이지 시작 글번호
+		int end = 0; // 현재 페이지 마지막 글번호
+		int number = 0; // 출력용 글번호
+		String pageNum = ""; // 페이지 번호
+		int currentPage = 0; // 현재 페이지
+
+		int pageCount = 0; // 페이지 갯수
+		int startPage = 0; // 시작 페이지
+		int endPage = 0; // 마지막 페이지
+
+		// 글갯수 구하기
+		cnt = dao.getInfoCnt();
+		pageNum = req.getParameter("pageNum");
+
+		if (pageNum == null) pageNum = "1";
+
+		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+
+		if (cnt > 0) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+
+			List<Map<String, Object>> dtos = dao.getInfoList(map);
+			model.addAttribute("dtos", dtos);
+		}
+
+		// 시작페이지
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
+
+		// 마지막페이지
+		endPage = startPage + pageBlock - 1;
+		if (endPage > pageCount) endPage = pageCount;
+
+		model.addAttribute("cnt", cnt); // 글갯수
+		model.addAttribute("number", number); // 출력용 글번호
+		model.addAttribute("pageNum", pageNum); // 페이지 번호
+
+		if (cnt > 0) {
+			model.addAttribute("startPage", startPage); // 시작페이지
+			model.addAttribute("endPage", endPage); // 마지막페이지
+			model.addAttribute("pageBlock", pageBlock); // 한블럭당 페이지갯수
+			model.addAttribute("pageCount", pageCount); // 페이지 갯수
+			model.addAttribute("currentPage", currentPage); // 현재페이지
+		}
+	}
+	
+	@Override
 	// 급여 - 전체리스트
 	public void attendance(HttpServletRequest req, Model model) {
 		// 페이징
@@ -115,7 +201,6 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("pageCount", pageCount); // 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-
 	}
 
 	@Override

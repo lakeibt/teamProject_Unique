@@ -28,12 +28,13 @@
 										<thead class="text-primary">
 											<tr>
 												<th>
-													<select class="form-control">
+													<select id="select1" class="form-control">
+														<option>2019</option>		
 														<option>2020</option>		
 													</select>
 												</th>
 												<th colspan="5">
-													<select id="select1" class="form-control" onchange="content()" style="width:130px;">
+													<select id="select2" class="form-control" onchange="content()" style="width:130px;">
 														<option selected disabled>학기를 선택하세요</option>
 														<option value="1">1학기</option>
 														<option value="2">2학기</option>
@@ -55,11 +56,11 @@
 									<div id="info"></div>
 									<script type="text/javascript">
 									function content() {
-										var yourSelect = document.getElementById("select1");
-										console.log(yourSelect);
-										var value = yourSelect.options[yourSelect.selectedIndex].value;
-										console.log(value);
-										var param = "value=" + value;
+										var yearIndex = document.getElementById("select1");
+										var semesterIndex = document.getElementById("select2");
+										var year = yearIndex.options[yearIndex.selectedIndex].value;
+										var semester = semesterIndex.options[semesterIndex.selectedIndex].value;
+										var param = "year=" + year + "&semester=" + semester;
 	
 										sendRequest(content_callback, "${student}scoreInfo", "get", param);
 										console.log(param);
