@@ -112,8 +112,6 @@
 		    ]]>
 	</select>
 	
-	
-	
 	<insert id="salary_input" parameterType="java.util.Map">
 		INSERT INTO A_SALARY_INPUT
 		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
@@ -136,6 +134,7 @@
 	<select id="getCourseCnt" resultType="int">
 		SELECT COUNT(*) as cnt FROM A_COURSE
 	</select>
+	
 	<select id="getCourseList" resultType="com.kosmo.uni.vo.CourseVO">
 		SELECT co_code
             , co_name

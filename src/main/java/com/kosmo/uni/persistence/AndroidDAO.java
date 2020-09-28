@@ -7,7 +7,7 @@ import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
 
 
-public interface AndDAO {
+public interface AndroidDAO {
 	
 	public HashMap<String, String> confirmIdPwdStu(String id);
 	

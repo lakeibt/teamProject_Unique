@@ -12,27 +12,27 @@ import com.kosmo.uni.vo.StudentVO;
 
 
 @Repository
-public class AndDAOImpl implements AndDAO{
+public class AndroidDAOImpl implements AndroidDAO{
 
 	@Autowired
 	SqlSession sqlSession;
 	
 	@Override
 	public HashMap<String, String> confirmIdPwdStu(String id) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		
 		return dao.confirmIdPwdStu(id);
 	}
 	
 	@Override
 	public HashMap<String, String> confirmIdPwdAdm(String id) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.confirmIdPwdAdm(id);
 	}
 
 	@Override
 	public StudentVO getStudentInfo(String id) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		StudentVO s = dao.getStudentInfo(id);
 		
 		return s;
@@ -40,26 +40,26 @@ public class AndDAOImpl implements AndDAO{
 
 	@Override
 	public Manager getAdminInfo(String id) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		Manager m = dao.getAdminInfo(id);
 		return m;
 	}
 	
 	@Override
 	public int whatNfc(Map<String, String> map) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.whatNfc(map);
 	}
 
 	@Override
 	public int hiNfc(String pnum) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.hiNfc(pnum);
 	}
 
 	@Override
 	public int byeNfc(Map<String, String> map) {
-		AndDAO dao = sqlSession.getMapper(AndDAO.class);
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.byeNfc(map);
 	}
 
