@@ -23,7 +23,7 @@
 %>
 		<% if(i == 0) {i++; continue;} %>
 		<tr>
-			<td style="width:60%"><a id="other" href="#coninfo_detail" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
+			<td style="width:60%;"><a id="other" href="#coninfo_detail" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
 			<td id="detail" style="width:30%"><%=e.select(".organ").text()%></td>
 			<% String day = e.select(".day").text();
 				String day2 = "";
