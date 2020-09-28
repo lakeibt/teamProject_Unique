@@ -11,8 +11,7 @@ function message_send2(){
 
 <div class="card" style="background-color: white;">
 	<form >
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}"> <select class="message_select"
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> <select class="message_select"
 			onchange="changeList()">
 			<c:if test="${option  == 'receive'}">
 				<option value="receive" selected>받은 쪽지</option>
@@ -29,7 +28,7 @@ function message_send2(){
 		<c:if test="${option  == 'send'}">
 			<h3 style="margin: 20px 10px;">보낸 쪽지함</h3>
 		</c:if>
-		<table class="table" style="font-size: 8px;">
+		<table class="table" style="font-size: 10px;">
 			<thead>
 				<tr>
 					<th style="width: 20%; font-size: 9px;">번호</th>

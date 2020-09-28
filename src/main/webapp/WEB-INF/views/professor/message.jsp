@@ -1,27 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<div class="card" style="background-color: white;">
-		<form>
+<%@ include file="../include/setting.jsp"%>
+<div class="card" id="message_card_div"style="background-color: white;">
+	<form style="padding: 10px 10px; height:400px;">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		 	<button class="btn_message_close" onclick="deleteMessage(this);"><i class="fas fa-times"></i></button>
-		 	<h3 style="margin:20px 10px;">${dto.getTitle()}</h3>
-			<table class="table" style="font-size:12px;">
-				<tbody>
-					<tr>
-						<th>발신자</th>
-						<td>${dto.getSender()}</td>
-						<th>발신일</th>
-						<td>${dto.getReg_date()}</td>
-					</tr>
-					<tr>
-						<td colspan="4" style="display:table-cell;">
-							<p class="form-control" style="height:150px;">
-								${dto.getContent()}
-							</p>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
-	</div>
+	 	<button class="btn_message_close" onclick="deleteMessage(this);"><span class="material-icons">clear</span></button>
+		<table class="table" style="font-size:12px;">
+			<thead>
+				<tr>
+					<th colspan="4">
+						<h3><input type="text" name="title" value="${dto.getTitle()}" style="width:100%; border:none; height: 40px;"></h3>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<td><input type="text" name="receive_id" value="${dto.getSender_id()}" style="border:none;"></td>
+					<th>이름</th>
+					<td><input type="text" name="receive_name" value="${dto.getSender()}"  style="width:100px; border:none;" ></td>
+				</tr>
+				<tr>
+					<td colspan="4" style="display:table-cell;">
+						<textarea id="content" name="content" rows="7" style="width:100%;">${dto.getContent()}</textarea>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4" align="center">
+						<button type="button" class="btn btn-info">답장</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+</div>

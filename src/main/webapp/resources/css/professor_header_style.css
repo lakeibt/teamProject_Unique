@@ -50,3 +50,9 @@
     bottom: 5px;
     left:12px;
 }
+
+.btn_message_close{
+	float:right;
+	background-color: white;
+	border: none;
+}
