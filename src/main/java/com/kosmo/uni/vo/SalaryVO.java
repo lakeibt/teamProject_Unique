@@ -19,7 +19,7 @@ public class SalaryVO {
 	
 	private int cost; // 식대 코드
 	private int meal;  // 식대
-	private int contract_vehicle;  //차량유지비 
+	private int contract_vehicle;  //차량유지비
 	
 	
 	

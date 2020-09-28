@@ -138,6 +138,8 @@ public class AdminServiceImpl implements AdminService {
 
 		String st = req.getParameter("st");
 		String et = req.getParameter("et");
+		System.out.println(req.getParameter("st"));
+		System.out.println(req.getParameter("et"));
 
 		// 글갯수 구하기
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -180,20 +182,15 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("number : " + number);
 		System.out.println("pageSize : " + pageSize);
 
-		String start2 = req.getParameter("start1");
-		String end2 = req.getParameter("end1");
-
-		System.out.println("start2 : : : " + start2);
-		System.out.println("end2 : : : " + end2);
-
 		if (search_Cnt > 0) {
+			map.put("st", st);
+			map.put("et", et);
 			map.put("start", start);
 			map.put("end", end);
 
 			List<AdminVO> dtos = dao.getAttendance_List_Search(map);
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("search_Cnt", search_Cnt);
-			model.addAttribute("currentPage", currentPage);
 
 		}
 
@@ -231,7 +228,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void salary_list_human(HttpServletRequest req, Model model) {
+	public void salary_list_humanMonth(HttpServletRequest req, Model model) {
 		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
@@ -287,7 +284,7 @@ public class AdminServiceImpl implements AdminService {
 			map.put("start", start);
 			map.put("end", end);
 
-			List<AdminVO> dtos = dao.getSalary_list_human(map);
+			List<AdminVO> dtos = dao.getSalary_list_humanMonth(map);
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("salary_list_cnt", salary_list_cnt);
 
@@ -329,7 +326,7 @@ public class AdminServiceImpl implements AdminService {
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
-		int salary_list_cnt = 0; // 글갯수
+		int humanSearch_Cnt = 0; // 글갯수
 		int start = 0; // 현재 페이지 시작 글번호
 		int end = 0; // 현재 페이지 마지막 글번호
 		int number = 0; // 출력용 글번호
@@ -339,16 +336,15 @@ public class AdminServiceImpl implements AdminService {
 		int pageCount = 0; // 페이지 갯수
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		String name = req.getParameter("name");
-
-		salary_list_cnt = dao.getSalary_Cnt();
-		System.out.println("salary_list_cnt : " + salary_list_cnt);
-
-		// 글갯수 구하기
-		Map<String, Object> map = new HashMap<String, Object>();
 		// 이름 검색
 		map.put("name", name);
+
+		humanSearch_Cnt = dao.humanSearch_Cnt(map);
+		System.out.println("humanSearch_Cnt : " + humanSearch_Cnt);
 
 		// 페이지 숫자
 		pageNum = req.getParameter("pageNum");
@@ -362,7 +358,7 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("currentPage : " + currentPage);
 
 		// 페이지 갯수 6 = (30 / 5) + (0)
-		pageCount = (salary_list_cnt / pageSize) + (salary_list_cnt % pageSize > 0 ? 1 : 0);
+		pageCount = (humanSearch_Cnt / pageSize) + (humanSearch_Cnt % pageSize > 0 ? 1 : 0);
 
 		// 현재 페이지 시작 글번호(페이지별)
 		// 1 = (1 - 1) * 5 + 1
@@ -377,7 +373,7 @@ public class AdminServiceImpl implements AdminService {
 
 		// 출력용 글번호
 		// 30 = 30 - (1 - 1) * 5;
-		number = salary_list_cnt - (currentPage - 1) * pageSize;
+		number = humanSearch_Cnt - (currentPage - 1) * pageSize;
 
 		System.out.println("number : " + number);
 		System.out.println("pageSize : " + pageSize);
@@ -388,13 +384,13 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("start2 : : : " + start2);
 		System.out.println("end2 : : : " + end2);
 
-		if (salary_list_cnt > 0) {
+		if (humanSearch_Cnt > 0) {
 			map.put("start", start);
 			map.put("end", end);
 
-			List<AdminVO> dtos = dao.getSalary_list_human_Search(map);
+			List<AdminVO> dtos = dao.humanSearch_List(map);
 			model.addAttribute("dtos", dtos);
-			model.addAttribute("salary_list_cnt", salary_list_cnt);
+			model.addAttribute("humanSearch_Cnt", humanSearch_Cnt);
 			model.addAttribute("currentPage", currentPage);
 
 		}
@@ -415,11 +411,11 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("endPage : " + endPage);
 		System.out.println("======================");
 
-		model.addAttribute("salary_list_cnt", salary_list_cnt); // 글갯수
+		model.addAttribute("humanSearch_Cnt", humanSearch_Cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 
-		if (salary_list_cnt > 0) {
+		if (humanSearch_Cnt > 0) {
 			model.addAttribute("startPage", startPage); // 시작페이지
 			model.addAttribute("endPage", endPage); // 마지막페이지
 			model.addAttribute("pageBlock", pageBlock); // 한블럭당 페이지갯수
@@ -433,104 +429,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void salary_list_month(HttpServletRequest req, Model model) {
-		// 페이징
-		int pageSize = 5; // 한페이지당 출력할 글 갯수
-		int pageBlock = 3; // 한 블럭당 페이지 갯수
-
-		int salary_list_cnt = 0; // 글갯수
-		int start = 0; // 현재 페이지 시작 글번호
-		int end = 0; // 현재 페이지 마지막 글번호
-		int number = 0; // 출력용 글번호
-		String pageNum = ""; // 페이지 번호
-		int currentPage = 0; // 현재 페이지
-
-		int pageCount = 0; // 페이지 갯수
-		int startPage = 0; // 시작 페이지
-		int endPage = 0; // 마지막 페이지
-
-		/* int salary_list_cnt = 0; */
-		salary_list_cnt = dao.getSalary_Cnt();
-		System.out.println("salary_list_cnt : " + salary_list_cnt);
-
-		// 페이지 숫자
-		pageNum = req.getParameter("pageNum");
-
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
-		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
-		pageCount = (salary_list_cnt / pageSize) + (salary_list_cnt % pageSize > 0 ? 1 : 0);
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
-		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 + 5 - 1;
-		end = start + pageSize - 1;
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
-		number = salary_list_cnt - (currentPage - 1) * pageSize;
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
-
-		if (salary_list_cnt > 0) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("start", start);
-			map.put("end", end);
-
-			List<AdminVO> dtos = dao.getSalary_list_month(map);
-			model.addAttribute("dtos", dtos);
-			model.addAttribute("salary_list_cnt", salary_list_cnt);
-
-		}
-
-		// 시작페이지
-		// 1 = (1 / 3) * 3 + 1;
-		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
-
-		System.out.println("startPage : " + startPage);
-
-		// 마지막페이지
-		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		System.out.println("endPage : " + endPage);
-		System.out.println("======================");
-
-		model.addAttribute("salary_list_cnt", salary_list_cnt); // 글갯수
-		model.addAttribute("number", number); // 출력용 글번호
-		model.addAttribute("pageNum", pageNum); // 페이지 번호
-
-		if (salary_list_cnt > 0) {
-			model.addAttribute("startPage", startPage); // 시작페이지
-			model.addAttribute("endPage", endPage); // 마지막페이지
-			model.addAttribute("pageBlock", pageBlock); // 한블럭당 페이지갯수
-			model.addAttribute("pageCount", pageCount); // 페이지 갯수
-			model.addAttribute("currentPage", currentPage); // 현재페이지
-		}
-
-	}
-
-	@Override
 	public void month_Search(HttpServletRequest req, Model model) {
 		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
-		int salary_list_cnt = 0; // 글갯수
+		int monthSearch_Cnt = 0; // 글갯수
 		int start = 0; // 현재 페이지 시작 글번호
 		int end = 0; // 현재 페이지 마지막 글번호
 		int number = 0; // 출력용 글번호
@@ -543,17 +447,17 @@ public class AdminServiceImpl implements AdminService {
 
 		String sm = req.getParameter("sm");
 		String em = req.getParameter("em");
-
-		salary_list_cnt = dao.getSalary_Cnt();
-
-		System.out.println("salary_list_cnt : " + salary_list_cnt);
-
+		
 		// 글갯수 구하기
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
 		// 날짜 검색
 		map.put("sm", sm);
 		map.put("em", em);
+
+		monthSearch_Cnt = dao.monthSearch_Cnt(map);
+
+		System.out.println("monthSearch_Cnt : " + monthSearch_Cnt);
 
 		// 페이지 숫자
 		pageNum = req.getParameter("pageNum");
@@ -567,7 +471,7 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("currentPage : " + currentPage);
 
 		// 페이지 갯수 6 = (30 / 5) + (0)
-		pageCount = (salary_list_cnt / pageSize) + (salary_list_cnt % pageSize > 0 ? 1 : 0);
+		pageCount = (monthSearch_Cnt / pageSize) + (monthSearch_Cnt % pageSize > 0 ? 1 : 0);
 
 		// 현재 페이지 시작 글번호(페이지별)
 		// 1 = (1 - 1) * 5 + 1
@@ -582,24 +486,18 @@ public class AdminServiceImpl implements AdminService {
 
 		// 출력용 글번호
 		// 30 = 30 - (1 - 1) * 5;
-		number = salary_list_cnt - (currentPage - 1) * pageSize;
+		number = monthSearch_Cnt - (currentPage - 1) * pageSize;
 
 		System.out.println("number : " + number);
 		System.out.println("pageSize : " + pageSize);
 
-		String start2 = req.getParameter("start1");
-		String end2 = req.getParameter("end1");
-
-		System.out.println("start2 : : : " + start2);
-		System.out.println("end2 : : : " + end2);
-
-		if (salary_list_cnt > 0) {
+		if (monthSearch_Cnt > 0) {
 			map.put("start", start);
 			map.put("end", end);
 
-			List<AdminVO> dtos = dao.getSalary_list_month_Search(map);
+			List<AdminVO> dtos = dao.monthSearch_List(map);
 			model.addAttribute("dtos", dtos);
-			model.addAttribute("salary_list_cnt", salary_list_cnt);
+			model.addAttribute("monthSearch_Cnt", monthSearch_Cnt);
 			model.addAttribute("currentPage", currentPage);
 
 		}
@@ -620,11 +518,11 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("endPage : " + endPage);
 		System.out.println("======================");
 
-		model.addAttribute("salary_list_cnt", salary_list_cnt); // 글갯수
+		model.addAttribute("monthSearch_Cnt", monthSearch_Cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
 		model.addAttribute("pageNum", pageNum); // 페이지 번호
 
-		if (salary_list_cnt > 0) {
+		if (monthSearch_Cnt > 0) {
 			model.addAttribute("startPage", startPage); // 시작페이지
 			model.addAttribute("endPage", endPage); // 마지막페이지
 			model.addAttribute("pageBlock", pageBlock); // 한블럭당 페이지갯수

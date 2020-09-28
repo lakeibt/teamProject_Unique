@@ -10,40 +10,109 @@
 		SELECT COUNT(*) as cnt
 		FROM A_NFC
 	</select>
-
+	
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
 		<![CDATA[
-		SELECT num, id, tagintime, tagouttime,pnum ,rNum 
-		FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
-    	FROM ( 
-        SELECT *FROM A_NFC n
-        JOIN A_ADMIN a
-        on n.pnum = a.tel))
-		WHERE rNum >=#{start} AND rNum <=#{end}
+			SELECT num, id, tagintime, tagouttime,pnum ,rNum 
+			FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
+	    	FROM ( 
+	        SELECT *FROM A_NFC n
+	        JOIN A_ADMIN a
+	        on n.pnum = a.tel))
+			WHERE rNum >=#{start} AND rNum <=#{end}
+    	]]>
+	</select>
+	
+	<select id="getAttendance_Search_Cnt" parameterType="java.util.Map"
+		resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) AS CNT
+		  FROM A_NFC
+        WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
     	]]>
 	</select>
 	
 	<select id="getAttendance_List_Search"
 		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
 		<![CDATA[
-		SELECT * FROM A_NFC
-		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
+		SELECT *
+  		  FROM (SELECT *
+        	      FROM (SELECT num, id, tagouttime, pnum, tagintime, rowNUM rNum FROM A_NFC n
+                JOIN A_ADMIN a
+                  on n.pnum = a.tel
+                  WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
+                  ))
+                  WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
 	</select>
 	
-	<select id="getSalary_list_human" parameterType="java.util.Map"
-		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT 
-		s.salary_inday,
-		s.sal_num,
-		s.id,
-		s.salary_month,
-		m.name,
-		m.depart
-		FROM A_SALARY s join A_ADMIN m
-		ON s.id = m.id
+	<select id="getSalary_Cnt" resultType="int">
+		SELECT COUNT(*) as cnt
+		FROM A_SALARY
 	</select>
+
+	<select id="getSalary_list_humanMonth" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+		<![CDATA[
+		SELECT * 
+	  	FROM (SELECT *
+	    FROM (SELECT rowNUM rNum, salary_month, s.id, a.name, d.depart_name, paytotal
+	                      , pay, meal, contract_vehicle, overtime
+	    FROM a_salary s, a_admin a, a_depart d
+	    where s.id = a.id
+      	and a.depart = d.depart))
+      	WHERE rNum >=#{start} and rNum <=#{end}
+        ]]>
+	</select>
+	
+	<select id="humanSearch_Cnt" parameterType="java.util.Map" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) as cnt
+		FROM A_SALARY s, A_ADMIN a
+		WHERE s.id = a.id
+		AND name LIKE '%'||#{name, jdbcType=VARCHAR}||'%'
+		]]>
+	</select>
+	
+	<select id="humanSearch_List" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+	<![CDATA[
+		    SELECT * from(
+		    	SELECT * from(
+		    		SELECT rowNUM rNum, salary_month, s.id, a.name, d.depart_name, paytotal, pay, meal, contract_vehicle, overtime
+              		  FROM a_salary s, a_admin a, a_depart d
+            WHERE s.id = a.id
+            AND a.depart = d.depart
+            AND name LIKE '%'||#{name, jdbcType=VARCHAR}||'%'))
+            WHERE rNum >=#{start} and rNum <=#{end}
+		    ]]>
+	</select>
+	
+	<select id="monthSearch_Cnt" parameterType="java.util.Map" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) as cnt
+		FROM A_SALARY s, A_ADMIN a
+		WHERE s.id = a.id
+		AND to_char(salary_month,'YYYYMM') BETWEEN #{sm, jdbcType=VARCHAR} AND #{em, jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<select id="monthSearch_List" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+	<![CDATA[
+		    SELECT * from(
+		    	SELECT * from(
+		    		SELECT rowNUM rNum, salary_month, s.id, a.name, d.depart_name, paytotal, pay, meal, contract_vehicle, overtime
+              		  FROM a_salary s, a_admin a, a_depart d
+            WHERE s.id = a.id
+            AND a.depart = d.depart
+            AND to_char(salary_month,'YYYYMM') BETWEEN #{sm, jdbcType=VARCHAR} AND #{em, jdbcType=VARCHAR}))
+            WHERE rNum >=#{start} and rNum <=#{end}
+		    ]]>
+	</select>
+	
+	
 	
 	<insert id="salary_input" parameterType="java.util.Map">
 		INSERT INTO A_SALARY_INPUT

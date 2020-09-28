@@ -242,7 +242,7 @@ public class AdminController {
 	public String salary_list_month(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_month");
 
-		adminService.salary_list_month(req, model);
+		adminService.salary_list_humanMonth(req, model);
 
 		return "admin/human_resources/pay/salary_list_month";
 	}
@@ -280,7 +280,7 @@ public class AdminController {
 	public String salary_list_human(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_human");
 
-		adminService.salary_list_human(req, model);
+		adminService.salary_list_humanMonth(req, model);
 
 		// adminService.salary_list_human(req, model);
 
