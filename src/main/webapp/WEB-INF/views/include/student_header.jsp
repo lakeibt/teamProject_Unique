@@ -2,7 +2,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
 	<div class="container-fluid">
-		<div class="collapse navbar-collapse justify-content-end">
+		<div class="collapse navbar-collapse justify-content-end" style = "height:40px;">
+			<c:if test="${sessionScope.auth != null}">
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" 
@@ -26,6 +27,7 @@
 					</a>
 				</li>
 			</ul>
+			</c:if>
 		</div>
 	</div>
 </nav>
