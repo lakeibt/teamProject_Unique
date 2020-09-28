@@ -5,9 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 public interface AdminService {
+	//공지사항
+	public void info_list(HttpServletRequest req, Model model);
+	public void infoPro(HttpServletRequest req, Model model);
+	public void content(HttpServletRequest req, Model model);
 	
 	public void attendance(HttpServletRequest req, Model model);
-
 	public void attendance_Search(HttpServletRequest req, Model model);
 	
 	public void salary_list_humanMonth(HttpServletRequest req, Model model);
@@ -19,6 +22,10 @@ public interface AdminService {
 	//급여등록 - 신규생성 
 	public void salary_input(HttpServletRequest req, Model model);
 	
+	public void salary_list_human(HttpServletRequest req, Model model);
+	
+	//급여등록 - 신규생성 
+	public void salary_list_month(HttpServletRequest req, Model model);
 	public void course_list(HttpServletRequest req, Model model);
 	
 	//급여대장 리스트 출력

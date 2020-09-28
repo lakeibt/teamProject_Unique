@@ -27,43 +27,61 @@
 									<table class="table">
 										<thead class="text-primary">
 											<tr>
-												<th style="width:10%;">이수구분</th>
-												<th style="width:25%;">교과목명</th>
-												<th style="width:15%;">담당교수</th>
-												<th style="width:20%;">강의시간</th>
-												<th style="width:10%;">학점</th>
-												<th style="width:15%;">수업계획서</th>
+												<th>
+													<select id="select1" class="form-control">
+														<option>2019</option>		
+														<option>2020</option>		
+													</select>
+												</th>
+												<th colspan="5">
+													<select id="select2" class="form-control" onchange="course()" style="width:130px;">
+														<option selected disabled>학기를 선택하세요</option>
+														<option value="1">1학기</option>
+														<option value="2">2학기</option>
+													</select>
+												</th>
 											</tr>
 										</thead>
-										<tbody>
-										<c:if test="${cnt > 0}" >
-											<c:forEach var="dto" items="${dtos}">
+										<thead class="text-primary">
 											<tr>
-												<td style="width:10%;">${dto.P_CODE}</td>
-												<td style="width:25%;">${dto.CO_NAME}</td>
-												<td style="width:15%;">${dto.P_NAME}</td>
-												<td style="width:20%;">${dto.DAY}/${dto.TIME}-${dto.TIME + dto.GRADE - 1}</td>
-												<td style="width:10%;">${dto.GRADE}</td>
-												<td style="width:15%;"><button class="btn btn-primary pull-left" onclick="content('${dto.CO_CODE}');">조회</button></td>
+												<td>학과</td>
+												<td><input class="form-control" type="text" value="${vo.m_code}" disabled></td>
+												<td>학번</td>
+												<td><input class="form-control" type="text" value="${vo.id}" disabled></td>
+												<td>이름</td>
+												<td><input class="form-control" type="text" value="${vo.name}" disabled></td>
 											</tr>
-											</c:forEach>
-										</c:if>
-										<c:if test="${cnt == 0}" >
-											<tr>
-												<td colspan="6" align="center">
-													수강 중인 강의가 없습니다.
-												</td>
-											</tr>
-										</c:if>
-										</tbody>
+										</thead>
 									</table>
+									<div id="info"></div>
 									<script type="text/javascript">
-									function content(code) {
-										var param = "code=" + code;
-										sendRequest(content_callback, "${student}course_syllabus", "get", param);
+									function course() {
+										var yearIndex = document.getElementById("select1");
+										var semesterIndex = document.getElementById("select2");
+										var year = yearIndex.options[yearIndex.selectedIndex].value;
+										var semester = semesterIndex.options[semesterIndex.selectedIndex].value;
+										var param = "year=" + year + "&semester=" + semester;
+	
+										sendRequest(course_callback, "${student}courseInfo", "get", param);
 									}
-									function content_callback() {
+	
+									function course_callback() {
 										var result = document.getElementById("info");
+										if (httpRequest.readyState == 4) {
+											if (httpRequest.status == 200) {
+												var data = httpRequest.responseText;
+												result.innerHTML = data;
+											} else result.innerHTML = "Error!";
+										} else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+									}
+									</script>
+									<script type="text/javascript">
+									function syllabus(code) {
+										var param = "code=" + code;
+										sendRequest(syllabus_callback, "${student}course_syllabus", "get", param);
+									}
+									function syllabus_callback() {
+										var result = document.getElementById("syllabus");
 										if (httpRequest.readyState == 4) {
 											if (httpRequest.status == 200) {
 												var data = httpRequest.responseText;
@@ -77,7 +95,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="info"></div>
+				<div id="syllabus"></div>
 				<!-- 메인 페이지 End -->
 			</div>
 		</div>

@@ -28,7 +28,7 @@ public class EduController {
 	public String home() {
 		logger.info("url ==> home");
 		
-		return "guest/main";
+		return "guest/login";
 	}
 	
 	// 로그인 페이지로 이동

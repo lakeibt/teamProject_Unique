@@ -42,5 +42,4 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getProfessorProfile", id);
 	}
 
-
 }

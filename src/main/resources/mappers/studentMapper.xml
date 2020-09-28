@@ -72,7 +72,7 @@
 		 WHERE S.CO_CODE = C.CO_CODE
 		   AND S.GRADES_CODE = G.GRADES_CODE
 		   AND S.ID = ST.ID
-		   AND S.ID = #{id} AND C.CO_SEMESTER = #{value}
+		   AND S.ID = #{id} AND C.CO_YEAR = #{year} AND C.CO_SEMESTER = #{semester}
 	</select>
 	<select id="getDay" resultType="com.kosmo.uni.vo.StudentStudyListVO">
 		SELECT *
@@ -81,7 +81,7 @@
 	<select id="getStudyCnt" resultType="int">
 		SELECT COUNT(*) as cnt FROM S_TIMETABLE
 	</select>
-	<select id="getStudyList" parameterType="String" resultType="java.util.Map">
+	<select id="getStudyList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT T.ID ID
 			 , S.NAME NAME
 			 , C.CO_NAME CO_NAME
@@ -96,8 +96,10 @@
 		   AND T.ID = S.ID
 		   AND T.CO_CODE IS NOT NULL
 		   AND T.ID = #{id}
+		   AND C.CO_YEAR = #{year}
+   		   AND C.CO_SEMESTER = #{semester}
 	</select>
-	<select id="getTimeTable" parameterType="String" resultType="java.util.Map">
+	<select id="getTimeTable" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT T.DAY DAY, T.TIME TIME, C.CO_NAME CO_NAME, C.P_NAME P_NAME, C.GRADE GRADE, S.NAME NAME, M.M_NAME MAJOR, S.ID
 	      FROM S_TIMETABLE T
 	 LEFT JOIN A_COURSE C
@@ -107,6 +109,33 @@
 	 LEFT JOIN A_MAJOR M
 	        ON S.M_CODE = M.M_CODE
 	     WHERE T.ID = #{id}
+	       AND C.CO_YEAR IS NULL OR C.CO_YEAR = #{year}
+   		   AND C.CO_SEMESTER IS NULL OR C.CO_SEMESTER = #{semester}
 	     ORDER BY DECODE(T.DAY, '월', 1, '화', 2, '수', 3, '목', 4, '금', 5), T.TIME
+	</select>
+	<select id="getMessageCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) as cnt FROM p_message where receiver_id = #{id}
+	</select>
+	
+	<select id="getMessageCnt_send" parameterType="String" resultType="int">
+		SELECT COUNT(*) as cnt FROM p_message where sender_id = #{id}
+	</select>
+	
+	<select id="getMessageList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
+	<![CDATA[
+		SELECT * FROM (SELECT num, title, content, m_code, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
+		  FROM (SELECT * FROM p_message where receiver_id = #{id})) WHERE rNum >= #{start} AND rNum <= #{end}
+	]]>
+	</select>	
+	
+	<select id="getMessageList_send" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
+	<![CDATA[
+		SELECT * FROM (SELECT num, title, content, m_code, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
+		  FROM (SELECT * FROM p_message where sender_id = #{id})) WHERE rNum >= #{start} AND rNum <= #{end}
+	]]>
+	</select>
+	
+	<select id="getMessage" parameterType="int" resultType="com.kosmo.uni.vo.MessageVO">
+		SELECT * FROM p_message WHERE num = #{num}
 	</select>
 </mapper>

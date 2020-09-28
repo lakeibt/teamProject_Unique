@@ -113,10 +113,16 @@ public class ProfessorServiceImpl implements ProfessorService{
 
 	@Override
 	public void myPageModify(HttpServletRequest req, Model model) {
-		String tel = req.getParameter("tel");
-		String email = req.getParameter("email");
-		String address = req.getParameter("address");
+		// TODO Auto-generated method stub
 		
-		Map<String, Object> 
 	}
+
+//	@Override
+//	public void myPageModify(HttpServletRequest req, Model model) {
+//		String tel = req.getParameter("tel");
+//		String email = req.getParameter("email");
+//		String address = req.getParameter("address");
+//		
+//		Map<String, Object> 
+//	}
 }

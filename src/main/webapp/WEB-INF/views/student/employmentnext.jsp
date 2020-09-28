@@ -4,7 +4,9 @@
 <%@ page import="org.jsoup.nodes.Document" %>
 <%@ page import="org.jsoup.nodes.Element" %>
 <%@ page import="org.jsoup.select.Elements" %>
-
+<style>
+.dark-edition a {color:black;}
+</style>
 <%
     // 파싱할 사이트를 적어준다(해당 사이트에 대한 태그를 다 긁어옴)
     request.setCharacterEncoding("utf-8");

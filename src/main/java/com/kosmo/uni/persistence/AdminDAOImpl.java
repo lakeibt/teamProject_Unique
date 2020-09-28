@@ -21,6 +21,36 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	//근태관리 건수
+	public int getInfoCnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getInfoCnt();
+	}
+	
+	@Override
+	public List<Map<String, Object>> getInfoList(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getInfoList(map);
+	}
+
+	@Override
+	public int insertInfo(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.insertInfo(map);
+	}
+
+	@Override
+	public void addCnt(int num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dao.addCnt(num);
+	}
+	
+	@Override
+	public Map<String, Object> getContent(int num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getContent(num);
+	}
+	
+	@Override
 	public int getAttendance_Cnt() {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getAttendance_Cnt();
