@@ -3,6 +3,7 @@
 	<div class="logo"><a href="#" class="simple-text logo-normal">Unique Universal</a></div>
 	<div class="sidebar-wrapper">
 		<ul class="nav">
+			<c:if test="${sessionScope.auth != null}">
 			<li class="nav-item">
 				<a class="nav-link" href="${student}myPage"> 
 					<i class="material-icons">dashboard</i>
@@ -33,6 +34,7 @@
 					<p>수강신청</p>
 				</a>
 			</li>
+			</c:if>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}employment">
 					<i class="material-icons">assignment_ind</i>
