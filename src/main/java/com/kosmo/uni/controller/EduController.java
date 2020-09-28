@@ -23,7 +23,7 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리
+	// HomeController.java는 주석처리d
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
@@ -41,6 +41,7 @@ public class EduController {
 	
 	@RequestMapping("/guest/logout")
 	public String gue_logout(HttpSession session, HttpServletRequest req) {
+		logger.info("url ==> logout");
 		session.invalidate();
 		
 		return "guest/login";

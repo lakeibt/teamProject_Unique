@@ -16,13 +16,14 @@ $(document).ready(function(){
 	var ajaxOption = {
             url : '${professor}messageSimple',
             type : "GET",
-
+            dataType : "text",
+            success : function(data){
+            	$('.message-box').html(data);	
+            }, error : function(){
+            	alert('오류!');
+            }
     };
-    
-    $.ajax(ajaxOption).done(function(data){
-        $('.message-box').html(data);
-    });
-});
+});  
 
 
 // 지우기
@@ -45,6 +46,7 @@ function deleteMessageSend(obj) {
 	}
 
 	div.hide();
+	event.stopPropagation();
 		
 
 };
@@ -68,7 +70,7 @@ function deleteMessage(obj) {
 	}
 	
 	div.hide();
-
+	event.stopPropagation();
 };
 
 
@@ -82,7 +84,7 @@ function messageList() {
 	var ajaxOption = {
                url : '${professor}messageList_form',
                type : "GET",
-               dataType : "html"
+               dataType : "text"
        };
        
        $.ajax(ajaxOption).done(function(data){
@@ -98,13 +100,14 @@ function changeList() {
     var ajaxOption = {
             url : '${professor}messageList_form?option=' + $('.message_select option:selected').val(),
             type : "GET",
-            dataType : "html"
+            dataType : "text"
     };
     
     $.ajax(ajaxOption).done(function(data){
         $('#messageList').children().remove();
         $('#messageList').html(data);
     });
+    event.stopPropagation();
 };
 
 // 쪽지 상세보기
@@ -143,7 +146,7 @@ function message_load(num) {
 			alert('오류!!!!');	
 		}
 	});
-	
+	event.stopPropagation();
 };
 
 //쪽지 보내기 폼 불러오기
@@ -152,7 +155,7 @@ function message_send(){
 	$.ajax({
 		url : '${professor}message_form',
 		type : 'GET',
-		dataType : 'html',
+		dataType : 'text',
 		success : function(data){
 			
 			if($('#mv').val() == '1'){
@@ -182,7 +185,7 @@ function message_send(){
 			alert('오류!!!!');	
 		}
 	});
-	
+	event.stopPropagation();
 };
 
 </script>
