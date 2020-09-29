@@ -7,6 +7,7 @@ import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.SalaryVO;
 
 public interface AdminDAO {
@@ -57,6 +58,7 @@ public interface AdminDAO {
 
 	//강의리스트출력
 	public List<CourseVO> getCourseList();
+	
 	//강의삭제
 	public int classDelete(String code);
 	//강의등록
@@ -74,5 +76,26 @@ public interface AdminDAO {
 	public List<ParkVO> getSearchList(String date);
 	//주차검색 출력(차번호)
 	public List<ParkVO> getCarNumList(String date);
+
+	public int getDivisionCnt(Map<String, Object> map);
+
+	public int updateDivCnt(Map <String, Object> map1);
+	// 급여 대장 수정
+	public SalaryInputVO getSalaryArticle(int salary_input_num);
+	// 급여대장 수정 처리 
+	public int UpdateSalInput(Map<String, Object> map);
+	//급여대장 삭제 
+	public int deleteSalary(int salary_input_num);
+	//급여 대장 조회시 업데이트
+	public int updateTotalSal(Map<String, Object> map);
+	//급여 대장 조회시 다시 0 만들기
+	public void updateZeroTotal(int salary_input_num);
+	//급여 대장 - 급여 합계
+	public int selectSalSum(int salary_input_num);
+	//급여 대장 - 식대, 차랑유지비 합계
+	public SalaryVO getMealCar(int salary_input_num);
+	
+	//급여명세서 조회
+	public List<PayslipVO> getPayslip(int salary_input_num);
 	
 }

@@ -22,10 +22,6 @@ public interface AdminService {
 	//급여등록 - 신규생성 
 	public void salary_input(HttpServletRequest req, Model model);
 	
-	public void salary_list_human(HttpServletRequest req, Model model);
-	
-	//급여등록 - 신규생성 
-	public void salary_list_month(HttpServletRequest req, Model model);
 	public void course_list(HttpServletRequest req, Model model);
 	
 	//급여대장 리스트 출력
@@ -51,4 +47,18 @@ public interface AdminService {
 	
 	//주차리스트 출력
 	public void parkSearchList(HttpServletRequest req, Model model);
+
+	public void salaryCnt(HttpServletRequest req, Model model);
+	
+	//급여대장 수정 폼
+	public void salaryModify(HttpServletRequest req, Model model);
+	//급여대장 수정 처리
+	public void salaryModifyPro(HttpServletRequest req, Model model);
+	//급여대장 삭제
+	public void salary_delete(HttpServletRequest req, Model model);
+	//급여대장 - 토탈급여 
+	public void salarytotal(HttpServletRequest req, Model model);
+	//급여명세서 출력 
+	public void salary_payslip(HttpServletRequest req, Model model);
+	
 }

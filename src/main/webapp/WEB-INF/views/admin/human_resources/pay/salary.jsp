@@ -32,8 +32,6 @@
 								<div class="x_content">
 									<table class="table" align="center">
 										<thead style="color:#73879C;">
-										
-											
 											<tr>
 												<th>급여구분</th>
 												<td><select class="form-control" style="float:left; width:100px;" name="salary_division">

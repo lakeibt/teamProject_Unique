@@ -11,6 +11,7 @@ import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.SalaryVO;
 
 @Repository
@@ -65,7 +66,6 @@ public class AdminDAOImpl implements AdminDAO {
 			String value = String.valueOf(map.get(key));
 			System.out.println("[key]:" + key + ", [value]:" + value);
 		}
-		
 		return dao.getAttendance_Search_Cnt(map);
 	}
 	
@@ -241,7 +241,7 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.classmodClear(vo);
 	}
-	
+
 	@Override
 	public int getParkingCnt() {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
@@ -264,6 +264,77 @@ public class AdminDAOImpl implements AdminDAO {
 	public List<ParkVO> getCarNumList(String date) {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getCarNumList(date);
+	}
+
+	@Override
+	public int getDivisionCnt(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		int cnt = dao.getDivisionCnt(map);
+		System.out.println("getDivisionCnt : " + cnt);
+		return cnt;
+	}
+
+	@Override
+	public int updateDivCnt(Map <String, Object> map1) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateDivCnt(map1);
+	}
+
+	@Override
+	public SalaryInputVO getSalaryArticle(int salary_input_num) {
+		SalaryInputVO vo = null;
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		vo = dao.getSalaryArticle(salary_input_num);
+		System.out.println("getSalaryArticle : " + vo);
+		return vo;
+	}
+
+	@Override
+	public int UpdateSalInput(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.UpdateSalInput(map);
+	}
+
+	@Override
+	public int deleteSalary(int salary_input_num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.deleteSalary(salary_input_num);
+	}
+
+	@Override
+	public int updateTotalSal(Map<String, Object> map1) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateTotalSal(map1);
+	}
+
+	@Override
+	public void updateZeroTotal(int salary_input_num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dao.updateZeroTotal(salary_input_num);
+	}
+
+	@Override
+	public int selectSalSum(int salary_input_num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.selectSalSum(salary_input_num);
+	}
+
+	@Override
+	public SalaryVO getMealCar(int salary_input_num) {
+		SalaryVO vo = null;
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		vo = dao.getMealCar(salary_input_num);
+		System.out.println("getMealCar : " + vo);
+		return vo;
+	}
+
+	@Override
+	public List<PayslipVO> getPayslip(int salary_input_num) {
+		List<PayslipVO> dtos = null;
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dtos = dao.getPayslip(salary_input_num);
+		System.out.println("급여명세서 : " + dtos);
+		return dtos;
 	}
 
 }

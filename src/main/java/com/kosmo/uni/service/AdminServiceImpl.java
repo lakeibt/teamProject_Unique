@@ -14,6 +14,7 @@ import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.SalaryVO;
 
@@ -645,7 +646,7 @@ public class AdminServiceImpl implements AdminService {
 		// 3단계. 화면으로부터 입력받은 값을 받아온다.
 
 		// 페이징 처리 (최신글 부터 5건씩 출력)
-		int pageSize = 2; // 한페이지당 출력할 글 갯수
+		int pageSize = 1; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한블럭당 페이지 갯수
 
 		int cnt = 0; // 글갯수
@@ -746,26 +747,28 @@ public class AdminServiceImpl implements AdminService {
 
 		List<SalaryVO> stos = dao.getSelectList(map);
 		System.out.println("stos.size() : " +stos.size());
-
+		
 		for(int i = 0; i < stos.size(); i++) {
 			SalaryVO sal = stos.get(i);
 			int car = 1;
+			SalaryVO vo = null;
 			if(sal.getCar() == car) {
 				int cost = sal.getCar();
-				SalaryVO vo = dao.getSelectCar(cost);
+				vo = dao.getSelectCar(cost);
 				sal.setCost(vo.getCost());
 				sal.setMeal(vo.getMeal());
 				sal.setContract_vehicle(vo.getContract_vehicle());
 				System.out.println("cost : " +sal);
+
 			} else {
 				int cost0 = sal.getCar();
-				SalaryVO vo = dao.getSelectCar(cost0);
+				vo = dao.getSelectCar(cost0);
 				sal.setCost(vo.getCost());
 				sal.setMeal(vo.getMeal());
 				sal.setContract_vehicle(vo.getContract_vehicle());
-				System.out.println("cost0 : " +sal);
 			}
 		}
+
 		System.out.println("stos : " + stos);
 		model.addAttribute("stos", stos);
 	}
@@ -783,6 +786,90 @@ public class AdminServiceImpl implements AdminService {
 		model.addAttribute("dtos",dtos);
 		model.addAttribute("course_Cnt",course_Cnt);
 		
+	}
+	
+	@Override
+	public void salaryCnt(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		int payments_division = Integer.parseInt(req.getParameter("payments_division"));
+		System.out.println("salary_input_num : " + salary_input_num);
+		System.out.println("payments_division : " +payments_division);
+		
+		Map <String, Object> map = new HashMap<>();
+		map.put("salary_input_num", salary_input_num);
+		map.put("payments_division", payments_division);
+		
+		int cnt = dao.getDivisionCnt(map);
+		
+		Map <String, Object> map1 = new HashMap<>();
+		map1.put("salary_input_num", salary_input_num);
+		map1.put("division_cnt", cnt);
+		int i = dao.updateDivCnt(map1);
+		System.out.println("i : " + i);
+		model.addAttribute("division_cnt",cnt);
+	}
+	
+	@Override
+	public void salaryModify(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		System.out.println("salary_input_num : " + salary_input_num);
+		
+		SalaryInputVO vo = dao.getSalaryArticle(salary_input_num);
+		
+		model.addAttribute("dto", vo);
+		System.out.println("vo : " + vo);
+	}
+	
+	@Override
+	public void salaryModifyPro(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		Map <String, Object> map = new HashMap<>();
+		map.put("salary_input_num", salary_input_num);
+		map.put("salary_division", Integer.parseInt(req.getParameter("salary_division")));
+		map.put("payments_division", Integer.parseInt(req.getParameter("payments_division")));
+		map.put("salary_name", req.getParameter("salary_name"));
+		map.put("salary_inday", req.getParameter("salary_inday"));
+		System.out.println("salary_input_num : "+salary_input_num);
+		System.out.println(Integer.parseInt(req.getParameter("salary_division")));
+		System.out.println(Integer.parseInt(req.getParameter("payments_division")));
+		System.out.println(req.getParameter("salary_name"));
+		System.out.println(req.getParameter("salary_inday"));
+		
+		int updateCnt = dao.UpdateSalInput(map);
+		System.out.println("updateCnt : "+updateCnt);
+		model.addAttribute("updateCnt", updateCnt);
+	}
+	
+	@Override
+	public void salary_delete(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		int deleteCnt = dao.deleteSalary(salary_input_num);
+		System.out.println("deleteCnt : " +deleteCnt);
+		model.addAttribute("deleteCnt", deleteCnt);
+	}
+	
+	@Override
+	public void salarytotal(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		int salary = dao.selectSalSum(salary_input_num);
+		System.out.println("salary : " + salary);
+		model.addAttribute("salary", salary);
+		SalaryVO vo = dao.getMealCar(salary_input_num);
+		model.addAttribute("vo", vo);
+		System.out.println("vo : " + vo);
+		Map <String, Object> map = new HashMap<>();
+		map.put("salary_input_num", salary_input_num);
+		map.put("salary_total", salary+vo.getMeal()+vo.getContract_vehicle());
+		
+		dao.updateTotalSal(map);
+		
+	}
+	
+	@Override
+	public void salary_payslip(HttpServletRequest req, Model model) {
+		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
+		List<PayslipVO> dtos =dao.getPayslip(salary_input_num);
+		model.addAttribute("dtos", dtos);
 	}
 
 	@Override
@@ -921,15 +1008,4 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
-	@Override
-	public void salary_list_human(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void salary_list_month(HttpServletRequest req, Model model) {
-		// TODO Auto-generated method stub
-		
-	}
 }
