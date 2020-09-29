@@ -59,4 +59,6 @@ public interface AdminService {
 	public void rankList(HttpServletRequest req, Model model);
 	// 아이디 가져오기
 	public void nextAdminId(HttpServletRequest req, Model model);
+	
+
 }

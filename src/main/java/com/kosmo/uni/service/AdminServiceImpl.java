@@ -1,5 +1,6 @@
 package com.kosmo.uni.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.DepartVO;
+import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.RankVO;
 import com.kosmo.uni.vo.SalaryInputVO;
@@ -946,16 +948,18 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void addHuman(MultipartHttpServletRequest req, Model model) {
 		
-		MultipartFile file = req.getFile("img");
+		MultipartFile photo = req.getFile("photo");
 		
-		String saveDir = req.getRealPath("/resources/image/");
+		Map<String, Object> map = new HashMap<>();
+		try {
+			map.put("img", photo.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		String id = req.getParameter("id");
-		String password = req.getParameter("password");
-		String name = req.getParameter("name");
-		String eng_name = req.getParameter("eng_name");
+		int insertCnt = dao.saveImage(map);
 		
-		
+		System.out.println(insertCnt);
 	}
 
 	// 아이디 가져오기

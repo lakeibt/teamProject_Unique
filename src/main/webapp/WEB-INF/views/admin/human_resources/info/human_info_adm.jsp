@@ -31,7 +31,7 @@ $(document).ready(function(){
 <div class="col-md-12 col-sm-12 ">
 	<div class="x_panel">
 		<div class="x_content">
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_resources/info/human_info_add" method="post">
+			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${path}admin/human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data"> 
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="x_title">
 				<h2>

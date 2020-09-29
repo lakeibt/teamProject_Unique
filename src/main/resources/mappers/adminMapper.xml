@@ -145,5 +145,13 @@
 		select 'a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from a_admin
 	</select>	
 	
+	<insert id="saveImage" parameterType="java.util.Map">
+		INSERT INTO yoon_img_test VALUES(#{img})
+	</insert>
+	
+	<select id="getByteImage" resultType="java.util.Map">
+		select img from yoon_img_test
+	</select>	
+	
 	
 </mapper>

@@ -2,11 +2,13 @@ package com.kosmo.uni.vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class HumanVO {
 	
 	private String id;
 	private String password;
-	private String photo;
+	private MultipartFile photo;
 	private String name;
 	private String eng_name;
 	private int jumin1;
@@ -37,12 +39,7 @@ public class HumanVO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -150,6 +147,12 @@ public class HumanVO {
 	}
 	public void setPosition(String position) {
 		this.position = position;
+	}
+	public MultipartFile getPhoto() {
+		return photo;
+	}
+	public void setPhoto(MultipartFile photo) {
+		this.photo = photo;
 	}
 	
 }

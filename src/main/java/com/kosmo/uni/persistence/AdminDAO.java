@@ -81,5 +81,8 @@ public interface AdminDAO {
 	// 아이디 가져오기
 	public String getNextAdminId();
 	
-	
+	// 이미지 저장
+	public int saveImage(Map<String, Object> map);
+	// 이미지 불러오기
+	public Map<String, Object> getByteImage();
 }

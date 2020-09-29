@@ -1,15 +1,22 @@
 package com.kosmo.uni.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.service.AdminServiceImpl;
 
 @Controller
@@ -19,6 +26,9 @@ public class AdminController {
 
 	@Autowired
 	AdminServiceImpl adminService;
+	
+	@Autowired
+	AdminDAO dao;
 
 	@RequestMapping(value = "/admin")
 	public String home(HttpServletRequest req, Model model) {
@@ -148,6 +158,20 @@ public class AdminController {
 
 		return "admin/human_resources/info/test";
 	}
+	
+	@RequestMapping(value = "/admin/image")
+	public ResponseEntity<byte[]> image() {
+		logger.info("image");
+		
+		Map<String, Object> map = dao.getByteImage();
+	       byte[] imageContent = (byte[]) map.get("img");
+	       final HttpHeaders headers = new HttpHeaders();
+	       headers.setContentType(MediaType.IMAGE_PNG);
+	       return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+
+
+	}
+	
 	
 	// 인사정보등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info")

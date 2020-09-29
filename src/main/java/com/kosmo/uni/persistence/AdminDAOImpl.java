@@ -264,4 +264,16 @@ public class AdminDAOImpl implements AdminDAO {
 		return dao.getNextAdminId();
 	}
 
+	@Override
+	public int saveImage(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.saveImage(map);
+	}
+
+	@Override
+	public Map<String, Object> getByteImage() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getByteImage();
+	}
+
 }
