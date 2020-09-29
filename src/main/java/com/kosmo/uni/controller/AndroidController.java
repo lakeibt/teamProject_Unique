@@ -45,7 +45,7 @@ public class AndroidController {
 	@RequestMapping("/android/androidMyPageMain")
 	public Map<String, Object> androidMyPageMain(HttpServletRequest req) {
 		logger.info("androidMyPageMain()");
-		
+		System.out.println("androidMyPageMain탔음");
 		Map<String, Object> map = andService.MyPage(req); 
 		
 		return map;
