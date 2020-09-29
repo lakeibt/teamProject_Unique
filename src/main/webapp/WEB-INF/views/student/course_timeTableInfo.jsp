@@ -27,7 +27,7 @@
 			<td style="background-color:lightblue">
 			${dtos[i-1].CO_NAME }<br>
 			${dtos[i-1].P_NAME }<br>
-			${dtos[i-1].DAY } ${dtos[i-1].TIME } - ${dtos[i-1].TIME + dtos[i-1].GRADE -1 }
+			${dtos[i-1].DAY } ${dtos[i-1].TIME }교시
 			</td>
 			</c:if>
 			<c:if test="${dtos[i-1].CO_NAME == null }"><td></td></c:if>
@@ -35,7 +35,7 @@
 			<td style="background-color:lightblue">
 			${dtos[9+i-1].CO_NAME }<br>
 			${dtos[9+i-1].P_NAME }<br>
-			${dtos[9+i-1].DAY } ${dtos[9+i-1].TIME } - ${dtos[9+i-1].TIME + dtos[9+i-1].GRADE -1 }
+			${dtos[9+i-1].DAY } ${dtos[9+i-1].TIME }교시
 			</td>
 			</c:if>
 			<c:if test="${dtos[9+i-1].CO_NAME == null }"><td></td></c:if>
@@ -43,7 +43,7 @@
 			<td style="background-color:lightblue">
 			${dtos[18+i-1].CO_NAME }<br>
 			${dtos[18+i-1].P_NAME }<br>
-			${dtos[18+i-1].DAY } ${dtos[18+i-1].TIME } - ${dtos[18+i-1].TIME + dtos[18+i-1].GRADE -1 }
+			${dtos[18+i-1].DAY } ${dtos[18+i-1].TIME }교시
 			</td>
 			</c:if>
 			<c:if test="${dtos[18+i-1].CO_NAME == null }"><td></td></c:if>
@@ -51,7 +51,7 @@
 			<td style="background-color:lightblue">
 			${dtos[27+i-1].CO_NAME }<br>
 			${dtos[27+i-1].P_NAME }<br>
-			${dtos[27+i-1].DAY } ${dtos[27+i-1].TIME } - ${dtos[27+i-1].TIME + dtos[27+i-1].GRADE -1 }
+			${dtos[27+i-1].DAY } ${dtos[27+i-1].TIME }교시
 			</td>
 			</c:if>
 			<c:if test="${dtos[27+i-1].CO_NAME == null }"><td></td></c:if>
@@ -59,7 +59,7 @@
 			<td style="background-color:lightblue">
 			${dtos[36+i-1].CO_NAME }<br>
 			${dtos[36+i-1].P_NAME }<br>
-			${dtos[36+i-1].DAY } ${dtos[36+i-1].TIME } - ${dtos[36+i-1].TIME + dtos[36+i-1].GRADE -1 }
+			${dtos[36+i-1].DAY } ${dtos[36+i-1].TIME }교시
 			</td>
 			</c:if>
 			<c:if test="${dtos[36+i-1].CO_NAME == null }"><td></td></c:if>
