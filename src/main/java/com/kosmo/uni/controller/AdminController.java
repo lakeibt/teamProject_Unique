@@ -1,22 +1,17 @@
 package com.kosmo.uni.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.service.AdminServiceImpl;
 
 @Controller
@@ -26,14 +21,12 @@ public class AdminController {
 
 	@Autowired
 	AdminServiceImpl adminService;
-	
-	@Autowired
-	AdminDAO dao;
 
 	@RequestMapping(value = "/admin")
 	public String home(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
 
+		adminService.info_list(req, model);
 		return "admin/main";
 	}
 
@@ -41,7 +34,31 @@ public class AdminController {
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
 
+		adminService.info_list(req, model);
 		return "admin/main";
+	}
+	// ------------------------- 공지사항(메인) -------------------------
+	@RequestMapping(value = "/admin/infoWrite")
+	public String infoWrite(HttpServletRequest req, Model model) {
+		logger.info("admin_infoWrite");
+
+		return "admin/infoWrite";
+	}
+	
+	@RequestMapping(value = "/admin/infoPro")
+	public String infoPro(HttpServletRequest req, Model model) {
+		logger.info("admin_infoPro");
+		
+		adminService.infoPro(req, model);
+		return "admin/infoPro";
+	}
+	
+	@RequestMapping(value = "/admin/content")
+	public String content(HttpServletRequest req, Model model) {
+		logger.info("admin_content");
+		
+		adminService.content(req, model);
+		return "admin/content";
 	}
 
 	// ------------------------- 학사관리 -------------------------
@@ -159,57 +176,52 @@ public class AdminController {
 		return "admin/human_resources/info/test";
 	}
 	
-	@RequestMapping(value = "/admin/image")
-	public ResponseEntity<byte[]> image() {
-		logger.info("image");
-		
-		Map<String, Object> map = dao.getByteImage();
-	       byte[] imageContent = (byte[]) map.get("img");
-	       final HttpHeaders headers = new HttpHeaders();
-	       headers.setContentType(MediaType.IMAGE_PNG);
-	       return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
-
-
-	}
-	
-	
 	// 인사정보등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info")
 	public String human_info(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info");
 
-		return "admin/human_resources/info/human_info";
-	}
-	
-	// 학생 등록폼
-	@RequestMapping(value = "/admin/human_resources/info/human_info_stu")
-	public String human_info_stu(HttpServletRequest req, Model model) {
-		logger.info("human_resources/info/human_info_stu");
-
-		model.addAttribute("option","stu");
+		String option = req.getParameter("option");
+		if(option == null) {
+			option = "adm";
+		}
 		
-		return "admin/human_resources/info/human_info_stu";
-	}
+		model.addAttribute("option", option);
+		
+		return "admin/human_resources/info/human_info";
+	}	
 	
 	// 직원 등록폼
 	@RequestMapping(value = "/admin/human_resources/info/human_info_adm")
 	public String human_info_adm(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info_adm");
 
-		model.addAttribute("option","adm");
+		model.addAttribute("option", "adm");
 		adminService.departList(req, model);
 		adminService.rankList(req, model);
 		adminService.nextAdminId(req, model);
 		
 		return "admin/human_resources/info/human_info_adm";
 	}
-	
+	// 학생 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_stu")
+	public String human_info_stu(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_stu");
+
+		model.addAttribute("option", "stu");
+		adminService.majorList(req, model);
+		adminService.nextStudentId(req, model);
+		
+		return "admin/human_resources/info/human_info_stu";
+	}
 	// 교수 등록폼
 	@RequestMapping(value = "/admin/human_resources/info/human_info_pro")
 	public String human_info_pro(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info_pro");
 
-		model.addAttribute("option","pro");
+		model.addAttribute("option", "pro");
+		adminService.majorList(req, model);
+		adminService.nextProfessorId(req, model);
 		
 		return "admin/human_resources/info/human_info_pro";
 	}
@@ -218,11 +230,11 @@ public class AdminController {
 	// 등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info_add")
 	public String human_info_add(MultipartHttpServletRequest req, Model model) {
-		logger.info("url ==> human_info_add");
+		logger.info("human_resources/info/human_info_add");
 		
 		adminService.addHuman(req, model);
 		
-		return "admin/human_resources/info/human_info";
+		return "admin/human_resources/info/human_info_add";
 	}
 	
 	
@@ -289,22 +301,50 @@ public class AdminController {
 		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
 	}
+	// 급여대장 수정 
+	@RequestMapping(value = "/admin/human_resources/pay/salary_modify")
+	public String salary_modify(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_modify");
+		adminService.salaryModify(req, model);
+		return "admin/human_resources/pay/salary_modify";
+	}
 	
-	// 급여대장 - 전체 계산 
-	@RequestMapping(value = "/admin/human_resources/pay/salaryTotalinput")
-	public String salaryTotalinput(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salaryTotalinput");
-		
-		adminService.salaryInput(req, model);
-		adminService.salaryList(req, model);
-		return "admin/human_resources/pay/salary_list";
+	// 급여대장 수정 salaryModifyPro  salary_delete
+	@RequestMapping(value = "/admin/human_resources/pay/salary_modifyPro")
+	public String salary_modifyPro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_modifyPro");
+		adminService.salaryModifyPro(req, model);
+		return "admin/human_resources/pay/salary_modifyPro";
+	}
+	// 급여대장삭제   salary_delete
+	@RequestMapping(value = "/admin/human_resources/pay/salary_delete")
+	public String salary_delete(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_delete");
+		adminService.salary_delete(req, model);
+		return "admin/human_resources/pay/salary_delete";
+	}
+	// 급여대장 - 전체 계산 클릭시 급여 인원수 업데이트
+	@RequestMapping(value = "/admin/human_resources/pay/divisioncnt")
+	public String divisioncnt(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/divisioncnt");
+		adminService.salaryCnt(req, model);
+		return "admin/human_resources/pay/divisioncnt";
 	}
 
+	// 급여대장 - 전체 계산 클릭시토탈 업데이트
+	@RequestMapping(value = "/admin/human_resources/pay/salarytotal")
+	public String salarytotal(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salarytotal");
+		adminService.salarytotal(req, model);
+		return "admin/human_resources/pay/salarytotal";
+	}
+	
+	
 	// 급여대장 - 급여명세서
 	@RequestMapping(value = "/admin/human_resources/pay/payslip")
 	public String salary_payslip(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salary_payslip");
-
+		logger.info("human_resources/pay/payslip");
+		adminService.salary_payslip(req, model);
 		return "admin/human_resources/pay/payslip";
 	}
 
@@ -321,7 +361,7 @@ public class AdminController {
 	public String salary_list_month(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_month");
 
-		adminService.salary_list_month(req, model);
+		adminService.salary_list_humanMonth(req, model);
 
 		return "admin/human_resources/pay/salary_list_month";
 	}
@@ -353,13 +393,13 @@ public class AdminController {
 		
 		return "admin/human_resources/pay/salary_enroll";
 	}
-
+	
 	// 사원별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_human")
 	public String salary_list_human(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_human");
 
-		adminService.salary_list_human(req, model);
+		adminService.salary_list_humanMonth(req, model);
 
 		// adminService.salary_list_human(req, model);
 

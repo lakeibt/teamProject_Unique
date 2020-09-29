@@ -28,10 +28,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
+
 <div class="col-md-12 col-sm-12 ">
 	<div class="x_panel">
 		<div class="x_content">
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${path}admin/human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data"> 
+			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="x_title">
 				<h2>
@@ -42,7 +44,7 @@ $(document).ready(function(){
 					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 				</li>
 				<li class="dropdown">
-				<select class="message_select" name="option" onchange="changeForm()">
+				<select class="form-control" id="human_info_form_select" name="option" onchange="changeForm()">
 					<c:if test="${option  == 'stu'}">
 						<option value="stu" selected>학생</option>
 						<option value="pro">교수</option>
@@ -54,6 +56,11 @@ $(document).ready(function(){
 						<option value="adm">직원</option>
 					</c:if>
 					<c:if test="${option  == 'adm'}">
+						<option value="stu">학생</option>
+						<option value="pro">교수</option>
+						<option value="adm"  selected>직원</option>
+					</c:if>
+					<c:if test="${option  == null}">
 						<option value="stu">학생</option>
 						<option value="pro">교수</option>
 						<option value="adm"  selected>직원</option>
@@ -78,7 +85,7 @@ $(document).ready(function(){
 							for="first-name">비밀번호
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="password" name="password" id="password" required="required" class="form-control ">
+							<input type="password" name="pwd" id="pwd" required="required" class="form-control ">
 						</div>
 					</div>
 					<div class="item form-group">
@@ -86,7 +93,7 @@ $(document).ready(function(){
 							for="first-name">비밀번호확인
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="password" name="password_re"  id="password_re" required="required"
+							<input type="password" name="pwd_re"  id="pwd_re" required="required"
 								class="form-control ">
 						</div>
 					</div>
@@ -119,6 +126,7 @@ $(document).ready(function(){
 						</label>
 						<div class="col-md-7 col-sm-7" id="selectBox_depart">
 							<select class="form-control" name="depart">
+								<option value=""> </option>
 								<c:forEach var="dto" items="${departList}">
 									<option value="${dto.getDepart()}">${dto.getDepart_name()}</option>
 								</c:forEach>
@@ -131,6 +139,7 @@ $(document).ready(function(){
 						</label>
 						<div class="col-md-7 col-sm-7 ">
 							<select class="form-control" name="rank">
+								<option value=""> </option>
 								<c:forEach var="dto" items="${rankList}">
 									<option value="${dto.getRank()}">${dto.getRank()}</option>
 								</c:forEach>
@@ -201,8 +210,8 @@ $(document).ready(function(){
 							for="first-name">주민번호
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="text" id="jumin1" required="required" class="form-control" style="width:47%; display:inline-block;">&nbsp;-
-							<input type="text" id="jumin2" required="required" class="form-control" style="width:47%; display:inline-block;">
+							<input type="text" id="jumin1" name="jumin1" required="required" class="form-control" style="width:47%; display:inline-block;">&nbsp;&nbsp;-&nbsp;
+							<input type="text" id="jumin2" name="jumin2" required="required" class="form-control" style="width:47%; display:inline-block;">
 						</div>
 					</div>
 					<div class="item form-group">
@@ -255,7 +264,7 @@ $(document).ready(function(){
 					</div>
 					<div id="human_info_btn_div">
 						<button class="btn btn-primary" type="reset">Reset</button>
-						<button type="submit" class="btn btn-success">Submit</button>
+						<button class="btn btn-success" id="submitBtn" type="submit">Submit</button>
 					</div>
 				</div>
 				<div class="col-md-4  form-group" align="center">

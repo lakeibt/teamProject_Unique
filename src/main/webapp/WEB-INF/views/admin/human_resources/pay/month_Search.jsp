@@ -9,8 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 var pageNum = ${pageNum}
-
-$("[id^=btn]").on('click', function(nextValue){ 
+	$("[id^=btn]").on('click', function(nextValue){ 
 		var id = $(this).attr("id"); 
 		var number = id.replace("btn", ""); 
 			pageNum = number;
@@ -21,7 +20,7 @@ $("[id^=btn]").on('click', function(nextValue){
 			type : 'GET',
 			dataType : 'text',
 			success : function(data) { 
-				$('#human').html(data);
+				$('#month').html(data);
 			},
 			error : function(request, status, error) {
 				console.log("@code : "+ request.status);
@@ -50,19 +49,19 @@ $("[id^=btn]").on('click', function(nextValue){
 				</tr>
 			</thead>
 			<tbody style="color: grey;">
-				<c:if test="${salary_list_cnt > 0}">
+				<c:if test="${monthSearch_Cnt > 0}">
 					<c:forEach var="dto" items="${dtos}">
 						<tr align="center">
-							<td><fmt:formatDate value="${dto.salary_InDay}"
+							<td><fmt:formatDate value="${dto.salary_month}"
 									pattern="YY/MM" /></td>
 							<td>${dto.id}</td>
 							<td>${dto.name}</td>
 							<td>${dto.depart_name}</td>
-							<td>${dto.sal+dto.over+dto.meals+dto.car}</td>
-							<td>${dto.sal}</td>
-							<td>${dto.meals}</td>
-							<td>${dto.car}</td>
-							<td>${dto.over}</td>
+							<td>${dto.paytotal}</td>
+							<td>${dto.pay}</td>
+							<td>${dto.meal}</td>
+							<td>${dto.contract_vehicle}</td>
+							<td>${dto.overtime}</td>
 							<!-- 기본급:1, 연장근무:2, 식대:3, 차량유지비:4 -->
 						</tr>
 					</c:forEach>
@@ -72,7 +71,7 @@ $("[id^=btn]").on('click', function(nextValue){
 		<table id="month_Search" style="width: 1000px" align="center">
 			<tr align="center">
 				<th align="center">
-					<!-- 게시글이 있으면 --> <c:if test="${salary_list_cnt> 0}">
+					<!-- 게시글이 있으면 --> <c:if test="${monthSearch_Cnt> 0}">
 						<!-- 처음[◀◀] /  이전블록[◀]  , 특수문자 : 한글상태 ㅁ+한자키-->
 						<c:if test="${startPage > pageBlock}">
 							<a href="month_Search"> [◀◀] </a>

@@ -41,6 +41,10 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public MessageVO getMessage(int num) {
 		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessage", num);
 	}
+	@Override
+	public Map<String, Object> getProfessorProfile(String id) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getProfessorProfile", id);
+	}
 	
 	@Override
 	public int updateReadChk(int num) {
@@ -54,6 +58,5 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public int insertMessage(MessageVO vo) {
 		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", vo);
 	}
-
 
 }

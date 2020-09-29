@@ -18,8 +18,8 @@ public class StudentVO {
 	private int grade;
 	private int r_code;
 	private int entrancedate;
-	
 	private String de_address;
+	
 	public String getId() {
 		return id;
 	}

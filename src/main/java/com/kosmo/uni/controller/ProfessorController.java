@@ -33,9 +33,9 @@ public class ProfessorController {
 	
 	// 내정보
 	@RequestMapping("/professor/myPage")
-	public String pro_myPage() {
+	public String pro_myPage(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage");
-		
+		proService.getProfessorProfile(req, model);
 		return "professor/myPage";
 	}
 	
@@ -136,14 +136,19 @@ public class ProfessorController {
 	@RequestMapping("/professor/messageSend")
 	public int pro_messageSend(HttpServletRequest req, Model model) {
 		logger.info("url ==> messageSend");
-		
 		int insertCnt = proService.messageSend(req, model);
 		
-	return insertCnt;
+		return insertCnt;
 	}	
-	
-
-	
+		
+	@RequestMapping("/professor/myPageModify")
+	public String myPageModify(HttpServletRequest req, Model model) {
+		logger.info("url ==> myPageModify");
+		
+		proService.myPageModify(req, model);
+		
+		return "professor/myPage";
+	}
 	
 	// 연습
 	@RequestMapping("/professor/test")

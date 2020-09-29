@@ -23,6 +23,9 @@ public interface ProfessorDAO {
 	
 	// 쪽지 상세 조회
 	public MessageVO getMessage(int num);
+	
+	// 교수 프로필 정보 가져오기
+	public Map<String, Object> getProfessorProfile(String id);
 
 	// 쪽지 미리보기
 	public List<MessageVO> getMessageList_notRead(Map<String, Object> map);

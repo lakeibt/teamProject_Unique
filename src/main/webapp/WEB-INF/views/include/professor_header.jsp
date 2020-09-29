@@ -264,8 +264,9 @@ function message_send(){
 							
 						</div>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link" href="javscript:void(0)" onclick="window.location = '${guest}logout'" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<li class="nav-item dropdown"><a class="nav-link"
+						href="${guest}logout" id="navbarDropdownMenuLink"
+						aria-haspopup="true" aria-expanded="false">
 							<i class="material-icons">power_settings_new</i>
 						</a>
 					</li>

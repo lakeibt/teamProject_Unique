@@ -10,15 +10,15 @@ public class AdminVO {
 	private String tagintime;	//출근시간
 	private String tagouttime;	//퇴근시간
 	
-	private Timestamp salary_InDay;	//지급일
+	private Timestamp salary_month;	//지급일
 	private int sal_Num;			//급여코드 - 정규 비정규 
 	private String name;			//이름
 	private String depart_name;		//부서
-	private int sal_total;			//총급여
-	private int sal;				//월급
-	private int over;				//야근수당
-	private int meals;				//식대
-	private int car;				//차량유지비
+	private int paytotal;			//총급여
+	private int pay;				//월급
+	private int overtime;			//야근수당
+	private int meal;				//식대
+	private int contract_vehicle;	//차량유지비
 	private int Payments_division;  // 지급 구분
 	
 	
@@ -52,14 +52,6 @@ public class AdminVO {
 	public void setTagouttime(String tagouttime) {
 		this.tagouttime = tagouttime;
 	}
-	
-	
-	public Timestamp getSalary_InDay() {
-		return salary_InDay;
-	}
-	public void setSalary_InDay(Timestamp salary_InDay) {
-		this.salary_InDay = salary_InDay;
-	}
 	public int getSal_Num() {
 		return sal_Num;
 	}
@@ -78,41 +70,47 @@ public class AdminVO {
 	public void setDepart_name(String depart_name) {
 		this.depart_name = depart_name;
 	}
-	public int getSal_total() {
-		return sal_total;
+	public int getmeal() {
+		return meal;
 	}
-	public void setSal_total(int sal_total) {
-		this.sal_total = sal_total;
+	public void setmeal(int meal) {
+		this.meal = meal;
 	}
-	public int getSal() {
-		return sal;
+	public int getcontract_vehicle() {
+		return contract_vehicle;
 	}
-	public void setSal(int sal) {
-		this.sal = sal;
-	}
-	public int getOver() {
-		return over;
-	}
-	public void setOver(int over) {
-		this.over = over;
-	}
-	public int getMeals() {
-		return meals;
-	}
-	public void setMeals(int meals) {
-		this.meals = meals;
-	}
-	public int getCar() {
-		return car;
-	}
-	public void setCar(int car) {
-		this.car = car;
+	public void setcontract_vehicle(int contract_vehicle) {
+		this.contract_vehicle = contract_vehicle;
 	}
 	public int getPayments_division() {
 		return Payments_division;
 	}
 	public void setPayments_division(int payments_division) {
 		Payments_division = payments_division;
+	}
+	public Timestamp getSalary_month() {
+		return salary_month;
+	}
+	public void setSalary_month(Timestamp salary_month) {
+		this.salary_month = salary_month;
+	}
+	public int getPaytotal() {
+		return paytotal;
+	}
+	public void setPaytotal(int paytotal) {
+		this.paytotal = paytotal;
+	}
+	public int getPay() {
+		return pay;
+	}
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
+	public int getOvertime() {
+		return overtime;
+	}
+	public void setOvertime(int overtime) {
+		this.overtime = overtime;
 	}
 	
 

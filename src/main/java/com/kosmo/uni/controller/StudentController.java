@@ -58,16 +58,10 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		return "student/contestnext2";
 	}
 	
-	@RequestMapping("/student/message")
-	public String stu_message() {
-		logger.info("url ==> message");
-		
-		return "student/message";
-	}
-	
 	@RequestMapping("/student/myPage")
 	public String stu_myPage(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage");
+		
 		stuService.studentSimpleInfo(req, model);
 		return "student/myPage";
 	}
@@ -97,17 +91,34 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 	public String stu_course_timeTable(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_timeTable");
 		
-		stuService.studentTimeTable(req, model);
+		stuService.studentinfo(req, model);
 		return "student/course_timeTable";
+	}
+	
+	@RequestMapping("/student/course_timeTableInfo")
+	public String stu_course_timeTableInfo(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_timeTableInfo");
+		
+		stuService.studentTimeTable(req, model);
+		return "student/course_timeTableInfo";
 	}
 	
 	@RequestMapping("/student/course")
 	public String stu_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
 		
-		stuService.courseList(req, model);
+		stuService.studentinfo(req, model);
 		return "student/course";
 	}
+
+	@RequestMapping("/student/courseInfo")
+	public String stu_courseInfo(HttpServletRequest req, Model model) {
+		logger.info("url ==> course");
+		
+		stuService.studentList(req, model);
+		return "student/courseInfo";
+	}
+	
 	@RequestMapping("/student/course_syllabus")
 	public String stu_course_syllabus(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_syllabus");
@@ -142,5 +153,4 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		
 		return "student/employment";
 	}
-
 }

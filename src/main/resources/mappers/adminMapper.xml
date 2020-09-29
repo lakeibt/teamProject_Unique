@@ -6,48 +6,141 @@
 
 <mapper namespace="com.kosmo.uni.persistence.AdminDAO">
 
+	<select id="getInfoCnt" resultType="int">
+		SELECT COUNT(*) as cnt
+		FROM A_INFO
+	</select>
+
+	<select id="getInfoList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		<![CDATA[
+		SELECT * FROM (SELECT NUM, TITLE, CONTENT, WRITER, READCNT, REG_DATE, ROWNUM R FROM 
+				      (SELECT * FROM A_INFO ORDER BY ROWNUM DESC))
+		WHERE R >= #{start} AND R <= #{end}
+    	]]>
+	</select>
+	
+	<insert id="insertInfo" parameterType="java.util.Map">
+		INSERT INTO A_INFO VALUES(INFO_SEQ.NEXTVAL, #{title}, #{content}, '관리자', 0, SYSDATE)
+	</insert>
+	
+	<update id="addCnt" parameterType="int">
+		UPDATE A_INFO SET READCNT = READCNT + 1 WHERE NUM = #{num}
+	</update>
+	
+	<select id="getContent" resultType="java.util.Map">
+		SELECT TITLE, CONTENT FROM A_INFO WHERE NUM = #{num}
+	</select>
+
 	<select id="getAttendance_Cnt" resultType="int">
 		SELECT COUNT(*) as cnt
 		FROM A_NFC
 	</select>
-
+	
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
 		<![CDATA[
-		SELECT num, id, tagintime, tagouttime,pnum ,rNum 
-		FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
-    	FROM ( 
-        SELECT *FROM A_NFC n
-        JOIN A_ADMIN a
-        on n.pnum = a.tel))
-		WHERE rNum >=#{start} AND rNum <=#{end}
+			SELECT num, id, tagintime, tagouttime,pnum ,rNum 
+			FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
+	    	FROM ( 
+	        SELECT *FROM A_NFC n
+	        JOIN A_ADMIN a
+	        on n.pnum = a.tel))
+			WHERE rNum >=#{start} AND rNum <=#{end}
+    	]]>
+	</select>
+	
+	<select id="getAttendance_Search_Cnt" parameterType="java.util.Map"
+		resultType="int">
+		<![CDATA[
+		SELECT COUNT(*) AS CNT
+		  FROM A_NFC
+        WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
     	]]>
 	</select>
 	
 	<select id="getAttendance_List_Search"
 		parameterType="java.util.Map" resultType="com.kosmo.uni.vo.AdminVO">
 		<![CDATA[
-		SELECT * FROM A_NFC
-		WHERE TO_CHAR(inday,'YYYY-MM-DD') >=#{st, jdbcType=VARCHAR} AND TO_CHAR(inday,'YYYY-MM-DD') <=#{et, jdbcType=VARCHAR}
+		SELECT *
+  		  FROM (SELECT *
+        	      FROM (SELECT num, id, tagouttime, pnum, tagintime, rowNUM rNum FROM A_NFC n
+                JOIN A_ADMIN a
+                  on n.pnum = a.tel
+                  WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
+                  ))
+                  WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
 	</select>
 	
-	<select id="getSalary_list_human" parameterType="java.util.Map"
+	<select id="getSalary_Cnt" resultType="int">
+		SELECT COUNT(*) as cnt
+		FROM A_SALARY
+	</select>
+
+	<select id="getSalary_list_humanMonth" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
-		SELECT 
-		s.salary_inday,
-		s.sal_num,
-		s.id,
-		s.salary_month,
-		m.name,
-		m.depart
-		FROM A_SALARY s join A_ADMIN m
-		ON s.id = m.id
+		<![CDATA[
+		SELECT * 
+	  	FROM (SELECT *
+	    FROM (SELECT rowNUM rNum, salary_month, s.id, a.name, d.depart_name, paytotal
+	                      , pay, meal, contract_vehicle, overtime
+	    FROM a_salary s, a_admin a, a_depart d
+	    where s.id = a.id
+      	and a.depart = d.depart))
+      	WHERE rNum >=#{start} and rNum <=#{end}
+        ]]>
+	</select>
+	
+	<select id="humanSearch_Cnt" parameterType="java.util.Map" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) as cnt
+		FROM A_SALARY s, A_ADMIN a
+		WHERE s.id = a.id
+		AND name LIKE '%'||#{name, jdbcType=VARCHAR}||'%'
+		]]>
+	</select>
+	
+	<select id="humanSearch_List" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+	<![CDATA[
+		    SELECT * from(
+		    	SELECT * from(
+		    		SELECT rowNUM rNum, salary_month, s.id, a.name, d.depart_name, paytotal, pay, meal, contract_vehicle, overtime
+              		  FROM a_salary s, a_admin a, a_depart d
+            WHERE s.id = a.id
+            AND a.depart = d.depart
+            AND name LIKE '%'||#{name, jdbcType=VARCHAR}||'%'))
+            WHERE rNum >=#{start} and rNum <=#{end}
+		    ]]>
+	</select>
+	
+	<select id="monthSearch_Cnt" parameterType="java.util.Map" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*) as cnt
+		FROM A_SALARY s, A_ADMIN a
+		WHERE s.id = a.id
+		AND to_char(salary_month,'YYYYMM') BETWEEN #{sm, jdbcType=VARCHAR} AND #{em, jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<select id="monthSearch_List" parameterType="java.util.Map"
+		resultType="com.kosmo.uni.vo.AdminVO">
+	<![CDATA[
+		    SELECT * from(
+		    	SELECT * from(
+		    		SELECT rowNUM rNum, salary_month, s.id, a.name, d.depart_name, paytotal, pay, meal, contract_vehicle, overtime
+              		  FROM a_salary s, a_admin a, a_depart d
+            WHERE s.id = a.id
+            AND a.depart = d.depart
+            AND to_char(salary_month,'YYYYMM') BETWEEN #{sm, jdbcType=VARCHAR} AND #{em, jdbcType=VARCHAR}))
+            WHERE rNum >=#{start} and rNum <=#{end}
+		    ]]>
 	</select>
 	
 	<insert id="salary_input" parameterType="java.util.Map">
-		INSERT INTO A_SALARY_INPUT
-		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name})
+		INSERT INTO a_salary_input
+		VALUES (salaryList_seq.nextVal,#{salary_division},#{payments_division},#{payments_start},#{payments_end},#{salary_inday},#{payments_month},#{salary_name},1,0,0)
 	</insert>
 	
 	<select id="getSalaryCnt" resultType="int">
@@ -58,8 +151,8 @@
 		<![CDATA[
 		SELECT * 
 			FROM (SELECT salary_input_num, salary_division, payments_division, salary_confirm
-	        , salary_inday, payments_month, salary_name, rowNUM rNum
-			FROM ( SELECT * FROM A_SALARY_INPUT ORDER BY salary_input_num ASC))
+	        , salary_inday, payments_month, salary_total, salary_name, division_cnt, rowNUM rNum 
+			FROM ( SELECT * FROM a_salary_input ORDER BY salary_input_num DESC)) 
 		WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
 	</select>
@@ -67,6 +160,7 @@
 	<select id="getCourseCnt" resultType="int">
 		SELECT COUNT(*) as cnt FROM A_COURSE
 	</select>
+	
 	<select id="getCourseList" resultType="com.kosmo.uni.vo.CourseVO">
 		SELECT co_code
             , co_name
@@ -118,6 +212,18 @@
 	<select id="getParkingList" resultType="com.kosmo.uni.vo.ParkVO">
 		SELECT * FROM A_PARKING ORDER BY num desc
 	</select>
+
+	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
+		SELECT m.id, m.name, m.rank, m.depart, 
+				s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total,
+				s.salary_name, ss.salary, s.salary_inday, m.car
+		  FROM a_salary_input s 
+		  Join a_admin m
+		    ON s.payments_division = m.Payments_division
+		  JOIN a_salaryset ss
+		    on ss.Rank = m.rank
+		 where s.salary_input_num = #{salary_input_num}
+	</select>
 	
 	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
 		SELECT * FROM A_PARKING WHERE PINTIME LIKE '%'||#{date}||'%'
@@ -126,8 +232,80 @@
 	<select id="getCarNumList" resultType="com.kosmo.uni.vo.ParkVO">
 		SELECT * FROM A_PARKING WHERE CARNUM LIKE '%'||#{date}||'%'
 	</select>
+
+	<select id="getDivisionCnt" resultType="int">
+		SELECT Count(*) as cnt
+		  FROM a_salary_input s 
+		  Join a_admin m
+		    ON s.payments_division = m.Payments_division
+		 where s.salary_input_num = #{salary_input_num} and s.payments_division = #{payments_division}
+	</select>
 	
+	<update id="updateDivCnt" parameterType="java.util.Map">
+		update a_salary_input
+ 		set division_cnt = #{division_cnt} where salary_input_num = #{salary_input_num}
+	</update>
 	
+	<select id="getSalaryArticle" resultType="com.kosmo.uni.vo.SalaryInputVO">
+		select salary_division, payments_division, salary_name, salary_inday, salary_input_num from a_salary_input where salary_input_num = #{salary_input_num}
+	</select>
+	
+	<update id="UpdateSalInput" parameterType="java.util.Map">
+		update a_salary_input
+		set salary_division=#{salary_division}, 
+		payments_division = #{payments_division}, 
+		salary_inday = #{salary_inday}, 
+		salary_name = #{salary_name} 
+		where salary_input_num = #{salary_input_num} 
+	</update>
+	
+	<delete id="deleteSalary" parameterType="int">
+		delete a_salary_input where salary_input_num = #{salary_input_num}
+	</delete>
+	
+	<update id="updateTotalSal" parameterType="java.util.Map">
+		update a_salary_input 
+ 		set salary_total=#{salary_total} where salary_input_num = #{salary_input_num}
+	</update>
+	
+	<update id="updateZeroTotal" parameterType="int">
+		update a_salary_input 
+		set salary_total = 0 where salary_input_num = #{salary_input_num}
+	</update>
+	<select id="selectSalSum" resultType="int">
+	 select sum(sa.salary) salary
+	   from a_salary_input s, a_admin a, a_salaryset sa
+	  where s.payments_division = a.Payments_division
+	    and sa.rank = a.rank
+	    and s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getMealCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select sum(v.meal) meal, sum(v.contract_vehicle) contract_vehicle
+		  from a_salary_input s, a_admin a, a_variablecost v
+		 where s.payments_division = a.Payments_division
+		   and a.car = v.cost
+		   and s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="getPayslip" resultType="com.kosmo.uni.vo.PayslipVO">
+		SELECT m.id id,
+			   m.name name, 
+			   m.enterday enterday,
+			   m.rank rank,
+			   m.depart depart, 
+		       s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total,
+		        s.salary_name, ss.salary, s.salary_inday, m.car, v.meal, v.contract_vehicle
+		  FROM a_salary_input s ,a_admin m, a_salaryset ss, a_variablecost v
+		 where s.payments_division = m.Payments_division
+		    and ss.Rank = m.rank
+		    and m.car = v.cost
+		    and s.salary_input_num = #{salary_input_num}
+	</select>
+	
+	<select id="salary_payslip" resultType="com.kosmo.uni.vo.SalaryVO">
+		select salary_name from a_salary_input where salary_input_num=#{salary_input_num}
+	</select>
 	
 	<!-- 석무 -->
 	<!-- 부서 목록 -->
@@ -140,18 +318,90 @@
 		select * FROM a_rank ORDER BY decode(rank, '총장','1','부장','2','과장','3','계장','4','주임','5','사원','6') desc
 	</select>
 	
+	<!-- 전공 목록 -->
+	<select id="getMajorList" resultType="com.kosmo.uni.vo.MajorVO">
+		select m_code, m_name FROM a_major order by m_name
+	</select>
+	
 	<!-- 직원 다음 아이디 -->
 	<select id="getNextAdminId" resultType="String">
 		select 'a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from a_admin
 	</select>	
 	
-	<insert id="saveImage" parameterType="java.util.Map">
-		INSERT INTO yoon_img_test VALUES(#{img})
-	</insert>
-	
-	<select id="getByteImage" resultType="java.util.Map">
-		select img from yoon_img_test
+	<select id="getNextProfessorId" resultType="String">
+		select 'p' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from p_professor
 	</select>	
 	
+	<select id="getNextStudentId" resultType="String">
+		select 's' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from s_student
+	</select>	
+	
+	
+	<insert id="insertAdmin" parameterType="com.kosmo.uni.vo.HumanVO">
+		INSERT INTO a_admin 
+		VALUES ('a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(ADM_SEQ.nextval),
+				#{pwd},
+				#{photo},
+				#{name},
+				#{eng_name},
+				#{jumin1},
+				#{jumin2},
+				#{gender},
+				#{frgn},
+				#{nation},
+				#{tel},
+				#{email},
+				#{address},
+				#{depart},
+				#{rank},
+				#{enterday},
+				#{account_number},
+				#{car},
+				1,
+				#{de_address})
+	</insert>
+	<insert id="insertProfesser" parameterType="com.kosmo.uni.vo.HumanVO">
+		INSERT INTO p_professor 
+		VALUES ('p' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(PRO_SEQ.nextval),
+				#{pwd},
+				#{photo},
+				#{name},
+				#{eng_name},
+				#{jumin1},
+				#{jumin2},
+				#{gender},
+				#{frgn},
+				#{nation},
+				#{tel},
+				#{email},
+				#{address},
+				#{m_code},
+				#{enterday},
+				#{account_number},
+				#{car},
+				#{position},
+				#{de_address})	
+	</insert>
+	<insert id="insertStudent" parameterType="com.kosmo.uni.vo.HumanVO">
+		INSERT INTO s_student  
+		VALUES ('s' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(STU_SEQ.nextval),
+				#{pwd},
+				#{photo},
+				#{name},
+				#{eng_name},
+				#{jumin1},
+				#{jumin2},
+				#{gender},
+				#{frgn},
+				#{nation},
+				#{tel},
+				#{email},
+				#{address},
+				#{m_code},
+				#{grade},
+				1,
+				#{entrancedate},
+				#{de_address})	
+	</insert>
 	
 </mapper>

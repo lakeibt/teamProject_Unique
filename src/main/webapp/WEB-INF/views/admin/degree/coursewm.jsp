@@ -7,7 +7,7 @@
 	<c:if test = "${cnt == 0}">
 		<script type = "text/javascript">
 			alert("강의등록오류");
-			window.lacation="${admin}degree/course";
+			window.location="${admin}degree/course";
 		</script>
 	</c:if>
 	

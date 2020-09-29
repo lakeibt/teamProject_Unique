@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <HTML>
 <HEAD>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </HEAD>
-
 <BODY>
-<img src="${path}admin/image">
-
+<script type = "text/javascript">
+			swal('등록 성공!', '성공적으로 등록되었습니다.', 'success');
+</script>
 </BODY>
 </HTML>

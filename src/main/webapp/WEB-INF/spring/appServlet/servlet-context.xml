@@ -33,7 +33,13 @@
 	<!-- Namespaces 탭에서 security 추가 -->
 	<sec:global-method-security secured-annotations="enabled" />
 	
+	<!-- 암호화  -->
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> 
+	
 	<!-- MultipartResolver 설정 -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="100000000" />
+		<beans:property name="maxInMemorySize" value="100000000" />
+	</beans:bean>
 	
 </beans:beans>

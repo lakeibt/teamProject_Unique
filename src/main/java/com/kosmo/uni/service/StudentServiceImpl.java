@@ -1,5 +1,6 @@
 package com.kosmo.uni.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.StudentDAO;
+import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentVO;
 
 @Service
@@ -151,8 +153,8 @@ public class StudentServiceImpl implements StudentService{
 		System.out.println("id :" + id);
 		cnt = stuDAO.getGradeCnt(id);
 		System.out.println("cnt => " + cnt);
-		int value = Integer.parseInt(req.getParameter("value"));
-		System.out.println("value :" + value );
+		int year = Integer.parseInt(req.getParameter("year"));
+		int semester = Integer.parseInt(req.getParameter("semester"));
 		pageNum=req.getParameter("pageNum");
 		
 		if(pageNum == null) pageNum ="1";  // 첫페이지를 1페이지로 지정
@@ -166,10 +168,11 @@ public class StudentServiceImpl implements StudentService{
 			map.put("start", start);
 			map.put("end", end);
 			map.put("id", id);
-			map.put("value", value);
+			map.put("year", year);
+			map.put("semester", semester);
 			// 5-2단계. 게시글 목록 조회
 			List<Map<String, Object>> dtos = stuDAO.getGradeList(map);
-			model.addAttribute("dtos", dtos);
+			model.addAttribute("score", dtos);
 			// (1 / 3) *3 + 1;
 			startPage = (currentPage / pageBlock) * pageBlock + 1;
 			if (currentPage % pageBlock == 0)
@@ -197,10 +200,18 @@ public class StudentServiceImpl implements StudentService{
 		int cnt=0;
 		String id = (String) req.getSession().getAttribute("memId");
 		System.out.println("id :" + id);
+		int year = Integer.parseInt(req.getParameter("year"));
+		int semester = Integer.parseInt(req.getParameter("semester"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("year", year);
+		map.put("semester", semester);
+		
 		cnt = stuDAO.getStudyCnt(id);
 		System.out.println("cnt => " + cnt);
-		List<Map<String, Object>> dtos = stuDAO.getStudyList(id);
-		model.addAttribute("dtos", dtos);
+		List<Map<String, Object>> dtos = stuDAO.getStudyList(map);
+		model.addAttribute("study", dtos);
 		model.addAttribute("cnt", cnt);
 	}
 	
@@ -210,10 +221,16 @@ public class StudentServiceImpl implements StudentService{
 		int cnt=0;
 		String id = (String) req.getSession().getAttribute("memId");
 		System.out.println("id :" + id);
-		cnt = stuDAO.getStudyCnt(id);
-		System.out.println("cnt => " + cnt);
-		List<Map<String, Object>> dtos = stuDAO.getTimeTable(id);
-		model.addAttribute("dto", dtos);
+		int year = Integer.parseInt(req.getParameter("year"));
+		int semester = Integer.parseInt(req.getParameter("semester"));
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("year", year);
+		map.put("semester", semester);
+		
+		List<Map<String, Object>> dtos = stuDAO.getTimeTable(map);
+		model.addAttribute("dtos", dtos);
 		model.addAttribute("cnt", cnt);
 	}
 
@@ -232,5 +249,83 @@ public class StudentServiceImpl implements StudentService{
 		}
 		model.addAttribute("vo", vo);
 		model.addAttribute("selectCnt", selectCnt);
+	}
+	
+	@Override
+	public void messageList(HttpServletRequest req, Model model) {
+		int pageSize = 5;
+		int pageBlock = 5;
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;	
+		String pageNum = "";
+		int currentPage = 0;
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0; 
+		
+		String id = (String) req.getSession().getAttribute("memId");
+		String option = req.getParameter("option") == null ? "" : req.getParameter("option");
+		System.out.println(option);
+		if(option.equals("receive") || option == "") {
+			model.addAttribute("option", "receive");
+			cnt = stuDAO.getMessageCnt(id);
+		} else {
+			model.addAttribute("option", option);
+			cnt = stuDAO.getMessageCnt_send(id);
+		}
+		
+		pageNum = req.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			ArrayList<MessageVO> dtos = null;
+			if(option.equals("receive") || option == null) {
+				dtos = (ArrayList<MessageVO>) stuDAO.getMessageList(map);
+			} else {
+				dtos = (ArrayList<MessageVO>) stuDAO.getMessageList_send(map);
+			}
+			model.addAttribute("dtos", dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock -1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);			
+		model.addAttribute("number", number);	 
+		model.addAttribute("pageNum", pageNum);
+		
+		if(cnt>0) {
+			model.addAttribute("startPage", startPage);	
+			model.addAttribute("endPage", endPage);			
+			model.addAttribute("pageBlock", pageBlock);	
+			model.addAttribute("pageCount", pageCount);	
+			model.addAttribute("currentPage", currentPage);
+		}
+	}
+
+	@Override
+	public void message(HttpServletRequest req, Model model) {
+		int num = Integer.parseInt(req.getParameter("num"));
+		System.out.println("num =>" + num);
+		MessageVO vo = stuDAO.getMessage(num);
+		
+		model.addAttribute("dto", vo);
 	}
 }

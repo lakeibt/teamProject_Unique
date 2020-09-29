@@ -108,6 +108,28 @@ public class ProfessorServiceImpl implements ProfessorService{
 	}
 
 	@Override
+	public void getProfessorProfile(HttpServletRequest req, Model model) {
+		String id = (String)req.getSession().getAttribute("memId");
+		Map<String, Object> proProfile = proDAO.getProfessorProfile(id);
+		
+		model.addAttribute("profile", proProfile);
+	}
+
+	@Override
+	public void myPageModify(HttpServletRequest req, Model model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+//	@Override
+//	public void myPageModify(HttpServletRequest req, Model model) {
+//		String tel = req.getParameter("tel");
+//		String email = req.getParameter("email");
+//		String address = req.getParameter("address");
+//		
+//		Map<String, Object> 
+//	}
+	
 	public void messageSimple(HttpServletRequest req, Model model) {
 		
 		int pageSize = 5;
@@ -189,6 +211,5 @@ public class ProfessorServiceImpl implements ProfessorService{
 		return insertCnt;
 		
 	}
-	
 
 }

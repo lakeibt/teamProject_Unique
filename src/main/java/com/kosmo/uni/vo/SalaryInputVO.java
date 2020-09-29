@@ -12,7 +12,21 @@ public class SalaryInputVO {
 	private String payments_month;  //지급연월
 	private String salary_name; //급여대장 명칭
 	private int salary_confirm; // 급여 확정 코드
-	
+	private int division_cnt; // 급여 정규직 인원수 코드
+	private int salary_total; // 급여 합계
+
+	public int getDivision_cnt() {
+		return division_cnt;
+	}
+	public void setDivision_cnt(int division_cnt) {
+		this.division_cnt = division_cnt;
+	}
+	public int getSalary_total() {
+		return salary_total;
+	}
+	public void setSalary_total(int salary_total) {
+		this.salary_total = salary_total;
+	}
 	public int getSalary_confirm() {
 		return salary_confirm;
 	}
