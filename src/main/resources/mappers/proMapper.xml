@@ -21,6 +21,10 @@
 		SELECT COUNT(*) as cnt FROM p_message where sender_id = #{id}
 	</select>
 	
+	<select id="getMessageCnt_notRead" parameterType="String" resultType="int">
+		SELECT COUNT(*) as cnt FROM p_message where sender_id = #{id} AND readchk = 0
+	</select>
+	
 	<select id="getMessageList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
 	<![CDATA[
 		SELECT * FROM (SELECT num, title, content, m_code, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
@@ -37,6 +41,17 @@
 	
 	<select id="getMessage" parameterType="int" resultType="com.kosmo.uni.vo.MessageVO">
 		SELECT * FROM p_message WHERE num = #{num}
+	</select>
+	
+	<update id="updateReadChk" parameterType="int">
+		UPDATE p_message SET readchk = 1 WHERE num = #{num} 
+	</update>
+
+	<select id="getMessageList_notRead" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
+		<![CDATA[
+		SELECT * FROM (SELECT num, title, content, m_code, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
+		  FROM (SELECT * FROM p_message where sender_id = #{id} AND readchk = 0)) WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
 	</select>
 
 </mapper>

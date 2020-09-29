@@ -23,6 +23,10 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public int getMessageCnt_send(String id) {
 		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessageCnt_send", id);
 	}
+	@Override
+	public int getMessageCnt_notRead(String id) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessageCnt_notRead", id);
+	}
 	
 	@Override
 	public List<MessageVO> getMessageList(Map<String, Object> map) {
@@ -40,6 +44,19 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	@Override
 	public Map<String, Object> getProfessorProfile(String id) {
 		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getProfessorProfile", id);
+	}
+	
+	@Override
+	public int updateReadChk(int num) {
+		return sqlSession.update("com.kosmo.uni.persistence.ProfessorDAO.updateReadChk", num);
+	}
+	@Override
+	public List<MessageVO> getMessageList_notRead(Map<String, Object> map) {
+		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList_notRead", map);
+	}
+	@Override
+	public int insertMessage(MessageVO vo) {
+		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", vo);
 	}
 
 }

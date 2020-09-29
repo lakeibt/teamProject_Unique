@@ -1,11 +1,112 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>인사정보등록</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+<link href="${resources}css/admin.css" rel="stylesheet">
+<title>인사정보등록</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script>
+
+// 처음 불러오기(직원)
+$(document).ready(function(){
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+	$.ajax({
+		url : '${admin}human_resources/info/human_info_adm',
+        type : "POST",
+        dataType : "html",
+        beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
+        success : function(data){
+        	$('#human_info_form_div').html(data);	
+        }, error : function(){
+        	alert('오류!');
+        }
+	});
+});  
+
+
+function changeForm() {
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");	
+	
+	$.ajax({
+        url : '${admin}human_resources/info/human_info_' + $('#human_info_form_select option:selected').val(),
+        type : "POST",
+        beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
+        dataType : "html",
+        success : function(data){
+            $('#human_info_form_div').children().remove();
+            $('#human_info_form_div').html(data);
+        }, error : function(){
+        	alert('오류!');
+        }
+	});
+	
+};
+function setThumbnail(event) {
+	var reader = new FileReader();
+	reader.onload = function(event) {
+		var img = document.createElement("img");
+		img.setAttribute("src", event.target.result);
+		$('#image_container').children().remove();
+		document.querySelector("div#image_container").appendChild(img);
+		};
+		reader.readAsDataURL(event.target.files[0]);
+}
+
+function addressSearch() {
+	new daum.Postcode({
+		oncomplete : function(data) {
+		// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+		// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+		// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		var fullAddr = ''; // 최종 주소 변수
+		var extraAddr = ''; // 조합형 주소 변수
+	
+		// 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+		if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+			fullAddr = data.roadAddress;
+	
+		} else { // 사용자가 지번 주소를 선택했을 경우(J)
+			fullAddr = data.jibunAddress;
+		}
+		// 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+		if (data.userSelectedType === 'R') {
+			//법정동명이 있을 경우 추가한다.
+			if (data.bname !== '') {
+				extraAddr += data.bname;
+			}
+			// 건물명이 있을 경우 추가한다.
+		if (data.buildingName !== '') {
+			extraAddr += (extraAddr !== '' ? ', '
+			+ data.buildingName : data.buildingName);
+			}
+			// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+			fullAddr += (extraAddr !== '' ? ' (' + extraAddr
+			+ ')' : '');
+		}
+		// 주소 정보를 해당 필드에 넣는다.
+		document.getElementById('address').value = fullAddr;
+	
+		// 커서를 상세주소 필드로 이동한다.
+		document.getElementById('de_address').focus();
+		}
+	}).open();
+}
+
+</script>	
 </head>
 
 <body class="nav-md">
@@ -23,239 +124,8 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 ">
-						<div class="x_panel">
-							<div class="x_title">
-								<h2>
-									인적정보등록
-								</h2>
-								<ul class="nav navbar-right panel_toolbox">
-								<li>
-									<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-								</li>
-								<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">구분</a>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="#">직원</a>
-									<a class="dropdown-item" href="#">학생</a>
-									<a class="dropdown-item" href="#">교수</a>								
-								</div>
-								</li>
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-							<div class="x_content">
-								<form id="demo-form2" data-parsley-validate
-									class="form-horizontal form-label-left">
-									<br>
-									<div class="col-md-3 col-sm-3  form-group">
-										<div id="human_info_imgAdd">
-											사진
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-12  form-group">
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">아이디(사번)
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">비밀번호
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">비밀번호확인
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<br><br><br><br>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align">입사일 
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input id="birthday" class="date-picker form-control"
-													required="required"
-													type="text"
-													onfocus="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-													onmouseover="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-													onclick="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-													onblur="if (!window.__cfRLUnblockHandlers) return false; this.type='text'"
-													onmouseout="if (!window.__cfRLUnblockHandlers) return false; timeFunctionLong(this)"
-													data-cf-modified-ed641bf6e1354c9585fdbfb0-="">
-												<script type="ed641bf6e1354c9585fdbfb0-text/javascript">
-													function timeFunctionLong(input) {
-														setTimeout(function() {
-															input.type = 'text';
-														}, 60000);
-													}
-												</script>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">부서코드
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<select class="form-control">
-													<option></option>
-													<option>부서코드1</option>
-													<option>부서코드2</option>
-													<option>부서코드3</option>
-													<option>부서코드4</option>
-													<option>부서코드5</option>
-												</select>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">직급
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<select class="form-control">
-													<option></option>
-													<option>직급1</option>
-													<option>직급2</option>
-													<option>직급3</option>
-													<option>직급4</option>
-													<option>직급5</option>
-												</select>
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">계좌번호
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">자차소유
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-											<div style="height:6.5px"></div>
-											<label>보유:</label>
-											<input type="radio" class="flat" name="car" id="car" value="" required />
-											<br>
-											<label>미보유:</label>
-											<input type="radio" class="flat" name="car" id="car" value="" />
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 col-sm-12  form-group">
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">이름
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">영문이름
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">이메일
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">휴대전화
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">주민번호
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">성별
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-											<div style="height:6.5px"></div>
-											<label>남:</label>
-											<input type="radio" class="flat" name="car" id="car" value="" required />
-											<br>
-											<label>여:</label>
-											<input type="radio" class="flat" name="car" id="car" value="" />
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">내/외국인
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<div style="height:6.5px"></div>
-												<label>내국인</label>
-												<input type="radio" class="flat" name="car" id="car" value="" required />
-												<br>
-												<label>외국인</label>
-												<input type="radio" class="flat" name="car" id="car" value="" />
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">국적
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" name="country" id="autocomplete-custom-append" class="form-control col-md-10" />
-											</div>
-										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align"
-												for="first-name">주소
-											</label>
-											<div class="col-md-7 col-sm-7 ">
-												<input type="text" id="first-name" required="required"
-													class="form-control ">
-											</div>
-										</div>
-									</div>
-										<div class="col-md-12 col-sm-12  form-group">
-											<button class="btn btn-primary" type="reset">Reset</button>
-											<button type="submit" class="btn btn-success">Submit</button>
-										</div>
-								</form>
-							</div>
-						</div>
-					</div>
+				<div class="row"  id="human_info_form_div">
+					
 				</div>
 			</div>
 			<!-- /page content -->

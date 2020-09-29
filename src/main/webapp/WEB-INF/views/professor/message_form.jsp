@@ -1,28 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../include/setting.jsp"%>
 
-<div class="icon-box">
-	<div class="icon-box">
-		<form class="php-email-form" style="padding-top:20px;">
+<html>
+<head>
+    <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
+    <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
+</head>
+<body>
+<div class="card" id="message_card_div"style="background-color: white;">
+	<form style="padding: 10px 10px; height:400px;">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-		 	<button class="btn_message_close" onclick="deleteMessageSend(this);"><i class="fas fa-times"></i></button>
-			<table class="table" style="font-size:12px;">
-					<tr>
-						<td>수신자ID</td>
-						<td><input type="text" class="form-control"></td>
-						<td>수신자ID</td>
-						<td><input type="text" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td colspan="3"><input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"></td>
-					</tr>
-					<tr>
-						<td colspan="4" style="display:table-cell;">
-							<textarea style="width: 100%; height: 250px;"></textarea>
-						</td>
-					</tr>
-			</table>
-		</form>
-	</div>
+	 	<button class="btn_message_close" onclick="deleteMessage(this);"><span class="material-icons">clear</span></button>
+		<table class="table" style="font-size:12px;">
+			<thead>
+				<tr>
+					<th colspan="4">
+						<h3><input type="text" name="title" value="${dto.getTitle()}" style="width:100%; border:none; height: 40px;"></h3>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>ID</th>
+					<td><input type="text" name="receive_id" value="${dto.getSender_id()}" style="border:none;"></td>
+					<th>이름</th>
+					<td><input type="text" name="receive_name" value="${dto.getSender()}"  style="width:100px; border:none;" ></td>
+				</tr>
+				<tr>
+					<td colspan="4" style="display:table-cell;">
+						<textarea id="content" name="content" rows="7" style="width:100%;">${dto.getContent()}</textarea>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4" align="center">
+						<button type="button" class="btn btn-info" onclick="message_send()">답장</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
 </div>
+</body>
+</html>

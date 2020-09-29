@@ -3,6 +3,7 @@ package com.kosmo.uni.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface AdminService {
 	//공지사항
@@ -61,4 +62,15 @@ public interface AdminService {
 	//급여명세서 출력 
 	public void salary_payslip(HttpServletRequest req, Model model);
 	
+	
+	// 인사 등록
+	public void addHuman(MultipartHttpServletRequest req, Model model);
+	
+	// 직원 등록
+	// 부서목록 가져오기
+	public void departList(HttpServletRequest req, Model model);
+	// 직급목록 가져오기
+	public void rankList(HttpServletRequest req, Model model);
+	// 아이디 가져오기
+	public void nextAdminId(HttpServletRequest req, Model model);
 }

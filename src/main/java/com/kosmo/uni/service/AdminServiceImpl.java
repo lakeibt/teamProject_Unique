@@ -9,12 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.DepartVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
+import com.kosmo.uni.vo.RankVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.SalaryVO;
 
@@ -1006,6 +1010,50 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("dtos",dtos);
 			model.addAttribute("parkCnt",parkCnt);
 		}
+	}
+
+	// 인사 등록
+	@Override
+	public void addHuman(MultipartHttpServletRequest req, Model model) {
+		
+		MultipartFile file = req.getFile("img");
+		
+		String saveDir = req.getRealPath("/resources/image/");
+		
+		String id = req.getParameter("id");
+		String password = req.getParameter("password");
+		String name = req.getParameter("name");
+		String eng_name = req.getParameter("eng_name");
+		
+		
+	}
+
+	// 아이디 가져오기
+	@Override
+	public void nextAdminId(HttpServletRequest req, Model model) {
+
+		String nextId = dao.getNextAdminId();
+		
+		model.addAttribute("nextId", nextId);
+	}
+	
+	
+	// 직원 등록폼
+	// 부서 목록 가져오기
+	@Override
+	public void departList(HttpServletRequest req, Model model) {
+		
+		List<DepartVO> departList = dao.getDepartList();
+		
+		model.addAttribute("departList",departList);
+	}
+	// 직급 목록 가져오기
+	@Override
+	public void rankList(HttpServletRequest req, Model model) {
+		
+		List<RankVO> rankList = dao.getRankList();
+		
+		model.addAttribute("rankList",rankList);
 	}
 
 }

@@ -40,7 +40,7 @@
         </ul>
         <ul class="nav" style="margin-top: 650px;">
         <li class="nav-item ">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="${guest}logout">
               <i class="material-icons">power_settings_new</i>
               <p>로그아웃</p>
             </a>

@@ -6,8 +6,11 @@ import java.util.Map;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.DepartVO;
+import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
+import com.kosmo.uni.vo.RankVO;
 import com.kosmo.uni.vo.SalaryVO;
 
 public interface AdminDAO {
@@ -97,5 +100,19 @@ public interface AdminDAO {
 	
 	//급여명세서 조회
 	public List<PayslipVO> getPayslip(int salary_input_num);
+	
+	
+	
+	// 인사 등록
+	public int insertHuman(HumanVO vo);
+	
+	// 직원 등록폼
+	// 부서목록 가져오기
+	public List<DepartVO> getDepartList();
+	// 직급목록 가져오기
+	public List<RankVO> getRankList();
+	// 아이디 가져오기
+	public String getNextAdminId();
+	
 	
 }
