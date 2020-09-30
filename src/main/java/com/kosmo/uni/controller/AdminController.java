@@ -32,6 +32,7 @@ public class AdminController {
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
 
+		adminService.info_list(req, model);
 		return "admin/main";
 	}
 	// ------------------------- 공지사항(메인) -------------------------
@@ -128,7 +129,55 @@ public class AdminController {
 	public String facility_ask(HttpServletRequest req, Model model) {
 		logger.info("degree/facility_ask");
 
+		adminService.equitmentList(req, model);
+		adminService.facility_ask(req, model);
 		return "admin/degree/facility_ask";
+	}
+	
+	// 시설문의 내용
+	@RequestMapping(value = "/admin/degree/facility_ask_content")
+	public String facility_ask_content(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_content");
+
+		adminService.facility_ask_content(req, model);
+		return "admin/degree/facility_ask_content";
+	}
+	
+	// 시설 요청 등록 폼
+	@RequestMapping(value = "/admin/degree/facility_ask_form")
+	public String facility_ask_form(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_form");
+
+		adminService.equitmentList(req, model);
+		adminService.selectMember(req, model);
+		return "admin/degree/facility_ask_form";
+	}
+	
+	// 시설 이름 서치
+	@RequestMapping(value = "/admin/degree/facility_search")
+	public String facility_search(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_search");
+
+		adminService.equitmentlistNext(req, model);
+		return "admin/degree/facility_search";
+	}
+	
+	// 시설 요청 등록 처리
+	@RequestMapping(value = "/admin/degree/facility_ask_Pro")
+	public String facility_ask_Pro(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_Pro");
+
+		adminService.facility_ask_Pro(req, model);
+		return "admin/degree/facility_ask_Pro";
+	}
+	
+	// 시설 요청 등록 처리
+	@RequestMapping(value = "/admin/degree/facility_ask_delete")
+	public String facility_ask_delete(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_delete");
+
+		adminService.facility_ask_delete(req, model);
+		return "admin/degree/facility_ask_delete";
 	}
 
 	// ------------------------- 인사관리 -------------------------
@@ -430,7 +479,17 @@ public class AdminController {
 	public String list(HttpServletRequest req, Model model) {
 		logger.info("facility/list");
 
+		adminService.equitmentList(req, model);
 		return "admin/facility/list";
+	}
+	
+	// 시설물 관리 리스트 AJAX
+	@RequestMapping(value = "/admin/facility/listNext")
+	public String listNext(HttpServletRequest req, Model model) {
+		logger.info("facility/listNext");
+
+		adminService.equitmentlistNext(req, model);
+		return "admin/facility/listNext";
 	}
 
 	// 시설문의
@@ -438,7 +497,33 @@ public class AdminController {
 	public String ask(HttpServletRequest req, Model model) {
 		logger.info("facility/ask");
 
+		adminService.facility_ask(req, model);
 		return "admin/facility/ask";
+	}
+	
+	// 시설문의 상세
+	@RequestMapping(value = "/admin/facility/ask_content")
+	public String ask_content(HttpServletRequest req, Model model) {
+		logger.info("facility/ask_content");
+		
+		adminService.facility_ask_content(req, model);
+		return "admin/facility/ask_content";
+	}
+	// 시설문의 승인
+	@RequestMapping(value = "/admin/facility/ask_pro")
+	public String ask_pro(HttpServletRequest req, Model model) {
+		logger.info("facility/ask_pro");
+		
+		adminService.askPro(req, model);
+		return "admin/facility/ask_pro";
+	}
+	// 시설문의 반려
+	@RequestMapping(value = "/admin/facility/ask_cancle")
+	public String ask_cancle(HttpServletRequest req, Model model) {
+		logger.info("facility/ask_cancle");
+		
+		adminService.askCancle(req, model);
+		return "admin/facility/ask_cancle";
 	}
 
 }

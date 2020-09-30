@@ -323,4 +323,91 @@
 		select 'a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from a_admin
 	</select>	
 	
+	<!-- 유진 -->
+	<!-- 시설 리스트 (코드) -->
+	<select id="equitmentCode" resultType="java.util.Map">
+		SELECT * FROM A_EQUIT_SET
+	</select>
+	
+	<!-- 시설 리스트 (종류) -->
+	<select id="equitmentKinds" resultType="java.util.Map">
+		SELECT S.E_CODE, K.E_KIND FROM A_EQUIT_SET S, A_EQUIT_KINDS K
+		WHERE S.E_CODE = K.E_CODE ORDER BY DECODE(S.E_CODE, 'OP', 1, 'ED', 2, 'IT', 3, 'EX', 4)
+	</select>	
+	
+	<!-- 시설 리스트 -->
+	<select id="equitmentList" resultType="java.util.Map">
+		SELECT * FROM A_EQUITMENT WHERE E_CODE = #{code} AND E_KIND = #{kind}
+	</select>	
+	
+	<!-- 시설 출고 리스트 -->
+	<select id="equitmentUsingList" resultType="java.util.Map">
+		SELECT U.E_CODE CODE, U.E_KIND KIND, U.E_NAME NAME, U.E_USING_CNT CNT, S.E_STATE STATE, U.E_PLACE PLACE, A.NAME ID
+		FROM A_USING_EQUITMENT U, A_EQUIT_STATE S, A_ADMIN A
+		WHERE U.E_STATE_CODE = S.E_STATE_CODE 
+		AND U.ID = A.ID
+		AND U.E_CODE = #{code} AND U.E_KIND = #{kind}
+	</select>	
+	
+	<!-- 시설 요청 리스트 -->
+	<select id="facilityAsk" resultType="java.util.Map">
+		SELECT A.ID ID, F.NUM NUM, T.T_TYPE TYPE, F.TITLE TITLE, D.DEPART_NAME DEPART, A.NAME NAME, F.WRITE_DATE DAY, P.STATE_NAME STATE
+		FROM A_FACILITY_ASK F, A_TYPE T, A_DEPART D, A_ADMIN A, A_PROCESS_STATE P
+		WHERE F.T_CODE = T.T_CODE AND F.DEPART = D.DEPART
+		AND F.ID = A.ID AND F.STATE_CODE = P.STATE_CODE
+	</select>	
+	<!-- 시설 요청 폼에 필요한 인사 정보 -->
+	<select id="selectMember" resultType="java.util.Map">
+		SELECT A.NAME NAME, D.DEPART_NAME DEPART FROM A_ADMIN A, A_DEPART D WHERE A.DEPART = D.DEPART AND ID = #{id}
+	</select>	
+	<!-- 시설 요청 폼 - 시설 이름 -->
+	<select id="searchName" resultType="String">
+		SELECT E_NAME FROM A_EQUITMENT WHERE E_CODE = #{code} AND E_KIND = #{kind} AND E_NAME LIKE '%'||#{keyword}||'%'
+	</select>	
+	
+	<!-- 시설 요청 폼 - 등록을 위한 부서코드 찾기 -->
+	<select id="searchDepart" resultType="String">
+		SELECT DEPART FROM A_ADMIN WHERE ID = #{id}
+	</select>	
+	<!-- 시설 요청 폼 - 등록 -->
+	<insert id="insertAsk" parameterType="java.util.Map">
+		INSERT INTO A_FACILITY_ASK
+		VALUES(ASK_SEQ.NEXTVAL, #{type}, #{title}, #{content}, #{depart}, #{id}, SYSDATE, 1, #{code}, #{kind}, #{e_name})
+	</insert>	
+	<!-- 시설 요청 폼 - 삭제 -->
+	<delete id="deleteAsk" parameterType="int">
+		DELETE A_FACILITY_ASK WHERE NUM = #{num}
+	</delete>	
+	<!-- 시설 요청 - 상세 페이지 -->
+	<select id="facilityAskContent" resultType="java.util.Map">
+		SELECT F.NUM NUM, T.T_TYPE TYPE, F.TITLE TITLE, D.DEPART_NAME DEPART, A.NAME NAME, F.WRITE_DATE DAY, P.STATE_NAME STATE,
+			   E.E_CODE E_CODE, E.E_CODENAME CODE, F.E_KIND KIND, F.E_NAME E_NAME, F.CONTENT CONTENT, A.ID ID
+		FROM A_FACILITY_ASK F, A_TYPE T, A_DEPART D, A_ADMIN A, A_PROCESS_STATE P, A_EQUIT_SET E
+		WHERE F.T_CODE = T.T_CODE AND F.DEPART = D.DEPART AND F.E_CODE = E.E_CODE
+		AND F.ID = A.ID AND F.STATE_CODE = P.STATE_CODE AND F.NUM = #{num} 
+	</select>	
+	<!-- 요청 등록 - using -->
+	<insert id="insertUsing" parameterType="java.util.Map">
+		INSERT INTO A_USING_EQUITMENT VALUES(#{code}, #{kind}, #{e_name}, 1, #{type}, #{depart}, #{id})
+	</insert>	
+	<!-- 요청 검색 - 등록 전 using 테이블에 있는지 검색 -->
+	<select id="selectUsing" resultType="int">
+		SELECT COUNT(*) FROM A_USING_EQUITMENT WHERE E_CODE = #{code} AND E_KIND = #{kind} AND E_NAME = #{e_name}
+	</select>	
+	<!-- 요청 검색 - 사용리스트에 있는 경우 개수만 update -->
+	<update id="updateUsing" parameterType="java.util.Map">
+		UPDATE A_USING_EQUITMENT SET E_USING_CNT = E_USING_CNT + 1 WHERE E_CODE = #{code} AND E_KIND = #{kind} AND E_NAME = #{e_name}
+	</update>	
+	<!-- 요청 등록 - update 시설물 개수 -->
+	<update id="updateCnt" parameterType="java.util.Map">
+		UPDATE A_EQUITMENT SET E_CNT = E_CNT - 1 WHERE E_CODE = #{code} AND E_KIND = #{kind} AND E_NAME = #{e_name}
+	</update>	
+	<!-- 요청 등록 - update 요청 상태 -->
+	<update id="updateState" parameterType="int">
+		UPDATE A_FACILITY_ASK SET STATE_CODE = 2 WHERE NUM = #{num}
+	</update>	
+	<!-- 요청 반려 - update 요청 상태 -->
+	<update id="deleteUsing" parameterType="int">
+		UPDATE A_FACILITY_ASK SET STATE_CODE = 3 WHERE NUM = #{num}
+	</update>	
 </mapper>
