@@ -395,6 +395,39 @@ public class AdminDAOImpl implements AdminDAO {
 		return dao.insertStudent(vo);
 	}
 
+	@Override
+	public int getStudentCnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getStudentCnt();
+	}
+
+	@Override
+	public int getProfessorCnt() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getProfessorCnt();
+	}
+	
+	@Override
+	public List<HumanVO> getStudentList(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getStudentList(map);
+	}
+
+	@Override
+	public List<HumanVO> getProfessorList(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getProfessorList(map);
+	}
+
+	@Override
+	public List<HumanVO> getAdminList(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getAdminList(map);
+	}
+
+
+
+
 
 
 

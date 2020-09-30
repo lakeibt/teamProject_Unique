@@ -246,7 +246,15 @@ public class AdminController {
 
 		return "admin/human_resources/info/human_state";
 	}
-
+	@RequestMapping(value = "/admin/human_resources/info/human_state_list")
+	public String human_state_list(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_list");
+		
+		adminService.humanList(req, model);
+		
+		return "admin/human_resources/info/human_state_list";
+	}
+ 
 	// 책정임금현황
 	@RequestMapping(value = "/admin/human_resources/info/salary_state")
 	public String salary_state(HttpServletRequest req, Model model) {

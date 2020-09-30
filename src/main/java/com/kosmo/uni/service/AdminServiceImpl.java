@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.DepartVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.MajorVO;
+import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.RankVO;
@@ -1216,6 +1218,93 @@ public class AdminServiceImpl implements AdminService {
 		List<MajorVO> majorList = dao.getMajorList();
 		
 		model.addAttribute("majorList",majorList);
+		
+	}
+
+	@Override
+	public void humanList(HttpServletRequest req, Model model) {
+		
+		int pageSize = 15;
+		int pageBlock = 5;
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;	
+		String pageNum = "";
+		int currentPage = 0;
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0; 
+		
+		String option = req.getParameter("option");
+		switch (option) {
+        case "adm":
+        	cnt = dao.getAdminCnt();
+            break;
+        case "pro":
+        	cnt = dao.getProfessorCnt();
+            break;
+        case "stu":
+        	cnt = dao.getStudentCnt();
+            break;
+        default:
+        	cnt = dao.getAdminCnt();
+        	break;
+		}
+		model.addAttribute("option", option);
+		
+		pageNum = req.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+	
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<HumanVO> dtos = null;
+			
+			switch (option) {
+	        case "adm":
+	        	dtos = dao.getAdminList(map);
+	            break;
+	        case "pro":
+	        	dtos = dao.getProfessorList(map);
+	            break;
+	        case "stu":
+	        	dtos = dao.getStudentList(map);
+	            break;
+			}
+			
+			model.addAttribute("dtos", dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock -1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);			
+		model.addAttribute("number", number);	 
+		model.addAttribute("pageNum", pageNum);
+		
+		if(cnt>0) {
+			model.addAttribute("startPage", startPage);	
+			model.addAttribute("endPage", endPage);			
+			model.addAttribute("pageBlock", pageBlock);	
+			model.addAttribute("pageCount", pageCount);	
+			model.addAttribute("currentPage", currentPage);
+		}
 		
 	}
 

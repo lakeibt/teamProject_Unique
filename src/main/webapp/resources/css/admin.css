@@ -56,3 +56,8 @@
 	-moz-appearance: none;
 	appearance: none; 
 }
+
+
+.human_state_hide_td{
+	padding : 0;
+}

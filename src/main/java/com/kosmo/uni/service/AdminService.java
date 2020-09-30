@@ -80,4 +80,7 @@ public interface AdminService {
 	// 아이디 가져오기 : 학생
 	public void nextStudentId(HttpServletRequest req, Model model);
 	
+	// 인사 정보 불러오기
+	public void humanList(HttpServletRequest req, Model model);
+	
 }

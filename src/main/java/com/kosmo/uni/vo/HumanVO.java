@@ -23,6 +23,8 @@ public class HumanVO {
 	// 직원
 	private String depart;
 	private String rank;	
+	private String depart_name;
+	
 	// 교수
 	private String position;
 	// 학생
@@ -32,6 +34,8 @@ public class HumanVO {
 	
 	// 학생, 교수
 	private String m_code;
+	private String m_name;
+	
 	// 직원, 교수
 	private Date enterday;
 	private String account_number;
@@ -181,6 +185,18 @@ public class HumanVO {
 	}
 	public void setCar(int car) {
 		this.car = car;
+	}
+	public String getDepart_name() {
+		return depart_name;
+	}
+	public void setDepart_name(String depart_name) {
+		this.depart_name = depart_name;
+	}
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	
 	

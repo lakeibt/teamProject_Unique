@@ -121,5 +121,11 @@ public interface AdminDAO {
 	public String getNextProfessorId();
 	public String getNextStudentId();	
 	
+	// 인사 정보 가져오기
+	public int getStudentCnt();
+	public int getProfessorCnt();
+	public List<HumanVO> getStudentList(Map<String, Object> map);
+	public List<HumanVO> getProfessorList(Map<String, Object> map);
+	public List<HumanVO> getAdminList(Map<String, Object> map);
 	
 }
