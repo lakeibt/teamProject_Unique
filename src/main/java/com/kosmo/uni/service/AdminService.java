@@ -73,4 +73,17 @@ public interface AdminService {
 	public void rankList(HttpServletRequest req, Model model);
 	// 아이디 가져오기
 	public void nextAdminId(HttpServletRequest req, Model model);
+	
+	// 시설물 관리
+	public void equitmentList(HttpServletRequest req, Model model);
+	public void equitmentlistNext(HttpServletRequest req, Model model);
+	public void askPro(HttpServletRequest req, Model model);
+	public void askCancle(HttpServletRequest req, Model model);
+	
+	// 시설 요청 - 학사
+	public void facility_ask(HttpServletRequest req, Model model);
+	public void facility_ask_content(HttpServletRequest req, Model model);
+	public void facility_ask_Pro(HttpServletRequest req, Model model);
+	public void selectMember(HttpServletRequest req, Model model); // 시설문의 할 때 필요한 인사정보
+	public void facility_ask_delete(HttpServletRequest req, Model model);
 }

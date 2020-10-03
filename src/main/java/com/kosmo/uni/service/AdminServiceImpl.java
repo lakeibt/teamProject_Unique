@@ -24,10 +24,10 @@ import com.kosmo.uni.vo.SalaryVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-
 	@Autowired
 	AdminDAO dao;
 	
+	// 공지사항 등록
 	@Override
 	public void infoPro(HttpServletRequest req, Model model) {
 		String title = req.getParameter("title");
@@ -37,19 +37,16 @@ public class AdminServiceImpl implements AdminService {
 		map.put("title", title);
 		map.put("content", content);
 		
-		System.out.println(title);
-		System.out.println(content);
-		
 		int insertCnt = dao.insertInfo(map);
 		model.addAttribute("insertCnt", insertCnt);
 	}
 	
+	// 공지사항 상세
 	@Override
 	public void content(HttpServletRequest req, Model model) {
 		int num = Integer.parseInt(req.getParameter("num"));
 		
-		// 조회수 증가
-		dao.addCnt(num);
+		dao.addCnt(num);// 조회수 증가
 		
 		Map<String, Object> dtos = dao.getContent(num);
 		model.addAttribute("dtos", dtos);
@@ -72,7 +69,6 @@ public class AdminServiceImpl implements AdminService {
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
 
-		// 글갯수 구하기
 		cnt = dao.getInfoCnt();
 		pageNum = req.getParameter("pageNum");
 
@@ -93,11 +89,8 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("dtos", dtos);
 		}
 
-		// 시작페이지
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
 		if (currentPage % pageBlock == 0) startPage -= pageBlock;
-
-		// 마지막페이지
 		endPage = startPage + pageBlock - 1;
 		if (endPage > pageCount) endPage = pageCount;
 
@@ -114,10 +107,9 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
-	@Override
 	// 급여 - 전체리스트
+	@Override
 	public void attendance(HttpServletRequest req, Model model) {
-		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
@@ -132,41 +124,17 @@ public class AdminServiceImpl implements AdminService {
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
 
-		// 글갯수 구하기
 		cnt = dao.getAttendance_Cnt();
 		System.out.println("cnt : " + cnt);
 
-		// 페이지 숫자
 		pageNum = req.getParameter("pageNum");
+		if (pageNum == null) pageNum = "1";
 
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
 		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 + 5 - 1;
 		end = start + pageSize - 1;
-
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
 		number = cnt - (currentPage - 1) * pageSize;
-
-		System.out.println("number : " + start);
-		System.out.println("pageSize : " + pageSize);
 
 		if (cnt > 0) {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -176,24 +144,12 @@ public class AdminServiceImpl implements AdminService {
 
 			List<AdminVO> dtos = dao.getAttendance_List(map);
 			model.addAttribute("dtos", dtos);
-
 		}
 
-		// 시작페이지
-		// 1 = (1 / 3) * 3 + 1;
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
-
-		System.out.println("startPage : " + startPage);
-
-		// 마지막페이지
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		System.out.println("endPage : " + endPage);
-		System.out.println("======================");
+		if (endPage > pageCount) endPage = pageCount;
 
 		model.addAttribute("cnt", cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
@@ -207,11 +163,10 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
 	}
-
-	@Override
+	
 	// 급여 - 조회리스트
+	@Override
 	public void attendance_Search(HttpServletRequest req, Model model) {
-		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
@@ -228,49 +183,20 @@ public class AdminServiceImpl implements AdminService {
 
 		String st = req.getParameter("st");
 		String et = req.getParameter("et");
-		System.out.println(req.getParameter("st"));
-		System.out.println(req.getParameter("et"));
 
-		// 글갯수 구하기
 		Map<String, Object> map = new HashMap<String, Object>();
-		// datepicker 선택 날짜
 		map.put("st", st);
 		map.put("et", et);
 
 		search_Cnt = dao.getAttendance_Search_Cnt(map);
-		System.out.println("search_Cnt : " + search_Cnt);
-
-		// 페이지 숫자
 		pageNum = req.getParameter("pageNum");
 
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
+		if (pageNum == null) pageNum = "1";
 		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (search_Cnt / pageSize) + (search_Cnt % pageSize > 0 ? 1 : 0);
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 + 5 - 1;
 		end = start + pageSize - 1;
-
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
 		number = search_Cnt - (currentPage - 1) * pageSize;
-
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
 
 		if (search_Cnt > 0) {
 			map.put("st", st);
@@ -281,24 +207,12 @@ public class AdminServiceImpl implements AdminService {
 			List<AdminVO> dtos = dao.getAttendance_List_Search(map);
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("search_Cnt", search_Cnt);
-
 		}
 
-		// 시작페이지
-		// 1 = (1 / 3) * 3 + 1;
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
-
-		System.out.println("startPage : " + startPage);
-
-		// 마지막페이지
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		System.out.println("endPage : " + endPage);
-		System.out.println("======================");
+		if (endPage > pageCount) endPage = pageCount;
 
 		model.addAttribute("search_Cnt", search_Cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
@@ -312,14 +226,12 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 			model.addAttribute("start", start); // 페이지 갯수
 			model.addAttribute("end", end); // 현재페이지
-
 		}
-
 	}
 
+	// 급여 - 월별
 	@Override
 	public void salary_list_humanMonth(HttpServletRequest req, Model model) {
-		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
@@ -334,40 +246,15 @@ public class AdminServiceImpl implements AdminService {
 		int startPage = 0; // 시작 페이지
 		int endPage = 0; // 마지막 페이지
 
-		/* int salary_list_cnt = 0; */
-
 		salary_list_cnt = dao.getSalary_Cnt();
-		System.out.println("salary_list_cnt : " + salary_list_cnt);
-
-		// 페이지 숫자
 		pageNum = req.getParameter("pageNum");
 
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
+		if (pageNum == null) pageNum = "1";
 		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (salary_list_cnt / pageSize) + (salary_list_cnt % pageSize > 0 ? 1 : 0);
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 + 5 - 1;
 		end = start + pageSize - 1;
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
 		number = salary_list_cnt - (currentPage - 1) * pageSize;
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
 
 		if (salary_list_cnt > 0) {
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -377,24 +264,12 @@ public class AdminServiceImpl implements AdminService {
 			List<AdminVO> dtos = dao.getSalary_list_humanMonth(map);
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("salary_list_cnt", salary_list_cnt);
-
 		}
 
-		// 시작페이지
-		// 1 = (1 / 3) * 3 + 1;
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
-
-		System.out.println("startPage : " + startPage);
-
-		// 마지막페이지
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		System.out.println("endPage : " + endPage);
-		System.out.println("======================");
+		if (endPage > pageCount) endPage = pageCount;
 
 		model.addAttribute("salary_list_cnt", salary_list_cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
@@ -407,12 +282,11 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("pageCount", pageCount); // 페이지 갯수
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 		}
-
 	}
 
+	// 인사 검색
 	@Override
 	public void human_Search(HttpServletRequest req, Model model) {
-		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
@@ -430,49 +304,19 @@ public class AdminServiceImpl implements AdminService {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		String name = req.getParameter("name");
-		// 이름 검색
 		map.put("name", name);
-
 		humanSearch_Cnt = dao.humanSearch_Cnt(map);
-		System.out.println("humanSearch_Cnt : " + humanSearch_Cnt);
 
-		// 페이지 숫자
 		pageNum = req.getParameter("pageNum");
-
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
+		if (pageNum == null) pageNum = "1";
 		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (humanSearch_Cnt / pageSize) + (humanSearch_Cnt % pageSize > 0 ? 1 : 0);
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 + 5 - 1;
 		end = start + pageSize - 1;
-
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
 		number = humanSearch_Cnt - (currentPage - 1) * pageSize;
-
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
 
 		String start2 = req.getParameter("start1");
 		String end2 = req.getParameter("end1");
-
-		System.out.println("start2 : : : " + start2);
-		System.out.println("end2 : : : " + end2);
 
 		if (humanSearch_Cnt > 0) {
 			map.put("start", start);
@@ -482,24 +326,12 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("humanSearch_Cnt", humanSearch_Cnt);
 			model.addAttribute("currentPage", currentPage);
-
 		}
 
-		// 시작페이지
-		// 1 = (1 / 3) * 3 + 1;
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
-
-		System.out.println("startPage : " + startPage);
-
-		// 마지막페이지
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		System.out.println("endPage : " + endPage);
-		System.out.println("======================");
+		if (endPage > pageCount) endPage = pageCount;
 
 		model.addAttribute("humanSearch_Cnt", humanSearch_Cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
@@ -513,14 +345,12 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 			model.addAttribute("start", start); // 페이지 갯수
 			model.addAttribute("end", end); // 현재페이지
-
 		}
-
 	}
 
+	// 월별 검색
 	@Override
 	public void month_Search(HttpServletRequest req, Model model) {
-		// 페이징
 		int pageSize = 5; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한 블럭당 페이지 갯수
 
@@ -538,48 +368,19 @@ public class AdminServiceImpl implements AdminService {
 		String sm = req.getParameter("sm");
 		String em = req.getParameter("em");
 		
-		// 글갯수 구하기
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		// 날짜 검색
 		map.put("sm", sm);
 		map.put("em", em);
-
-		monthSearch_Cnt = dao.monthSearch_Cnt(map);
-
-		System.out.println("monthSearch_Cnt : " + monthSearch_Cnt);
-
-		// 페이지 숫자
+		monthSearch_Cnt = dao.monthSearch_Cnt(map); // 날짜 검색
+		
 		pageNum = req.getParameter("pageNum");
 
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
+		if (pageNum == null) pageNum = "1";
 		currentPage = Integer.parseInt(pageNum); // 현재페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (monthSearch_Cnt / pageSize) + (monthSearch_Cnt % pageSize > 0 ? 1 : 0);
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1 - 1) * 5 + 1
 		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호(페이지별)
-		// 5 = 1 + 5 - 1;
 		end = start + pageSize - 1;
-
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
 		number = monthSearch_Cnt - (currentPage - 1) * pageSize;
-
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
 
 		if (monthSearch_Cnt > 0) {
 			map.put("start", start);
@@ -589,24 +390,12 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("dtos", dtos);
 			model.addAttribute("monthSearch_Cnt", monthSearch_Cnt);
 			model.addAttribute("currentPage", currentPage);
-
 		}
 
-		// 시작페이지
-		// 1 = (1 / 3) * 3 + 1;
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
-
-		System.out.println("startPage : " + startPage);
-
-		// 마지막페이지
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
-
-		System.out.println("endPage : " + endPage);
-		System.out.println("======================");
+		if (endPage > pageCount) endPage = pageCount;
 
 		model.addAttribute("monthSearch_Cnt", monthSearch_Cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
@@ -620,10 +409,10 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("currentPage", currentPage); // 현재페이지
 			model.addAttribute("start", start); // 페이지 갯수
 			model.addAttribute("end", end); // 현재페이지
-
 		}
 	}
 	
+	// 급여 확정 - 등록
 	@Override
 	public void salary_input(HttpServletRequest req, Model model) {
 		Map<String, Object> map = new HashMap<>();
@@ -637,7 +426,6 @@ public class AdminServiceImpl implements AdminService {
 		String payments_month = req.getParameter("payments_month_01")+"-"+req.getParameter("payments_month_02");
 		
 		map.put("payments_month", payments_month);
-		
 		map.put("salary_name", req.getParameter("salary_name"));
 		
 		int inputNum = dao.salary_input(map);
@@ -645,11 +433,9 @@ public class AdminServiceImpl implements AdminService {
 		model.addAttribute("inputNum",inputNum);
 	}
 
+	// 급여 리스트
 	@Override
 	public void salaryList(HttpServletRequest req, Model model) {
-		// 3단계. 화면으로부터 입력받은 값을 받아온다.
-
-		// 페이징 처리 (최신글 부터 5건씩 출력)
 		int pageSize = 1; // 한페이지당 출력할 글 갯수
 		int pageBlock = 3; // 한블럭당 페이지 갯수
 
@@ -664,70 +450,32 @@ public class AdminServiceImpl implements AdminService {
 		int startPage = 0; // 시작페이지
 		int endPage = 0; // 마지막 페이지
 
-		
-		
-		// 5-1단계. 글 갯수 구하기
 		cnt = dao.getSalaryCnt();
-		System.out.println("cnt : " + cnt);
-
 		pageNum = req.getParameter("pageNum");
 
-		if (pageNum == null) {
-			pageNum = "1"; // 첫페이지를 1페이지로 지정
-		}
-
-		// 글 30건 기준
+		if (pageNum == null) pageNum = "1";
 		currentPage = Integer.parseInt(pageNum); // 현재 페이지 : 1
-		System.out.println("currentPage : " + currentPage);
-
-		// 페이지 갯수 6 = (30 / 5) + (0)
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지 있으면 1
-
-		// 현재 페이지 시작 글번호(페이지별)
-		// 1 = (1-1) * 5 + 1
 		start = (currentPage - 1) * pageSize + 1;
-
-		// 현재 페이지 마지막 글번호 (페이지별)
-		// 5 = 1 + 5 - 1;
 		end = start + pageSize - 1;
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
-
-		// 출력용 글번호
-		// 30 = 30 - (1 - 1) * 5;
 		number = cnt - (currentPage - 1) * pageSize;
-		System.out.println("number : " + number);
-		System.out.println("pageSize : " + pageSize);
 
-		// 5-2단계. 게시글 목록 조회
 		if (cnt > 0) {
 			Map <String, Object> map = new HashMap<>();
 			map.put("start", start);
 			map.put("end", end);
-			System.out.println("map : " + map);
 			List<SalaryInputVO> mtos = dao.getSalaryList(map);
-			System.out.println("mtos : " + mtos);
 			model.addAttribute("mtos", mtos);
 		}
-		// 6단계. request나 session에 처리결과를 저장 (jsp에 전달)
-		// 시작 페이지
-		// 1 = (1/3) * 3 + 1;
-		startPage = (currentPage / pageBlock) * pageBlock + 1;
-		if (currentPage % pageBlock == 0)
-			startPage -= pageBlock;
 
-		System.out.println("startPage : " + startPage);
-		// 마지막 페이지
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if (currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock - 1;
-		if (endPage > pageCount)
-			endPage = pageCount;
+		if (endPage > pageCount) endPage = pageCount;
 
 		int adminCnt = dao.getAdminCnt();
 		model.addAttribute("adminCnt", adminCnt); // 직원수 
 		
-		System.out.println("endPage : " + endPage);
-		System.out.println("====================");
-
 		model.addAttribute("cnt", cnt); // 글갯수
 		model.addAttribute("number", number); // 출력용 글번호
 		model.addAttribute("pageNum", pageNum); // 페이지번호
@@ -741,16 +489,15 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 	
+	// 급여 등록
 	@Override
 	public void salaryInput(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
-		System.out.println("salary_input_num : " + salary_input_num);
 		
 		Map <String, Object> map = new HashMap<>();
 		map.put("salary_input_num", salary_input_num);
 
 		List<SalaryVO> stos = dao.getSelectList(map);
-		System.out.println("stos.size() : " +stos.size());
 		
 		for(int i = 0; i < stos.size(); i++) {
 			SalaryVO sal = stos.get(i);
@@ -762,8 +509,6 @@ public class AdminServiceImpl implements AdminService {
 				sal.setCost(vo.getCost());
 				sal.setMeal(vo.getMeal());
 				sal.setContract_vehicle(vo.getContract_vehicle());
-				System.out.println("cost : " +sal);
-
 			} else {
 				int cost0 = sal.getCar();
 				vo = dao.getSelectCar(cost0);
@@ -772,32 +517,26 @@ public class AdminServiceImpl implements AdminService {
 				sal.setContract_vehicle(vo.getContract_vehicle());
 			}
 		}
-
-		System.out.println("stos : " + stos);
 		model.addAttribute("stos", stos);
 	}
 
+	// 강의 리스트
 	@Override
 	public void course_list(HttpServletRequest req, Model model) {
 		int course_Cnt = 0;
 		
 		course_Cnt = dao.getCourseCnt();
 		
-		System.out.println("course_Cnt : " + course_Cnt);
-		
 		List<CourseVO> dtos = dao.getCourseList();
-		System.out.println("dtos" + dtos);
 		model.addAttribute("dtos",dtos);
 		model.addAttribute("course_Cnt",course_Cnt);
-		
 	}
 	
+	// 급여 개수
 	@Override
 	public void salaryCnt(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
 		int payments_division = Integer.parseInt(req.getParameter("payments_division"));
-		System.out.println("salary_input_num : " + salary_input_num);
-		System.out.println("payments_division : " +payments_division);
 		
 		Map <String, Object> map = new HashMap<>();
 		map.put("salary_input_num", salary_input_num);
@@ -809,21 +548,19 @@ public class AdminServiceImpl implements AdminService {
 		map1.put("salary_input_num", salary_input_num);
 		map1.put("division_cnt", cnt);
 		int i = dao.updateDivCnt(map1);
-		System.out.println("i : " + i);
 		model.addAttribute("division_cnt",cnt);
 	}
 	
+	// 급여 수정
 	@Override
 	public void salaryModify(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
-		System.out.println("salary_input_num : " + salary_input_num);
 		
 		SalaryInputVO vo = dao.getSalaryArticle(salary_input_num);
-		
 		model.addAttribute("dto", vo);
-		System.out.println("vo : " + vo);
 	}
 	
+	// 수정 처리
 	@Override
 	public void salaryModifyPro(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
@@ -833,40 +570,32 @@ public class AdminServiceImpl implements AdminService {
 		map.put("payments_division", Integer.parseInt(req.getParameter("payments_division")));
 		map.put("salary_name", req.getParameter("salary_name"));
 		map.put("salary_inday", req.getParameter("salary_inday"));
-		System.out.println("salary_input_num : "+salary_input_num);
-		System.out.println(Integer.parseInt(req.getParameter("salary_division")));
-		System.out.println(Integer.parseInt(req.getParameter("payments_division")));
-		System.out.println(req.getParameter("salary_name"));
-		System.out.println(req.getParameter("salary_inday"));
 		
 		int updateCnt = dao.UpdateSalInput(map);
-		System.out.println("updateCnt : "+updateCnt);
 		model.addAttribute("updateCnt", updateCnt);
 	}
 	
+	// 급여 삭제
 	@Override
 	public void salary_delete(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
 		int deleteCnt = dao.deleteSalary(salary_input_num);
-		System.out.println("deleteCnt : " +deleteCnt);
 		model.addAttribute("deleteCnt", deleteCnt);
 	}
 	
+	// 총급여
 	@Override
 	public void salarytotal(HttpServletRequest req, Model model) {
 		int salary_input_num = Integer.parseInt(req.getParameter("salary_input_num"));
 		int salary = dao.selectSalSum(salary_input_num);
-		System.out.println("salary : " + salary);
 		model.addAttribute("salary", salary);
 		SalaryVO vo = dao.getMealCar(salary_input_num);
 		model.addAttribute("vo", vo);
-		System.out.println("vo : " + vo);
 		Map <String, Object> map = new HashMap<>();
 		map.put("salary_input_num", salary_input_num);
 		map.put("salary_total", salary+vo.getMeal()+vo.getContract_vehicle());
 		
 		dao.updateTotalSal(map);
-		
 	}
 	
 	@Override
@@ -882,12 +611,10 @@ public class AdminServiceImpl implements AdminService {
 		String code = req.getParameter("co_code");
 		delete_Cnt = dao.classDelete(code);
 		model.addAttribute("delete_Cnt", delete_Cnt);
-		
 	}
 
 	@Override
 	public void classinput(HttpServletRequest req, Model model) {
-		
 		CourseVO vo = new CourseVO();
 
 		String co_name = req.getParameter("co_name");
@@ -913,27 +640,21 @@ public class AdminServiceImpl implements AdminService {
 		vo.setGrade(grade);
 		vo.setLimit_num(limit_num);
 		vo.setP_name(p_name);
-		System.out.println();
 		
 		int insert_Cnt = dao.classInsert(vo);
-		System.out.println("insert cnt :"+insert_Cnt);
-		
 		model.addAttribute("cnt",insert_Cnt);
 	}
 
 	@Override
 	public void classmod(HttpServletRequest req, Model model) {
-		
 		String co_code = req.getParameter("co_code");
 		
 		CourseVO vo = dao.classInfo(co_code);
 		model.addAttribute("vo",vo);
-		
 	}
 
 	@Override
 	public void classmodClear(HttpServletRequest req, Model model) {
-		
 		CourseVO vo = new CourseVO();
 		
 		String co_code = req.getParameter("co_code");
@@ -966,47 +687,35 @@ public class AdminServiceImpl implements AdminService {
 		vo.setGrade(grade);
 		vo.setLimit_num(limit_num);
 		vo.setP_name(p_name);
-		System.out.println();
 		
 		int update_Cnt = dao.classmodClear(vo);
-		System.out.println("update_Cnt :"+update_Cnt);
-		
 		model.addAttribute("cnt", update_Cnt);
-		
 	}
 
 	@Override
 	public void parkingList(HttpServletRequest req, Model model) {
 		int parkCnt = 0;
 
-			parkCnt = dao.getParkingCnt();
-			System.out.println("parkCntSVS : " + parkCnt);
-			List<ParkVO> dtos = dao.getParkingList();
-			System.out.println("dtosSVS" + dtos);
-			model.addAttribute("dtos",dtos);
-			model.addAttribute("parkCnt",parkCnt);
+		parkCnt = dao.getParkingCnt();
+		List<ParkVO> dtos = dao.getParkingList();
+		model.addAttribute("dtos",dtos);
+		model.addAttribute("parkCnt",parkCnt);
 	}
 
 	@Override
 	public void parkSearchList(HttpServletRequest req, Model model) {
 		int parkCnt = 0;
-		
 		String param = req.getParameter("param");
 		String text = req.getParameter("intext");
-		System.out.println("param 값 : "+param);
-		System.out.println("text 값 : "+text);
+		
 		if(param.equals("carnum")) {
 			parkCnt = dao.getParkingCnt();
-			System.out.println("parkCntSVS : " + parkCnt);
 			List<ParkVO> dtos = dao.getCarNumList(text);
-			System.out.println("dtosSVS" + dtos);
 			model.addAttribute("dtos",dtos);
 			model.addAttribute("parkCnt",parkCnt);
 		} else {
 			parkCnt = dao.getParkingCnt();
-			System.out.println("parkCntSVS : " + parkCnt);
 			List<ParkVO> dtos = dao.getSearchList(text);
-			System.out.println("dtosSVS" + dtos);
 			model.addAttribute("dtos",dtos);
 			model.addAttribute("parkCnt",parkCnt);
 		}
@@ -1015,34 +724,26 @@ public class AdminServiceImpl implements AdminService {
 	// 인사 등록
 	@Override
 	public void addHuman(MultipartHttpServletRequest req, Model model) {
-		
 		MultipartFile file = req.getFile("img");
 		
 		String saveDir = req.getRealPath("/resources/image/");
-		
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
 		String name = req.getParameter("name");
 		String eng_name = req.getParameter("eng_name");
-		
-		
 	}
 
 	// 아이디 가져오기
 	@Override
 	public void nextAdminId(HttpServletRequest req, Model model) {
-
 		String nextId = dao.getNextAdminId();
-		
 		model.addAttribute("nextId", nextId);
 	}
-	
 	
 	// 직원 등록폼
 	// 부서 목록 가져오기
 	@Override
 	public void departList(HttpServletRequest req, Model model) {
-		
 		List<DepartVO> departList = dao.getDepartList();
 		
 		model.addAttribute("departList",departList);
@@ -1050,10 +751,135 @@ public class AdminServiceImpl implements AdminService {
 	// 직급 목록 가져오기
 	@Override
 	public void rankList(HttpServletRequest req, Model model) {
-		
 		List<RankVO> rankList = dao.getRankList();
 		
 		model.addAttribute("rankList",rankList);
 	}
 
+	// 시설물 관리 리스트
+	@Override
+	public void equitmentList(HttpServletRequest req, Model model) {
+		List<Map<String, Object>> code = dao.equitmentCode();
+		List<Map<String, Object>> kinds = dao.equitmentKinds();
+		
+		model.addAttribute("code", code);
+		model.addAttribute("kinds", kinds);
+		model.addAttribute("cnt", kinds.size());
+	}
+	
+	@Override
+	public void equitmentlistNext(HttpServletRequest req, Model model) {
+		String code = req.getParameter("code");
+		String kind = req.getParameter("kind");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", code);
+		map.put("kind", kind);
+		List<Map<String, Object>> list = dao.equitmentList(map);
+		List<Map<String, Object>> using = dao.equitmentUsingList(map);
+		
+		if(req.getParameter("keyword") != null) {
+			Map<String, Object> search = new HashMap<String, Object>();
+			search.put("code", code);
+			search.put("kind", kind);
+			search.put("keyword", req.getParameter("keyword"));
+			List<String> searchName = dao.searchName(search);
+			model.addAttribute("search", searchName);
+		}
+		model.addAttribute("list", list);
+		model.addAttribute("using", using);
+	}
+
+	// 시설물 요청
+	@Override
+	public void facility_ask(HttpServletRequest req, Model model) {
+		List<Map<String, Object>> list = dao.facilityAsk();
+		model.addAttribute("list", list);
+	}
+	// 요청 폼에 들어갈 인사정보 검색
+	@Override
+	public void selectMember(HttpServletRequest req, Model model) {
+		String id = req.getParameter("id");
+		Map<String, Object> member = dao.selectMember(id);
+		model.addAttribute("member", member);
+	}
+	// 요청 상세 내용
+	@Override
+	public void facility_ask_content(HttpServletRequest req, Model model) {
+		int num = Integer.parseInt(req.getParameter("num"));
+		
+		Map<String, Object> content = dao.facilityAskContent(num);
+		model.addAttribute("content", content);
+	}
+	// 요청 등록
+	@Override
+	public void facility_ask_Pro(HttpServletRequest req, Model model) {
+		String id = (String) req.getSession().getAttribute("memId");
+		String depart = dao.searchDepart(id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("code", req.getParameter("code"));
+		map.put("kind", req.getParameter("kinds"));
+		map.put("type", req.getParameter("type"));
+		map.put("e_name", req.getParameter("e_name"));
+		map.put("title", req.getParameter("title"));
+		map.put("content", req.getParameter("content"));
+		map.put("depart", depart);
+		
+		int insertCnt = dao.insertAsk(map);
+		model.addAttribute("insertCnt", insertCnt);
+	}
+	// 요청 삭제
+	@Override
+	public void facility_ask_delete(HttpServletRequest req, Model model) {
+		int num = Integer.parseInt(req.getParameter("num"));
+		
+		int deleteCnt = dao.deleteAsk(num);
+		model.addAttribute("deleteCnt", deleteCnt);
+	}
+	
+	//시설물 요청 처리 
+	@Override
+	public void askPro(HttpServletRequest req, Model model) {
+		// 코드, 종류, 제품, 개수, 상태(사용/대여), 부서, 이름
+		int num = Integer.parseInt(req.getParameter("num"));
+		String id = req.getParameter("id");
+		String depart = dao.searchDepart(id);
+		int type = 1;
+		
+		if(req.getParameter("type").equals("사용")) type = 1;
+		else type = 2;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("code", req.getParameter("e_code"));
+		map.put("kind", req.getParameter("kind"));
+		map.put("type", type);
+		map.put("e_name", req.getParameter("e_name"));
+		map.put("depart", depart);
+		
+		int selectCnt = dao.selectUsing(map);
+		
+		if(selectCnt > 0) { // 사용리스트에 있는 경우 개수만 업데이트
+			int updateUsing = dao.updateUsing(map);
+			model.addAttribute("updateUsing", updateUsing);
+		} else { // 사용리스트에 없는 경우 리스트에 데이터 생성
+			int insertCnt = dao.insertUsing(map);
+			model.addAttribute("insertCnt", insertCnt);
+		}
+		
+		int updateCnt = dao.updateCnt(map); // 원래 시설물 리스트에서 개수 차감
+		int updateState = dao.updateState(num); // 요청 리스트에서 상태 변경
+		
+		model.addAttribute("updateCnt", updateCnt);
+		model.addAttribute("updateState", updateState);
+	}
+	// 요청 반려
+	@Override
+	public void askCancle(HttpServletRequest req, Model model) {
+		int num = Integer.parseInt(req.getParameter("num"));
+		// 요청 리스트에서 상태 변경 (요청대기 > 반려)
+		int updateCnt = dao.deleteUsing(num);
+		model.addAttribute("updateCnt", updateCnt);
+	}
 }

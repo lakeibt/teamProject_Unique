@@ -345,9 +345,6 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.insertHuman(vo);
 	}
-
-	
-	
 	
 	@Override
 	public List<DepartVO> getDepartList() {
@@ -367,4 +364,92 @@ public class AdminDAOImpl implements AdminDAO {
 		return dao.getNextAdminId();
 	}
 
+	@Override
+	public List<Map<String, Object>> equitmentCode() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.equitmentCode();
+	}
+
+	@Override
+	public List<Map<String, Object>> equitmentKinds() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.equitmentKinds();
+	}
+	@Override
+	public List<Map<String, Object>> equitmentList(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.equitmentList(map);
+	}
+	@Override
+	public List<Map<String, Object>> equitmentUsingList(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.equitmentUsingList(map);
+	}
+	@Override
+	public List<Map<String, Object>> facilityAsk() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.facilityAsk();
+	}
+	@Override
+	public Map<String, Object> selectMember(String id) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.selectMember(id);
+	}
+	@Override
+	public Map<String, Object> facilityAskContent(int num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.facilityAskContent(num);
+	}
+	@Override
+	public List<String> searchName(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.searchName(map);
+	}
+	@Override
+	public String searchDepart(String id) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.searchDepart(id);
+	}
+	@Override
+	public int insertAsk(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.insertAsk(map);
+	}
+	@Override
+	public int deleteAsk(int num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.deleteAsk(num);
+	}
+	@Override
+	public int selectUsing(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.selectUsing(map);
+	}
+	@Override
+	public int updateUsing(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateUsing(map);
+	}
+	@Override
+	public int updateCnt(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateCnt(map);
+	}
+	@Override
+	public int updateState(int num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateState(num);
+	}
+
+	@Override
+	public int insertUsing(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.insertUsing(map);
+	}
+
+	@Override
+	public int deleteUsing(int num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.deleteUsing(num);
+	}
 }

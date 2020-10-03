@@ -1,21 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>시설물 관리 리스트</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
-	<link href="${resources}css/style.css" rel="stylesheet">
+<title>시설물 관리 리스트</title>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
+<script src="/uni/resources/js/request.js"></script>
+<link href="${resources}css/style.css" rel="stylesheet">
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 			</div>
-
 			<!-- top navigation -->
 			<div class="top_nav">
 				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
@@ -36,74 +35,84 @@
 									<div class="col-lg-12 d-flex flex-column justify-content-center-center">
 										<div class="icon-box">
 											<div class="icon-box">
-												<form class="php-email-form" style="height: 110px;">
+												<form class="php-email-form">
 													<table class="table" >
 														<tr>
-															<td align="right">
-																<select name="parkSearch" style="padding: 8px;">      
-												                    <option value="1" >기자제명</option>
-												                    <option value="2" >기자제코드</option>
-												                    <option value="3" >분류코드</option>
+															<th align="center" style="border:none;">
+																<select style="width:40%; height:60px; float:left; margin-right:10px;" class="form-control" 
+																		name="code" style="padding: 8px;" id="code" onchange="return codeSelect();">      
+												                    <option value="none">코드선택</option>
+												                    <c:forEach var="code" items="${code }">
+												                    <option value="${code.E_CODE }">${code.E_CODENAME }</option>
+												                    </c:forEach>
 																</select>
-															</td>
-															<td><input class="form-control" type="text"placeholder="입력"></td>
-															<td>
-																<button class="php-email-form" type="submit">
-																	<font style="vertical-align:inherit;">검색</font>
-																</button>
-															</td>
+																<select style="width:40%; height:60px;" class="form-control" name="kinds" style="padding: 8px;" 
+																		id="kinds" onchange="return kindsSelect();">
+																	<option value="none">분류선택</option>
+																</select>
+															</th>
 														</tr>
 													</table>
 												</form>
 											</div>
 										</div>
 									</div>
-									<div class="col-lg-12 d-flex flex-column justify-content-center-center">
-										<div class="icon-box">
-											<div class="icon-box">
-											<form class="php-email-form">
-												<table class="table" style="font-size:12px;">
-													<thead>
-														<tr>
-															<th colspan="8">기자제 목록</th>
-														</tr>
-													</thead>
-													<thead>
-														<tr>
-															<th style="width:10%;">번호</th>
-															<th style="width:10%;">분류코드</th>
-															<th style="width:15%;">기자제코드</th>
-															<th style="width:15%;">기자제명</th>
-															<th style="width:15%;">수량</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td style="width:10%;">1</td>
-															<td style="width:10%;">20200123123123</td>
-															<td style="width:15%;">T00001</td>
-															<td style="width:15%;">테이블 002.ver</td>
-															<td style="width:15%;">10</td>
-														</tr>
-														<tr>
-															<td style="width:10%;">2</td>
-															<td style="width:10%;">20200123125457</td>
-															<td style="width:15%;">C00001</td>
-															<td style="width:15%;">컴퓨터 삼성</td>
-															<td style="width:15%;">10</td>
-														</tr>
-														<tr>
-															<td style="width:10%;">3</td>
-															<td style="width:10%;">20200145645778</td>
-															<td style="width:15%;">C00002</td>
-															<td style="width:15%;">컴퓨터 엘지</td>
-															<td style="width:15%;">10</td>
-														</tr>
-													</tbody>
-												</table>
-												</form>
-											</div>
-										</div>
+									<script>
+									function codeSelect() {
+										var selected = document.getElementById('code');
+										var value = selected.options[selected.selectedIndex].value;
+										var kinds = document.getElementById('kinds');
+										var kinds_value = kinds.options[kinds.selectedIndex].value;
+										
+										var codeArray = new Array;
+										var kindArray = new Array;
+										
+										<c:forEach var="i" items="${kinds}">
+											codeArray.push('${i.E_CODE}');
+											kindArray.push('${i.E_KIND}');
+										</c:forEach>
+										
+										if(kinds.length > 1) {
+											var len = kinds.length;
+											for(var i = 1; i < len; i++) { kinds.options[1] = null; }
+											for(var i = 0; i < '${cnt}'; i++) {
+												if(codeArray[i] == value) {
+													var setOption = document.createElement('option');
+													setOption.text = kindArray[i];
+													setOption.value = kindArray[i];
+													kinds.options.add(setOption);
+												}
+											}
+										} else {
+											for(var i = 0; i < '${cnt}'; i++) {
+												if(codeArray[i] == value) {
+													var setOption = document.createElement('option');
+													setOption.text = kindArray[i];
+													setOption.value = kindArray[i];
+													kinds.options.add(setOption);
+												}
+											}
+										}
+									}
+									function kindsSelect() {
+										var selected = document.getElementById('code');
+										var value = selected.options[selected.selectedIndex].value;
+										var kinds = document.getElementById('kinds');
+										var kinds_value = kinds.options[kinds.selectedIndex].value;
+										var param = "code="+value+"&kind="+kinds_value;
+										sendRequest(list_callback, "${admin}facility/listNext", "get", param);
+									}
+									function list_callback() {
+										var result = document.getElementById("next");
+										if (httpRequest.readyState == 4) {
+											if (httpRequest.status == 200) {
+												var data = httpRequest.responseText;
+												result.innerHTML = data;
+											} else result.innerHTML = "Error!";
+										} else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+									}
+									</script>
+									<div class="col-lg-12 d-flex flex-column justify-content-center-center" id="next">
 									</div>
 								</div>
 							</div>
@@ -113,13 +122,8 @@
 				</section>
 			</div>
 			<!-- /page content -->
-
-
-			<!-- footer content -->
-			<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
-			<!-- /footer content -->
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

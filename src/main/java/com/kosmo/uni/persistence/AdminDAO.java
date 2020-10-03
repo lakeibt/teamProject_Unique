@@ -114,5 +114,25 @@ public interface AdminDAO {
 	// 아이디 가져오기
 	public String getNextAdminId();
 	
+	// 시설 관리 리스트(코드)
+	public List<Map<String, Object>> equitmentCode();
+	// 시설 관리 리스트(종류)
+	public List<Map<String, Object>> equitmentKinds();
+	public List<Map<String, Object>> equitmentList(Map<String, Object> map);
+	public List<Map<String, Object>> equitmentUsingList(Map<String, Object> map);
+	// 시설 요청
+	public List<Map<String, Object>> facilityAsk();
+	public Map<String, Object> selectMember(String id);
+	public Map<String, Object> facilityAskContent(int num);
+	public List<String> searchName(Map<String, Object> map);
+	public String searchDepart(String id);
+	public int insertAsk(Map<String, Object> map);
+	public int deleteAsk(int num);
 	
+	public int selectUsing(Map<String, Object> map);
+	public int updateUsing(Map<String, Object> map); // 사용리스트에 있는 경우 개수만 수정
+	public int insertUsing(Map<String, Object> map); // 사용리스트에 없는 경우 데이터 입력
+	public int deleteUsing(int num); // 반려(요청대기 > 반려)
+	public int updateCnt(Map<String, Object> map); // 시설물 리스트 개수 수정 -1
+	public int updateState(int num); // 요청 리스트 상태 수정 (요청대기 > 요청완료)
 }
