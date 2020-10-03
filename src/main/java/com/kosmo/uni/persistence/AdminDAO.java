@@ -149,5 +149,8 @@ public interface AdminDAO {
 	public List<HumanVO> getStudentList(Map<String, Object> map);
 	public List<HumanVO> getProfessorList(Map<String, Object> map);
 	public List<HumanVO> getAdminList(Map<String, Object> map);
+	public HumanVO getStudentInfo(String id);
+	public HumanVO getProfessorInfo(String id);
+	public HumanVO getAdminInfo(String id);
 	
 }

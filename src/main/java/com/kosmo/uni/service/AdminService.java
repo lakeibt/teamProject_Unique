@@ -96,5 +96,6 @@ public interface AdminService {
 	
 	// 인사 정보 불러오기
 	public void humanList(HttpServletRequest req, Model model);
+	public void humanInfo(HttpServletRequest req, Model model);
 	
 }

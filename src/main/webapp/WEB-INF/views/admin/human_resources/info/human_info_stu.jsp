@@ -156,7 +156,7 @@ $(document).ready(function(){
 							for="first-name">휴대전화
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="text" name="tel" required="required"
+							<input type="text" name="tel" required="required" onfocus="this.placeholder = '000-0000-0000'" onblur="this.placeholder = ' '"
 								class="form-control ">
 						</div>
 					</div>

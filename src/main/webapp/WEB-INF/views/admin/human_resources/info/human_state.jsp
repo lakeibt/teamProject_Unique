@@ -53,10 +53,42 @@ function changeList(){
 	
 };
 
-function detail_state(){
-	swal('ㅎㅇ','ㅎㅇ','success');
+function detail_state_adm(obj){
+	 var token = $("meta[name='_csrf']").attr("content");
+     var header = $("meta[name='_csrf_header']").attr("content");
+     
+	 var tr = $(obj).parent().parent();
+	 var id = $(obj).parent().parent().attr('id');
+	
+	 $.ajax({
+	    	url: '${admin}human_resources/info/human_state_detail_adm?id=' + id,
+	    	type : "POST",
+	        dataType : "text",
+	        beforeSend: function (xhr) {
+	        	xhr.setRequestHeader(header, token);
+	        },
+	        success : function(data){
+					tr.after(data);
+					
+					$(obj).text('Close');
+					$(obj).attr('onclick','deleteTr_adm(this)')
+					
+	        	
+	        }, error : function(){
+	        	swal('Error!','불러오기 실패!','error');
+	        }
+	    });
+};
+	
+	
+function deleteTr_adm(obj) {
+	
+	var tr = $(obj).parent().parent().next();
+	tr.remove();
+	
+	$(obj).text('View');
+	$(obj).attr('onclick','detail_state_adm(this)');
 }
-
 
 </script>
 

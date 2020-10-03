@@ -825,12 +825,17 @@ public class AdminServiceImpl implements AdminService {
 				}
 				String account_number = req.getParameter("account_number");
 				int car = Integer.parseInt(req.getParameter("car"));
+				String carnum = "";
+				if(car == 1) {
+					carnum = req.getParameter("carnum");
+				}
 				
 				vo.setDepart(depart);
 				vo.setRank(rank);
 				vo.setEnterday(enterday);
 				vo.setAccount_number(account_number);
 				vo.setCar(car);
+				vo.setCarnum(carnum);
 				
 				insertCnt = dao.insertAdmin(vo);
 				
@@ -847,12 +852,17 @@ public class AdminServiceImpl implements AdminService {
 				}
 				String account_number = req.getParameter("account_number");
 				int car = Integer.parseInt(req.getParameter("car")); 
+				String carnum = "";
+				if(car == 1) {
+					carnum = req.getParameter("carnum");
+				}
 				
 				vo.setPosition(position);
 				vo.setM_code(m_code);
 				vo.setEnterday(enterday);
 				vo.setAccount_number(account_number);
 				vo.setCar(car);
+				vo.setCarnum(carnum);
 				
 				insertCnt = dao.insertProfesser(vo);
 				
@@ -1137,6 +1147,30 @@ public class AdminServiceImpl implements AdminService {
 			model.addAttribute("pageCount", pageCount);	
 			model.addAttribute("currentPage", currentPage);
 		}
+		
+	}
+
+	@Override
+	public void humanInfo(HttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		String option = id.substring(0, 1);
+		
+		HumanVO vo = null;
+		
+		switch(option) {
+		case "a" :
+			vo = dao.getAdminInfo(id);
+			break;
+		case "p" :
+			vo = dao.getProfessorInfo(id);
+			break;
+		case "s" :
+			vo = dao.getStudentInfo(id);
+			break;
+		}
+		
+		model.addAttribute("vo",vo);
 		
 	}
 }

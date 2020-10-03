@@ -286,6 +286,8 @@ public class AdminController {
 	}
 	
 	
+	
+	
 
 	// 인사정보현황
 	@RequestMapping(value = "/admin/human_resources/info/human_state")
@@ -294,6 +296,7 @@ public class AdminController {
 
 		return "admin/human_resources/info/human_state";
 	}
+	// 인사 리스트 가져오기
 	@RequestMapping(value = "/admin/human_resources/info/human_state_list")
 	public String human_state_list(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_state_list");
@@ -301,6 +304,33 @@ public class AdminController {
 		adminService.humanList(req, model);
 		
 		return "admin/human_resources/info/human_state_list";
+	}
+	// 직원 상세정보
+	@RequestMapping(value = "/admin/human_resources/info/human_state_detail_adm")
+	public String human_state_detail_adm(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_detail_adm");
+		
+		adminService.humanInfo(req, model);
+		
+		return "admin/human_resources/info/human_state_detail_adm";
+	}
+	// 교수 상세정보
+	@RequestMapping(value = "/admin/human_resources/info/human_state_detail_pro")
+	public String human_state_detail_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_detail_pro");
+		
+		adminService.humanInfo(req, model);
+		
+		return "admin/human_resources/info/human_state_detail_pro";
+	}
+	// 학생 상세정보
+	@RequestMapping(value = "/admin/human_resources/info/human_state_detail_stu")
+	public String human_state_detail_stu(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_detail_stu");
+		
+		adminService.humanInfo(req, model);
+		
+		return "admin/human_resources/info/human_state_detail_stu";
 	}
  
 	// 책정임금현황
