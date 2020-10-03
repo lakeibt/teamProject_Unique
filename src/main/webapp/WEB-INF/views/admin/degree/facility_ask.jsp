@@ -22,77 +22,121 @@
 			<!-- /top navigation -->
 
 			<!-- page content -->
-			<div class="right_col" role="main">
-				<section class="breadcrumbs">
-					<div class="container">
-						<!-- 쪽지 확인 페이지 -->
-						<h3>시설문의함</h3>
-						<hr> 
-						<section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="margin-top: -40px;">
-							<div class="container">
-								<div class="contact">
-									<div class="row">
-										<div class="col-lg-12 d-flex flex-column justify-content-center-center">
-											<div class="icon-box">
-												<div class="icon-box">
-												<form class="php-email-form" style="background-color:white;">
-													<table class="table" style="font-size:14px;">
-														<thead>
-															<tr>
-																<th colspan="4" align="left">문의/요청 목록</th>
-																<th colspan="4" style="text-align:right">
-																	<a onclick="askForm('${memId}');">문의/요청 등록</a>
-																</th>
-															</tr>
-														</thead>
-														<thead>
-															<tr>
-																<th style="width:8%;">번호</th>
-																<th style="width:8%;">타입</th>
-																<th style="width:20%;">제목</th>
-																<th style="width:13%;">부서</th>
-																<th style="width:13%;">요청자</th>
-																<th style="width:15%;">요청일</th>
-																<th style="width:13%;">상태</th>
-																<td style="width:10%;"></td>
-															</tr>
-														</thead>
-														<tbody>
-															<c:forEach var="list" items="${list }">
-															<tr>
-																<td style="width:8%;">${list.NUM }</td>
-																<td style="width:8%;">${list.TYPE }</td>
-																<td style="width:20%;">
-																	<a onclick="content('${list.NUM}');">${list.TITLE }</a>
-																</td>
-																<td style="width:13%;">${list.DEPART }</td>
-																<td style="width:13%;">${list.NAME }</td>
-																<td style="width:15%;">${list.DAY }</td>
-																<c:if test="${list.STATE == '반려' }">
-																<td style="width:13%; color:red;">${list.STATE }</td>
-																</c:if>
-																<c:if test="${list.STATE != '반려' }">
-																<td style="width:13%;">${list.STATE }</td>
-																</c:if>
-																<c:if test="${list.ID == memId && list.STATE != '요청완료' }">
-																<td style="width:10%;">
-																	<button class="form-control" style="width:40px; background-color:#2A3F54; color:white;" onclick="window.location='${admin}degree/facility_ask_delete?num='+${list.NUM}">X</button>
-																</td>
-																</c:if>
-																<c:if test="${list.ID != memId || list.STATE == '요청완료' }">
-																<td style="width:10%;">
-																</td>
-																</c:if>
-															</tr>
-															</c:forEach>
-														</tbody>
-													</table>
-													</form>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-12 d-flex flex-column justify-content-center-center" id="display">
-										</div>
+			<div class="right_col" role="main" style="min-height:934px;">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3>
+								<font style="vertical-align:inherit;">
+									<font style="vertical-align:inherit;">시설문의</font>
+								</font>
+							</h3>
+						</div>
+					</div>
+					<div class="row" style="display:block;">
+						<div class="col-md-12 col-sm-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>
+										<font style="vertical-align:inherit;">
+											<font style="vertical-align:inherit;">문의/요청 목록</font>
+										</font>
+									</h2>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<p>
+										<font style="vertical-align:inherit;">
+											<font style="vertical-align:inherit; text-align:right;">
+												<a class="btn btn-app" onclick="askForm('${memId}');">
+													<i class="fa fa-edit"></i>
+													<font style="vertical-align:inherit;">
+														<font style="vertical-align:inherit;">문의/요청 등록</font>
+													</font>
+												</a>
+											</font>
+										</font>
+									</p>
+									<div class="table-responsive">
+										<table class="table table-striped jambo_table">
+											<thead>
+												<tr class="headings">
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">번호</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">타입</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">제목</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">부서</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">요청자</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">요청일</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">상태</font>
+														</font>
+													</th>
+													<th class="column-title no-link last">
+														<span class="nobr">
+															<font style="vertical-align:inherit;">
+																<font style="vertical-align:inherit;">삭제</font>
+															</font>
+														</span>
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="list" items="${list }">
+												<tr>
+													<td>${list.NUM }</td>
+													<td>${list.TYPE }</td>
+													<td>
+														<a onclick="content('${list.NUM}');">${list.TITLE }</a>
+													</td>
+													<td>${list.DEPART }</td>
+													<td>${list.NAME }</td>
+													<td>${list.DAY }</td>
+													<c:if test="${list.STATE == '반려' }">
+													<td style="color:red;">${list.STATE }</td>
+													</c:if>
+													<c:if test="${list.STATE != '반려' }">
+													<td>${list.STATE }</td>
+													</c:if>
+													<c:if test="${list.ID == memId && list.STATE != '요청완료' }">
+													<td>
+														<button type="button" class="btn btn-secondary" onclick="window.location='${admin}degree/facility_ask_delete?num='+${list.NUM}">
+															<i class="fa fa-close"></i>
+														</button>
+													</td>
+													</c:if>
+													<c:if test="${list.ID != memId || list.STATE == '요청완료' }">
+													<td>
+													</td>
+													</c:if>
+												</tr>
+												</c:forEach>
+											</tbody>
+										</table>
 										<script>
 										function content(num) {
 											var param = "num="+num;
@@ -219,13 +263,16 @@
 									</div>
 								</div>
 							</div>
-						</section>
+						</div>
 					</div>
-				</section>
-			</div>
+					<div class="row" style="display:block">
+						<div class="col-md-12 col-sm-12" id="display"></div>
+					</div>
+				</div>
 			<!-- /page content -->
 		</div>
 	</div>
+</div>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

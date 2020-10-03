@@ -22,9 +22,6 @@ $(document).ready(function(){
 		$(this).siblings('.upload-name').val(filename);
 	}); 
 });
-
-
-
 </script>
 </head>
 <body>

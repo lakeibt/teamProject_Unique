@@ -26,14 +26,6 @@
 				<img src="${img}sample/인사정보현황.jpg">
 			</div>
 			<!-- /page content -->
-
-
-			<!-- footer content -->
-			<footer>
-				<div class="pull-right">황동국팀 - 관리자 페이지</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>

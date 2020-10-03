@@ -16,7 +16,6 @@ import com.kosmo.uni.vo.StudentVO;
 
 @Service
 public class AndroidServiceImpl implements AndroidService {
-
 	@Autowired
 	AndroidDAO andDAO;
 
@@ -74,6 +73,7 @@ public class AndroidServiceImpl implements AndroidService {
 		return out;
 	}
 
+	// 내 정보 가져오기 - 학생/직원
 	@Override
 	public Map<String, Object> MyPage(HttpServletRequest req) {
 		// 안드로이드에서 전달한 id값
@@ -84,15 +84,18 @@ public class AndroidServiceImpl implements AndroidService {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		// 회원정보 조회
+		// 회원정보 조회 - 이름 학과 학년 이메일 학번(아이디) 
 		if(id.substring(0,1).equals("s")) {
-			StudentVO s = andDAO.getStudentInfo(id);
-			System.out.println("s : " + s);
+			Map<String, Object> s = new HashMap<String, Object>();
+			s = andDAO.getStudentInfo(id);
 			
-			map.put("data1", s.getId());
-			map.put("data2", s.getName());
-			System.out.println("m.id : " + s.getId());
-			System.out.println("m.name : " + s.getName());
+			map.put("photo", s.get("PHOTO"));
+			map.put("id", s.get("ID"));
+			map.put("name", s.get("NAME"));
+			map.put("tel", s.get("TEL"));
+			map.put("email", s.get("EMAIL"));
+			map.put("major", s.get("M_NAME"));
+			map.put("grade", s.get("GRADE"));
 			
 		} else if(id.substring(0,1).equals("a")) {
 			Manager m = andDAO.getAdminInfo(id);
