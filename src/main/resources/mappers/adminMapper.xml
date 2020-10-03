@@ -227,6 +227,10 @@
 		 where s.salary_input_num = #{salary_input_num}
 	</select>
 	
+	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select * from a_variableCost where cost = #{cost}
+	</select>
+	
 	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
 		SELECT * FROM A_PARKING WHERE PINTIME LIKE '%'||#{date}||'%'
 	</select>
