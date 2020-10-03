@@ -45,7 +45,8 @@
 	    	FROM ( 
 	        SELECT *FROM A_NFC n
 	        JOIN A_ADMIN a
-	        on n.pnum = a.tel))
+	        on n.pnum = a.tel
+	        ORDER BY tagintime DESC))
 			WHERE rNum >=#{start} AND rNum <=#{end}
     	]]>
 	</select>
@@ -68,6 +69,7 @@
                 JOIN A_ADMIN a
                   on n.pnum = a.tel
                   WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
+                  ORDER BY tagintime DESC
                   ))
                   WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
