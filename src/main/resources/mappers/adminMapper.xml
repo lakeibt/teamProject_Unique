@@ -15,7 +15,7 @@
 		resultType="java.util.Map">
 		<![CDATA[
 		SELECT * FROM (SELECT NUM, TITLE, CONTENT, WRITER, READCNT, REG_DATE, ROWNUM R FROM 
-				      (SELECT * FROM A_INFO ORDER BY ROWNUM DESC))
+				      (SELECT * FROM A_INFO ORDER BY NUM DESC))
 		WHERE R >= #{start} AND R <= #{end}
     	]]>
 	</select>
