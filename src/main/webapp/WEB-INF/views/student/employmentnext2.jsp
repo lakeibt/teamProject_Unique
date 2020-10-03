@@ -17,10 +17,10 @@
 	Elements file = posts.select("div");
 %>
 <div class="card">
-	<div class="card-body">
+	<div class="card-body" >
 		<div style="width: 65%; float: left;">
 			<%=file.select(".sumTit span").text()%><br>
-			<h4><%=file.select(".sumTit h3").text().substring(file.select(".sumTit span").text().length())%></h4>
+			<h3 style="font-weight: bold;"><%=file.select(".sumTit h3").text().substring(file.select(".sumTit span").text().length())%></h3>
 			<table class="table" style="font-size: 15px; width: 650px;">
 				<tr>
 					<th style="width: 15%">지원자격</th>

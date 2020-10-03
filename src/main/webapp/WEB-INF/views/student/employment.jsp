@@ -171,7 +171,8 @@ function chnQnaType(type , select) {
 				</div>
 				<div class="row">
 					<div class="col-lg-12">	
-						<div id="coninfo_detail"></div>
+						<div id="coninfo_detail">
+						</div>
 					</div>
 				</div>
 			</div>

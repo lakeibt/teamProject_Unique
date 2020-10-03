@@ -27,9 +27,9 @@
 	<tr>
 		<td style="width:20%"><%=e.select(".coTit a").text()%></td>
 		<td id="detail" style="width:70%;">
-			<a id="other" href="#" class="scroll" onclick="content1('<%=e.select(".tit a").attr("href")%>')">
-				<h5><%=e.select(".tit a").attr("title")%></h5>
-			</a><br>
+			<a id="other" href="#coninfo_detail" class="scroll" onclick="content1('<%=e.select(".tit a").attr("href")%>')">
+				<strong style="font-size: 20px;"><%=e.select(".tit a").attr("title")%></strong>
+			</a><br><br>
 			<%=e.select(".sTit span:eq(0)").text()%> / <%=e.select(".sTit span:eq(1)").text()%> / <%=e.select(".sTit span:eq(2)").text()%> / <%=e.select(".sTit span:eq(3)").text()%><br>
 			<%=e.select(".sDsc span:eq(0)").text()%> / <%=e.select(".sDsc span:eq(1)").text()%> / <%=e.select(".sDsc span:eq(2)").text()%> / <%=e.select(".sDsc span:eq(3)").text()%><br>
 		</td>
