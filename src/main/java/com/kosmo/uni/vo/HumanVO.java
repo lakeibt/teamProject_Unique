@@ -4,8 +4,9 @@ import java.util.Date;
 
 public class HumanVO {
 	
+	// 공통
 	private String id;
-	private String password;
+	private String pwd;
 	private String photo;
 	private String name;
 	private String eng_name;
@@ -17,25 +18,41 @@ public class HumanVO {
 	private String tel;
 	private String email;
 	private String address;
+	private String de_address;
+	
+	// 직원
 	private String depart;
-	private String rank;
+	private String rank;	
+	private String depart_name;
+	
+	// 교수
+	private String position;
+	// 학생
+	private int grade;
+	private int r_code;
+	private int entrancedate;
+	
+	// 학생, 교수
+	private String m_code;
+	private String m_name;
+	
+	// 직원, 교수
 	private Date enterday;
 	private String account_number;
 	private int car;
-	private int payments_division;
-	private String m_code;
-	private String position;
+	
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPassword() {
-		return password;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getPhoto() {
 		return photo;
@@ -103,6 +120,12 @@ public class HumanVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getDe_address() {
+		return de_address;
+	}
+	public void setDe_address(String de_address) {
+		this.de_address = de_address;
+	}
 	public String getDepart() {
 		return depart;
 	}
@@ -114,6 +137,36 @@ public class HumanVO {
 	}
 	public void setRank(String rank) {
 		this.rank = rank;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	public int getR_code() {
+		return r_code;
+	}
+	public void setR_code(int r_code) {
+		this.r_code = r_code;
+	}
+	public int getEntrancedate() {
+		return entrancedate;
+	}
+	public void setEntrancedate(int entrancedate) {
+		this.entrancedate = entrancedate;
+	}
+	public String getM_code() {
+		return m_code;
+	}
+	public void setM_code(String m_code) {
+		this.m_code = m_code;
 	}
 	public Date getEnterday() {
 		return enterday;
@@ -133,23 +186,20 @@ public class HumanVO {
 	public void setCar(int car) {
 		this.car = car;
 	}
-	public int getPayments_division() {
-		return payments_division;
+	public String getDepart_name() {
+		return depart_name;
 	}
-	public void setPayments_division(int payments_division) {
-		this.payments_division = payments_division;
+	public void setDepart_name(String depart_name) {
+		this.depart_name = depart_name;
 	}
-	public String getM_code() {
-		return m_code;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setM_code(String m_code) {
-		this.m_code = m_code;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
-	public String getPosition() {
-		return position;
-	}
-	public void setPosition(String position) {
-		this.position = position;
-	}
+	
+	
+	
 	
 }
