@@ -2,82 +2,140 @@
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
+<head>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 <link href="${resources}css/style.css" rel="stylesheet">
-<div class="icon-box">
-	<div class="icon-box">
-		<form class="php-email-form">
-			<table class="table" style="font-size:12px;">
+<script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
+<script src="/uni/resources/js/request.js"></script>
+<div class="x_panel">
+	<div class="x_title">
+		<h2>
+			<font style="vertical-align:inherit;">
+				<font style="vertical-align:inherit;">기자제 목록</font>
+			</font>
+		</h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+		<div class="table-responsive">
+			<table class="table table-striped jambo_table">
 				<thead>
-					<tr>
-						<th colspan="8">기자제 목록</th>
-					</tr>
-				</thead>
-				<thead>
-					<tr>
-						<th style="width:20%;">기자재코드</th>
-						<th style="width:20%;">분류코드</th>
-						<th style="width:40%;">제품명</th>
-						<th style="width:20%;">수량</th>
+					<tr class="headings">
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">기자재코드</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">분류코드</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">제품명</font>
+							</font>
+						</th>
+						<th class="column-title no-link last">
+							<span class="nobr">
+								<font style="vertical-align:inherit;">
+									<font style="vertical-align:inherit;">수량</font>
+								</font>
+							</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="list" items="${list }">
-					<tr>
-						<td style="width:20%;">${list.E_CODE }</td>
-						<td style="width:20%;">${list.E_KIND }</td>
-						<td style="width:40%;">${list.E_NAME }</td>
-						<td style="width:20%;">${list.E_CNT }</td>
-					</tr>
+						<tr>
+							<td style="width:20%;">${list.E_CODE }</td>
+							<td style="width:20%;">${list.E_KIND }</td>
+							<td style="width:40%;">${list.E_NAME }</td>
+							<td style="width:20%;">${list.E_CNT }</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-		</form>
+		</div>
 	</div>
 </div>
-<div class="icon-box">
-	<div class="icon-box">
-		<form class="php-email-form">
-			<table class="table" style="font-size:12px;">
+<div class="x_panel">
+	<div class="x_title">
+		<h2>
+			<font style="vertical-align:inherit;">
+				<font style="vertical-align:inherit;">기자제 출고 목록</font>
+			</font>
+		</h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+		<div class="table-responsive">
+			<table class="table table-striped jambo_table">
 				<thead>
-					<tr>
-						<th colspan="8">기자제 출고 목록</th>
-					</tr>
-				</thead>
-				<thead>
-					<tr>
-						<th style="width:10%;">기자재코드</th>
-						<th style="width:10%;">분류코드</th>
-						<th style="width:25%;">제품명</th>
-						<th style="width:10%;">사용수량</th>
-						<th style="width:15%;">상태</th>
-						<th style="width:15%;">사용장소</th>
-						<th style="width:15%;">사용인</th>
+					<tr class="headings">
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">기자재코드</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">분류코드</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">제품명</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">사용수량</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">상태</font>
+							</font>
+						</th>
+						<th class="column-title">
+							<font style="vertical-align:inherit;">
+								<font style="vertical-align:inherit;">사용장소</font>
+							</font>
+						</th>
+						<th class="column-title no-link last">
+							<span class="nobr">
+								<font style="vertical-align:inherit;">
+									<font style="vertical-align:inherit;">사용인</font>
+								</font>
+							</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="using" items="${using }">
-					<tr>
-						<td style="width:10%;">${using.CODE }</td>
-						<td style="width:10%;">${using.KIND }</td>
-						<td style="width:25%;">${using.NAME }</td>
-						<td style="width:10%;">${using.CNT }</td>
-						<c:if test="${using.STATE == '대여중' }">
-						<td style="width:15%;">
-						${using.STATE }<button>반납</button>
-						</td>
-						</c:if>
-						<c:if test="${using.STATE != '대여중' }">
-						<td style="width:15%;">${using.STATE }</td>
-						</c:if>
-						<td style="width:15%;">${using.PLACE }</td>
-						<td style="width:15%;">${using.ID }</td>
-					</tr>
+						<tr>
+							<td style="width:10%;">${using.CODE }</td>
+							<td style="width:10%;">${using.KIND }</td>
+							<td style="width:25%;">${using.NAME }</td>
+							<td style="width:10%;">${using.CNT }</td>
+							<c:if test="${using.STATE == '대여중' }">
+							<td style="width:15%;">
+							${using.STATE }<button>반납</button>
+							</td>
+							</c:if>
+							<c:if test="${using.STATE != '대여중' }">
+							<td style="width:15%;">${using.STATE }</td>
+							</c:if>
+							<td style="width:15%;">${using.PLACE }</td>
+							<td style="width:15%;">${using.ID }</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-		</form>
+		</div>
 	</div>
 </div>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
+</body>
 </html>

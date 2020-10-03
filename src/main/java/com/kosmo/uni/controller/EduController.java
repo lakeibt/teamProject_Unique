@@ -61,14 +61,6 @@ public class EduController {
 		return "guest/login";
 	}
 	
-//	@RequestMapping("/guest/course")
-//	public String gue_course(HttpServletRequest req, Model model) {
-//		logger.info("url ==> course");
-//		
-//		eduService.studentList(req, model);
-//		return "guest/course";
-//	}
-	
 	@RequestMapping("/guest/bcrypt")
 	public String bcrypt() {
 		logger.info("url ==> bcrypt");

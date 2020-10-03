@@ -10,7 +10,7 @@
 	<sec:http pattern="/bootstrap/**" security="none" />
 	<sec:http pattern="/resources/**" security="none" />
 	<sec:http pattern="/android/**" security="none" />
-<!-- 	<sec:http pattern="/professor/messageList_form" security="none" />
+	<!-- <sec:http pattern="/professor/messageList_form" security="none" />
 	<sec:http pattern="/professor/message_form" security="none" />
 	<sec:http pattern="/professor/message" security="none" />
 	<sec:http pattern="/professor/messageList_simple" security="none" /> -->
@@ -26,7 +26,7 @@
 		<sec:intercept-url pattern="/guest/**" access="permitAll" />
 		
 		<!-- 로그인한 사용자 영역 -->
-		<sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_MANAGER')" />
+		<!-- <sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_MANAGER')" /> -->
 	
 		<!-- 로그인폼 -->
 		<sec:form-login login-page="/guest/login" 

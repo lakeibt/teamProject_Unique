@@ -1,4 +1,4 @@
-<!-- jQuery -->
+	<!-- jQuery -->
 	<script src="${resources}vendors/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="${resources}vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

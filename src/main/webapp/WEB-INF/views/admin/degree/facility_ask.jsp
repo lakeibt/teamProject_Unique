@@ -273,6 +273,9 @@
 		</div>
 	</div>
 </div>
+<!-- footer content -->
+<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
+<!-- /footer content -->
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 </body>
 </html>

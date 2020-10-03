@@ -15,7 +15,7 @@
 		resultType="java.util.Map">
 		<![CDATA[
 		SELECT * FROM (SELECT NUM, TITLE, CONTENT, WRITER, READCNT, REG_DATE, ROWNUM R FROM 
-				      (SELECT * FROM A_INFO ORDER BY ROWNUM DESC))
+				      (SELECT * FROM A_INFO ORDER BY NUM DESC))
 		WHERE R >= #{start} AND R <= #{end}
     	]]>
 	</select>
@@ -45,7 +45,8 @@
 	    	FROM ( 
 	        SELECT *FROM A_NFC n
 	        JOIN A_ADMIN a
-	        on n.pnum = a.tel))
+	        on n.pnum = a.tel
+	        ORDER BY tagintime DESC))
 			WHERE rNum >=#{start} AND rNum <=#{end}
     	]]>
 	</select>
@@ -68,6 +69,7 @@
                 JOIN A_ADMIN a
                   on n.pnum = a.tel
                   WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
+                  ORDER BY tagintime DESC
                   ))
                   WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
@@ -318,6 +320,11 @@
 		select * FROM a_rank ORDER BY decode(rank, '총장','1','부장','2','과장','3','계장','4','주임','5','사원','6') desc
 	</select>
 	
+	<!-- 전공 목록 -->
+	<select id="getMajorList" resultType="com.kosmo.uni.vo.MajorVO">
+		select m_code, m_name FROM a_major order by m_name
+	</select>
+	
 	<!-- 직원 다음 아이디 -->
 	<select id="getNextAdminId" resultType="String">
 		select 'a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from a_admin
@@ -410,4 +417,119 @@
 	<update id="deleteUsing" parameterType="int">
 		UPDATE A_FACILITY_ASK SET STATE_CODE = 3 WHERE NUM = #{num}
 	</update>	
+
+	<select id="getNextProfessorId" resultType="String">
+		select 'p' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from p_professor
+	</select>	
+	
+	<select id="getNextStudentId" resultType="String">
+		select 's' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(max(to_number(substr(id, 6, 4))) + 1) as id from s_student
+	</select>	
+	
+	
+	<insert id="insertAdmin" parameterType="com.kosmo.uni.vo.HumanVO">
+		INSERT INTO a_admin 
+		VALUES ('a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(ADM_SEQ.nextval),
+				#{pwd},
+				#{photo},
+				#{name},
+				#{eng_name},
+				#{jumin1},
+				#{jumin2},
+				#{gender},
+				#{frgn},
+				#{nation},
+				#{tel},
+				#{email},
+				#{address},
+				#{depart},
+				#{rank},
+				#{enterday},
+				#{account_number},
+				#{car},
+				1,
+				#{de_address})
+	</insert>
+	<insert id="insertProfesser" parameterType="com.kosmo.uni.vo.HumanVO">
+		INSERT INTO p_professor 
+		VALUES ('p' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(PRO_SEQ.nextval),
+				#{pwd},
+				#{photo},
+				#{name},
+				#{eng_name},
+				#{jumin1},
+				#{jumin2},
+				#{gender},
+				#{frgn},
+				#{nation},
+				#{tel},
+				#{email},
+				#{address},
+				#{m_code},
+				#{enterday},
+				#{account_number},
+				#{car},
+				#{position},
+				#{de_address})	
+	</insert>
+	<insert id="insertStudent" parameterType="com.kosmo.uni.vo.HumanVO">
+		INSERT INTO s_student  
+		VALUES ('s' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(STU_SEQ.nextval),
+				#{pwd},
+				#{photo},
+				#{name},
+				#{eng_name},
+				#{jumin1},
+				#{jumin2},
+				#{gender},
+				#{frgn},
+				#{nation},
+				#{tel},
+				#{email},
+				#{address},
+				#{m_code},
+				#{grade},
+				1,
+				#{entrancedate},
+				#{de_address})	
+	</insert>
+	
+	<select id="getProfessorCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM p_professor
+	</select>
+	<select id="getStudentCnt" resultType="int">
+		SELECT COUNT(*) as cnt FROM s_student
+	</select>
+	
+	<select id="getAdminList" resultType="com.kosmo.uni.vo.HumanVO">
+		<![CDATA[
+		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, dep depart, depname depart_name , rank, enterday, account_number, car, de_address, rowNum rNum 
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, a.depart dep, d.depart_name depname, rank, enterday, account_number, car, de_address FROM a_admin a, a_depart d WHERE a.depart = d.depart)) WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<select id="getProfessorList" resultType="com.kosmo.uni.vo.HumanVO">
+		<![CDATA[
+		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, position, enterday, account_number, car, de_address, rowNum rNum 
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, p.m_code co, m.m_name na, position, enterday, account_number, car, de_address FROM p_professor p, a_major m WHERE p.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<select id="getStudentList" resultType="com.kosmo.uni.vo.HumanVO">
+		<![CDATA[
+		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, grade, r_code, entrancedate, de_address, rowNum rNum 
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, s.m_code co, m.m_name na,grade, r_code, entrancedate, de_address FROM s_student s, a_major m WHERE s.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<select id="getStudentList" resultType="com.kosmo.uni.vo.HumanVO">
+		<![CDATA[
+		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, grade, r_code, entrancedate, de_address, rowNum rNum 
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, s.m_code co, m.m_name na,grade, r_code, entrancedate, de_address FROM s_student s, a_major m WHERE s.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
+		]]>
+	</select>
+	
+	<select id="getSettingList" resultType="java.util.Map">
+		SELECT * FROM A_SALARYSET ORDER BY SALARY DESC
+	</select>
 </mapper>

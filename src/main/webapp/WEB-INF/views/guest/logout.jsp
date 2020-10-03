@@ -7,7 +7,6 @@
 </head>
 <body>
 	<script type = "text/javascript">
-		alert("로그아웃되었습니다.");
 		window.location = "${guest}login";
 	</script>
 </body>

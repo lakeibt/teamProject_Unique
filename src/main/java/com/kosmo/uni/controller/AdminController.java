@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.service.AdminServiceImpl;
 
 @Controller
 public class AdminController {
-
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
@@ -182,37 +183,14 @@ public class AdminController {
 
 	// ------------------------- 인사관리 -------------------------
 	// ------------------------ 기본코드설정 ------------------------
-	// 인사기초코드
-	@RequestMapping(value = "/admin/human_resources/code_setting/code_setting")
-	public String code_setting(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/code_setting");
-
-		return "admin/human_resources/code_setting/code_setting";
-	}
-	// 
-	@RequestMapping(value = "/admin/human_resources/code_setting/code_rankList")
-	public String code_rankList(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/code_rankList");
-		
-		return "admin/human_resources/code_setting/code_rankList";
-	}
-	
 	// 인사/급여환경설정
 	@RequestMapping(value = "/admin/human_resources/code_setting/setting")
 	public String setting(HttpServletRequest req, Model model) {
 		logger.info("human_resources/code_setting/setting");
 
+		adminService.setting(req, model);
 		return "admin/human_resources/code_setting/setting";
 	}
-
-	// 급/상여 등록/수정
-	@RequestMapping(value = "/admin/human_resources/code_setting/salary_setting")
-	public String salary_setting(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/salary_setting");
-
-		return "admin/human_resources/code_setting/salary_setting";
-	}
-
 	// ------------------------- 인사정보 -------------------------
 	// 테스트
 	@RequestMapping(value = "/admin/human_resources/info/test")
@@ -227,54 +205,59 @@ public class AdminController {
 	public String human_info(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info");
 
-		return "admin/human_resources/info/human_info";
-	}
-	
-	// 학생 등록폼
-	@RequestMapping(value = "/admin/human_resources/info/human_info_stu")
-	public String human_info_stu(HttpServletRequest req, Model model) {
-		logger.info("human_resources/info/human_info_stu");
-
-		model.addAttribute("option","stu");
+		String option = req.getParameter("option");
+		if(option == null) {
+			option = "adm";
+		}
 		
-		return "admin/human_resources/info/human_info_stu";
-	}
+		model.addAttribute("option", option);
+		
+		return "admin/human_resources/info/human_info";
+	}	
 	
 	// 직원 등록폼
 	@RequestMapping(value = "/admin/human_resources/info/human_info_adm")
 	public String human_info_adm(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info_adm");
 
-		model.addAttribute("option","adm");
+		model.addAttribute("option", "adm");
 		adminService.departList(req, model);
 		adminService.rankList(req, model);
 		adminService.nextAdminId(req, model);
 		
 		return "admin/human_resources/info/human_info_adm";
 	}
-	
+	// 학생 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_stu")
+	public String human_info_stu(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_stu");
+
+		model.addAttribute("option", "stu");
+		adminService.majorList(req, model);
+		adminService.nextStudentId(req, model);
+		
+		return "admin/human_resources/info/human_info_stu";
+	}
 	// 교수 등록폼
 	@RequestMapping(value = "/admin/human_resources/info/human_info_pro")
 	public String human_info_pro(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info_pro");
 
-		model.addAttribute("option","pro");
+		model.addAttribute("option", "pro");
+		adminService.majorList(req, model);
+		adminService.nextProfessorId(req, model);
 		
 		return "admin/human_resources/info/human_info_pro";
 	}
-
 	
 	// 등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info_add")
 	public String human_info_add(MultipartHttpServletRequest req, Model model) {
-		logger.info("url ==> human_info_add");
+		logger.info("human_resources/info/human_info_add");
 		
 		adminService.addHuman(req, model);
-		
-		return "admin/human_resources/info/human_info";
+		return "admin/human_resources/info/human_info_add";
 	}
-	
-	
 
 	// 인사정보현황
 	@RequestMapping(value = "/admin/human_resources/info/human_state")
@@ -283,7 +266,15 @@ public class AdminController {
 
 		return "admin/human_resources/info/human_state";
 	}
-
+	@RequestMapping(value = "/admin/human_resources/info/human_state_list")
+	public String human_state_list(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_list");
+		
+		adminService.humanList(req, model);
+		
+		return "admin/human_resources/info/human_state_list";
+	}
+ 
 	// 책정임금현황
 	@RequestMapping(value = "/admin/human_resources/info/salary_state")
 	public String salary_state(HttpServletRequest req, Model model) {

@@ -8,6 +8,7 @@ import com.kosmo.uni.vo.SalaryInputVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.DepartVO;
 import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.MajorVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.RankVO;
@@ -101,16 +102,18 @@ public interface AdminDAO {
 	//급여명세서 조회
 	public List<PayslipVO> getPayslip(int salary_input_num);
 	
-	
-	
 	// 인사 등록
-	public int insertHuman(HumanVO vo);
+	public int insertAdmin(HumanVO vo);
+	public int insertProfesser(HumanVO vo);
+	public int insertStudent(HumanVO vo);
 	
 	// 직원 등록폼
 	// 부서목록 가져오기
 	public List<DepartVO> getDepartList();
 	// 직급목록 가져오기
 	public List<RankVO> getRankList();
+	// 전공목록 가져오기
+	public List<MajorVO> getMajorList();
 	// 아이디 가져오기
 	public String getNextAdminId();
 	
@@ -135,4 +138,17 @@ public interface AdminDAO {
 	public int deleteUsing(int num); // 반려(요청대기 > 반려)
 	public int updateCnt(Map<String, Object> map); // 시설물 리스트 개수 수정 -1
 	public int updateState(int num); // 요청 리스트 상태 수정 (요청대기 > 요청완료)
+	public String getNextProfessorId();
+	public String getNextStudentId();	
+	
+	// 인사 정보 가져오기
+	public int getStudentCnt();
+	public int getProfessorCnt();
+	public List<HumanVO> getStudentList(Map<String, Object> map);
+	public List<HumanVO> getProfessorList(Map<String, Object> map);
+	public List<HumanVO> getAdminList(Map<String, Object> map);
+	
+	// 기초환경 설정 페이지 - 직급별 급여 리스트
+	public List<Map<String, Object>> getSettingList();
+	
 }

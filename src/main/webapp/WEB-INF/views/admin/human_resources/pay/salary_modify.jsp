@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,6 @@
 <title>급여수정</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 <script src="http://code.jquery.com/jquery-1.12.1.js"></script>
-<!-- Template Main JS File -->
 <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -16,15 +14,9 @@ $(document).ready(function() {
         $("#salary_modifyPro").submit();
     });
  });
-
 </script>
-
-
 </head>
 <body>
-
-<!-- page content -->
-
 <div>
 	<div class="row">
 		<div class="col-md-12">
@@ -75,7 +67,5 @@ $(document).ready(function() {
 		</div>
 	</div>
 </div>
-
-
 </body>
 </html>

@@ -1,5 +1,13 @@
 package com.kosmo.uni.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +15,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +25,9 @@ import com.kosmo.uni.persistence.AdminDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.DepartVO;
+import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.MajorVO;
+import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.RankVO;
@@ -26,6 +38,9 @@ import com.kosmo.uni.vo.SalaryVO;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminDAO dao;
+	
+	@Autowired
+	BCryptPasswordEncoder encoder;
 	
 	// 공지사항 등록
 	@Override
@@ -724,21 +739,167 @@ public class AdminServiceImpl implements AdminService {
 	// 인사 등록
 	@Override
 	public void addHuman(MultipartHttpServletRequest req, Model model) {
-		MultipartFile file = req.getFile("img");
+		int insertCnt = 0;
 		
-		String saveDir = req.getRealPath("/resources/image/");
-		String id = req.getParameter("id");
-		String password = req.getParameter("password");
-		String name = req.getParameter("name");
-		String eng_name = req.getParameter("eng_name");
+		String option = req.getParameter("option");
+		
+		MultipartFile file = req.getFile("photo");
+		
+		String saveDir_adm = req.getRealPath("/resources/img/profile_photo/admin/");
+		String saveDir_pro = req.getRealPath("/resources/img/profile_photo/professor/");
+		String saveDir_stu = req.getRealPath("/resources/img/profile_photo/student/");
+		
+		String realDir_adm = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\admin\\";
+		String realDir_pro = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\professor\\";
+		String realDir_stu = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\student\\";
+		
+		try {
+			FileInputStream fis = null;
+			FileOutputStream fos = null;
+			
+			if(option.equals("adm")) {
+				file.transferTo(new File(saveDir_adm+file.getOriginalFilename()));
+				fis = new FileInputStream(saveDir_adm + file.getOriginalFilename());
+				fos = new FileOutputStream(realDir_adm + file.getOriginalFilename());
+			} else if(option.equals("pro")) {
+				file.transferTo(new File(saveDir_pro+file.getOriginalFilename()));
+				fis = new FileInputStream(saveDir_pro + file.getOriginalFilename());
+				fos = new FileOutputStream(realDir_pro + file.getOriginalFilename());
+			} else {
+				file.transferTo(new File(saveDir_stu+file.getOriginalFilename()));
+				fis = new FileInputStream(saveDir_stu + file.getOriginalFilename());
+				fos = new FileOutputStream(realDir_stu + file.getOriginalFilename());
+			}
+			
+			int data = 0;
+			
+			while((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			
+			String id = req.getParameter("id");
+			String pwd = encoder.encode(req.getParameter("pwd"));
+			String photo = file.getOriginalFilename();
+			String name = req.getParameter("name");
+			String eng_name = req.getParameter("eng_name");
+			int jumin1 = Integer.parseInt(req.getParameter("jumin1"));
+			int jumin2 = Integer.parseInt(req.getParameter("jumin2"));
+			int gender = Integer.parseInt(req.getParameter("gender"));
+			int frgn = Integer.parseInt(req.getParameter("frgn"));
+			String nation = req.getParameter("nation");
+			String tel = req.getParameter("tel");
+			String email = req.getParameter("email");
+			String address = req.getParameter("address");
+			String de_address = req.getParameter("de_address");
+			
+			HumanVO vo = new HumanVO();
+			vo.setId(id);
+			
+			vo.setPwd(pwd);
+			vo.setPhoto(photo);
+			vo.setName(name);
+			vo.setEng_name(eng_name);
+			vo.setJumin1(jumin1);
+			vo.setJumin2(jumin2);
+			vo.setGender(gender);
+			vo.setFrgn(frgn);
+			vo.setNation(nation);
+			vo.setTel(tel);
+			vo.setEmail(email);
+			vo.setAddress(address);
+			vo.setDe_address(de_address);
+			
+			if(option.equals("adm")) {
+				// payment_division = 1;
+				String depart = req.getParameter("depart");
+				String rank = req.getParameter("rank");
+				String ed = req.getParameter("enterday");
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date enterday = null;
+				try {
+					enterday = transFormat.parse(ed);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				String account_number = req.getParameter("account_number");
+				int car = Integer.parseInt(req.getParameter("car"));
+				
+				vo.setDepart(depart);
+				vo.setRank(rank);
+				vo.setEnterday(enterday);
+				vo.setAccount_number(account_number);
+				vo.setCar(car);
+				
+				insertCnt = dao.insertAdmin(vo);
+				
+			} else if(option.equals("pro")) {
+				String position = req.getParameter("position");
+				String m_code = req.getParameter("m_code");
+				String ed = req.getParameter("enterday");
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date enterday = null;
+				try {
+					enterday = transFormat.parse(ed);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				String account_number = req.getParameter("account_number");
+				int car = Integer.parseInt(req.getParameter("car")); 
+				
+				vo.setPosition(position);
+				vo.setM_code(m_code);
+				vo.setEnterday(enterday);
+				vo.setAccount_number(account_number);
+				vo.setCar(car);
+				
+				insertCnt = dao.insertProfesser(vo);
+				
+			} else {
+				// r_code = 1;
+				String m_code = req.getParameter("m_code");
+				int entrancedate = Integer.parseInt(req.getParameter("entrancedate"));
+				int grade = Integer.parseInt(req.getParameter("grade"));
+				
+				vo.setM_code(m_code);
+				vo.setEntrancedate(entrancedate);
+				vo.setGrade(grade);
+				
+				insertCnt = dao.insertStudent(vo);
+			}
+			
+			model.addAttribute("insertCnt", insertCnt);
+			model.addAttribute("option", option);
+		
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
+
+	
+	// 직원 등록폼
 	// 아이디 가져오기
 	@Override
 	public void nextAdminId(HttpServletRequest req, Model model) {
 		String nextId = dao.getNextAdminId();
 		model.addAttribute("nextId", nextId);
 	}
+	@Override
+	public void nextProfessorId(HttpServletRequest req, Model model) {
+		
+		String nextId = dao.getNextProfessorId();
+		
+		model.addAttribute("nextId", nextId);
+	}
+	@Override
+	public void nextStudentId(HttpServletRequest req, Model model) {
+		
+		String nextId = dao.getNextStudentId();
+		
+		model.addAttribute("nextId", nextId);
+	}	
 	
 	// 직원 등록폼
 	// 부서 목록 가져오기
@@ -754,6 +915,15 @@ public class AdminServiceImpl implements AdminService {
 		List<RankVO> rankList = dao.getRankList();
 		
 		model.addAttribute("rankList",rankList);
+	}
+	// 전공 목록 가져오기
+	@Override
+	public void majorList(HttpServletRequest req, Model model) {
+
+		List<MajorVO> majorList = dao.getMajorList();
+		
+		model.addAttribute("majorList",majorList);
+		
 	}
 
 	// 시설물 관리 리스트
@@ -881,5 +1051,98 @@ public class AdminServiceImpl implements AdminService {
 		// 요청 리스트에서 상태 변경 (요청대기 > 반려)
 		int updateCnt = dao.deleteUsing(num);
 		model.addAttribute("updateCnt", updateCnt);
+	}
+	
+	@Override
+	public void humanList(HttpServletRequest req, Model model) {
+		int pageSize = 15;
+		int pageBlock = 5;
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;	
+		String pageNum = "";
+		int currentPage = 0;
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0; 
+		
+		String option = req.getParameter("option");
+		switch (option) {
+        case "adm":
+        	cnt = dao.getAdminCnt();
+            break;
+        case "pro":
+        	cnt = dao.getProfessorCnt();
+            break;
+        case "stu":
+        	cnt = dao.getStudentCnt();
+            break;
+        default:
+        	cnt = dao.getAdminCnt();
+        	break;
+		}
+		model.addAttribute("option", option);
+		
+		pageNum = req.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+	
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<HumanVO> dtos = null;
+			
+			switch (option) {
+	        case "adm":
+	        	dtos = dao.getAdminList(map);
+	            break;
+	        case "pro":
+	        	dtos = dao.getProfessorList(map);
+	            break;
+	        case "stu":
+	        	dtos = dao.getStudentList(map);
+	            break;
+			}
+			
+			model.addAttribute("dtos", dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		
+		endPage = startPage + pageBlock -1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		model.addAttribute("cnt", cnt);			
+		model.addAttribute("number", number);	 
+		model.addAttribute("pageNum", pageNum);
+		
+		if(cnt>0) {
+			model.addAttribute("startPage", startPage);	
+			model.addAttribute("endPage", endPage);			
+			model.addAttribute("pageBlock", pageBlock);	
+			model.addAttribute("pageCount", pageCount);	
+			model.addAttribute("currentPage", currentPage);
+		}
+		
+	}
+
+	@Override
+	public void setting(HttpServletRequest req, Model model) {
+		// 직급별 급여 가져오기
+		List<Map<String, Object>> list = dao.getSettingList();
+		model.addAttribute("list", list);
 	}
 }

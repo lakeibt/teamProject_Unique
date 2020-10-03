@@ -1,18 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file = "../include/setting.jsp" %>
-
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Contact - Moderna Bootstrap Template</title>
-	<%@ include file = "../bootstrap/professor_bootstrap.jsp" %>
+  <title>
+    [유일대]
+  </title>
+  <%@ include file = "../bootstrap/professor_bootstrap.jsp" %>
+  <%@ include file = "../bootstrap/guest_bootstrap2.jsp" %>
+  <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
 </head>
 
-<body>
-
-  <%@ include file = "../include/professor_header.jsp" %>
+<body class="dark-edition">
+	<div class="wrapper ">
+	<%@ include file = "../include/professor_sidebar.jsp" %>
+	<div class="main-panel">
+	<%@ include file = "../include/professor_header.jsp" %>
 
 
   <main id="main">
@@ -163,6 +167,9 @@
 
   <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 <%@ include file = "../bootstrap/professor_bootstrap_js.jsp" %>
+<%@ include file = "../bootstrap/guest_bootstrap_js2.jsp" %>
+</div>
+</div>
 </body>
 
 </html>

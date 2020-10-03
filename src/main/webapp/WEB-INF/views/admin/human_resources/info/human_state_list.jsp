@@ -5,65 +5,106 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta id="_csrf" name="_csrf" content="${_csrf.token}" />
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
-
-<script>
-$(document).ready(function(){
-	var fileTarget = $('.filebox .upload-hidden');
-	fileTarget.on('change', function(){
-		// 값이 변경되면
-		if(window.FileReader){		// modern browser
-			var filename = $(this)[0].files[0].name; 
-		} else { 	// old IE var
-			filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-		}
-		// 추출한 파일명 삽입
-		$(this).siblings('.upload-name').val(filename);
-	}); 
-});
-</script>
 </head>
 <body>
+				<div class="x_panel">
+                  <div class="x_title">
+                  	<div class="col-sm-1">
+	                    <select class="form-control" id="human_state_option_val" onchange="changeList()">
+	                    	<c:if test="${option == 'adm'}">
+								<option value="stu">학생</option>
+								<option value="pro">교수</option>
+								<option value="adm" selected>직원</option>
+							</c:if>
+							<c:if test="${option == 'pro'}">
+								<option value="stu">학생</option>
+								<option value="pro" selected>교수</option>
+								<option value="adm">직원</option>
+							</c:if>
+							<c:if test="${option == 'stu'}">
+								<option value="stu" selected>학생</option>
+								<option value="pro">교수</option>
+								<option value="adm">직원</option>
+							</c:if>
+	                    </select>
+	                    
+                    </div>
+                    <div class="col-sm-6"></div>
+					<div class="col-sm-5   form-group pull-right top_search">
+	                  <div class="input-group">
+	                    <input type="text" class="form-control" placeholder="Search for...">
+	                    <span class="input-group-btn">
+	                      <button class="btn btn-default" type="button">검색</button>
+	                    </span>
+	                  </div>
+	                </div>
+				
+                    <div class="clearfix" style="height: 40px;"></div>
+                  </div>
 
-
-<div class="col-md-12 col-sm-12 ">
-	<div class="x_panel">
-		<div class="x_content">
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+                  <div class="x_content">
+                  <div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+					  <thead>
+					  	<c:if test="${option == 'adm'}">
+					    <tr class="headings">
+					      <th class="column-title">사번 </th>
+					      <th class="column-title">이름</th>
+					      <th class="column-title">전화번호</th>
+					      <th class="column-title">이메일</th>
+					      <th class="column-title">부서</th>
+					      <th class="column-title">직급</th>
+					      <th class="column-title no-link last"><span class="nobr">더보기</span>
+					      </th>
+					    </tr>
+					    </c:if>
+					    <c:if test="${option == 'pro'}">
+					    <tr class="headings">
+					      <th class="column-title">교번 </th>
+					      <th class="column-title">이름</th>
+					      <th class="column-title">전화번호</th>
+					      <th class="column-title">이메일</th>
+					      <th class="column-title">학과</th>
+					      <th class="column-title">직책</th>
+					      <th class="column-title no-link last"><span class="nobr">더보기</span></th>
+					    </tr>
+					    </c:if>
+					    <c:if test="${option == 'stu'}">
+					    <tr class="headings">
+					      <th class="column-title">교번 </th>
+					      <th class="column-title">이름</th>
+					      <th class="column-title">전화번호</th>
+					      <th class="column-title">이메일</th>
+					      <th class="column-title">학과</th>
+					      <th class="column-title">학년</th>
+					      <th class="column-title no-link last"><span class="nobr">더보기</span>
+					      </th>
+					    </tr>
+					    </c:if>
+					  </thead>
+					
+					  <tbody>
+					  <c:forEach var="dto" items="${dtos}">
+					  	<c:if  test="${option == 'adm'}">
+						<tr class="even pointer" id="${dto.getId()}">
+							<td class=" ">${dto.getId()}</td>
+							<td class=" ">${dto.getName()}</td>
+							<td class=" ">${dto.getTel()}</td>
+							<td class=" ">${dto.getEmail()}</td>
+							<td class=" ">${dto.getDepart_name()}</td>
+							<td class="a-right a-right ">${dto.getRank()}</td>
+							<td class=" last"><a href="javascript:void(0)" onclick="detail_state()">View</a></td>
+						</tr>
+						<tr class="detail_tr">
+							<td colspan="7">
+								<div>
+									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="x_title">
 				<h2>
 					인적정보등록
 				</h2>
-				<ul class="nav navbar-right panel_toolbox">
-				<li>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-				</li>
-				<li class="dropdown">
-				<select class="form-control" id="human_info_form_select" name="option" onchange="changeForm()">
-					<c:if test="${option  == 'stu'}">
-						<option value="stu" selected>학생</option>
-						<option value="pro">교수</option>
-						<option value="adm">직원</option>
-					</c:if>
-					<c:if test="${option  == 'pro'}">
-						<option value="stu">학생</option>
-						<option value="pro" selected>교수</option>
-						<option value="adm">직원</option>
-					</c:if>
-					<c:if test="${option  == 'adm'}">
-						<option value="stu">학생</option>
-						<option value="pro">교수</option>
-						<option value="adm"  selected>직원</option>
-					</c:if>
-					<c:if test="${option  == null}">
-						<option value="stu">학생</option>
-						<option value="pro">교수</option>
-						<option value="adm"  selected>직원</option>
-					</c:if>
-				</select>
-				</ul>
+
 				<div class="clearfix"></div>
 			</div>
 				<br>
@@ -74,26 +115,10 @@ $(document).ready(function(){
 							for="first-name">아이디(사번)
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="text" value="${nextId}" name="id" required="required" class="form-control " readonly>
+							<input type="text" value="" name="id" required="required" class="form-control " readonly>
 						</div>
 					</div>
-					<div class="item form-group">
-						<label class="col-form-label col-md-3 col-sm-3 label-align"
-							for="first-name">비밀번호
-						</label>
-						<div class="col-md-7 col-sm-7 ">
-							<input type="password" name="pwd" id="pwd" required="required" class="form-control ">
-						</div>
-					</div>
-					<div class="item form-group">
-						<label class="col-form-label col-md-3 col-sm-3 label-align"
-							for="first-name">비밀번호확인
-						</label>
-						<div class="col-md-7 col-sm-7 ">
-							<input type="password" name="pwd_re"  id="pwd_re" required="required"
-								class="form-control ">
-						</div>
-					</div>
+					
 					<br><br><br><br>
 					<div class="item form-group">
 						<label class="col-form-label col-md-3 col-sm-3 label-align">입사일 
@@ -282,8 +307,37 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</form>
-		</div>
-	</div>
-</div>
+								</div>
+							</td>
+						</tr>
+						</c:if>
+						<c:if  test="${option == 'pro'}">
+						<tr class="even pointer" id="${dto.getId()}">
+							<td class=" ">${dto.getId()}</td>
+							<td class=" ">${dto.getName()}</td>
+							<td class=" ">${dto.getTel()}</td>
+							<td class=" ">${dto.getEmail()}</td>
+							<td class=" ">${dto.getM_name()}</td>
+							<td class="a-right a-right ">${dto.getPosition()}</td>
+							<td class=" last"><a href="javascript:void(0)" onclick="detail_state()">View</a></td>
+						</tr>
+						</c:if>
+						<c:if  test="${option == 'stu'}">
+						<tr class="even pointer" id="${dto.getId()}">
+							<td class=" ">${dto.getId()}</td>
+							<td class=" ">${dto.getName()}</td>
+							<td class=" ">${dto.getTel()}</td>
+							<td class=" ">${dto.getEmail()}</td>
+							<td class=" ">${dto.getM_name()}</td>
+							<td class="a-right a-right ">${dto.getGrade()}</td>
+							<td class=" last"><a href="javascript:void(0)" onclick="detail_state()">View</a></td>
+						</tr>
+						</c:if>
+						</c:forEach>
+					    </tbody>
+					  </table>
+					</div>  
+                  </div>
+                </div>
 </body>
 </html>

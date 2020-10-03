@@ -11,7 +11,6 @@
 </head>
 <script type="text/javascript">
 $(function(){
-    
     // 질문유형을 선택한다.
     chnQnaType('0' , '0');
 });
@@ -61,7 +60,6 @@ function chnQnaType(type , select) {
 				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
 			</div>
 			<!-- /top navigation -->
-
 			<!-- page content -->
 			<div class="right_col" role="main" style="min-height:934px;">
 				<div class="">
@@ -200,6 +198,9 @@ function chnQnaType(type , select) {
 		</div>
 	</div>
 </div>
+<!-- footer content -->
+<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
+<!-- /footer content -->
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 <script type="text/javascript">
 function content() {
