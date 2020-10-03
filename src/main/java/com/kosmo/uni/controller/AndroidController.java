@@ -1,12 +1,9 @@
 package com.kosmo.uni.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;	// 수정
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
-import com.kosmo.uni.vo.Manager;
-import com.kosmo.uni.vo.StudentVO;
 
 @Controller
 public class AndroidController {
@@ -45,7 +40,6 @@ public class AndroidController {
 	@RequestMapping("/android/androidMyPageMain")
 	public Map<String, Object> androidMyPageMain(HttpServletRequest req) {
 		logger.info("androidMyPageMain()");
-		
 		Map<String, Object> map = andService.MyPage(req); 
 		
 		return map;

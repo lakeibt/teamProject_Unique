@@ -52,7 +52,7 @@ public class EduController {
 		logger.info("url ==> logout");
 		session.invalidate();
 		
-		return "guest/login";
+		return "guest/logout";
 	}
 	
 	@RequestMapping("/guest/main")
