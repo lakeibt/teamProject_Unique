@@ -74,7 +74,7 @@ jQuery(document).ready(function($) {
 										</thead>
 									</table>
 									<div id="coninfo"></div>
-									<div id="btn_group">
+									<div id="btn_group" align="center">
 								        <button class="number" id="btn1" onclick="content(1)" value="1">1</button>
 								        <button class="number" id="btn3" onclick="content(2)" value="2">2</button>
 								        <button class="number" id="btn4" onclick="content(3)" value="3">3</button>
