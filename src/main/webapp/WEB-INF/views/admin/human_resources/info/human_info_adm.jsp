@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
-
 <script>
 $(document).ready(function(){
 	var fileTarget = $('.filebox .upload-hidden');
@@ -22,11 +21,29 @@ $(document).ready(function(){
 		$(this).siblings('.upload-name').val(filename);
 	}); 
 });
+
+$(document).ready(function(){
+	
+	$('#car_num_div').hide();
+	
+	$("input:radio[name=car]").change(function(){
+		
+		if($("input[name=car]:checked").val() == "1"){
+			
+			$('#car_num_div').show();
+ 
+        }else if($("input[name=car]:checked").val() == "0"){
+        	
+        	$('#car_num_div').hide();
+           
+        }
+		
+	});
+	
+});
 </script>
 </head>
 <body>
-
-
 <div class="col-md-12 col-sm-12 ">
 	<div class="x_panel">
 		<div class="x_content">
@@ -94,27 +111,12 @@ $(document).ready(function(){
 								class="form-control ">
 						</div>
 					</div>
-					<br><br><br><br>
+					<br><br>
 					<div class="item form-group">
 						<label class="col-form-label col-md-3 col-sm-3 label-align">입사일 
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input id="birthday" class="date-picker form-control" name="enterday"
-								required="required"
-								type="text"
-								onfocus="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-								onmouseover="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-								onclick="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-								onblur="if (!window.__cfRLUnblockHandlers) return false; this.type='text'"
-								onmouseout="if (!window.__cfRLUnblockHandlers) return false; timeFunctionLong(this)"
-								data-cf-modified-ed641bf6e1354c9585fdbfb0-="">
-								<script type="ed641bf6e1354c9585fdbfb0-text/javascript">
-													function timeFunctionLong(input) {
-														setTimeout(function() {
-															input.type = 'text';
-														}, 60000);
-													}
-								</script>
+							<input class="form-control" type="date" name="enterday">
 						</div>
 					</div>
 					<div class="item form-group">
@@ -159,10 +161,19 @@ $(document).ready(function(){
 						<div class="col-md-7 col-sm-7 ">
 							<div style="height:6.5px"></div>
 							<label>보유:</label>
-							<input type="radio" class="flat" name="car" id="car" value="1" required />
+							<input type="radio" class="flat" name="car" id="car_y" value="1" required/>
 							<br>
 							<label>미보유:</label>
-							<input type="radio" class="flat" name="car" id="car" value="0" />
+							<input type="radio" class="flat" name="car" id="car_n" value="0" />
+						</div>
+					</div>
+					<div class="item form-group"  id="car_num_div">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">차번호
+						</label>
+						<div class="col-md-7 col-sm-7">
+							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가 0000'" onblur="this.placeholder = ' '" 
+								class="form-control ">
 						</div>
 					</div>
 				</div>
@@ -198,7 +209,7 @@ $(document).ready(function(){
 							for="first-name">휴대전화
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="text" name="tel" required="required"
+							<input type="text" name="tel" required="required" onfocus="this.placeholder = '000-0000-0000'" onblur="this.placeholder = ' '"
 								class="form-control ">
 						</div>
 					</div>

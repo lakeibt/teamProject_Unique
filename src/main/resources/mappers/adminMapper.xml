@@ -452,7 +452,8 @@
 				#{account_number},
 				#{car},
 				1,
-				#{de_address})
+				#{de_address},
+				#{carnum})
 	</insert>
 	<insert id="insertProfesser" parameterType="com.kosmo.uni.vo.HumanVO">
 		INSERT INTO p_professor 
@@ -474,7 +475,8 @@
 				#{account_number},
 				#{car},
 				#{position},
-				#{de_address})	
+				#{de_address},
+				#{carnum})	
 	</insert>
 	<insert id="insertStudent" parameterType="com.kosmo.uni.vo.HumanVO">
 		INSERT INTO s_student  
@@ -524,6 +526,18 @@
 		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, grade, r_code, entrancedate, de_address, rowNum rNum 
 		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, s.m_code co, m.m_name na,grade, r_code, entrancedate, de_address FROM s_student s, a_major m WHERE s.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
 		]]>
+	</select>
+	
+	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		select * from s_student where id = #{id}
+	</select>
+	
+	<select id="getProfessorInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		select * from p_professor where id = #{id}
+	</select>
+	
+	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		select * from a_admin where id = #{id}
 	</select>
 	
 </mapper>

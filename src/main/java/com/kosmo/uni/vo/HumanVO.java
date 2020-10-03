@@ -40,6 +40,7 @@ public class HumanVO {
 	private Date enterday;
 	private String account_number;
 	private int car;
+	private String carnum;
 	
 	
 	public String getId() {
@@ -197,6 +198,12 @@ public class HumanVO {
 	}
 	public void setM_name(String m_name) {
 		this.m_name = m_name;
+	}
+	public String getCarnum() {
+		return carnum;
+	}
+	public void setCarnum(String carnum) {
+		this.carnum = carnum;
 	}
 	
 	
