@@ -10,17 +10,14 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
 
-
 @Repository
 public class AndroidDAOImpl implements AndroidDAO{
-
 	@Autowired
 	SqlSession sqlSession;
 	
 	@Override
 	public HashMap<String, String> confirmIdPwdStu(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
-		
 		return dao.confirmIdPwdStu(id);
 	}
 	
@@ -31,11 +28,9 @@ public class AndroidDAOImpl implements AndroidDAO{
 	}
 
 	@Override
-	public StudentVO getStudentInfo(String id) {
+	public Map<String, Object> getStudentInfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
-		StudentVO s = dao.getStudentInfo(id);
-		
-		return s;
+		return dao.getStudentInfo(id);
 	}
 
 	@Override
