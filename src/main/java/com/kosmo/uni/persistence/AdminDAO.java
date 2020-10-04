@@ -102,8 +102,6 @@ public interface AdminDAO {
 	//급여명세서 조회
 	public List<PayslipVO> getPayslip(int salary_input_num);
 	
-	
-	
 	// 인사 등록
 	public int insertAdmin(HumanVO vo);
 	public int insertProfesser(HumanVO vo);
@@ -152,5 +150,8 @@ public interface AdminDAO {
 	public HumanVO getStudentInfo(String id);
 	public HumanVO getProfessorInfo(String id);
 	public HumanVO getAdminInfo(String id);
+	
+	// 기초환경 설정 페이지 - 직급별 급여 리스트
+	public List<Map<String, Object>> getSettingList();
 	
 }

@@ -1065,7 +1065,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public void humanList(HttpServletRequest req, Model model) {
-		
 		int pageSize = 15;
 		int pageBlock = 5;
 		int cnt = 0;
@@ -1171,6 +1170,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		model.addAttribute("vo",vo);
+	}
 		
+	@Override
+	public void setting(HttpServletRequest req, Model model) {
+		// 직급별 급여 가져오기
+		List<Map<String, Object>> list = dao.getSettingList();
+		model.addAttribute("list", list);
 	}
 }

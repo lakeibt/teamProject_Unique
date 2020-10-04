@@ -16,7 +16,6 @@ import com.kosmo.uni.service.AdminServiceImpl;
 
 @Controller
 public class AdminController {
-
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
@@ -184,37 +183,14 @@ public class AdminController {
 
 	// ------------------------- 인사관리 -------------------------
 	// ------------------------ 기본코드설정 ------------------------
-	// 인사기초코드
-	@RequestMapping(value = "/admin/human_resources/code_setting/code_setting")
-	public String code_setting(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/code_setting");
-
-		return "admin/human_resources/code_setting/code_setting";
-	}
-	// 
-	@RequestMapping(value = "/admin/human_resources/code_setting/code_rankList")
-	public String code_rankList(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/code_rankList");
-		
-		return "admin/human_resources/code_setting/code_rankList";
-	}
-	
 	// 인사/급여환경설정
 	@RequestMapping(value = "/admin/human_resources/code_setting/setting")
 	public String setting(HttpServletRequest req, Model model) {
 		logger.info("human_resources/code_setting/setting");
 
+		adminService.setting(req, model);
 		return "admin/human_resources/code_setting/setting";
 	}
-
-	// 급/상여 등록/수정
-	@RequestMapping(value = "/admin/human_resources/code_setting/salary_setting")
-	public String salary_setting(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/salary_setting");
-
-		return "admin/human_resources/code_setting/salary_setting";
-	}
-
 	// ------------------------- 인사정보 -------------------------
 	// 테스트
 	@RequestMapping(value = "/admin/human_resources/info/test")
@@ -273,7 +249,6 @@ public class AdminController {
 		
 		return "admin/human_resources/info/human_info_pro";
 	}
-
 	
 	// 등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info_add")
@@ -281,13 +256,8 @@ public class AdminController {
 		logger.info("human_resources/info/human_info_add");
 		
 		adminService.addHuman(req, model);
-		
 		return "admin/human_resources/info/human_info_add";
 	}
-	
-	
-	
-	
 
 	// 인사정보현황
 	@RequestMapping(value = "/admin/human_resources/info/human_state")

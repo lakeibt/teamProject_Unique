@@ -11,18 +11,17 @@ public interface AdminService {
 	public void infoPro(HttpServletRequest req, Model model);
 	public void content(HttpServletRequest req, Model model);
 	
+	//인사근태
 	public void attendance(HttpServletRequest req, Model model);
 	public void attendance_Search(HttpServletRequest req, Model model);
 	
+	//인사별 월별 급여 리스트
 	public void salary_list_humanMonth(HttpServletRequest req, Model model);
-	
 	public void human_Search(HttpServletRequest req, Model model);
-	
 	public void month_Search(HttpServletRequest req, Model model);
 	
 	//급여등록 - 신규생성 
 	public void salary_input(HttpServletRequest req, Model model);
-	
 	public void course_list(HttpServletRequest req, Model model);
 	
 	//급여대장 리스트 출력
@@ -62,7 +61,6 @@ public interface AdminService {
 	//급여명세서 출력 
 	public void salary_payslip(HttpServletRequest req, Model model);
 	
-	
 	// 인사 등록
 	public void addHuman(MultipartHttpServletRequest req, Model model);
 	
@@ -98,4 +96,6 @@ public interface AdminService {
 	public void humanList(HttpServletRequest req, Model model);
 	public void humanInfo(HttpServletRequest req, Model model);
 	
+	// 기초 환경설정(직급별 급여)
+	public void setting(HttpServletRequest req, Model model);
 }

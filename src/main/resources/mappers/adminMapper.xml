@@ -540,4 +540,7 @@
 		select * from a_admin where id = #{id}
 	</select>
 	
+	<select id="getSettingList" resultType="java.util.Map">
+		SELECT * FROM A_SALARYSET ORDER BY SALARY DESC
+	</select>
 </mapper>

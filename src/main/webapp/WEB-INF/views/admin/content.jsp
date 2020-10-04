@@ -3,11 +3,20 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
-<div class="row">
-	<div class="col-md-12 col-sm-12">
-		<div class="dashboard_graph">
-			<form>
-				<table class="table">
+<div class="col-md-12 col-sm-12">
+	<div class="x_panel">
+		<div class="x_content">
+			<div class="table-responsive">
+				<table class="table table-striped jambo_table">
+					<thead>
+						<tr class="haedings">
+							<td colspan="2">
+								<font style="vertical-align:inherit;">
+									<font style="vertical-align:inherit;">내용</font>
+								</font>
+							</td>
+						</tr>
+					</thead>
 					<tbody>
 						<tr>
 							<th style="width:10%">제목</th>
@@ -25,9 +34,8 @@
 						</tr>
 					</tbody>
 				</table>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>
-</body>
 </html>

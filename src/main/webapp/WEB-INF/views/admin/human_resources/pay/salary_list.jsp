@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -7,9 +6,7 @@
 <title>급여대장</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 <script src="http://code.jquery.com/jquery-1.12.1.js"></script>
-<!-- Template Main JS File -->
 <script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
-
 <script>
 $(document).ready(function(){
 	$('#delete').click(function(){
@@ -25,7 +22,6 @@ $(document).ready(function(){
 		modi_sal();
 	})
 });
-
 function modi_sal(){
 	$.ajax({
 		url : '${pageContext.request.contextPath}/admin/human_resources/pay/salary_modify',  // 응답페이지  ==> 컨트롤러/basic.
@@ -41,8 +37,6 @@ function modi_sal(){
 		}
 	});
 }
-
-
 $(document).ready(function(){
 	$('#cntAndTotal').click(function(){
 		divisioncnt();
@@ -50,7 +44,6 @@ $(document).ready(function(){
 		
 	})
 });
-
 function divisioncnt(){
 	$.ajax({
 		url : '${pageContext.request.contextPath}/admin/human_resources/pay/divisioncnt',  // 응답페이지  ==> 컨트롤러/basic.
@@ -67,7 +60,6 @@ function divisioncnt(){
 		}
 	});
 }
-
 function salarytotal(){
 	$.ajax({
 		url : '${pageContext.request.contextPath}/admin/human_resources/pay/salarytotal',  // 응답페이지  ==> 컨트롤러/basic.
@@ -84,13 +76,11 @@ function salarytotal(){
 		}
 	});
 }
-
 $(document).ready(function(){
 	$('#payroll').click(function(){
 		selectSalary();
 	})
 });
-
 function selectSalary(){
 	$.ajax({
 		url : '${pageContext.request.contextPath}/admin/human_resources/pay/payroll',  // 응답페이지  ==> 컨트롤러/basic.
@@ -106,7 +96,6 @@ function selectSalary(){
 		}
 	});
 }
-
 </script>
 </head>
 <body class="nav-md">
@@ -115,7 +104,6 @@ function selectSalary(){
 			<div class="col-md-3 left_col">
 				<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 			</div>
-
 			<!-- top navigation -->
 			<div class="top_nav">
 				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
