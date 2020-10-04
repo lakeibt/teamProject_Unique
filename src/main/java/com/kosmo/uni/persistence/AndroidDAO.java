@@ -12,7 +12,7 @@ public interface AndroidDAO {
 	public HashMap<String, String> confirmIdPwdStu(String id);
 	public HashMap<String, String> confirmIdPwdAdm(String id);
 	
-	public Map<String, Object> getStudentInfo(String id);
+	public StudentVO getStudentInfo(String id);
 	public Manager getAdminInfo(String id);
 	
 	//nfc 오늘 날짜에 있는지 없는지 체크

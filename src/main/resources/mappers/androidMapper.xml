@@ -10,15 +10,12 @@
 		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id}
 	</select>
 	
-	<select id="getStudentInfo" resultType="java.util.Map">
-		SELECT S.PHOTO PHOTO, S.ID ID, S.NAME NAME, 
-			   S.TEL TEL, S.EMAIL EMAIL, M.M_NAME M_NAME, S.GRADE GRADE
-		FROM S_STUDENT S, A_MAJOR M
-		WHERE S.M_CODE = M.M_CODE AND id=#{id}
+	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
+		SELECT * FROM S_STUDENT WHERE id=#{id}
 	</select>
 	
 	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.Manager">
-		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id}
+		SELECT * FROM A_ADMIN WHERE id=#{id}
 	</select>
 
 	<select id="whatNfc" parameterType="java.util.Map" resultType="int">

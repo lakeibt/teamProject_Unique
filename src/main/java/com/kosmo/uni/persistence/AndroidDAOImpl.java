@@ -28,7 +28,7 @@ public class AndroidDAOImpl implements AndroidDAO{
 	}
 
 	@Override
-	public Map<String, Object> getStudentInfo(String id) {
+	public StudentVO getStudentInfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getStudentInfo(id);
 	}
@@ -36,8 +36,7 @@ public class AndroidDAOImpl implements AndroidDAO{
 	@Override
 	public Manager getAdminInfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
-		Manager m = dao.getAdminInfo(id);
-		return m;
+		return dao.getAdminInfo(id);
 	}
 	
 	@Override
