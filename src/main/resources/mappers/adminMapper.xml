@@ -522,13 +522,6 @@
 		]]>
 	</select>
 	
-	<select id="getStudentList" resultType="com.kosmo.uni.vo.HumanVO">
-		<![CDATA[
-		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, grade, r_code, entrancedate, de_address, rowNum rNum 
-		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, s.m_code co, m.m_name na,grade, r_code, entrancedate, de_address FROM s_student s, a_major m WHERE s.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
-		]]>
-	</select>
-	
 	<select id="getSettingList" resultType="java.util.Map">
 		SELECT * FROM A_SALARYSET ORDER BY SALARY DESC
 	</select>
