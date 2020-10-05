@@ -86,23 +86,37 @@ public class AndroidServiceImpl implements AndroidService {
 		
 		// 회원정보 조회 - 이름 학과 학년 이메일 학번(아이디) 
 		if(id.substring(0,1).equals("s")) {
-			Map<String, Object> s = new HashMap<String, Object>();
-			s = andDAO.getStudentInfo(id);
+			StudentVO s = andDAO.getStudentInfo(id);
+			String mcode = "";
+			if(s.getM_code().equals("CO")) {
+				mcode = "기계공학과";
+			}else {
+				mcode = s.getM_code();
+			}
 			
-			map.put("photo", s.get("PHOTO"));
-			map.put("id", s.get("ID"));
-			map.put("name", s.get("NAME"));
-			map.put("tel", s.get("TEL"));
-			map.put("email", s.get("EMAIL"));
-			map.put("major", s.get("M_NAME"));
-			map.put("grade", s.get("GRADE"));
+			map.put("data1", s.getId());
+			map.put("data2", s.getName());
+			map.put("data3", mcode);
+			map.put("data4", s.getPhoto());
 			
 		} else if(id.substring(0,1).equals("a")) {
 			Manager m = andDAO.getAdminInfo(id);
 			System.out.println("m : " + m);
-			
+			String depart = "";
+			if(m.getDepart().equals("DE")) {
+				depart = "학사관리과";
+			}else if(m.getDepart().equals("HU")){
+				depart = "인사관리과";
+			}else if(m.getDepart().equals("FA")){
+				depart = "시설관리과";
+			} else {
+				depart = m.getDepart();
+			}
 			map.put("data1", m.getId());
 			map.put("data2", m.getName());
+			map.put("data3", m.getRank());
+			map.put("data4", m.getPhoto());
+			map.put("data5", depart);
 			System.out.println("m.id : " + m.getId());
 			System.out.println("m.name : " + m.getName());
 			
