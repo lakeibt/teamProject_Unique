@@ -191,6 +191,33 @@ public class AdminController {
 		adminService.setting(req, model);
 		return "admin/human_resources/code_setting/setting";
 	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_form")
+	public String setting_form(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_form");
+		
+		return "admin/human_resources/code_setting/setting_form";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_pro")
+	public String setting_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_pro");
+		
+		adminService.settingPro(req, model);
+		return "admin/human_resources/code_setting/setting_pro";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_humanList")
+	public String setting_humanList(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_humanList");
+		
+		adminService.settingHumanList(req, model);
+		return "admin/human_resources/code_setting/setting_humanList";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_deletePro")
+	public String setting_deletePro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_deletePro");
+		
+		adminService.settingDeletePro(req, model);
+		return "admin/human_resources/code_setting/setting_deletePro";
+	}
 	// ------------------------- 인사정보 -------------------------
 	// 테스트
 	@RequestMapping(value = "/admin/human_resources/info/test")

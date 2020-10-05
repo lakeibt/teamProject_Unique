@@ -153,5 +153,10 @@ public interface AdminDAO {
 	
 	// 기초환경 설정 페이지 - 직급별 급여 리스트
 	public List<Map<String, Object>> getSettingList();
+	public int addRank(String rank);
+	public int addSalaySet(Map<String, Object> map);
+	public List<Map<String, Object>> getSettingHumanList(String rank);
+	public int selectRank(String rank);
+	public int deleteRank(String rank);
 	
 }
