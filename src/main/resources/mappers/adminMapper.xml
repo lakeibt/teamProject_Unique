@@ -216,19 +216,20 @@
 	</select>
 
 	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
-		SELECT m.id, m.name, m.rank, m.depart, 
-				s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total,
-				s.salary_name, ss.salary, s.salary_inday, m.car
-		  FROM a_salary_input s 
-		  Join a_admin m
-		    ON s.payments_division = m.Payments_division
-		  JOIN a_salaryset ss
-		    on ss.Rank = m.rank
-		 where s.salary_input_num = #{salary_input_num}
-	</select>
-	
-	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
-		select * from a_variableCost where cost = #{cost}
+		SELECT m.id id,
+		       m.name name, 
+		       m.enterday enterday,
+		       m.rank rank,
+		       d.depart_name, 
+		       s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total, s.salary_division,
+		        s.salary_name, ss.salary, s.salary_inday, m.car, v.meal, v.contract_vehicle, b.rate, d.depart_name
+		  FROM a_salary_input s ,a_admin m, a_salaryset ss, a_variablecost v, a_bonusset b, a_depart d
+		 where s.payments_division = m.Payments_division
+		    and m.depart = d.depart
+		    and ss.Rank = m.rank
+		    and m.car = v.cost
+		    and b.rank = m.rank
+		    and s.salary_input_num = #{salary_input_num}
 	</select>
 	
 	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
@@ -253,7 +254,7 @@
 	</update>
 	
 	<select id="getSalaryArticle" resultType="com.kosmo.uni.vo.SalaryInputVO">
-		select salary_division, payments_division, salary_name, salary_inday, salary_input_num from a_salary_input where salary_input_num = #{salary_input_num}
+		select salary_division, payments_division, salary_name, salary_inday, salary_input_num, salary_confirm from a_salary_input where salary_input_num = #{salary_input_num}
 	</select>
 	
 	<update id="UpdateSalInput" parameterType="java.util.Map">
@@ -295,18 +296,21 @@
 	</select>
 	
 	<select id="getPayslip" resultType="com.kosmo.uni.vo.PayslipVO">
-		SELECT m.id id,
-			   m.name name, 
-			   m.enterday enterday,
-			   m.rank rank,
-			   m.depart depart, 
-		       s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total,
-		        s.salary_name, ss.salary, s.salary_inday, m.car, v.meal, v.contract_vehicle
-		  FROM a_salary_input s ,a_admin m, a_salaryset ss, a_variablecost v
+		SELECT m.id,
+		       m.name, 
+		       m.enterday,
+		       m.rank,
+		       d.depart_name, 
+		       s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total, s.salary_division,
+		        s.salary_name, ss.salary, s.salary_inday, m.car, v.meal, v.contract_vehicle, b.rate
+		  FROM a_salary_input s ,a_admin m, a_salaryset ss, a_variablecost v, a_bonusset b, a_depart d
 		 where s.payments_division = m.Payments_division
+		    and m.depart = d.depart
 		    and ss.Rank = m.rank
 		    and m.car = v.cost
-		    and s.salary_input_num = #{salary_input_num}
+		    and b.rank = m.rank
+		    and s.salary_input_num=#{salary_input_num}
+		    and m.id = #{id}
 	</select>
 	
 	<select id="salary_payslip" resultType="com.kosmo.uni.vo.SalaryVO">
@@ -558,5 +562,56 @@
 	</select>
 	<delete id="deleteRank" parameterType="String">
 		DELETE FROM A_RANK WHERE RANK = #{rank}
+	</delete>
+	<insert id="insertSal" parameterType="com.kosmo.uni.vo.SalaryVO">
+		INSERT INTO a_SALARY (num, id, meal, overtime, contract_vehicle, pay, paytotal, salary_month, salary_input_num, salary_name, salary_division)
+		VALUES (salary_seq.nextVal, #{id}, #{meal}, #{overtime}, #{contract_vehicle}, #{pay}, #{paytotal}, #{salary_month}, #{salary_input_num}, #{salary_name}, #{salary_division})
+	</insert>
+	
+	
+	<select id="getSelectSalaryList" resultType="com.kosmo.uni.vo.SalaryVO">
+		<![CDATA[
+			SELECT id, name, enterday, rank, depart_name, 
+	        salary_input_num, payments_division, division_cnt, salary_total, salary_division,
+	        salary_name, salary, salary_inday, car, meal, contract_vehicle, rate, depart_name, 
+	        ROWNUM FROM (SELECT * FROM SALARY_VIEW WHERE salary_input_num =#{salary_input_num})
+			WHERE ROWNUM >=#{start} AND ROWNUM<=#{end}
+		]]>
+	</select>
+	
+	<insert id="insertBns" parameterType="com.kosmo.uni.vo.SalaryVO">
+		INSERT INTO a_bonus (num, id, rate, bonustotal, bonus_month, salary_input_num, salary_name, salary_division)
+		VALUES (bonus_seq.nextVal, #{id}, #{rate}, #{bonustotal}*0.5, #{bonus_month}, #{salary_input_num}, #{salary_name}, #{salary_division})
+	</insert>
+	
+	<select id="getSelectConfirm" resultType="int">
+		select salary_confirm from a_salary_input where salary_input_num=#{salary_input_num}
+	</select>
+	
+	<update id="getUpdateConfirm" parameterType="java.util.Map">
+		update a_salary_input set salary_confirm=2 where salary_input_num=#{salary_input_num}
+	</update>
+	
+	<select id="getSeleteConfirmOne" resultType="com.kosmo.uni.vo.SalaryVO">
+		SELECT a.id, a.name, a.rank, d.depart_name, s.pay, s.meal, s.contract_vehicle, s.paytotal, s.salary_input_num, s.salary_month, s.salary_division, s.salary_name
+		  FROM a_admin a, a_salary s, a_depart d
+		 where a.id = s.id
+		   and d.depart = a.depart
+		   and s.salary_input_num=#{salary_input_num}
+	</select>
+	
+	<select id="getSeleteConfirmTwo" resultType="com.kosmo.uni.vo.SalaryVO">
+		SELECT a.id, a.name, a.rank, d.depart_name, b.bonustotal, b.rate, b.salary_input_num, b.bonus_month, b.salary_division, b.salary_name
+		  FROM a_admin a, a_bonus b, a_depart d
+		 where a.id = b.id
+		   and d.depart = a.depart
+		   and b.salary_input_num=#{salary_input_num}
+	</select>
+	
+	<delete id="deleteSalaryConfirm" parameterType="int">
+		delete from a_salary where salary_input_num=#{salary_input_num}
+	</delete>
+	<delete id="deleteBonusConfirm" parameterType="int">
+		delete from a_bonus where salary_input_num=#{salary_input_num}
 	</delete>
 </mapper>

@@ -258,6 +258,10 @@ function endSelect() {
 				</div>
 			<!-- /page content -->
 		</div>
+		<!-- /page content -->
+
+	</div>
+	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 	</div>
 </div>
 <!-- footer content -->
