@@ -45,8 +45,8 @@ public class AndroidController {
 		return map;
 	}
 	
-//	앱 로그인
-	@ResponseBody	// 웹(스프링)에서 안드로이드로 값(json)을 전달하기 위한 어노테이션
+	// nfc 태그
+	@ResponseBody
 	@RequestMapping("/android/androidNfcTag")
 	public Map<String, String> androidNfcTag(HttpServletRequest req){
 		logger.info("androidNfcTag()");
@@ -55,8 +55,5 @@ public class AndroidController {
 		
 		return out;
 	}
-	
-	
-	
 }
 

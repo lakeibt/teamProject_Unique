@@ -59,8 +59,6 @@
 									href="${path}admin/human_resources/info/human_info">인사정보등록</a></li>
 								<li><a
 									href="${path}admin/human_resources/info/human_state">인사정보현황</a></li>
-								<li><a
-									href="${path}admin/human_resources/info/salary_state">책정임금현황</a></li>
 							</ul></li>
 						<li><a>급여관리<span class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">

@@ -20,7 +20,6 @@ import com.kosmo.uni.vo.SalaryVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
-
 	@Autowired
 	SqlSession sqlSession;
 
@@ -530,4 +529,28 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getAdminInfo(id);
 	}
+	@Override
+	public List<Map<String, Object>> getSettingList() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSettingList();
+	}
+
+	@Override
+	public int updateAdminInfo(HumanVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateAdminInfo(vo);
+	}
+
+	@Override
+	public int updateProfessorInfo(HumanVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateProfessorInfo(vo);
+	}
+
+	@Override
+	public int updateStudentInfo(HumanVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateStudentInfo(vo);
+	}
+	
 }

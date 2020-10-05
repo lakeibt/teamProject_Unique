@@ -829,6 +829,7 @@ public class AdminServiceImpl implements AdminService {
 				if(car == 1) {
 					carnum = req.getParameter("carnum");
 				}
+				String bank = req.getParameter("bank");
 				
 				vo.setDepart(depart);
 				vo.setRank(rank);
@@ -836,6 +837,7 @@ public class AdminServiceImpl implements AdminService {
 				vo.setAccount_number(account_number);
 				vo.setCar(car);
 				vo.setCarnum(carnum);
+				vo.setBank(bank);
 				
 				insertCnt = dao.insertAdmin(vo);
 				
@@ -856,6 +858,7 @@ public class AdminServiceImpl implements AdminService {
 				if(car == 1) {
 					carnum = req.getParameter("carnum");
 				}
+				String bank = req.getParameter("bank");
 				
 				vo.setPosition(position);
 				vo.setM_code(m_code);
@@ -863,6 +866,7 @@ public class AdminServiceImpl implements AdminService {
 				vo.setAccount_number(account_number);
 				vo.setCar(car);
 				vo.setCarnum(carnum);
+				vo.setBank(bank);
 				
 				insertCnt = dao.insertProfesser(vo);
 				
@@ -1065,7 +1069,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public void humanList(HttpServletRequest req, Model model) {
-		
 		int pageSize = 15;
 		int pageBlock = 5;
 		int cnt = 0;
@@ -1079,6 +1082,10 @@ public class AdminServiceImpl implements AdminService {
 		int endPage = 0; 
 		
 		String option = req.getParameter("option");
+		if(option == null) {
+			option = "adm";
+		}
+		
 		switch (option) {
         case "adm":
         	cnt = dao.getAdminCnt();
@@ -1125,6 +1132,9 @@ public class AdminServiceImpl implements AdminService {
 	        case "stu":
 	        	dtos = dao.getStudentList(map);
 	            break;
+	        default:
+	        	dtos = dao.getAdminList(map);
+	        	break;
 			}
 			
 			model.addAttribute("dtos", dtos);
@@ -1171,6 +1181,181 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		model.addAttribute("vo",vo);
+	}
+		
+	@Override
+	public void setting(HttpServletRequest req, Model model) {
+		// 직급별 급여 가져오기
+		List<Map<String, Object>> list = dao.getSettingList();
+		model.addAttribute("list", list);
+	}
+
+	@Override
+	public void updateHuman(MultipartHttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		String option = id.substring(0, 1);
+		
+		switch(option) {
+		case "a" :
+			option = "adm";
+			break;
+		case "p" :
+			option = "pro";
+			break;
+		case "s" :
+			option = "stu";
+			break;
+		}
+		
+		int insertCnt = 0;
+		
+		MultipartFile file = req.getFile("photo");
+		String saveDir_adm = req.getRealPath("/resources/img/profile_photo/admin/");
+		String saveDir_pro = req.getRealPath("/resources/img/profile_photo/professor/");
+		String saveDir_stu = req.getRealPath("/resources/img/profile_photo/student/");
+		
+		String realDir_adm = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\admin\\";
+		String realDir_pro = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\professor\\";
+		String realDir_stu = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\student\\";
+		
+		try {
+			FileInputStream fis = null;
+			FileOutputStream fos = null;
+			
+			if(option.equals("adm")) {
+				file.transferTo(new File(saveDir_adm+file.getOriginalFilename()));
+				fis = new FileInputStream(saveDir_adm + file.getOriginalFilename());
+				fos = new FileOutputStream(realDir_adm + file.getOriginalFilename());
+			} else if(option.equals("pro")) {
+				file.transferTo(new File(saveDir_pro+file.getOriginalFilename()));
+				fis = new FileInputStream(saveDir_pro + file.getOriginalFilename());
+				fos = new FileOutputStream(realDir_pro + file.getOriginalFilename());
+			} else {
+				file.transferTo(new File(saveDir_stu+file.getOriginalFilename()));
+				fis = new FileInputStream(saveDir_stu + file.getOriginalFilename());
+				fos = new FileOutputStream(realDir_stu + file.getOriginalFilename());
+			}
+			
+			int data = 0;
+			
+			while((data = fis.read()) != -1) {
+				
+				fos.write(data);
+			}
+			
+			fis.close();
+			fos.close();
+			
+			String photo = file.getOriginalFilename();
+			String name = req.getParameter("name");
+			String eng_name = req.getParameter("eng_name");
+			int jumin1 = Integer.parseInt(req.getParameter("jumin1"));
+			int jumin2 = Integer.parseInt(req.getParameter("jumin2"));
+			int gender = Integer.parseInt(req.getParameter("gender"));
+			int frgn = Integer.parseInt(req.getParameter("frgn"));
+			String nation = req.getParameter("nation");
+			String tel = req.getParameter("tel");
+			String email = req.getParameter("email");
+			String address = req.getParameter("address");
+			String de_address = req.getParameter("de_address");
+			
+			HumanVO vo = new HumanVO();
+			
+			vo.setId(id);
+			vo.setPhoto(photo);
+			vo.setName(name);
+			vo.setEng_name(eng_name);
+			vo.setJumin1(jumin1);
+			vo.setJumin2(jumin2);
+			vo.setGender(gender);
+			vo.setFrgn(frgn);
+			vo.setNation(nation);
+			vo.setTel(tel);
+			vo.setEmail(email);
+			vo.setAddress(address);
+			vo.setDe_address(de_address);
+			
+			if(option.equals("adm")) {
+				// payment_division = 1;
+				String depart = req.getParameter("depart");
+				String rank = req.getParameter("rank");
+				String ed = req.getParameter("enterday");
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date enterday = null;
+				try {
+					enterday = transFormat.parse(ed);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				String account_number = req.getParameter("account_number");
+				int car = Integer.parseInt(req.getParameter("car"));
+				String carnum = "";
+				if(car == 1) {
+					carnum = req.getParameter("carnum");
+				}
+				String bank = req.getParameter("bank");
+				
+				vo.setDepart(depart);
+				vo.setRank(rank);
+				vo.setEnterday(enterday);
+				vo.setAccount_number(account_number);
+				vo.setCar(car);
+				vo.setCarnum(carnum);
+				vo.setBank(bank);
+				
+				insertCnt = dao.updateAdminInfo(vo);
+				
+			} else if(option.equals("pro")) {
+				String position = req.getParameter("position");
+				String m_code = req.getParameter("m_code");
+				String ed = req.getParameter("enterday");
+				SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date enterday = null;
+				try {
+					enterday = transFormat.parse(ed);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				String account_number = req.getParameter("account_number");
+				int car = Integer.parseInt(req.getParameter("car")); 
+				String carnum = "";
+				if(car == 1) {
+					carnum = req.getParameter("carnum");
+				}
+				String bank = req.getParameter("bank");
+				
+				vo.setPosition(position);
+				vo.setM_code(m_code);
+				vo.setEnterday(enterday);
+				vo.setAccount_number(account_number);
+				vo.setCar(car);
+				vo.setCarnum(carnum);
+				vo.setBank(bank);
+				
+				insertCnt = dao.updateProfessorInfo(vo);
+				
+			} else {
+				// r_code = 1;
+				String m_code = req.getParameter("m_code");
+				int entrancedate = Integer.parseInt(req.getParameter("entrancedate"));
+				int grade = Integer.parseInt(req.getParameter("grade"));
+				
+				vo.setM_code(m_code);
+				vo.setEntrancedate(entrancedate);
+				vo.setGrade(grade);
+				
+				insertCnt = dao.updateStudentInfo(vo);
+			}
+			
+			model.addAttribute("insertCnt", insertCnt);
+			model.addAttribute("option", option);
+		
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
+	
 }

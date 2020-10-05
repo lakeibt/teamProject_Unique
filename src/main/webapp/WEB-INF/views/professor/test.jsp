@@ -1,50 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../include/setting.jsp"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<script>
+<meta charset="UTF-8">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 
-$(document).ready(function(){
-	$.ajax({
-		url : '${professor}messageSimple',
-		type : 'GET',
-		dataType : 'html'
-	});
-	
-});
-
-</script>
 </head>
 <body>
-
-
-<ul>
-<c:forEach var="dto" items="${dtos}">
-	<c:set var="now" value="<%=new java.util.Date()%>" />
-	<c:set var="nowTime">
-		<fmt:formatDate value="${now}" pattern="mm" />
-	</c:set>
-	<c:set var="t" value="${dto.getReg_date()}" />
-	<c:set var="time" value="${t}">
-		<fmt:formatDate value="${time}" pattern="mm" />
-	</c:set>
-
-
-
-	<li class="message-item" style="padding: 5px 5px;">
-		<a class="dropdown-item" style="height: 100%; padding:10px 10px;">
-			<span class="message-info">
-			    <span class="time">${rt}</span>
-				<span>${dto.getSender()}</span>
-			</span>
-			<span class="message"> ${dto.getContent()} </span>
-		</a>
-	</li>
-</c:forEach>
-</ul>
-
-
+	<input type="text" id="message" />
+	<input type="button" id="sendBtn" value="submit"/>
+	<div id="messageArea"></div>
 </body>
+<script type="text/javascript">
+	$("#sendBtn").click(function() {
+		sendMessage();
+		$('#message').val('')
+	});
+
+	let sock = new SockJS("http://localhost:80/ex/echo/");
+	sock.onmessage = onMessage;
+	sock.onclose = onClose;
+	// 메시지 전송
+	function sendMessage() {
+		sock.send($("#message").val());
+	}
+	// 서버로부터 메시지를 받았을 때
+	function onMessage(msg) {
+		var data = msg.data;
+		$("#messageArea").append(data + "<br/>");
+	}
+	// 서버와 연결을 끊었을 때
+	function onClose(evt) {
+		$("#messageArea").append("연결 끊김");
+
+	}
+</script>
 </html>

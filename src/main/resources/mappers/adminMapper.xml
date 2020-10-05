@@ -227,6 +227,10 @@
 		 where s.salary_input_num = #{salary_input_num}
 	</select>
 	
+	<select id="getSelectCar" resultType="com.kosmo.uni.vo.SalaryVO">
+		select * from a_variableCost where cost = #{cost}
+	</select>
+	
 	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
 		SELECT * FROM A_PARKING WHERE PINTIME LIKE '%'||#{date}||'%'
 	</select>
@@ -449,7 +453,8 @@
 				#{car},
 				1,
 				#{de_address},
-				#{carnum})
+				#{carnum},
+				#{bank})
 	</insert>
 	<insert id="insertProfesser" parameterType="com.kosmo.uni.vo.HumanVO">
 		INSERT INTO p_professor 
@@ -472,7 +477,8 @@
 				#{car},
 				#{position},
 				#{de_address},
-				#{carnum})	
+				#{carnum},
+				#{bank})	
 	</insert>
 	<insert id="insertStudent" parameterType="com.kosmo.uni.vo.HumanVO">
 		INSERT INTO s_student  
@@ -525,15 +531,88 @@
 	</select>
 	
 	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.HumanVO">
-		select * from s_student where id = #{id}
+		select * from s_student s, a_major m where s.m_code = m.m_code AND id = #{id}
 	</select>
 	
 	<select id="getProfessorInfo" resultType="com.kosmo.uni.vo.HumanVO">
-		select * from p_professor where id = #{id}
+		select * from p_professor p, a_major m where p.m_code = m.m_code AND id = #{id}
 	</select>
 	
 	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.HumanVO">
-		select * from a_admin where id = #{id}
+		select * from a_admin a, a_depart d where a.depart = d.depart AND id = #{id}
 	</select>
+	
+	<select id="getSettingList" resultType="java.util.Map">
+		SELECT * FROM A_SALARYSET ORDER BY SALARY DESC
+	</select>
+	
+	<update id="updateAdminInfo" parameterType="com.kosmo.uni.vo.HumanVO">
+		UPDATE a_admin SET
+			photo = #{photo},
+			name = #{name},
+			eng_name = #{eng_name},
+			jumin1 = #{jumin1},
+			jumin2 = #{jumin2},
+			gender = #{gender},
+			frgn = #{frgn},
+			nation = #{nation},
+			tel = #{tel},
+			email = #{email},
+			address = #{address},
+			depart = #{depart},
+			rank = #{rank},
+			enterday = #{enterday},
+			account_number = #{account_number},
+			car = #{car},
+			de_address = #{de_address},
+			carnum = #{carnum},
+			bank = #{bank}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateProfessorInfo" parameterType="com.kosmo.uni.vo.HumanVO">
+		UPDATE p_professor SET
+			photo = #{photo},
+			name = #{name},
+			eng_name = #{eng_name},
+			jumin1 = #{jumin1},
+			jumin2 = #{jumin2},
+			gender = #{gender},
+			frgn = #{frgn},
+			nation = #{nation},
+			tel = #{tel},
+			email = #{email},
+			address = #{address},
+			m_code = #{m_code},
+			enterday = #{enterday},
+			account_number = #{account_number},
+			car = #{car},
+			position = #{position},
+			de_address = #{de_address},
+			carnum = #{carnum},
+			bank = #{bank}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateStudentInfo" parameterType="com.kosmo.uni.vo.HumanVO">
+		UPDATE s_student SET
+			photo = #{photo},
+			name = #{name},
+			eng_name = #{eng_name},
+			jumin1 = #{jumin1},
+			jumin2 = #{jumin2},
+			gender = #{gender},
+			frgn = #{frgn},
+			nation = #{nation},
+			tel = #{tel},
+			email = #{email},
+			address = #{address},
+			m_code = #{m_code},
+			grade = #{grade},
+			entrancedate = #{entrancedate},
+			de_address = #{de_address}	
+		WHERE id = #{id}
+	</update>
+	
 	
 </mapper>

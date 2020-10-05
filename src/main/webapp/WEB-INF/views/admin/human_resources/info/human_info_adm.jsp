@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
-
 <script>
 $(document).ready(function(){
 	var fileTarget = $('.filebox .upload-hidden');
@@ -43,12 +42,27 @@ $(document).ready(function(){
 	
 });
 
+$(document).ready(function(){
+	
+	$("input:radio[name=car]").change(function(){
+		
+		if($("input[name=car]:checked").val() == "1"){
+			
+			$('#car_num_div').show();
+ 
+        }else if($("input[name=car]:checked").val() == "0"){
+        	
+        	$('#car_num_div').hide();
+           
+        }
+		
+	});
+	
+});
 
 </script>
 </head>
 <body>
-
-
 <div class="col-md-12 col-sm-12 ">
 	<div class="x_panel">
 		<div class="x_content">
@@ -154,9 +168,28 @@ $(document).ready(function(){
 						<label class="col-form-label col-md-3 col-sm-3 label-align"
 							for="first-name">계좌번호
 						</label>
-						<div class="col-md-7 col-sm-7">
+						<div class="col-md-4 col-sm-4">
 							<input type="text" name="account_number" required="required"
 								class="form-control ">
+						</div>
+						<div class="col-md-3 col-sm-3">
+							<select class="form-control" name="bank">
+								<option value=""></option>
+		                        <option value="국민은행">국민은행</option>
+		                        <option value="기업은행">기업은행</option>
+		                        <option value="농협은행">농협은행</option>
+		                        <option value="산업은행">산업은행</option>
+		                        <option value="새마을금고">새마을금고</option>
+		                        <option value="신한은행">신한은행</option>
+		                        <option value="외환은행">외환은행</option>
+		                        <option value="우리은행">우리은행</option>
+		                        <option value="우체국">우체국</option>
+		                        <option value="카카오뱅크">카카오뱅크</option>
+		                        <option value="케이뱅크">케이뱅크</option>
+		                        <option value="하나은행">하나은행</option>
+		                        <option value="한국씨티은행">한국씨티은행</option>
+		                        <option value="SC제일은행">SC제일은행</option>
+							</select>
 						</div>
 					</div>
 					<div class="item form-group">

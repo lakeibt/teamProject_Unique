@@ -159,7 +159,6 @@ function message_load(num) {
 				$('#message_send_div').attr('class','col-lg-12');
 				
 				$('#message').html(data);
-				
 			}
 			
 		},

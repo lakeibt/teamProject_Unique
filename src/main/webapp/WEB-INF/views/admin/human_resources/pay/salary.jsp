@@ -1,20 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>급여등록</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<title>급여등록</title>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 			<div class="col-md-3 left_col">
 				<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 			</div>
-
 			<!-- top navigation -->
 			<div class="top_nav">
 				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>

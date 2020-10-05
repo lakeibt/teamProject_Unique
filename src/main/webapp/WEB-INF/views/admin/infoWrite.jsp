@@ -19,42 +19,43 @@ function confirmInfo() {
 }
 </script>
 </head>
-	<!-- page content -->
-	<div class="right_col" role="main">
-		<div style="height:40px;"></div>
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<div class="dashboard_graph">
-					<div class="row x_title">
-						<div style="width:100%; margin:auto;">
-							<h3>공지등록 폼</h3>
-						</div>
-					</div>
-					<form action="infoPro" name="infoForm" onsubmit="return confirmInfo();";>
+<div class="col-md-12 col-sm-12">
+	<div class="x_panel">
+		<div class="x_content">
+			<div class="table-responsive">
+				<form action="infoPro" name="infoForm" onsubmit="return confirmInfo();" style="opacity:1;">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-						<table class="table">
-							<tbody>
-								<tr>
-									<th style="width:10%">제목</th>
-									<td style="width:90%"><input type="text" class="form-control" name="title"></td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<textarea name="content" cols="100" rows="40" style="width:100%;"></textarea>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" align="center">
-										<input type="submit" value="등록" class="btn">
-										<input onclick="self.close();" type="button" value="취소" class="btn">
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
-				</div>
+					<table class="table table-striped jambo_table">
+						<thead>
+							<tr class="haedings">
+								<td colspan="2">
+									<font style="vertical-align:inherit;">
+										<font style="vertical-align:inherit;">공지등록</font>
+									</font>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th style="width:10%">제목</th>
+								<td style="width:90%"><input type="text" class="form-control" name="title"></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<textarea name="content" cols="100" rows="40" style="width:100%;"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center">
+									<input type="submit" value="등록" class="btn">
+									<input onclick="self.close();" type="button" value="취소" class="btn">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>
-</body>
+</div>
 </html>

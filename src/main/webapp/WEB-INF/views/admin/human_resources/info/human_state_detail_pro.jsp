@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var = "adm_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/admin/"/>
+<c:set var = "pro_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/professor/"/>
 
 
 <tr class="detail_tr">
@@ -31,31 +31,36 @@
 					</div>
 					<div class="item form-group">
 						<label class="col-form-label col-md-3 col-sm-3 label-align"
-							for="first-name">부서코드
+							for="first-name">학과
 						</label>
 						<div class="col-md-7 col-sm-7" id="selectBox_depart">
-							<select class="form-control" name="depart">
-								<option value="${vo.getDepart()}" selected>${vo.getDepart_name()}</option>
-								<option value="DE">학사관리과</option>
-								<option value="HU">인사관리과</option>
-								<option value="FA">시설관리과</option>
+							<select class="form-control" name="m_code">
+								<option value="${vo.getM_code()}">${vo.getM_name()} </option>
+								<option value="co">컴퓨터공학과</option>
+								<option value="be">뷰티미용과</option>
+								<option value="cn">건축학과</option>
+								<option value="en">영어영문학과</option>
+								<option value="fd">패션디자인학과</option>
+								<option value="ko">국어국문학과</option>
+								<option value="ja">일어일문학과</option>
+								<option value="fr">불어불문학과</option>
+								<option value="ma">기계공학과</option>
+								<option value="bi">생명공학과</option>
+								<option value="ad">시각디자인학과</option>
+								<option value="sc">조소학과</option>
 							</select>
-							
 						</div>
 					</div>
 					<div class="item form-group">
 						<label class="col-form-label col-md-3 col-sm-3 label-align"
-							for="first-name">직급
+							for="first-name">직책
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<select class="form-control" name="rank">
-								<option value="${vo.getRank()}" selected>${vo.getRank()}</option>
-								<option value="사원">사원</option>
-								<option value="주임">주임</option>
-								<option value="계장">계장</option>
-								<option value="과장">과장</option>
-								<option value="부장">부장</option>
-								<option value="총장">총장</option>
+							<select class="form-control" name="position">
+								<option value="${vo.getPosition()}">${vo.getPosition()}</option>
+								<option value="교수">교수</option>
+								<option value="부교수">부교수</option>
+								<option value="강사">강사</option>
 							</select>
 						</div>
 					</div>
@@ -271,7 +276,7 @@
 					<div style="height: 50px;">
 					</div>
 					<div id="image_container">
-						<img src="${adm_photo}${vo.getPhoto()}">
+						<img src="${pro_photo}${vo.getPhoto()}">
 					</div>
 					<div class="filebox">
 						<input class="upload-name"  value="${vo.getPhoto()}" name="photo2" value="파일선택" disabled="disabled">
