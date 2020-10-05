@@ -66,6 +66,23 @@ public interface AdminDAO {
 	public SalaryVO getMealCar(int salary_input_num);
 	
 	//급여명세서 조회
-	public List<PayslipVO> getPayslip(int salary_input_num);
-	
+	public PayslipVO getPayslip(Map<String, Object> map);
+	//급여 확정 - 인서트
+	public int insertSal(SalaryVO sal);
+	//급여대장 리스트 페이징 처리
+	public List<SalaryVO> getSelectSalaryList(Map<String, Object> map);
+	//급여대장 - 보너스 확정 버튼 클릭
+	public int insertBns(SalaryVO sal);
+	//급여대장 확정 버튼 클릭 후 salary_confirm코드 확인
+	public int getSelectConfirm(Map<String, Object> map);
+	//급여대장 확정 버튼 클릭 후 salary_confirm 2로 업데이트
+	public int getUpdateConfirm(Map<String, Object> map);
+	//급여대장 확정 후 급여 조회
+	public List<SalaryVO> getSeleteConfirmOne(int salary_input_num);
+	//급여대장 확정 후 상여 조회
+	public List<SalaryVO> getSeleteConfirmTwo(int salary_input_num);
+	//급여 확정 후 삭제 - 급여 
+	public void deleteSalaryConfirm(int salary_input_num);
+	//급여 확정 후 삭제 - 상여 
+	public void deleteBonusConfirm(int salary_input_num);
 }

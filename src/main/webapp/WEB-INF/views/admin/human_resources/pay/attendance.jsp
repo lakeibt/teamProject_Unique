@@ -240,9 +240,6 @@
 		</div>
 		<!-- /page content -->
 
-		<!-- footer content -->
-		<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
-		<!-- /footer content -->
 	</div>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>
 	</div>

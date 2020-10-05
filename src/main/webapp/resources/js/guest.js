@@ -1,6 +1,6 @@
 !(function($) {
 	//side bar - scroll menu - left
-	$(window).scroll(function() {
+	/*$(window).scroll(function() {
 		var position = $(document).scrollTop();
 		var footer_top = $('#footer').offset().top;
 		
@@ -10,7 +10,7 @@
 		if(leftbar_position > footer_top) {
 			$('#leftbar').css('top', 100);
 		} 
-	});
+	});*/
 	/*
 	//side bar - scroll banner - right
 	$(window).scroll(function() {

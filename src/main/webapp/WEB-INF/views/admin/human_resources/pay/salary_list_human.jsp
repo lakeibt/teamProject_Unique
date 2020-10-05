@@ -211,9 +211,6 @@
 			</div>
 			<!-- /page content -->
 
-			<!-- footer content -->
-				<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
-			<!-- /footer content -->
 		</div>
 	</div>
 	<!-- /page content -->

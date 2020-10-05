@@ -190,7 +190,7 @@ public class AdminController {
 	// 급여대장 - 조회
 	@RequestMapping(value = "/admin/human_resources/pay/payroll")
 	public String thisM_list(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/thisM_list");
+		logger.info("human_resources/pay/payroll");
 		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
 	}
@@ -233,14 +233,37 @@ public class AdminController {
 	}
 	
 	
-	// 급여대장 - 급여명세서
+	// 급여대장 - 급여명세서 
 	@RequestMapping(value = "/admin/human_resources/pay/payslip")
 	public String salary_payslip(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/payslip");
 		adminService.salary_payslip(req, model);
 		return "admin/human_resources/pay/payslip";
 	}
-
+	
+	//급여대장 - 확정 
+	@RequestMapping(value = "/admin/human_resources/pay/commitSalary")
+	public String commitSalary(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/commitSalary");
+		adminService.commitSalary(req, model);
+		return "admin/human_resources/pay/commitSalary";
+	}
+	//급여대장 확정 버튼 후 조회 
+	@RequestMapping(value = "/admin/human_resources/pay/confirm_payroll")
+	public String confirm_payroll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/confirm_payroll");
+		adminService.confirm_payroll(req, model);
+		return "admin/human_resources/pay/confirm_payroll";
+	}
+	
+	//급여대장 조회 - 수정   modifyRoll
+	@RequestMapping(value = "/admin/human_resources/pay/modifyRoll")
+	public String modifyRoll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/modifyRoll");
+		adminService.modifyRoll(req, model);
+		return "admin/human_resources/pay/modifyRoll";
+	}
+	
 	// 급여명세
 	@RequestMapping(value = "/admin/human_resources/pay/salary_info")
 	public String salary_info(HttpServletRequest req, Model model) {
@@ -248,6 +271,8 @@ public class AdminController {
 
 		return "admin/human_resources/pay/salary_info";
 	}
+	
+	
 	
 	// 월별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_month")

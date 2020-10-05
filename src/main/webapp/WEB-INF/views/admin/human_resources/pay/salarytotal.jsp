@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<fmt:formatNumber type="number" maxFractionDigits="3" value="${salary+vo.meal+vo.contract_vehicle}" /> 원
+	<fmt:formatNumber type="number" maxFractionDigits="3" value="${salary}" /> 원
 </body>
 </html>
