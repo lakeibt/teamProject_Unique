@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,6 @@ import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.DepartVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.MajorVO;
-import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
 import com.kosmo.uni.vo.RankVO;
@@ -740,7 +738,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void addHuman(MultipartHttpServletRequest req, Model model) {
 		int insertCnt = 0;
-		
 		String option = req.getParameter("option");
 		
 		MultipartFile file = req.getFile("photo");
@@ -898,14 +895,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 	@Override
 	public void nextProfessorId(HttpServletRequest req, Model model) {
-		
 		String nextId = dao.getNextProfessorId();
 		
 		model.addAttribute("nextId", nextId);
 	}
 	@Override
 	public void nextStudentId(HttpServletRequest req, Model model) {
-		
 		String nextId = dao.getNextStudentId();
 		
 		model.addAttribute("nextId", nextId);
@@ -929,11 +924,9 @@ public class AdminServiceImpl implements AdminService {
 	// 전공 목록 가져오기
 	@Override
 	public void majorList(HttpServletRequest req, Model model) {
-
 		List<MajorVO> majorList = dao.getMajorList();
 		
 		model.addAttribute("majorList",majorList);
-		
 	}
 
 	// 시설물 관리 리스트
@@ -1095,16 +1088,13 @@ public class AdminServiceImpl implements AdminService {
 		model.addAttribute("option", option);
 		
 		pageNum = req.getParameter("pageNum");
-		if(pageNum == null) {
-			pageNum = "1";
-		}
+		
+		if(pageNum == null) pageNum = "1";
 		
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
-	
 		start = (currentPage - 1) * pageSize + 1;
 		end = start + pageSize - 1;
-		
 		number = cnt - (currentPage - 1) * pageSize;
 		
 		if(cnt > 0) {
@@ -1115,15 +1105,9 @@ public class AdminServiceImpl implements AdminService {
 			List<HumanVO> dtos = null;
 			
 			switch (option) {
-	        case "adm":
-	        	dtos = dao.getAdminList(map);
-	            break;
-	        case "pro":
-	        	dtos = dao.getProfessorList(map);
-	            break;
-	        case "stu":
-	        	dtos = dao.getStudentList(map);
-	            break;
+	        case "adm":dtos = dao.getAdminList(map); break;
+	        case "pro":dtos = dao.getProfessorList(map); break;
+	        case "stu":dtos = dao.getStudentList(map); break;
 			}
 			
 			model.addAttribute("dtos", dtos);
@@ -1151,7 +1135,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void humanInfo(HttpServletRequest req, Model model) {
-		
 		String id = req.getParameter("id");
 		String option = id.substring(0, 1);
 		
@@ -1168,7 +1151,6 @@ public class AdminServiceImpl implements AdminService {
 			vo = dao.getStudentInfo(id);
 			break;
 		}
-		
 		model.addAttribute("vo",vo);
 	}
 		
@@ -1177,5 +1159,43 @@ public class AdminServiceImpl implements AdminService {
 		// 직급별 급여 가져오기
 		List<Map<String, Object>> list = dao.getSettingList();
 		model.addAttribute("list", list);
+		model.addAttribute("cnt", list.size());
+	}
+	@Override
+	public void settingPro(HttpServletRequest req, Model model) {
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = transFormat.parse(req.getParameter("date"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		// 무결성위배조건 - 부모테이블 먼저 추가 > RANK 테이블
+		int insert = dao.addRank(req.getParameter("rank"));
+		
+		// 직급 / 급여 추가
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rank", req.getParameter("rank"));
+		map.put("month", Integer.parseInt(req.getParameter("month")));
+		map.put("date", date);
+		
+		int insertCnt = dao.addSalaySet(map);
+		model.addAttribute("insertCnt", insertCnt);
+	}
+	@Override
+	public void settingHumanList(HttpServletRequest req, Model model) {
+		List<Map<String, Object>> list = dao.getSettingHumanList(req.getParameter("rank"));
+		
+		model.addAttribute("human", list);
+	}
+	@Override
+	public void settingDeletePro(HttpServletRequest req, Model model) {
+		int deleteCnt = 0;
+		int cnt = dao.selectRank(req.getParameter("rank")); // 직급에 해당되는 사원이 있는지 확인
+		if(cnt > 0) deleteCnt = 2;
+		else deleteCnt = dao.deleteRank(req.getParameter("rank"));
+		
+		model.addAttribute("deleteCnt", deleteCnt);
 	}
 }

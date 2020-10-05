@@ -98,4 +98,7 @@ public interface AdminService {
 	
 	// 기초 환경설정(직급별 급여)
 	public void setting(HttpServletRequest req, Model model);
+	public void settingPro(HttpServletRequest req, Model model);
+	public void settingHumanList(HttpServletRequest req, Model model);
+	public void settingDeletePro(HttpServletRequest req, Model model);
 }

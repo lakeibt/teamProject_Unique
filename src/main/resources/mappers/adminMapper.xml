@@ -543,4 +543,20 @@
 	<select id="getSettingList" resultType="java.util.Map">
 		SELECT * FROM A_SALARYSET ORDER BY SALARY DESC
 	</select>
+	<insert id="addRank" parameterType="String">
+		INSERT INTO A_RANK VALUES(#{rank})
+	</insert>
+	<insert id="addSalaySet" parameterType="java.util.Map">
+		INSERT INTO A_SALARYSET VALUES(#{rank}, #{month}, #{date})
+	</insert>
+	<select id="getSettingHumanList" resultType="java.util.Map">
+		SELECT A.ID ID, D.DEPART_NAME DEPART, A.NAME NAME, A.TEL TEL, A.EMAIL EMAIL, A.ADDRESS ADDRESS, A.ENTERDAY ENTERDAY
+		FROM A_ADMIN A, A_DEPART D WHERE A.DEPART = D.DEPART AND A.RANK = #{rank}
+	</select>
+	<select id="selectRank" resultType="int">
+		SELECT COUNT(*) FROM A_ADMIN WHERE RANK = #{rank}
+	</select>
+	<delete id="deleteRank" parameterType="String">
+		DELETE FROM A_RANK WHERE RANK = #{rank}
+	</delete>
 </mapper>

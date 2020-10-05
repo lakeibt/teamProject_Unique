@@ -534,4 +534,29 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getSettingList();
 	}
+	@Override
+	public int addRank(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.addRank(rank);
+	}
+	@Override
+	public int addSalaySet(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.addSalaySet(map);
+	}
+	@Override
+	public List<Map<String, Object>> getSettingHumanList(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSettingHumanList(rank);
+	}
+	@Override
+	public int selectRank(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.selectRank(rank);
+	}
+	@Override
+	public int deleteRank(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.deleteRank(rank);
+	}
 }

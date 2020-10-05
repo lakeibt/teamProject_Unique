@@ -2,25 +2,11 @@
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
-<script>
-function confirm() {
-	if(!document.settingForm.rank) {
-		alert("직급을 입력하세요");
-		return false;
-	} else if(!document.settingForm.month) {
-		alert("기본급을 입력하세요");
-		return false;
-	} else if(!document.settingForm.date) {
-		alert("지급일을 선택하세요");
-		return false;
-	}
-	return true;
-}
-</script>
+<body>
 <div class="x_panel">
 	<div class="x_content">
 		<div class="table-responsive">
-			<form action="setting_pro" name="settingForm" style="opacity:1" onsubmit="return confirm();">
+			<form action="${admin }human_resources/code_setting/setting_pro" name="settingForm" style="opacity:1" onsubmit="return confirm();">
 				<table class="table table-striped jambo_table">
 					<thead>
 						<tr class="headings">
@@ -38,10 +24,10 @@ function confirm() {
 							<td>기본급(월)</td>
 							<td><input name="month" type="number" class="form-control"></td>
 							<td>지급일</td>
-							<td><input name="date" type="month" class="form-control"></td>
+							<td><input name="date" type="date" class="form-control"></td>
 						</tr>
 						<tr>
-							<th colspan="6" align="center"><input style="background-color:#2A3F54; color:white; padding:0px;"type="submit" value="추가" class="form-control"></th>
+							<th colspan="6" align="center"><input style="background-color:#2A3F54; color:white; padding:0px;" type="submit" value="추가" class="form-control"></th>
 						</tr>
 					</tbody>
 				</table>
@@ -49,4 +35,5 @@ function confirm() {
 		</div>
 	</div>
 </div>
+</body>
 </html>
