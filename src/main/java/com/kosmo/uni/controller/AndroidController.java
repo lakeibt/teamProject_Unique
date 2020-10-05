@@ -50,9 +50,7 @@ public class AndroidController {
 	@RequestMapping("/android/androidNfcTag")
 	public Map<String, String> androidNfcTag(HttpServletRequest req){
 		logger.info("androidNfcTag()");
-		
 		Map<String, String> out = andService.NfcTag(req);
-		
 		return out;
 	}
 }
