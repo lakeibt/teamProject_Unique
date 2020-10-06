@@ -8,11 +8,12 @@
 		<th class="column-title" colspan="8"><h5>검색 목록</h5></th>
 	</tr>
 	<tr>
-		<th style="width:10%;">번호</th>
-		<th style="width:20%;">차량번호</th>
-		<th style="width:20%;">날짜</th>
-		<th style="width:20%;">입차시간</th>
-		<th style="width:20%;">출차시간</th>
+		<th style="width:5%;">번호</th>
+		<th style="width:10%;">차량번호</th>
+		<th style="width:20%;">이름(소속)</th>
+		<th style="width:15%;">날짜</th>
+		<th style="width:25%;">입차시간</th>
+		<th style="width:25%;">출차시간</th>
 	</tr>
 <c:if test="${parkCnt > 0}">
 <c:forEach var="dto" items="${dtos}">
@@ -20,6 +21,7 @@
 	<tr>
 		<td>${dto.num}</td>
 		<td>${dto.carNum}</td>
+		<td>${dto.name}(${dto.depart_name})</td>
 		<td>${fn:substring(TextValue,0,15)}</td>
 		<td>${dto.pintime}</td>
 		<td>${dto.pouttime}</td>

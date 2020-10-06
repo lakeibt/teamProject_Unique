@@ -117,6 +117,11 @@
 													</th>
 													<th class="column-title">
 														<font style="vertical-align:inherit;">
+															<font style="vertical-align:inherit;">이름(소속)</font>
+														</font>
+													</th>
+													<th class="column-title">
+														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">날짜</font>
 														</font>
 													</th>
@@ -141,6 +146,7 @@
 														<tr>
 															<td>${dto.num}</td>
 															<td>${dto.carNum}</td>
+															<td>${dto.name}(${dto.depart_name})</td>
 															<td>${fn:substring(TextValue,0,15)}</td>
 															<td>${dto.pintime}</td>
 															<td>${dto.pouttime}</td>

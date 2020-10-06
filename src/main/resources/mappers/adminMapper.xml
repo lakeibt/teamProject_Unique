@@ -40,14 +40,16 @@
 	<select id="getAttendance_List" parameterType="java.util.Map"
 		resultType="com.kosmo.uni.vo.AdminVO">
 		<![CDATA[
-			SELECT num, id, tagintime, tagouttime,pnum ,rNum 
-			FROM (SELECT num, id, tagouttime,pnum, tagintime, rowNUM rNum
-	    	FROM ( 
-	        SELECT *FROM A_NFC n
-	        JOIN A_ADMIN a
-	        on n.pnum = a.tel
-	        ORDER BY tagintime DESC))
-			WHERE rNum >=#{start} AND rNum <=#{end}
+			SELECT num, id, name, depart_name, tagintime, tagouttime,pnum ,rNum 
+         FROM (SELECT num, id, name, depart_name, tagouttime,pnum, tagintime, rowNUM rNum
+          FROM ( 
+           SELECT * FROM A_NFC n
+           , A_ADMIN a
+       , A_DEPART d
+           WHERE n.pnum = a.tel
+         AND d.depart = a.depart
+           ORDER BY tagintime DESC))
+         WHERE rNum >=#{start} AND rNum <=#{end}
     	]]>
 	</select>
 	
@@ -65,13 +67,14 @@
 		<![CDATA[
 		SELECT *
   		  FROM (SELECT *
-        	      FROM (SELECT num, id, tagouttime, pnum, tagintime, rowNUM rNum FROM A_NFC n
-                JOIN A_ADMIN a
-                  on n.pnum = a.tel
-                  WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR}
-                  ORDER BY tagintime DESC
-                  ))
-                  WHERE rNum >=#{start} AND rNum <=#{end}
+			      FROM (SELECT num, id, name, depart_name, tagouttime,pnum, tagintime, rowNUM rNum 
+			      FROM A_NFC n
+		           , A_ADMIN a
+		       , A_DEPART d
+			         WHERE SUBSTR(tagintime,1,10) BETWEEN #{st, jdbcType=VARCHAR} AND #{et, jdbcType=VARCHAR} AND n.pnum = a.tel AND d.depart = a.depart
+			         ORDER BY tagintime DESC
+			         ))
+         WHERE rNum >=#{start} AND rNum <=#{end}
 		]]>
 	</select>
 	
@@ -212,7 +215,12 @@
 	</select>
 	
 	<select id="getParkingList" resultType="com.kosmo.uni.vo.ParkVO">
-		SELECT * FROM A_PARKING ORDER BY num desc
+		SELECT p.NUM num, p.PINTIME pintime, p.POUTTIME pouttime, p.CARNUM carnum, a.NAME name, d.depart_name
+		  FROM A_PARKING p
+		   , A_ADMIN a
+		   , A_DEPART d
+		 WHERE p.carnum = a.carnum
+		   AND a.depart = d.depart
 	</select>
 
 	<select id="getSelectList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.SalaryVO">
@@ -233,11 +241,19 @@
 	</select>
 	
 	<select id="getSearchList" resultType="com.kosmo.uni.vo.ParkVO">
-		SELECT * FROM A_PARKING WHERE PINTIME LIKE '%'||#{date}||'%'
+	SELECT p.NUM num, p.PINTIME pintime, p.POUTTIME pouttime, p.CARNUM carnum, a.NAME name, d.depart_name
+		  FROM A_PARKING p, A_ADMIN a, A_DEPART d
+		 WHERE p.carnum = a.carnum
+		   AND a.depart = d.depart
+		   AND p.PINTIME LIKE '%'||#{date}||'%'
 	</select>
 	
 	<select id="getCarNumList" resultType="com.kosmo.uni.vo.ParkVO">
-		SELECT * FROM A_PARKING WHERE CARNUM LIKE '%'||#{date}||'%'
+		SELECT p.NUM num, p.PINTIME pintime, p.POUTTIME pouttime, p.CARNUM carnum, a.NAME name, d.depart_name
+		  FROM A_PARKING p, A_ADMIN a, A_DEPART d
+		 WHERE p.carnum = a.carnum
+		   AND a.depart = d.depart
+		   AND p.CARNUM LIKE '%'||#{date}||'%'
 	</select>
 
 	<select id="getDivisionCnt" resultType="int">

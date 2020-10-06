@@ -40,7 +40,7 @@ $("[id^=btn]").on('click',
 <div class="table-responsive">
 	<table class="table table-striped jambo_table">
 		<thead>
-			<tr class="headings">	
+			<tr class="headings" align="center">	
 				<th class="column-title">
 					<font style="vertical-align:inherit;">
 						<font style="vertical-align:inherit;">출근</font>
@@ -98,7 +98,7 @@ $("[id^=btn]").on('click',
 						<c:if test="${empty dto.tagouttime}">
 							<td>-</td>
 						</c:if>
-						<td>${dto.id}</td>
+						<td>${dto.name}(${dto.depart_name})</td>
 						<fmt:parseDate var="intime" value="${dto.tagintime}" pattern="yyyy/MM/dd/(E) HH:mm" />
 						<fmt:parseDate var="outtime" value="${dto.tagouttime}" pattern="yyyy/MM/dd/(E) HH:mm" />
 						<!-- 날짜 -->

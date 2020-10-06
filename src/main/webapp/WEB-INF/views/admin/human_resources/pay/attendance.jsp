@@ -121,7 +121,7 @@ function endSelect() {
 									<div class="table-responsive">
 										<table class="table table-striped jambo_table">
 											<thead>
-												<tr class="headings">	
+												<tr class="headings" align="center">	
 													<th class="column-title">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">출근</font>
@@ -134,7 +134,7 @@ function endSelect() {
 													</th>
 													<th class="column-title">
 														<font style="vertical-align:inherit;">
-															<font style="vertical-align:inherit;">사원번호</font>
+															<font style="vertical-align:inherit;">이름(소속)</font>
 														</font>
 													</th>
 													<th class="column-title">
@@ -179,7 +179,7 @@ function endSelect() {
 															<c:if test="${empty dto.tagouttime}">
 																<td>-</td>
 															</c:if>
-															<td>${dto.id}</td>
+															<td>${dto.name}(${dto.depart_name})</td>
 															<fmt:parseDate var="intime" value="${dto.tagintime}" pattern="yyyy/MM/dd/(E) HH:mm" />
 															<fmt:parseDate var="outtime" value="${dto.tagouttime}" pattern="yyyy/MM/dd/(E) HH:mm" />
 															<!-- 날짜 -->
