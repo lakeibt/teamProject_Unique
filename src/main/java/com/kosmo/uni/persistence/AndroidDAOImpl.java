@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.Manager;
+import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
 
 @Repository
@@ -56,6 +57,38 @@ public class AndroidDAOImpl implements AndroidDAO{
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.byeNfc(map);
 	}
+
+	@Override
+	public int whatCar(Map<String, String> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.whatCar(map);
+	}
+
+	@Override
+	public ParkVO carNum(String carNum) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.carNum(carNum);
+	}
+	
+	@Override
+	public int todayCar(Map<String, String> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.todayCar(map);
+	}
+
+	@Override
+	public int hiParking(String carNum) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.hiParking(carNum);
+	}
+
+	@Override
+	public int byeParking(Map<String, String> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.byeParking(map);
+	}
+
+	
 
 
 }

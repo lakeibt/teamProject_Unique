@@ -53,5 +53,13 @@ public class AndroidController {
 		Map<String, String> out = andService.NfcTag(req);
 		return out;
 	}
+	
+	@ResponseBody
+	@RequestMapping("/android/parking")
+	public Map<String, String> androidParking(HttpServletRequest req){
+		logger.info("androidParking()");
+		Map<String, String> out = andService.Parking(req);
+		return out;
+	}
 }
 
