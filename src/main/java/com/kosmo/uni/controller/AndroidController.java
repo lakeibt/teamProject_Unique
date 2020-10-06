@@ -1,5 +1,7 @@
 package com.kosmo.uni.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
+import com.kosmo.uni.vo.nfcVO;
 
 @Controller
 public class AndroidController {
@@ -59,6 +62,15 @@ public class AndroidController {
 	public Map<String, String> androidParking(HttpServletRequest req){
 		logger.info("androidParking()");
 		Map<String, String> out = andService.Parking(req);
+		return out;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/android/workcheck")
+	public ArrayList<nfcVO> androidWorkcheck(HttpServletRequest req){
+		logger.info("androidWorkcheck()");
+		
+		ArrayList<nfcVO> out = andService.workcheck(req);
 		return out;
 	}
 }

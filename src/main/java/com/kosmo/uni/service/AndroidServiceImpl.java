@@ -1,7 +1,9 @@
 package com.kosmo.uni.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
+import com.kosmo.uni.vo.nfcVO;
 
 @Service
 public class AndroidServiceImpl implements AndroidService {
@@ -247,5 +250,13 @@ public class AndroidServiceImpl implements AndroidService {
 		
 		
 		return out;
+	}
+
+	@Override
+	public ArrayList<nfcVO> workcheck(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		ArrayList<nfcVO> dtos = andDAO.workchecklist(id);
+		System.out.println("dtos : "+dtos);
+		return dtos;
 	}
 }

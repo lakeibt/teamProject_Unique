@@ -1,6 +1,8 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
+import com.kosmo.uni.vo.nfcVO;
 
 @Repository
 public class AndroidDAOImpl implements AndroidDAO{
@@ -86,6 +89,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 	public int byeParking(Map<String, String> map) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.byeParking(map);
+	}
+
+	@Override
+	public ArrayList<nfcVO> workchecklist(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.workchecklist(id);
 	}
 
 	

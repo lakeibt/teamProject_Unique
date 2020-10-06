@@ -58,4 +58,10 @@
 		AND PINTIME LIKE '%'||#{today}||'%'
 	</update>
 	
+	<select id="workchecklist" parameterType="String" resultType="com.kosmo.uni.vo.nfcVO">
+		SELECT a.tagintime tagintime , a.tagouttime tagouttime 
+		  FROM A_NFC a, A_ADMIN b
+		 WHERE a.pnum = b.tel AND id = #{id}
+	</select>
+	
 </mapper>
