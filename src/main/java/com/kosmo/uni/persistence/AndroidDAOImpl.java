@@ -65,7 +65,7 @@ public class AndroidDAOImpl implements AndroidDAO{
 	}
 
 	@Override
-	public ParkVO carNum(String carNum) {
+	public String carNum(String carNum) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.carNum(carNum);
 	}

@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-<table class="table" style="font-size:15px;">
-	<tr>
-		<th colspan="8"><h5>검색 목록</h5></th>
+<table class="table table-striped jambo_table" style="font-size:15px;">
+	<tr class="headings">
+		<th class="column-title" colspan="8"><h5>검색 목록</h5></th>
 	</tr>
 	<tr>
 		<th style="width:10%;">번호</th>
@@ -19,7 +19,7 @@
 <c:set var="TextValue" value="${dto.pintime}"/>
 	<tr>
 		<td>${dto.num}</td>
-		<td>${dto.carnum}</td>
+		<td>${dto.carNum}</td>
 		<td>${fn:substring(TextValue,0,15)}</td>
 		<td>${dto.pintime}</td>
 		<td>${dto.pouttime}</td>

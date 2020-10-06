@@ -29,7 +29,7 @@ public interface AndroidDAO {
 	public int whatCar(String carNum);
 	
 	//parking 차량번호 Full로 다시 불러오기
-	public ParkVO carNum(String carNum);
+	public String carNum(String carNum);
 	
 	//parking 오늘 날짜에 있는지 없는지 체크
 	public int todayCar(Map<String, String> map);

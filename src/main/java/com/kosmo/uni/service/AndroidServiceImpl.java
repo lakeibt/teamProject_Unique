@@ -216,25 +216,26 @@ public class AndroidServiceImpl implements AndroidService {
 			//오늘 입차 내역 있음?
 			SimpleDateFormat format1 = new SimpleDateFormat ("MM/dd");
 			String today = format1.format (System.currentTimeMillis());
-			ParkVO realCarNum = andDAO.carNum(carNum);
-			System.out.println("차량번호 : "+realCarNum.getCarNum());
+			String realCarNum = andDAO.carNum(carNum);
+			System.out.println("차량번호 : "+realCarNum);
 			
 			Map<String, String> going2 = new HashMap<String, String>();
-			going2.put("carNum", realCarNum.getCarNum());
+			going2.put("carNum", realCarNum);
+			going2.put("today", today);
 			int incount = andDAO.todayCar(going2);
 			System.out.println("오늘 입차내역이 있나요? : "+incount);
 		    
 			if(incount == 1) {
 				System.out.println("차량 퇴근");
 				Map<String, String> going3 = new HashMap<String, String>();
-				going3.put("carNum", realCarNum.getCarNum());
+				going3.put("carNum", realCarNum);
 				going3.put("today", today);
 				andDAO.byeParking(going3);
-				out.put("carNum", realCarNum.getCarNum());
+				out.put("carNum", realCarNum);
 			} else if (incount == 0) {
 				System.out.println("차량 출근");
-				andDAO.hiParking(realCarNum.getCarNum());
-				out.put("carNum", realCarNum.getCarNum());
+				andDAO.hiParking(realCarNum);
+				out.put("carNum", realCarNum);
 			}
 			
 			

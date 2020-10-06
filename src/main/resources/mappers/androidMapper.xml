@@ -38,7 +38,7 @@
 		SELECT COUNT(*) as cnt FROM A_ADMIN WHERE CARNUM LIKE '%'||#{carNum}||'%'
 	</select>
 	
-	<select id="carNum" parameterType="com.kosmo.uni.vo.ParkVO">
+	<select id="carNum" parameterType="String" resultType="String">
 		SELECT CARNUM FROM A_ADMIN WHERE CARNUM LIKE '%'||#{carNum}||'%'
 	</select>
 	

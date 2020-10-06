@@ -97,7 +97,8 @@
 											<font style="vertical-align:inherit;">출입 목록</font>
 										</font>
 									</h2>
-									<div class="clearfix"></div>
+									<div class="clearfix" id="searchinfo">
+									</div>
 								</div>
 								<div class="x_content">
 									<div class="table-responsive">
@@ -139,7 +140,7 @@
 													<c:set var="TextValue" value="${dto.pintime}"/>
 														<tr>
 															<td>${dto.num}</td>
-															<td>${dto.carnum}</td>
+															<td>${dto.carNum}</td>
 															<td>${fn:substring(TextValue,0,15)}</td>
 															<td>${dto.pintime}</td>
 															<td>${dto.pouttime}</td>
@@ -154,7 +155,8 @@
 						</div>
 					</div>
 					<div class="row" style="display:block">
-						<div class="col-md-12 col-sm-12" id="display"></div>
+						<div class="col-md-12 col-sm-12" id="display">
+						</div>
 					</div>
 				</div>
 			<!-- /page content -->
