@@ -48,7 +48,6 @@ function changeList(){
     });
 	
 };
-<<<<<<< HEAD
 
 function detail_state_adm(obj){
 	 var token = $("meta[name='_csrf']").attr("content");
@@ -87,11 +86,6 @@ function deleteTr_adm(obj) {
 	$(obj).attr('onclick','detail_state_adm(this)');
 }
 
-=======
-function detail_state(){
-	swal('ㅎㅇ','ㅎㅇ','success');
-}
->>>>>>> tjr
 </script>
 </head>
 <body class="nav-md">
@@ -106,7 +100,6 @@ function detail_state(){
 			</div>
 			<!-- /top navigation -->
 			<!-- page content -->
-<<<<<<< HEAD
 		<div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -132,29 +125,6 @@ function detail_state(){
         </div>
         <!-- /page content -->
 
-
-=======
-			<div class="right_col" role="main">
-				<img src="${img}sample/인사정보현황.jpg">
-			</div>
-			<!-- /page content -->
-			<div class="right_col" role="main">
-				<div class="">
-					<div class="page-title">
-						<div class="title_left">
-							<h3>인사정보현황</h3>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<div class="row" style="display: block;">
-						<div class="clearfix"></div>
-						<div class="col-md-12 col-sm-12" id="human_state_list_div">
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /page content -->
->>>>>>> tjr
 			<!-- footer content -->
 			<footer>
 				<div class="pull-right">황동국팀 - 관리자 페이지</div>
