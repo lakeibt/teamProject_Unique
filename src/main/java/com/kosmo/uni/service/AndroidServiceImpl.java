@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.Manager;
+import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
 
 @Service
@@ -98,6 +99,12 @@ public class AndroidServiceImpl implements AndroidService {
 			map.put("data2", s.getName());
 			map.put("data3", mcode);
 			map.put("data4", s.getPhoto());
+			map.put("data5", s.getGrade());
+			map.put("data6", s.getEntrancedate());
+			map.put("data7", s.getTel());
+			map.put("data8", s.getEmail());
+			map.put("data9", s.getAddress());
+			map.put("data10", s.getDe_address());
 			
 		} else if(id.substring(0,1).equals("a")) {
 			Manager m = andDAO.getAdminInfo(id);
@@ -190,6 +197,56 @@ public class AndroidServiceImpl implements AndroidService {
 				out.put("tagid", null);
 			}
 		}
+		return out;
+	}
+
+	@Override
+	public Map<String, String> Parking(HttpServletRequest req) {
+		String carNum = req.getParameter("carNum");
+		System.out.println("차량번호 : "+carNum);
+		
+		Map<String, String> out = new HashMap<String, String>();
+		
+		Map<String, String> going = new HashMap<String, String>();
+		going.put("carNum", carNum);
+		
+		//admin인 사람이 차가 있는지 확인
+		int have = andDAO.whatCar(going);
+		System.out.println("admin의 차량인가요? :"+have);
+		if(have > 0) { 
+			//등록된 차량
+			//오늘 입차 내역 있음?
+			SimpleDateFormat format1 = new SimpleDateFormat ("MM/dd");
+			String today = format1.format (System.currentTimeMillis());
+			ParkVO realCarNum = andDAO.carNum(carNum);
+			System.out.println("차량번호 : "+realCarNum.getCarNum());
+			
+			Map<String, String> going2 = new HashMap<String, String>();
+			going2.put("carNum", realCarNum.getCarNum());
+			int incount = andDAO.todayCar(going2);
+			System.out.println("오늘 입차내역이 있나요? : "+incount);
+		    
+			if(incount == 1) {
+				System.out.println("차량 퇴근");
+				Map<String, String> going3 = new HashMap<String, String>();
+				going3.put("carNum", realCarNum.getCarNum());
+				going3.put("today", today);
+				andDAO.byeParking(going3);
+				out.put("carNum", realCarNum.getCarNum());
+			} else if (incount == 0) {
+				System.out.println("차량 출근");
+				andDAO.hiParking(realCarNum.getCarNum());
+				out.put("carNum", realCarNum.getCarNum());
+			}
+			
+			
+		}else {
+			//미등록 차량
+			System.out.println("미등록 차량");
+			out.put("carnum", null);
+		}
+		
+		
 		return out;
 	}
 }

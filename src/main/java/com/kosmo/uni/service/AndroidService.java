@@ -11,5 +11,7 @@ public interface AndroidService {
 	public Map<String, Object> MyPage(HttpServletRequest req);
 
 	public Map<String, String> NfcTag(HttpServletRequest req);
+	
+	public Map<String, String> Parking(HttpServletRequest req);
 
 }
