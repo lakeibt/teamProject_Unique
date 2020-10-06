@@ -26,7 +26,7 @@ public interface AndroidDAO {
 	public int byeNfc(Map<String, String> map);
 	
 	//admin의 등록된 차량이 맞는지 확인
-	public int whatCar(Map<String, String> map);
+	public int whatCar(String carNum);
 	
 	//parking 차량번호 Full로 다시 불러오기
 	public ParkVO carNum(String carNum);

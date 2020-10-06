@@ -203,16 +203,14 @@ public class AndroidServiceImpl implements AndroidService {
 	@Override
 	public Map<String, String> Parking(HttpServletRequest req) {
 		String carNum = req.getParameter("carNum");
-		System.out.println("차량번호 : "+carNum);
+		carNum = carNum.replaceAll("\n","");
+		System.out.println("차량번호 :!"+carNum+"!");
 		
 		Map<String, String> out = new HashMap<String, String>();
 		
-		Map<String, String> going = new HashMap<String, String>();
-		going.put("carNum", carNum);
-		
 		//admin인 사람이 차가 있는지 확인
-		int have = andDAO.whatCar(going);
-		System.out.println("admin의 차량인가요? :"+have);
+		int have = andDAO.whatCar(carNum);
+		System.out.println("admin의 차량인가요? : "+have);
 		if(have > 0) { 
 			//등록된 차량
 			//오늘 입차 내역 있음?

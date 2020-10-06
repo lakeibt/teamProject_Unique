@@ -34,7 +34,7 @@
 		AND TAGINTIME LIKE '%'||#{today}||'%'
 	</update>
 	
-	<select id="whatCar" parameterType="java.util.Map" resultType="int">
+	<select id="whatCar" parameterType="String" resultType="int">
 		SELECT COUNT(*) as cnt FROM A_ADMIN WHERE CARNUM LIKE '%'||#{carNum}||'%'
 	</select>
 	
