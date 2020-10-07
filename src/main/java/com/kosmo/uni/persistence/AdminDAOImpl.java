@@ -20,7 +20,6 @@ import com.kosmo.uni.vo.SalaryVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
-
 	@Autowired
 	SqlSession sqlSession;
 
@@ -333,11 +332,65 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<PayslipVO> getPayslip(int salary_input_num) {
-		List<PayslipVO> dtos = null;
+	public PayslipVO getPayslip(Map<String, Object> map) {
+		PayslipVO vo = null;
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
-		dtos = dao.getPayslip(salary_input_num);
-		System.out.println("급여명세서 : " + dtos);
+		vo = dao.getPayslip(map);
+		System.out.println("급여명세서 : " + vo);
+		return vo;
+	}
+
+	@Override
+	public int insertSal(SalaryVO sal) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.insertSal(sal);
+	}
+
+	@Override
+	public List<SalaryVO> getSelectSalaryList(Map<String, Object> map) {
+		List<SalaryVO> dtos = null;
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dtos = dao.getSelectSalaryList(map);
+		System.out.println("getSalaryList : " + dtos);
+		return dtos;
+	}
+
+	@Override
+	public int insertBns(SalaryVO sal) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.insertBns(sal);
+	}
+
+	@Override
+	public int getSelectConfirm(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSelectConfirm(map);
+	}
+
+	@Override
+	public int getUpdateConfirm(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getUpdateConfirm(map);
+	}
+
+	@Override
+	public List<SalaryVO> getSeleteConfirmOne(int salary_input_num) {
+		List<SalaryVO> dtos = null;
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dtos = dao.getSeleteConfirmOne(salary_input_num);
+		System.out.println("getSalaryList : " + dtos);
+		return dtos;
+	}
+
+	@Override
+	public List<SalaryVO> getSeleteConfirmTwo(int salary_input_num) {
+		List<SalaryVO> dtos = null;
+		
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dtos = dao.getSeleteConfirmTwo(salary_input_num);
+		System.out.println("getSalaryList : " + dtos);
 		return dtos;
 	}
 	
@@ -530,4 +583,48 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getAdminInfo(id);
 	}
+	@Override
+	public List<Map<String, Object>> getSettingList() {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSettingList();
+	}
+	@Override
+	public int addRank(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.addRank(rank);
+	}
+	@Override
+	public int addSalaySet(Map<String, Object> map) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.addSalaySet(map);
+	}
+	@Override
+	public List<Map<String, Object>> getSettingHumanList(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getSettingHumanList(rank);
+	}
+	@Override
+	public int selectRank(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.selectRank(rank);
+	}
+	@Override
+	public int deleteRank(String rank) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.deleteRank(rank);
+	}
+	
+	@Override
+	public void deleteSalaryConfirm(int salary_input_num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dao.deleteSalaryConfirm(salary_input_num);
+		
+	}
+
+	@Override
+	public void deleteBonusConfirm(int salary_input_num) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		dao.deleteBonusConfirm(salary_input_num);
+	}
+
 }

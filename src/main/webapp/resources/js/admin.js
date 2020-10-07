@@ -16,6 +16,17 @@ function modifyRoll(id) {
 	window.open(url, "confirm", "menubar=no, width=350 height=300" );
 }
 
+//payslipInfo('${stos.id}','${salary_input_num}')"
+function payslipInfo(id, num) {
+	//id값 미입력시
+	var url = "payslip?salary_input_num=" + num+"&id="+id;
+	window.open(url, "confirm", "menubar=no, width=1400 height=600" );
+}
+
 function payslip(num){
 	window.loaction="payslip?salary_input_num="+num;
+}
+
+function salCommit(num){
+	window.loaction="commitSalary?salary_input_num="+num;
 }

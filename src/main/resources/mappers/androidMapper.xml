@@ -3,22 +3,19 @@
     
 <mapper namespace="com.kosmo.uni.persistence.AndroidDAO">
 	<select id="confirmIdPwdStu" resultType="java.util.Map" parameterType = "String">
-		SELECT id, name, pwd FROM S_STUDENT WHERE id=#{id}
+		SELECT * FROM S_STUDENT WHERE id=#{id}
 	</select>
 	
 	<select id="confirmIdPwdAdm" resultType="java.util.Map" parameterType = "String">
-		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id}
+		SELECT * FROM A_ADMIN WHERE id=#{id}
 	</select>
 	
-	<select id="getStudentInfo" resultType="java.util.Map">
-		SELECT S.PHOTO PHOTO, S.ID ID, S.NAME NAME, 
-			   S.TEL TEL, S.EMAIL EMAIL, M.M_NAME M_NAME, S.GRADE GRADE
-		FROM S_STUDENT S, A_MAJOR M
-		WHERE S.M_CODE = M.M_CODE AND id=#{id}
+	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
+		SELECT * FROM S_STUDENT WHERE id=#{id}
 	</select>
 	
 	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.Manager">
-		SELECT id, name, pwd FROM A_ADMIN WHERE id=#{id}
+		SELECT * FROM A_ADMIN WHERE id=#{id}
 	</select>
 
 	<select id="whatNfc" parameterType="java.util.Map" resultType="int">
@@ -32,8 +29,39 @@
 	
 	<update id="byeNfc" parameterType="java.util.Map">
 		UPDATE A_NFC 
-		SET TAGOUTTIME = TO_CHAR(SYSDATE, 'YYYY/MM/DD/(DY) HH24:MI')
+		SET TAGOUTTIME = TO_CHAR(SYSDATE + 9/24, 'YYYY/MM/DD/(DY) HH24:MI')
 		WHERE PNUM = #{phonenum}
 		AND TAGINTIME LIKE '%'||#{today}||'%'
 	</update>
+	
+	<select id="whatCar" parameterType="String" resultType="int">
+		SELECT COUNT(*) as cnt FROM A_ADMIN WHERE CARNUM LIKE '%'||#{carNum}||'%'
+	</select>
+	
+	<select id="carNum" parameterType="String" resultType="String">
+		SELECT CARNUM FROM A_ADMIN WHERE CARNUM LIKE '%'||#{carNum}||'%'
+	</select>
+	
+	<select id="todayCar" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) as cnt FROM A_PARKING WHERE CARNUM = #{carNum} AND PINTIME LIKE '%'||#{today}||'%'
+	</select>
+	
+	<insert id="hiParking" parameterType="com.kosmo.uni.vo.ParkVO">
+		INSERT INTO A_PARKING (NUM, CARNUM) 
+		VALUES (CAR_SEQ.nextval, #{carNum})
+	</insert>
+	
+	<update id="byeParking" parameterType="java.util.Map">
+		UPDATE A_PARKING 
+		SET POUTTIME = TO_CHAR(SYSDATE + 9/24, 'YYYY/MM/DD/(DY) HH24:MI')
+		WHERE CARNUM = #{carNum}
+		AND PINTIME LIKE '%'||#{today}||'%'
+	</update>
+	
+	<select id="workchecklist" parameterType="String" resultType="com.kosmo.uni.vo.nfcVO">
+		SELECT a.tagintime tagintime , a.tagouttime tagouttime 
+		  FROM A_NFC a, A_ADMIN b
+		 WHERE a.pnum = b.tel AND id = #{id}
+	</select>
+	
 </mapper>

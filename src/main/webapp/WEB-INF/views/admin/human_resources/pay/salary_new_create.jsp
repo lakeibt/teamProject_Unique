@@ -1,18 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
-	<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
+<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/admin.js"></script>
 </head>
 <body class="nav-md">
-	<form action="salary_enroll" method="post" name="salary_"
-		onsubmit="confirmIdCheck();">
+	<form action="salary_enroll" method="post" name="salary_" onsubmit="confirmIdCheck();">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<div class="row">
 		<div class="col-md-12">
@@ -21,8 +17,6 @@
 				<div class="x_content">
 					<table class="table" align="center">
 						<thead style="color:#73879C;">
-						
-							
 							<tr>
 								<th>급여구분</th>
 								<td><select>
@@ -158,15 +152,12 @@
 								<td><input class="form-control input-sm" type="text"></td>
 							</tr>
 							<tr>
-		
 								<th colspan="2"><input class="form-control" style="float:left; width:100px;" type="submit" 
 									value="등록"> <input class="form-control" style="float:left; width:100px;" type="reset" value="취소">
-									
 									</th>
 							</tr>
 						</thead>
 					</table>
-					
 				</div>
 			</div>
 		</div>

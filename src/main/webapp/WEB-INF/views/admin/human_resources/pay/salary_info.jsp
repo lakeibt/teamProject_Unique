@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/setting.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +6,6 @@
 	<title>급여명세</title>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -27,9 +25,7 @@
 			</div>
 			<!-- /page content -->
 
-			<!-- footer content -->
-			<%@ include file="/WEB-INF/views/include/admin_footer.jsp"%>
-			<!-- /footer content -->
+			
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap_js.jsp"%>

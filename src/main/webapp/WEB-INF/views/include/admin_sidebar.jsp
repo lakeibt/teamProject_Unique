@@ -46,12 +46,7 @@
 						<li><a>기초코드 설정<span class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">
 								<li><a
-									href="${path}admin/human_resources/code_setting/salary_setting">급/상여
-										지급일자 등록</a></li>
-								<li><a
 									href="${path}admin/human_resources/code_setting/setting">인사/급여환경설정</a></li>
-								<li><a
-									href="${path}admin/human_resources/code_setting/code_setting">인사기초코드등록</a></li>
 							</ul></li>
 						<li><a>인사정보<span class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">

@@ -40,7 +40,6 @@
 					<p>학점</p>
 				</a>
 			</li>
-			</c:if>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}employment">
 					<i class="material-icons">assignment_ind</i>
@@ -53,6 +52,7 @@
 					<p>공모전 정보</p>
 				</a>
 			</li>
+			</c:if>
 		</ul>
 	</div>
 </div>

@@ -1,7 +1,9 @@
 package com.kosmo.uni.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.Manager;
+import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
+import com.kosmo.uni.vo.nfcVO;
 
 @Service
 public class AndroidServiceImpl implements AndroidService {
@@ -86,23 +90,43 @@ public class AndroidServiceImpl implements AndroidService {
 		
 		// 회원정보 조회 - 이름 학과 학년 이메일 학번(아이디) 
 		if(id.substring(0,1).equals("s")) {
-			Map<String, Object> s = new HashMap<String, Object>();
-			s = andDAO.getStudentInfo(id);
+			StudentVO s = andDAO.getStudentInfo(id);
+			String mcode = "";
+			if(s.getM_code().equals("CO")) {
+				mcode = "기계공학과";
+			}else {
+				mcode = s.getM_code();
+			}
 			
-			map.put("photo", s.get("PHOTO"));
-			map.put("id", s.get("ID"));
-			map.put("name", s.get("NAME"));
-			map.put("tel", s.get("TEL"));
-			map.put("email", s.get("EMAIL"));
-			map.put("major", s.get("M_NAME"));
-			map.put("grade", s.get("GRADE"));
+			map.put("data1", s.getId());
+			map.put("data2", s.getName());
+			map.put("data3", mcode);
+			map.put("data4", s.getPhoto());
+			map.put("data5", s.getGrade());
+			map.put("data6", s.getEntrancedate());
+			map.put("data7", s.getTel());
+			map.put("data8", s.getEmail());
+			map.put("data9", s.getAddress());
+			map.put("data10", s.getDe_address());
 			
 		} else if(id.substring(0,1).equals("a")) {
 			Manager m = andDAO.getAdminInfo(id);
 			System.out.println("m : " + m);
-			
+			String depart = "";
+			if(m.getDepart().equals("DE")) {
+				depart = "학사관리과";
+			}else if(m.getDepart().equals("HU")){
+				depart = "인사관리과";
+			}else if(m.getDepart().equals("FA")){
+				depart = "시설관리과";
+			} else {
+				depart = m.getDepart();
+			}
 			map.put("data1", m.getId());
 			map.put("data2", m.getName());
+			map.put("data3", m.getRank());
+			map.put("data4", m.getPhoto());
+			map.put("data5", depart);
 			System.out.println("m.id : " + m.getId());
 			System.out.println("m.name : " + m.getName());
 			
@@ -177,5 +201,62 @@ public class AndroidServiceImpl implements AndroidService {
 			}
 		}
 		return out;
+	}
+
+	@Override
+	public Map<String, String> Parking(HttpServletRequest req) {
+		String carNum = req.getParameter("carNum");
+		carNum = carNum.replaceAll("\n","");
+		System.out.println("차량번호 :!"+carNum+"!");
+		
+		Map<String, String> out = new HashMap<String, String>();
+		
+		//admin인 사람이 차가 있는지 확인
+		int have = andDAO.whatCar(carNum);
+		System.out.println("admin의 차량인가요? : "+have);
+		if(have > 0) { 
+			//등록된 차량
+			//오늘 입차 내역 있음?
+			SimpleDateFormat format1 = new SimpleDateFormat ("MM/dd");
+			String today = format1.format (System.currentTimeMillis());
+			String realCarNum = andDAO.carNum(carNum);
+			System.out.println("차량번호 : "+realCarNum);
+			
+			Map<String, String> going2 = new HashMap<String, String>();
+			going2.put("carNum", realCarNum);
+			going2.put("today", today);
+			int incount = andDAO.todayCar(going2);
+			System.out.println("오늘 입차내역이 있나요? : "+incount);
+		    
+			if(incount == 1) {
+				System.out.println("차량 퇴근");
+				Map<String, String> going3 = new HashMap<String, String>();
+				going3.put("carNum", realCarNum);
+				going3.put("today", today);
+				andDAO.byeParking(going3);
+				out.put("carNum", realCarNum);
+			} else if (incount == 0) {
+				System.out.println("차량 출근");
+				andDAO.hiParking(realCarNum);
+				out.put("carNum", realCarNum);
+			}
+			
+			
+		}else {
+			//미등록 차량
+			System.out.println("미등록 차량");
+			out.put("carnum", null);
+		}
+		
+		
+		return out;
+	}
+
+	@Override
+	public ArrayList<nfcVO> workcheck(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		ArrayList<nfcVO> dtos = andDAO.workchecklist(id);
+		System.out.println("dtos : "+dtos);
+		return dtos;
 	}
 }
