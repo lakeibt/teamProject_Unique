@@ -31,5 +31,7 @@ public interface ProfessorDAO {
 	public List<MessageVO> getMessageList_notRead(Map<String, Object> map);
 	
 	// 쪽지 보내기
-	public int insertMessage(MessageVO vo);
+	public int insertMessage(Map<String, Object> map);
+	public List<Map<String, Object>> authenList(String authen);
+	public String getReceiverName(Map<String, Object> map);
 }

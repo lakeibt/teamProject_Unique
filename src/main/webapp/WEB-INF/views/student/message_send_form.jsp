@@ -39,9 +39,9 @@ function confirm() {
 	var receiver = $("#receiver option:selected").val();
 	
 	var param = "title="+title+"&content="+content+"&authen="+authen+"&receiver="+receiver;
-	sendRequest(pro_send_callback, "proMessageSend", "get", param);
+	sendRequest(send_callback, "messageSend", "get", param);
 }
-function pro_send_callback() {
+function send_callback() {
 	if (httpRequest.readyState == 4) {
 		if (httpRequest.status == 200) {
 			var data = httpRequest.responseText;
