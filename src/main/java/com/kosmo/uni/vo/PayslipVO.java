@@ -15,7 +15,7 @@ public class PayslipVO {
 	private int payments_division;		//지급 구분 - 정규/ 비정규/ 교수
 	private int division_cnt;			//급여 받는 정규직사원 명수
 	private String salary_name;			//급여명
-	
+	private String email;				//이메일
 	private Date salary_inday;		//급여지급일
 	private int salary_division;   //급여 구분 - 급여 / 상여
 	private int rate;   //상여 퍼센트
@@ -29,6 +29,14 @@ public class PayslipVO {
 	private int pay;
 	private int paytotal;
 	private int bonustotal;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getId() {
 		return id;
 	}

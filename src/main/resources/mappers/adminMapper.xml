@@ -150,7 +150,7 @@
 		SELECT m.id,
 		       m.name, 
 		       m.enterday,
-		       m.rank,
+		       m.rank, m.email,
 		       d.depart_name, 
 		       s.salary_input_num, s.payments_division, s.division_cnt, s.salary_total, s.salary_division,
 		        s.salary_name, ss.salary, s.salary_inday, m.car, v.meal, v.contract_vehicle, b.rate

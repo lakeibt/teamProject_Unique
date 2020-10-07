@@ -30,7 +30,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/main")
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
-
 		return "admin/main";
 	}
 
@@ -44,7 +43,6 @@ public class AdminController {
 		
 		return "admin/degree/course";
 	}
-	
 	//강의등록
 	@RequestMapping(value = "/admin/degree/coursenext")
 	public String coursenext(HttpServletRequest req, Model model) {
@@ -57,7 +55,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/degree/coursenext2")
 	public String coursenext2(HttpServletRequest req, Model model) {
 		logger.info("degree/coursenext2");
-		
 		
 		return "admin/degree/coursenext2";
 	}
