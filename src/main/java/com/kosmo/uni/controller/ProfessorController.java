@@ -41,8 +41,10 @@ public class ProfessorController {
 	
 	// 강의관리
 	@RequestMapping("/professor/course")
-	public String pro_course() {
+	public String pro_course(HttpServletRequest req, Model model) {
 		logger.info("url ==> course");
+		
+		proService.courseData(req, model);
 		
 		return "professor/course";
 	}
