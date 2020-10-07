@@ -17,6 +17,7 @@ public class CourseVO {
 	private String p_name;
 	private String grade_code;
 	private int school_year;
+	private int plan_chk;
 	
 	
 	public int getSchool_year() {
@@ -121,6 +122,12 @@ public class CourseVO {
 	}
 	public void setProfessor(String professor) {
 		this.professor = professor;
+	}
+	public int getPlan_chk() {
+		return plan_chk;
+	}
+	public void setPlan_chk(int plan_chk) {
+		this.plan_chk = plan_chk;
 	}
 	
 }
