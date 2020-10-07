@@ -53,5 +53,17 @@
 		  FROM (SELECT * FROM p_message where sender_id = #{id} AND readchk = 0)) WHERE rNum >= #{start} AND rNum <= #{end}
 		]]>
 	</select>
+	
+	<select id="getCourseProCnt" parameterType="String" resultType="int">
+		SELECT COUNT(*) as cnt FROM P_PROFESSOR p, A_COURSE C 
+		WHERE p.name = c.p_name AND id = #{id}
+	</select>
+	
+	<select id="getCourseProList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.CourseVO">
+		SELECT co_name ,co_day, le_code, co_num, limit_num
+		FROM P_PROFESSOR p, A_COURSE C
+ 		WHERE p.name = c.p_name AND id = #{id}
+	</select>
+	
 
 </mapper>

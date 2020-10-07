@@ -66,11 +66,11 @@
 			<div class="container">
 
 				<div class="d-flex justify-content-between align-items-center">
-					<h2>성적관리</h2>
+					<h2>수업관리</h2>
 
 					<ol>
 						<li><a href="${professor}main">홈</a></li>
-						<li>성적관리</li>
+						<li>수업관리</li>
 					</ol>
 				</div>
 			</div>
@@ -162,8 +162,12 @@
 								<h2 class="entry-title">
 									<a href="#">1주차</a>
 								</h2>
+								
+								<div class="entry-content"><a href="http://localhost:3000/"></a>
+								
+								</div>
 
-								<div class="entry-content">
+								<!-- <div class="entry-content">
 									<table class="table" style="font-size: 15px; text-align: center;">
 										<tr>
 											<th>수업목록</th>
@@ -205,7 +209,7 @@
 											</tr>
 										</tfoot>
 									</table>
-								</div>
+								</div> -->
 
 							</article>
 							<!-- End blog entry -->

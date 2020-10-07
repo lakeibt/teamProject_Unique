@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.MessageVO;
 
 @Repository
@@ -57,6 +59,17 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	@Override
 	public int insertMessage(MessageVO vo) {
 		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", vo);
+	}
+	@Override
+	public int getCourseProCnt(String id) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getCourseProCnt(id);
+	}
+	@Override
+	public List<CourseVO> getCourseProList(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		List<CourseVO> dtos = dao.getCourseProList(map);
+		return dtos;
 	}
 
 }

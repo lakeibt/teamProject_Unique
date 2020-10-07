@@ -3,6 +3,8 @@ package com.kosmo.uni.persistence;
 import java.util.List;
 import java.util.Map;
 
+import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.MessageVO;
 
 public interface ProfessorDAO {
@@ -32,4 +34,10 @@ public interface ProfessorDAO {
 	
 	// 쪽지 보내기
 	public int insertMessage(MessageVO vo);
+	
+	// 강의 갯수
+	public int getCourseProCnt(String id);
+	
+	// 강의 리스트
+	public List<CourseVO> getCourseProList(Map<String, Object> map);
 }

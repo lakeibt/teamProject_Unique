@@ -81,41 +81,21 @@ function endSelect() {
 						<div class="col-md-12 col-sm-12">
 							<div class="x_panel">
 								<div class="x_content">
-									<div class="table-responsive">
-										<table class="table table-striped jambo_table">
-											<tbody>
-												<tr class="headings">
-													<th class="column-title">
-														<font style="vertical-align:inherit;">
-															<font style="vertical-align:inherit;">대상기간</font>
-														</font>
-													</th>
-													<th class="column-title">
-														<font style="vertical-align:inherit;">
-															<font style="vertical-align:inherit;">
-																<input class="form-control" type="date" id="startDate" onchange="startSelect()">
-															</font>
-														</font>
-													</th>
-													<th class="column-title">
-														<font style="vertical-align:inherit;">
-															<font style="vertical-align:inherit;">
-																<input class="form-control" type="date" id="endDate" onchange="endSelect()">
-															</font>
-														</font>
-													</th>
-													<th class="column-title">
-														<font style="vertical-align:inherit;">
-															<font style="vertical-align:inherit;">
-																<input type="button" class="btn" style="padding: 6px 6px;" id="attendance_Search" value="검색">
-																<input type="button" class="btn" style="padding: 6px 6px;" onclick="location.reload();" value="초기화">
-															</font>
-														</font>
-													</th>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+									<table class="table">
+										<thead style="color: #73879C;">
+											<tr align="center">
+												<th>대상기간</th>
+												<th><input class="form-control" type="date"
+													id="startDate" onchange="startSelect()"></th>
+												<th><input class="form-control" type="date"
+													id="endDate" onchange="endSelect()"></th>
+												<th><input type="button" class="btn"
+													style="padding: 6px 6px;" id="attendance_Search" value="검색"><a href="http://192.168.219.143:3000"></a>
+													<input type="button" class="btn" style="padding: 6px 6px;"
+													onclick="location.reload();" value="초기화"></th>
+											</tr>
+										</thead>
+									</table>
 								</div>
 								<div class="x_content" id="attendance">
 									<div class="table-responsive">
