@@ -64,8 +64,8 @@
 								<li><a href="${path}admin/human_resources/pay/salary">급여등록</a></li>
 								<li><a
 									href="${path}admin/human_resources/pay/salary_list">급여대장</a></li>
-								<li><a
-									href="${path}admin/human_resources/pay/salary_info">급여명세</a></li>
+								<%-- <li><a
+									href="${path}admin/human_resources/pay/salary_info">급여명세</a></li> --%>
 								<li><a
 									href="${path}admin/human_resources/pay/salary_list_month">월별
 										급/상여지급현황</a></li>
