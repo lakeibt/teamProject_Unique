@@ -20,7 +20,7 @@ function modifyRoll(id) {
 function payslipInfo(id, num) {
 	//id값 미입력시
 	var url = "payslip?salary_input_num=" + num+"&id="+id;
-	window.open(url, "confirm", "menubar=no, width=1000 height=600" );
+	window.open(url, "confirm", "menubar=no, width=1400 height=600" );
 }
 
 function payslip(num){

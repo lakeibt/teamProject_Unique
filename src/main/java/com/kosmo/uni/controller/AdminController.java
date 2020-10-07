@@ -34,6 +34,7 @@ public class AdminController {
 		logger.info("admin_main");
 
 		adminService.info_list(req, model);
+
 		return "admin/main";
 	}
 	// ------------------------- 공지사항(메인) -------------------------
