@@ -235,23 +235,6 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public void studentSimpleInfo(HttpServletRequest req, Model model) {
-		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("세션 : " + (String) req.getSession().getAttribute("memId"));
-		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
-		int check = stuDAO.studentIdCheck(id);
-		//
-		int selectCnt = 0;
-		Map<String, Object> vo = null;
-		if (check == 1) {
-			vo = stuDAO.getStudentSimpleInfo(id);
-			selectCnt = 1;
-		}
-		model.addAttribute("vo", vo);
-		model.addAttribute("selectCnt", selectCnt);
-	}
-	
-	@Override
 	public void messageList(HttpServletRequest req, Model model) {
 		int pageSize = 5;
 		int pageBlock = 5;
@@ -266,8 +249,10 @@ public class StudentServiceImpl implements StudentService{
 		int endPage = 0; 
 		
 		String id = (String) req.getSession().getAttribute("memId");
-		String option = req.getParameter("option") == null ? "" : req.getParameter("option");
-		System.out.println(option);
+		String option = req.getParameter("option");
+		if(option == null || option.equals("undefined") || option.equals("receive")) option = "receive";
+		else option = "send";
+		
 		if(option.equals("receive") || option == "") {
 			model.addAttribute("option", "receive");
 			cnt = stuDAO.getMessageCnt(id);
@@ -277,9 +262,7 @@ public class StudentServiceImpl implements StudentService{
 		}
 		
 		pageNum = req.getParameter("pageNum");
-		if(pageNum == null) {
-			pageNum = "1";
-		}
+		if(pageNum == null || pageNum.equals("undefined")) pageNum = "1";
 		
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
@@ -293,17 +276,18 @@ public class StudentServiceImpl implements StudentService{
 			map.put("end", end);
 			map.put("id", id);
 			ArrayList<MessageVO> dtos = null;
-			if(option.equals("receive") || option == null) {
+			if(option.equals("receive") || option.equals("undefined") || option == null) {
 				dtos = (ArrayList<MessageVO>) stuDAO.getMessageList(map);
 			} else {
 				dtos = (ArrayList<MessageVO>) stuDAO.getMessageList_send(map);
 			}
+			
 			model.addAttribute("dtos", dtos);
+			model.addAttribute("testDate", dtos.get(0).getReg_date());
 		}
 		
 		startPage = (currentPage / pageBlock) * pageBlock + 1;
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
-		
 		endPage = startPage + pageBlock -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
@@ -323,9 +307,153 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public void message(HttpServletRequest req, Model model) {
 		int num = Integer.parseInt(req.getParameter("num"));
-		System.out.println("num =>" + num);
 		MessageVO vo = stuDAO.getMessage(num);
 		
+		if(vo.getReadchk() == 0) {
+			stuDAO.updateReadChk(num);
+		}
 		model.addAttribute("dto", vo);
+	}
+	
+	@Override
+	public void studentSimpleInfo(HttpServletRequest req, Model model) {
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println("세션 : " + (String) req.getSession().getAttribute("memId"));
+		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
+		int check = stuDAO.studentIdCheck(id);
+
+		int selectCnt = 0;
+		Map<String, Object> vo = null;
+		if (check == 1) {
+			vo = stuDAO.getStudentSimpleInfo(id);
+			selectCnt = 1;
+		}
+		model.addAttribute("vo", vo);
+		model.addAttribute("selectCnt", selectCnt);
+	}
+	
+	@Override
+	public void messageSimple(HttpServletRequest req, Model model) {
+		int pageSize = 5;
+		int pageBlock = 5;
+		int cnt = 0;
+		int start = 0;
+		int end = 0;
+		int number = 0;	
+		String pageNum = "";
+		int currentPage = 0;
+		int pageCount = 0;
+		int startPage = 0;
+		int endPage = 0; 
+		
+		String id = (String) req.getSession().getAttribute("memId");
+		cnt = stuDAO.getMessageCnt_notRead(id);
+		
+		pageNum = req.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		currentPage = Integer.parseInt(pageNum);
+		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
+		start = (currentPage - 1) * pageSize + 1;
+		end = start + pageSize - 1;
+		number = cnt - (currentPage - 1) * pageSize;
+		
+		if(cnt > 0) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("id", id);
+			ArrayList<MessageVO> dtos = null;
+			dtos = (ArrayList<MessageVO>) stuDAO.getMessageList_notRead(map);
+			
+			model.addAttribute("dtos", dtos);
+		}
+		
+		startPage = (currentPage / pageBlock) * pageBlock + 1;
+		if(currentPage % pageBlock == 0) startPage -= pageBlock;
+		endPage = startPage + pageBlock -1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		req.getSession().setAttribute("nr_cnt", cnt);
+		model.addAttribute("cnt", cnt);			
+		model.addAttribute("number", number);	 
+		model.addAttribute("pageNum", pageNum);
+		
+		if(cnt>0) {
+			model.addAttribute("startPage", startPage);	
+			model.addAttribute("endPage", endPage);			
+			model.addAttribute("pageBlock", pageBlock);	
+			model.addAttribute("pageCount", pageCount);	
+			model.addAttribute("currentPage", currentPage);
+		}
+	}
+
+	@Override
+	public int messageSend(HttpServletRequest req, Model model) {
+		String title = req.getParameter("title");
+		String receiver_id = req.getParameter("receiver");
+		String content = req.getParameter("content");
+		String authen = "";
+		if(req.getParameter("authen").equals("stu")) authen = "S_STUDENT";
+		else authen = "P_PROFESSOR";
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", receiver_id);
+		map.put("authen", authen);
+		String receiver_name = stuDAO.getReceiverName(map);
+		
+		map.put("id", req.getSession().getAttribute("memId"));
+		map.put("authen", "S_STUDENT");
+		String sender_name = stuDAO.getReceiverName(map);
+		
+		Map<String, Object> msg = new HashMap<>();
+		msg.put("title", title);
+		msg.put("content", content);
+		msg.put("receiver_id", receiver_id);
+		msg.put("receiver_name", receiver_name);
+		msg.put("sender_id", req.getSession().getAttribute("memId"));
+		msg.put("sender_name", sender_name);
+		
+		int insertCnt = stuDAO.insertMessage(msg);
+		return insertCnt;
+	}
+	@Override
+	public int messageReply(HttpServletRequest req, Model model) {
+		String title = req.getParameter("title");
+		String receiver_id = req.getParameter("receiver_id");
+		String receiver_name = req.getParameter("receiver_name");
+		String content = req.getParameter("content");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", req.getSession().getAttribute("memId"));
+		map.put("authen", "S_STUDENT");
+		String sender_name = stuDAO.getReceiverName(map);
+		
+		Map<String, Object> msg = new HashMap<>();
+		msg.put("title", title);
+		msg.put("content", content);
+		msg.put("receiver_id", receiver_id);
+		msg.put("receiver_name", receiver_name);
+		msg.put("sender_id", req.getSession().getAttribute("memId"));
+		msg.put("sender_name", sender_name);
+		
+		int insertCnt = stuDAO.insertMessage(msg);
+		return insertCnt;
+	}
+	// 보내기 폼 수신자 설정
+	@Override
+	public void addresseeList(HttpServletRequest req, Model model) {
+		String authen = "";
+		if(req.getParameter("authen") == null) authen = "P_PROFESSOR";
+		else if(req.getParameter("authen") != null && req.getParameter("authen").equals("pro")) {
+			authen = "P_PROFESSOR";
+		} else authen = "S_STUDENT";
+		
+		List<Map<String, Object>> list = null;
+		list = stuDAO.authenList(authen);
+		
+		model.addAttribute("authenList", list);
 	}
 }

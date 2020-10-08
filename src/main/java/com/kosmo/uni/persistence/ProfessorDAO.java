@@ -40,4 +40,10 @@ public interface ProfessorDAO {
 	
 	// 강의 리스트
 	public List<CourseVO> getCourseProList(Map<String, Object> map);
+	
+	public int insertMessage(Map<String, Object> map);
+	
+	public List<Map<String, Object>> authenList(String authen);
+	
+	public String getReceiverName(Map<String, Object> map);
 }

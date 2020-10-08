@@ -57,8 +57,16 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList_notRead", map);
 	}
 	@Override
-	public int insertMessage(MessageVO vo) {
-		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", vo);
+	public int insertMessage(Map<String, Object> map) {
+		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", map);
+	}
+	@Override
+	public List<Map<String, Object>> authenList(String authen) {
+		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.authenList", authen);
+	}
+	@Override
+	public String getReceiverName(Map<String, Object> map) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getReceiverName", map);
 	}
 	@Override
 	public int getCourseProCnt(String id) {
@@ -70,6 +78,11 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
 		List<CourseVO> dtos = dao.getCourseProList(map);
 		return dtos;
+	}
+	@Override
+	public int insertMessage(MessageVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

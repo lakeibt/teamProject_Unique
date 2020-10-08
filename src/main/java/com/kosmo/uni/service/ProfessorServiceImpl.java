@@ -38,9 +38,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 		int endPage = 0;
 
 		String id = (String) req.getSession().getAttribute("memId");
-		String option = req.getParameter("option") == null ? "" : req.getParameter("option");
-		System.out.println(option);
-		if (option.equals("receive") || option == "") {
+		String option = req.getParameter("option");
+		if(option == null || option.equals("undefined") || option.equals("receive")) option = "receive";
+		else option = "send";
+		if(option.equals("receive") || option == "") {
 			model.addAttribute("option", "receive");
 			cnt = proDAO.getMessageCnt(id);
 		} else {
@@ -49,10 +50,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 		}
 
 		pageNum = req.getParameter("pageNum");
-		if (pageNum == null) {
-			pageNum = "1";
-		}
-
+		if(pageNum == null || pageNum.equals("undefined")) pageNum = "1";
+		
 		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt / pageSize) + (cnt % pageSize > 0 ? 1 : 0);
 
@@ -67,7 +66,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 			map.put("end", end);
 			map.put("id", id);
 			ArrayList<MessageVO> dtos = null;
-			if (option.equals("receive") || option == null) {
+			if(option.equals("receive") || option.equals("undefined") || option == null) {
 				dtos = (ArrayList<MessageVO>) proDAO.getMessageList(map);
 			} else {
 				dtos = (ArrayList<MessageVO>) proDAO.getMessageList_send(map);
@@ -135,7 +134,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 //	}
 
 	public void messageSimple(HttpServletRequest req, Model model) {
-
 		int pageSize = 5;
 		int pageBlock = 5;
 		int cnt = 0;
@@ -194,37 +192,85 @@ public class ProfessorServiceImpl implements ProfessorService {
 			model.addAttribute("pageBlock", pageBlock);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("currentPage", currentPage);
-
 		}
 
 	}
 
 	@Override
 	public int messageSend(HttpServletRequest req, Model model) {
-
 		String title = req.getParameter("title");
-		String receive_id = req.getParameter("receive_id");
-		String receive_name = req.getParameter("receive_name");
+		String receiver_id = req.getParameter("receiver");
 		String content = req.getParameter("content");
-
-		MessageVO vo = new MessageVO();
-
-		vo.setTitle(title);
-
-		int insertCnt = proDAO.insertMessage(vo);
-
+		String authen = "";
+		if(req.getParameter("authen").equals("stu")) authen = "S_STUDENT";
+		else authen = "P_PROFESSOR";
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", receiver_id);
+		map.put("authen", authen);
+		String receiver_name = proDAO.getReceiverName(map);
+		
+		map.put("id", req.getSession().getAttribute("memId"));
+		map.put("authen", "P_PROFESSOR");
+		String sender_name = proDAO.getReceiverName(map);
+		
+		Map<String, Object> msg = new HashMap<>();
+		msg.put("title", title);
+		msg.put("content", content);
+		msg.put("receiver_id", receiver_id);
+		msg.put("receiver_name", receiver_name);
+		msg.put("sender_id", req.getSession().getAttribute("memId"));
+		msg.put("sender_name", sender_name);
+		
+		int insertCnt = proDAO.insertMessage(msg);
 		return insertCnt;
-
 	}
-
+	@Override
+	public int messageReply(HttpServletRequest req, Model model) {
+		String title = req.getParameter("title");
+		String receiver_id = req.getParameter("receiver_id");
+		String receiver_name = req.getParameter("receiver_name");
+		String content = req.getParameter("content");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", req.getSession().getAttribute("memId"));
+		map.put("authen", "P_PROFESSOR");
+		String sender_name = proDAO.getReceiverName(map);
+		
+		Map<String, Object> msg = new HashMap<>();
+		msg.put("title", title);
+		msg.put("content", content);
+		msg.put("receiver_id", receiver_id);
+		msg.put("receiver_name", receiver_name);
+		msg.put("sender_id", req.getSession().getAttribute("memId"));
+		msg.put("sender_name", sender_name);
+		
+		int insertCnt = proDAO.insertMessage(msg);
+		return insertCnt;
+	}
+	// 보내기 폼 수신자 설정
+	@Override
+	public void addresseeList(HttpServletRequest req, Model model) {
+		String authen = "";
+		if(req.getParameter("authen") == null) authen = "P_PROFESSOR";
+		else if(req.getParameter("authen") != null && req.getParameter("authen").equals("pro")) {
+			authen = "P_PROFESSOR";
+		} else authen = "S_STUDENT";
+		
+		List<Map<String, Object>> list = null;
+		list = proDAO.authenList(authen);
+		
+		model.addAttribute("authenList", list);
+	}
+	
 	@Override
 	public void courseData(HttpServletRequest req, Model model) {
-
+	
 		String id = (String) req.getSession().getAttribute("memId");
 		int cnt = proDAO.getCourseProCnt(id);
 		System.out.println("1_cnt : " + cnt);
 		System.out.println("1_id : " + id);
-
+	
 		if (cnt > 0) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			System.out.println("2_cnt : " + cnt);
@@ -235,7 +281,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 			List<CourseVO> dtos = proDAO.getCourseProList(map);
 			System.out.println("3_cnt : " + cnt);
 			System.out.println("3_id : " + id);
-
+	
 			model.addAttribute("cnt", cnt);
 			model.addAttribute("dtos", dtos);
 		}

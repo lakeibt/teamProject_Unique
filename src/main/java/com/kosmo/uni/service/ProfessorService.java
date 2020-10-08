@@ -24,4 +24,8 @@ public interface ProfessorService {
 	
 	// 교수 수강정보
 	public void courseData(HttpServletRequest req, Model model);
+
+	public int messageReply(HttpServletRequest req, Model model);
+	// 쪽지 보내기 폼 - 수신자 : 학생/교수
+	public void addresseeList(HttpServletRequest req, Model model);
 }
