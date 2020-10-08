@@ -27,10 +27,16 @@ public interface AndroidService {
 	//ADM 정보 수정
 	public Map<String, Object> maninfosave(HttpServletRequest req);
 	
-	//ADM 정보 보기 
+	//STU 정보 보기 
 	public Map<String, Object> stuinfo(HttpServletRequest req);
 	
-	//ADM 정보 수정
+	//STU 정보 수정
 	public Map<String, Object> stuinfosave(HttpServletRequest req);
+	
+	//PRO 정보 보기 
+	public Map<String, Object> proinfo(HttpServletRequest req);
+	
+	//PRO 정보 수정
+	public Map<String, Object> proinfosave(HttpServletRequest req);
 
 }
