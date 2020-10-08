@@ -29,7 +29,9 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 		String msg = authentication.getName() + "님 환영합니다.";
 		request.setAttribute("msg", msg);
 		request.getSession().setAttribute("memId", vo.getUserId());
+		request.getSession().setAttribute("name", vo.getUserName());
 		request.getSession().setAttribute("auth", vo.getAuthorities());
+		request.getSession().setAttribute("photo", vo.getPhoto());
 		
 		if(vo.getAuthorities().toString().equals("[ROLE_PROFESSOR]")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/professor/main");

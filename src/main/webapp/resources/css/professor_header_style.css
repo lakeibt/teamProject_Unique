@@ -1,7 +1,9 @@
 .message-box{
+	list-style:none;
 	border: 1px solid #D9DEE4;
 	display: block;	
 	width: 300px;
+	padding: 0;
 }
 
 .message-box span{
@@ -11,6 +13,12 @@
 .message-item{
 	background-color: #f3f8fa;
 	margin: 6px 6px;
+	height: 100px;
+}
+
+.message-item-all{
+	background-color: #f3f8fa;
+	margin: 6px 6px;
 }
 
 .dropdown-item{
@@ -18,9 +26,12 @@
 	padding: 3px 3px;
 }
 
+.message-info{
+	display: block;
+}
+
 .time{
-	position: absolute;
-    right: 25px;
+	float: right;
     font-size: 11px;
     font-style: italic;
     font-weight: bold;
@@ -29,6 +40,7 @@
 .message{
 	display: block;
 	font-size:11px;
+	margin-top: 10px;
 }
 
 .message-new{

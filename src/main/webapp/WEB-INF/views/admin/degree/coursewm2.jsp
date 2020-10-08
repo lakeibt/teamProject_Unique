@@ -6,14 +6,14 @@
 <body>
 	<c:if test = "${cnt == 0}">
 		<script type = "text/javascript">
-			alert("강의삭제오류");
+			alert("강의수정오류");
 			window.history.back();
 		</script>
 	</c:if>
 	
 	<c:if test = "${cnt != 0}">
 		<script type = "text/javascript">
-			alert("강의삭제가 완료되었습니다");
+			alert("강의 수정이 완료되었습니다");
 			window.history.back();
 		</script>
 	</c:if>

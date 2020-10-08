@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
-<table class="table" style="font-size: 13px;">
+<table class="table">
 	<thead>
 		<tr>
 			<th style="width: 10%;">이수구분</th>
@@ -15,11 +15,27 @@
 		<c:if test="${cnt > 0}">
 			<c:forEach var="dto" items="${dtos}">
 				<tr>
-					<td style="width: 10%;">${dto.p_code}</td>
-					<td style="width: 25%;">${dto.co_name}</td>
-					<td style="width: 15%;">${dto.name_1}</td>
-					<td style="width: 10%;">${dto.grade_1}</td>
-					<td style="width: 10%;">${dto.grade_code}</td>
+					<td style="width: 10%;">${dto.P_CODE}</td>
+					<td style="width: 25%;">${dto.CO_NAME}</td>
+					<td style="width: 15%;">${dto.P_NAME}</td>
+					<td style="width: 10%;">${dto.GRADE}</td>
+					<c:if test="${dto.SCORE == 'AA' || dto.SCORE == 'BB' || dto.SCORE == 'CC' || dto.SCORE == 'DD' }">
+						<c:if test="${dto.SCORE == 'AA' }">
+							<td style="width: 10%;">A+</td>
+						</c:if>
+						<c:if test="${dto.SCORE == 'BB' }">
+							<td style="width: 10%;">B+</td>
+						</c:if>
+						<c:if test="${dto.SCORE == 'CC' }">
+							<td style="width: 10%;">C+</td>
+						</c:if>
+						<c:if test="${dto.SCORE == 'DD' }">
+							<td style="width: 10%;">D+</td>
+						</c:if>
+					</c:if>
+					<c:if test="${dto.SCORE != 'AA' && dto.SCORE != 'BB' && dto.SCORE != 'CC' && dto.SCORE != 'DD' }">
+						<td style="width: 10%;">${dto.SCORE }</td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</c:if>

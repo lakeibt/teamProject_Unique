@@ -48,54 +48,59 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Override
 	public Map<String, Object> getCourseSyllabusInfo(String code) {
-		Map<String, Object> dtos;
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dtos = dao.getCourseSyllabusInfo(code);
+		return dao.getCourseSyllabusInfo(code);
 	}
 	
 	@Override
 	public Map<String, Object> getCourseSyllabusList(String code) {
-		Map<String, Object> dtos;
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dtos = dao.getCourseSyllabusList(code);
+		return dao.getCourseSyllabusList(code);
 	}
 	
 	@Override
-	public int getGradeCnt() {
+	public int getGradeCnt(String id) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dao.getGradeCnt();
+		return dao.getGradeCnt(id);
 	}
 
 	@Override
-	public List<CourseVO> getGradeList(Map<String, Object> map) {
-		List<CourseVO> dtos;
+	public List<Map<String, Object>> getGradeList(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dtos = dao.getGradeList(map);
+		return dao.getGradeList(map);
 	}
 
 	@Override
 	public List<StudentStudyListVO> getDay() {
-		List<StudentStudyListVO> dtos;
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dtos = dao.getDay();
+		return dao.getDay();
 	}
 	@Override
-	public int getStudyCnt() {
+	public int getStudyCnt(String id) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dao.getStudyCnt();
-	}
-
-	@Override
-	public List<StudentStudyListVO> getStudyList(Map<String, Object> map) {
-		List<StudentStudyListVO> dtos;
-		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dtos = dao.getStudyList(map);
+		return dao.getStudyCnt(id);
 	}
 
 	@Override
-	public List<CourseVO> getCourseList(Map<String, Object> map) {
-		List<CourseVO> dtos;
+	public List<Map<String, Object>> getStudyList(String id) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
-		return dtos = dao.getCourseList(map);
+		return dao.getStudyList(id);
+	}
+
+	@Override
+	public List<Map<String, Object>> getCourseList(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getCourseList(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getTimeTable(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getTimeTable(id);
+	}
+	@Override
+	public Map<String, Object> getStudentSimpleInfo(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getStudentSimpleInfo(id);
 	}
 }

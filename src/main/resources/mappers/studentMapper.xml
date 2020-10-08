@@ -1,94 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
- <!DOCTYPE mapper
-      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   	  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    	  
 <mapper namespace = "com.kosmo.uni.persistence.StudentDAO">
 	<select id="studentIdCheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM student WHERE id=#{ id }
+		SELECT COUNT(*) FROM S_STUDENT WHERE id=#{id}
 	</select>
 	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
-		SELECT * FROM student WHERE id= #{id}
+		SELECT * FROM S_STUDENT WHERE id = #{id}
+	</select>
+	<select id="getStudentSimpleInfo" resultType="java.util.Map">
+		SELECT NAME, ENG_NAME, PHOTO, SUBSTR(ID, 2) as NUM, A.M_NAME, EMAIL, GRADE
+		  FROM S_STUDENT S
+			 , A_MAJOR A
+		 WHERE id = #{id}
+		   AND S.M_CODE = A.M_CODE
 	</select>
 	<update id="updateStudentInfo" parameterType="com.kosmo.uni.vo.StudentVO">
-		UPDATE student SET tel=#{tel}, address=#{address}, 
-		de_address=#{de_address}, email=#{email} WHERE id=#{id}
+		UPDATE S_STUDENT SET tel=#{tel}, address=#{address}, de_address=#{de_address}, email=#{email} WHERE id=#{id}
 	</update>
 	<select id="getCourseCnt" resultType="int">
-		SELECT COUNT(*) as cnt FROM course
+		SELECT COUNT(*) as cnt FROM A_COURSE
 	</select>
-	<select id="getCourseList" resultType="com.kosmo.uni.vo.CourseVO">
+	<select id="getCourseList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT distinct c.co_code co_code
-            , c.co_name co_name
-            , c.m_code m_code
-            , c.p_code p_code
-    		, c.limit_num limit_num
-     		, c.co_num co_num
-            , c.grade grade_1
-     		, c.co_year co_year
-            , c.co_semester co_semester
-            , c.co_day co_day
-            , c.le_code le_code
-     		, p.name name_1
-  		FROM STUDENT_COURSE sc
-		   			, STUDENT s
-		   			, COURSE c
-		   			, PROFESSOR p
-		 			WHERE sc.id = s.id
-				    AND sc.co_code = c.co_code
-				    AND c.p_name = p.id
-				    AND s.m_code = c.m_code
-				    AND s.id = #{id}
+             , c.co_name co_name
+             , c.m_code m_code
+             , c.p_code p_code
+    		 , c.limit_num limit_num
+     		 , c.co_num co_num
+             , c.grade grade_1
+     		 , c.co_year co_year
+             , c.co_semester co_semester
+             , c.co_day co_day
+             , c.le_code le_code
+     		 , p.name name_1
+     		 , c.school_year school_year
+  		  FROM S_STUDENT s, A_COURSE c, P_PROFESSOR p
+		 WHERE c.p_name = p.name AND s.m_code = c.m_code
 	</select>
 	<select id="getCourseSyllabusInfo" parameterType="String" resultType="java.util.Map">
 		SELECT C.CO_NAME c_name, P.NAME p_name, P.TEL tel
 			 , G.ATTEND attend, G.MIDTERM midterm, G.FINALS finals, G.ASSIGN_REPORT report, G.ASSIGN_TEAM team
-		FROM COURSE C, PROFESSOR P, GRADE_POINT G
-		WHERE C.CO_CODE = G.CO_CODE
-		AND C.P_NAME = P.ID
-		AND C.CO_CODE = #{code}
+		FROM A_COURSE C, P_PROFESSOR P, P_GRADE_POINT G
+		WHERE C.CO_CODE = G.CO_CODE AND C.P_NAME = P.NAME AND C.CO_CODE = #{code}
 	</select>
 	<select id="getCourseSyllabusList" parameterType="String" resultType="java.util.Map">
 		SELECT S.SUBJECT subject
 			 , S.WEEK_1 week1, S.WEEK_2 week2, S.WEEK_3 week3, S.WEEK_4 week4, S.WEEK_5 week5, S.WEEK_6 week6
 			 , S.WEEK_7 week7, S.WEEK_8 week8, S.WEEK_9 week9, S.WEEK_10 week10, S.WEEK_11 week11, S.WEEK_12 week12
-		FROM COURSE C, PROFESSOR P, SYLLABUS S
-		WHERE C.CO_CODE = S.CO_CODE
-		AND C.P_NAME = P.ID
-		AND C.CO_CODE = #{code}
+		FROM A_COURSE C, P_PROFESSOR P, P_SYLLABUS S
+		WHERE C.CO_CODE = S.CO_CODE AND C.P_NAME = P.NAME AND C.CO_CODE = #{code}
 	</select>
 	<select id="getGradeCnt" resultType="int">
-		SELECT COUNT(*) as cnt FROM student_grades
+		SELECT COUNT(*) FROM P_STUDENT_SCORE WHERE ID = #{id}
 	</select>
-	<select id="getGradeList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.CourseVO">
-		SELECT g.grades_code grade_code
-		     , c.p_code p_code
-		     , c.co_name co_name
-		     , c.grade grade_1
-		     , p.name name_1
-		     , c.co_year co_year
-     		 , c.co_semester co_semester
-     		 , s.name name
-     		 , s.entrancedate entrancedate
-			  FROM STUDENT_GRADES g
-				   , STUDENT s
-				   , COURSE c
-				   , PROFESSOR p
-				 WHERE g.id = s.id
-				   AND c.co_code = g.co_code
-				   AND c.p_name = p.id
-				   AND s.id = #{id}
-				   AND c.co_semester = #{value}
+	<select id="getGradeList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT C.P_CODE P_CODE
+			 , C.CO_CODE CO_CODE
+		     , C.CO_NAME CO_NAME
+		     , C.GRADE GRADE
+		     , C.P_NAME P_NAME
+		     , C.CO_YEAR YEAR
+     		 , C.CO_SEMESTER SEMESTER
+     		 , ST.NAME NAME
+     		 , S.GRADES_CODE SCORE
+     		 , G.GRADES_SCORE SCORE_POINT
+		  FROM P_STUDENT_SCORE S, A_COURSE C, P_GRADES_SET G, S_STUDENT ST
+		 WHERE S.CO_CODE = C.CO_CODE
+		   AND S.GRADES_CODE = G.GRADES_CODE
+		   AND S.ID = ST.ID
+		   AND S.ID = #{id} AND C.CO_SEMESTER = #{value}
 	</select>
 	<select id="getDay" resultType="com.kosmo.uni.vo.StudentStudyListVO">
 		SELECT *
 		  FROM day
 	</select>
 	<select id="getStudyCnt" resultType="int">
-		SELECT COUNT(*) as cnt FROM student_study
+		SELECT COUNT(*) as cnt FROM S_TIMETABLE
 	</select>
-	<select id="getStudyList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.StudentStudyListVO">
-		SELECT * FROM student_study WHERE id = #{id}
+	<select id="getStudyList" parameterType="String" resultType="java.util.Map">
+		SELECT T.ID ID
+			 , S.NAME NAME
+			 , C.CO_NAME CO_NAME
+			 , C.P_NAME P_NAME
+			 , C.P_CODE P_CODE
+			 , T.DAY DAY
+			 , T.TIME TIME
+			 , C.GRADE GRADE
+			 , C.CO_CODE CO_CODE
+		  FROM VIEW_TIMETABLE T, A_COURSE C, S_STUDENT S 
+		 WHERE T.CO_CODE = C.CO_CODE
+		   AND T.ID = S.ID
+		   AND T.CO_CODE IS NOT NULL
+		   AND T.ID = #{id}
+	</select>
+	<select id="getTimeTable" parameterType="String" resultType="java.util.Map">
+		SELECT T.DAY DAY, T.TIME TIME, C.CO_NAME CO_NAME, C.P_NAME P_NAME, C.GRADE GRADE, S.NAME NAME, M.M_NAME MAJOR, S.ID
+	      FROM S_TIMETABLE T
+	 LEFT JOIN A_COURSE C
+	        ON T.CO_CODE = C.CO_CODE
+ 	 LEFT JOIN S_STUDENT S
+	        ON T.ID = S.ID
+	 LEFT JOIN A_MAJOR M
+	        ON S.M_CODE = M.M_CODE
+	     WHERE T.ID = #{id}
+	     ORDER BY DECODE(T.DAY, '월', 1, '화', 2, '수', 3, '목', 4, '금', 5), T.TIME
 	</select>
 </mapper>

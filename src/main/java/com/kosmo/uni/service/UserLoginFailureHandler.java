@@ -19,7 +19,7 @@ public class UserLoginFailureHandler implements AuthenticationFailureHandler {
 		
 		request.setAttribute("errMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		System.out.println("로그인 실패");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/main.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/guest/login.jsp");
 		dispatcher.forward(request, response);
 	}
 	

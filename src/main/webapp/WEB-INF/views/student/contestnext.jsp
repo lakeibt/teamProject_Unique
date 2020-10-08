@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
 <%@ page import="org.jsoup.Jsoup" %>
 <%@ page import="org.jsoup.nodes.Document" %>
@@ -24,8 +23,8 @@
 %>
 		<% if(i == 0) {i++; continue;} %>
 		<tr>
-			<td style="width:70%"><a id="other" href="#coninfo_detail" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
-			<td id="detail" style="width:20%"><%=e.select(".organ").text()%></td>
+			<td style="width:60%"><a id="other" href="#coninfo_detail" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
+			<td id="detail" style="width:30%"><%=e.select(".organ").text()%></td>
 			<% String day = e.select(".day").text();
 				String day2 = "";
 				if(day.substring(day.length()-3, day.length()).equals("접수중")) {

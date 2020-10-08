@@ -6,10 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,15 +43,22 @@ public class EduController {
 	public String gue_logout(HttpSession session, HttpServletRequest req) {
 		session.invalidate();
 		
-		return "guest/main";
+		return "guest/login";
 	}
 	
 	@RequestMapping("/guest/main")
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
-		
-		return "guest/main";
+		return "guest/login";
 	}
+	
+//	@RequestMapping("/guest/course")
+//	public String gue_course(HttpServletRequest req, Model model) {
+//		logger.info("url ==> course");
+//		
+//		eduService.studentList(req, model);
+//		return "guest/course";
+//	}
 	
 	@RequestMapping("/guest/sample")
 	public String gue_sample() {

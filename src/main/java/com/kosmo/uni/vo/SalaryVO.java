@@ -101,7 +101,4 @@ public class SalaryVO {
 	public void setCar(int car) {
 		this.car = car;
 	}
-	
-	
-
 }
