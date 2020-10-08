@@ -32,7 +32,6 @@ public class ProfessorController {
 		logger.info("url ==> main");
 		proService.infoList(req, model);
 		proService.courseList(req, model);
-		proService.calendarList(req, model);
 		
 		return "professor/main";
 	}
