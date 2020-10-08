@@ -4,7 +4,7 @@
 <body>
 <!-- footer content -->
 <footer>
-	<div class="pull-right">황동국팀 - 관리자 페이지</div>
+	<div class="pull-right">UNIQUE팀 - 관리자 페이지</div>
 	<div class="clearfix"></div>
 </footer>
 <!-- /footer content -->

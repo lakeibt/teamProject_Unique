@@ -74,7 +74,7 @@ jQuery(document).ready(function($) {
 										</thead>
 									</table>
 									<div id="coninfo"></div>
-									<div id="btn_group">
+									<div id="btn_group" align="center">
 								        <button class="number" id="btn1" onclick="content(1)" value="1">1</button>
 								        <button class="number" id="btn3" onclick="content(2)" value="2">2</button>
 								        <button class="number" id="btn4" onclick="content(3)" value="3">3</button>
@@ -116,7 +116,7 @@ function content_callback() {
    } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
 }
 
-function content1(var1) {
+function content2(var1) {
    var1= var1.replace(/&/g,"%26").replace(/\+/g,"%2B");
    var param = "url=" + var1;
    sendRequest(content_callback1,"contestnext2", "get", param);

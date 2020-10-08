@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="sidebar" data-color="purple" data-background-color="black" data-image="${assets}img/sidebar-2.jpg">
-	<div class="logo"><a href="#" class="simple-text logo-normal">Unique Universal</a></div>
+	<div class="logo"><a href="${student}myPage" class="simple-text logo-normal">Unique Universal</a></div>
 	<div class="sidebar-wrapper">
 		<ul class="nav">
+			<c:if test="${sessionScope.auth != null}">
 			<li class="nav-item">
-				<a class="nav-link" href="${student}myPage"> 
+				<a class="nav-link" href="${student}myPage">
 					<i class="material-icons">dashboard</i>
 					<p>홈</p>
 				</a>
@@ -13,6 +14,12 @@
 				<a class="nav-link" href="${student}myPage_modify"> 
 					<i class="material-icons">person</i>
 					<p>내 정보</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="${student}course_register">
+					<i class="material-icons">schedule</i>
+					<p>수강신청</p>
 				</a>
 			</li>
 			<li class="nav-item">
@@ -28,9 +35,9 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="${student}course_register">
-					<i class="material-icons">schedule</i>
-					<p>수강신청</p>
+				<a class="nav-link" href="${student}score">
+					<i class="material-icons">rule</i>
+					<p>학점</p>
 				</a>
 			</li>
 			<li class="nav-item">
@@ -45,6 +52,7 @@
 					<p>공모전 정보</p>
 				</a>
 			</li>
+			</c:if>
 		</ul>
 	</div>
 </div>

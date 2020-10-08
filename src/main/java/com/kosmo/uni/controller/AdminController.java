@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.service.AdminServiceImpl;
 
 @Controller
 public class AdminController {
-
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
@@ -23,6 +25,7 @@ public class AdminController {
 	public String home(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
 
+		adminService.info_list(req, model);
 		return "admin/main";
 	}
 
@@ -30,7 +33,32 @@ public class AdminController {
 	public String main(HttpServletRequest req, Model model) {
 		logger.info("admin_main");
 
+		adminService.info_list(req, model);
+
 		return "admin/main";
+	}
+	// ------------------------- 공지사항(메인) -------------------------
+	@RequestMapping(value = "/admin/infoWrite")
+	public String infoWrite(HttpServletRequest req, Model model) {
+		logger.info("admin_infoWrite");
+
+		return "admin/infoWrite";
+	}
+	
+	@RequestMapping(value = "/admin/infoPro")
+	public String infoPro(HttpServletRequest req, Model model) {
+		logger.info("admin_infoPro");
+		
+		adminService.infoPro(req, model);
+		return "admin/infoPro";
+	}
+	
+	@RequestMapping(value = "/admin/content")
+	public String content(HttpServletRequest req, Model model) {
+		logger.info("admin_content");
+		
+		adminService.content(req, model);
+		return "admin/content";
 	}
 
 	// ------------------------- 학사관리 -------------------------
@@ -103,66 +131,217 @@ public class AdminController {
 	public String facility_ask(HttpServletRequest req, Model model) {
 		logger.info("degree/facility_ask");
 
+		adminService.equitmentList(req, model);
+		adminService.facility_ask(req, model);
 		return "admin/degree/facility_ask";
+	}
+	
+	// 시설문의 내용
+	@RequestMapping(value = "/admin/degree/facility_ask_content")
+	public String facility_ask_content(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_content");
+
+		adminService.facility_ask_content(req, model);
+		return "admin/degree/facility_ask_content";
+	}
+	
+	// 시설 요청 등록 폼
+	@RequestMapping(value = "/admin/degree/facility_ask_form")
+	public String facility_ask_form(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_form");
+
+		adminService.equitmentList(req, model);
+		adminService.selectMember(req, model);
+		return "admin/degree/facility_ask_form";
+	}
+	
+	// 시설 이름 서치
+	@RequestMapping(value = "/admin/degree/facility_search")
+	public String facility_search(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_search");
+
+		adminService.equitmentlistNext(req, model);
+		return "admin/degree/facility_search";
+	}
+	
+	// 시설 요청 등록 처리
+	@RequestMapping(value = "/admin/degree/facility_ask_Pro")
+	public String facility_ask_Pro(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_Pro");
+
+		adminService.facility_ask_Pro(req, model);
+		return "admin/degree/facility_ask_Pro";
+	}
+	
+	// 시설 요청 등록 처리
+	@RequestMapping(value = "/admin/degree/facility_ask_delete")
+	public String facility_ask_delete(HttpServletRequest req, Model model) {
+		logger.info("degree/facility_ask_delete");
+
+		adminService.facility_ask_delete(req, model);
+		return "admin/degree/facility_ask_delete";
 	}
 
 	// ------------------------- 인사관리 -------------------------
 	// ------------------------ 기본코드설정 ------------------------
-	// 인사기초코드
-	@RequestMapping(value = "/admin/human_resources/code_setting/code_setting")
-	public String code_setting(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/code_setting");
-
-		return "admin/human_resources/code_setting/code_setting";
-	}
-	// 
-	@RequestMapping(value = "/admin/human_resources/code_setting/code_rankList")
-	public String code_rankList(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/code_rankList");
-		
-		return "admin/human_resources/code_setting/code_rankList";
-	}
-	
 	// 인사/급여환경설정
 	@RequestMapping(value = "/admin/human_resources/code_setting/setting")
 	public String setting(HttpServletRequest req, Model model) {
 		logger.info("human_resources/code_setting/setting");
 
+		adminService.setting(req, model);
 		return "admin/human_resources/code_setting/setting";
 	}
-
-	// 급/상여 등록/수정
-	@RequestMapping(value = "/admin/human_resources/code_setting/salary_setting")
-	public String salary_setting(HttpServletRequest req, Model model) {
-		logger.info("human_resources/code_setting/salary_setting");
-
-		return "admin/human_resources/code_setting/salary_setting";
+	
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_form")
+	public String setting_form(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_form");
+		
+		return "admin/human_resources/code_setting/setting_form";
 	}
-
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_pro")
+	public String setting_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_pro");
+		
+		adminService.settingPro(req, model);
+		return "admin/human_resources/code_setting/setting_pro";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_humanList")
+	public String setting_humanList(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_humanList");
+		
+		adminService.settingHumanList(req, model);
+		return "admin/human_resources/code_setting/setting_humanList";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_deletePro")
+	public String setting_deletePro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_deletePro");
+		
+		adminService.settingDeletePro(req, model);
+		return "admin/human_resources/code_setting/setting_deletePro";
+	}
+	
 	// ------------------------- 인사정보 -------------------------
 	// 인사정보등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info")
 	public String human_info(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_info");
 
+		String option = req.getParameter("option");
+		if(option == null) {
+			option = "adm";
+		}
+		
+		model.addAttribute("option", option);
+		
 		return "admin/human_resources/info/human_info";
+	}	
+	
+	// 직원 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_adm")
+	public String human_info_adm(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_adm");
+
+		model.addAttribute("option", "adm");
+		adminService.departList(req, model);
+		adminService.rankList(req, model);
+		adminService.nextAdminId(req, model);
+		
+		return "admin/human_resources/info/human_info_adm";
+	}
+	// 학생 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_stu")
+	public String human_info_stu(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_stu");
+
+		model.addAttribute("option", "stu");
+		adminService.majorList(req, model);
+		adminService.nextStudentId(req, model);
+		
+		return "admin/human_resources/info/human_info_stu";
+	}
+	// 교수 등록폼
+	@RequestMapping(value = "/admin/human_resources/info/human_info_pro")
+	public String human_info_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_pro");
+
+		model.addAttribute("option", "pro");
+		adminService.majorList(req, model);
+		adminService.nextProfessorId(req, model);
+		
+		return "admin/human_resources/info/human_info_pro";
+	}
+	
+	// 등록
+	@RequestMapping(value = "/admin/human_resources/info/human_info_add")
+	public String human_info_add(MultipartHttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_info_add");
+		
+		adminService.addHuman(req, model);
+		return "admin/human_resources/info/human_info_add";
 	}
 
 	// 인사정보현황
 	@RequestMapping(value = "/admin/human_resources/info/human_state")
 	public String human_state(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_state");
-
+		
+		String option = req.getParameter("option");
+		if(option == null) {
+			option = "adm";
+		}
+		
+		model.addAttribute("option", option);
+		
 		return "admin/human_resources/info/human_state";
 	}
-
-	// 책정임금현황
-	@RequestMapping(value = "/admin/human_resources/info/salary_state")
-	public String salary_state(HttpServletRequest req, Model model) {
-		logger.info("human_resources/info/salary_state");
-
-		return "admin/human_resources/info/salary_state";
+	// 인사 리스트 가져오기
+	@RequestMapping(value = "/admin/human_resources/info/human_state_list")
+	public String human_state_list(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_list");
+		
+		adminService.humanList(req, model);
+		
+		return "admin/human_resources/info/human_state_list";
 	}
+	// 직원 상세정보
+	@RequestMapping(value = "/admin/human_resources/info/human_state_detail_adm")
+	public String human_state_detail_adm(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_detail_adm");
+		
+		adminService.humanInfo(req, model);
+		
+		return "admin/human_resources/info/human_state_detail_adm";
+	}
+	// 교수 상세정보
+	@RequestMapping(value = "/admin/human_resources/info/human_state_detail_pro")
+	public String human_state_detail_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_detail_pro");
+		
+		adminService.humanInfo(req, model);
+		
+		return "admin/human_resources/info/human_state_detail_pro";
+	}
+	// 학생 상세정보
+	@RequestMapping(value = "/admin/human_resources/info/human_state_detail_stu")
+	public String human_state_detail_stu(HttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_detail_stu");
+		
+		adminService.humanInfo(req, model);
+		
+		return "admin/human_resources/info/human_state_detail_stu";
+	}
+	
+	@RequestMapping(value = "/admin/human_resources/info/human_state_modify")
+	public String human_state_modify_adm(MultipartHttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_modify_adm");
+		
+		adminService.updateHuman(req, model);
+		
+		return "admin/human_resources/info/human_state_modify";
+	}	
+
+
 
 	// ------------------------- 급여관리 -------------------------
 	// 근태관리
@@ -206,29 +385,80 @@ public class AdminController {
 	// 급여대장 - 조회
 	@RequestMapping(value = "/admin/human_resources/pay/payroll")
 	public String thisM_list(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/thisM_list");
+		logger.info("human_resources/pay/payroll");
 		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
 	}
+	// 급여대장 수정 
+	@RequestMapping(value = "/admin/human_resources/pay/salary_modify")
+	public String salary_modify(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_modify");
+		adminService.salaryModify(req, model);
+		return "admin/human_resources/pay/salary_modify";
+	}
 	
-	// 급여대장 - 전체 계산 
-	@RequestMapping(value = "/admin/human_resources/pay/salaryTotalinput")
-	public String salaryTotalinput(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salaryTotalinput");
-		
-		adminService.salaryInput(req, model);
-		adminService.salaryList(req, model);
-		return "admin/human_resources/pay/salary_list";
+	// 급여대장 수정 salaryModifyPro  salary_delete
+	@RequestMapping(value = "/admin/human_resources/pay/salary_modifyPro")
+	public String salary_modifyPro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_modifyPro");
+		adminService.salaryModifyPro(req, model);
+		return "admin/human_resources/pay/salary_modifyPro";
+	}
+	// 급여대장삭제   salary_delete
+	@RequestMapping(value = "/admin/human_resources/pay/salary_delete")
+	public String salary_delete(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salary_delete");
+		adminService.salary_delete(req, model);
+		return "admin/human_resources/pay/salary_delete";
+	}
+	// 급여대장 - 전체 계산 클릭시 급여 인원수 업데이트
+	@RequestMapping(value = "/admin/human_resources/pay/divisioncnt")
+	public String divisioncnt(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/divisioncnt");
+		adminService.salaryCnt(req, model);
+		return "admin/human_resources/pay/divisioncnt";
 	}
 
-	// 급여대장 - 급여명세서
+	// 급여대장 - 전체 계산 클릭시토탈 업데이트
+	@RequestMapping(value = "/admin/human_resources/pay/salarytotal")
+	public String salarytotal(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/salarytotal");
+		adminService.salarytotal(req, model);
+		return "admin/human_resources/pay/salarytotal";
+	}
+	
+	
+	// 급여대장 - 급여명세서 
 	@RequestMapping(value = "/admin/human_resources/pay/payslip")
 	public String salary_payslip(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salary_payslip");
-
+		logger.info("human_resources/pay/payslip");
+		adminService.salary_payslip(req, model);
 		return "admin/human_resources/pay/payslip";
 	}
-
+	
+	//급여대장 - 확정 
+	@RequestMapping(value = "/admin/human_resources/pay/commitSalary")
+	public String commitSalary(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/commitSalary");
+		adminService.commitSalary(req, model);
+		return "admin/human_resources/pay/commitSalary";
+	}
+	//급여대장 확정 버튼 후 조회 
+	@RequestMapping(value = "/admin/human_resources/pay/confirm_payroll")
+	public String confirm_payroll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/confirm_payroll");
+		adminService.confirm_payroll(req, model);
+		return "admin/human_resources/pay/confirm_payroll";
+	}
+	
+	//급여대장 조회 - 수정   modifyRoll
+	@RequestMapping(value = "/admin/human_resources/pay/modifyRoll")
+	public String modifyRoll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/modifyRoll");
+		adminService.modifyRoll(req, model);
+		return "admin/human_resources/pay/modifyRoll";
+	}
+	
 	// 급여명세
 	@RequestMapping(value = "/admin/human_resources/pay/salary_info")
 	public String salary_info(HttpServletRequest req, Model model) {
@@ -237,12 +467,14 @@ public class AdminController {
 		return "admin/human_resources/pay/salary_info";
 	}
 	
+	
+	
 	// 월별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_month")
 	public String salary_list_month(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_month");
 
-		adminService.salary_list_month(req, model);
+		adminService.salary_list_humanMonth(req, model);
 
 		return "admin/human_resources/pay/salary_list_month";
 	}
@@ -274,13 +506,13 @@ public class AdminController {
 		
 		return "admin/human_resources/pay/salary_enroll";
 	}
-
+	
 	// 사원별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_human")
 	public String salary_list_human(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/salary_list_human");
 
-		adminService.salary_list_human(req, model);
+		adminService.salary_list_humanMonth(req, model);
 
 		// adminService.salary_list_human(req, model);
 
@@ -323,7 +555,17 @@ public class AdminController {
 	public String list(HttpServletRequest req, Model model) {
 		logger.info("facility/list");
 
+		adminService.equitmentList(req, model);
 		return "admin/facility/list";
+	}
+	
+	// 시설물 관리 리스트 AJAX
+	@RequestMapping(value = "/admin/facility/listNext")
+	public String listNext(HttpServletRequest req, Model model) {
+		logger.info("facility/listNext");
+
+		adminService.equitmentlistNext(req, model);
+		return "admin/facility/listNext";
 	}
 
 	// 시설문의
@@ -331,7 +573,33 @@ public class AdminController {
 	public String ask(HttpServletRequest req, Model model) {
 		logger.info("facility/ask");
 
+		adminService.facility_ask(req, model);
 		return "admin/facility/ask";
+	}
+	
+	// 시설문의 상세
+	@RequestMapping(value = "/admin/facility/ask_content")
+	public String ask_content(HttpServletRequest req, Model model) {
+		logger.info("facility/ask_content");
+		
+		adminService.facility_ask_content(req, model);
+		return "admin/facility/ask_content";
+	}
+	// 시설문의 승인
+	@RequestMapping(value = "/admin/facility/ask_pro")
+	public String ask_pro(HttpServletRequest req, Model model) {
+		logger.info("facility/ask_pro");
+		
+		adminService.askPro(req, model);
+		return "admin/facility/ask_pro";
+	}
+	// 시설문의 반려
+	@RequestMapping(value = "/admin/facility/ask_cancle")
+	public String ask_cancle(HttpServletRequest req, Model model) {
+		logger.info("facility/ask_cancle");
+		
+		adminService.askCancle(req, model);
+		return "admin/facility/ask_cancle";
 	}
 
 }

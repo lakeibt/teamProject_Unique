@@ -2,16 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:sec="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security-5.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/security 
+		https://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
 <!-- 주의 : 네임스페이스 security => sec로 수정 -->
 	<!-- 정적 리소스 파일들에는 보안 설정을 하지 않음 -->
 	<sec:http pattern="/include/**" security="none" />
 	<sec:http pattern="/bootstrap/**" security="none" />
 	<sec:http pattern="/resources/**" security="none" />
 	<sec:http pattern="/android/**" security="none" />
-	<sec:http pattern="/professor/messageList_form" security="none" />
-	<sec:http pattern="/professor/message_form" security="none" />
+	
 	<sec:http auto-config="true" use-expressions="true" create-session="never">
 		
 		<!-- 관리자 영역 설정 -->
@@ -37,7 +39,7 @@
 			     expired-url="/user/login.do" => 세션 만료시 이동할 주소
 			     error-if-maximum-exceeded="true" => 최대 세션 초과시 에러 옵션 
 			-->
-			<sec:concurrency-control max-sessions="1"
+			<sec:concurrency-control max-sessions="3"
 			 	expired-url="/guest/main"
 			 	error-if-maximum-exceeded="true"
 			/>        
@@ -55,8 +57,10 @@
 	<!-- 주의 : 에러 => UserAuthenticationService에서 sqlSession을 매개변수 생성자에 주입하면 에러 사라짐  -->
 	<bean id="userService" class="com.kosmo.uni.service.UserAuthenticationService">
 		<constructor-arg name="sqlSession" ref="sqlSession" />
-	</bean> 
+	</bean>
 	
 	<!-- 비밀번호 암호화 빈 -->
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+	
 </beans>

@@ -12,39 +12,15 @@
 			<li class="nav-item dropdown open" style="padding-left: 15px;">
 				<a href="javascript:;" class="user-profile dropdown-toggle"
 				aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown"
-				aria-expanded="false"> <img
-					src="${img}sample/img.jpg" alt="">이름
-			</a>
+				aria-expanded="false">
+				<img src="${adm_photo}${sessionScope.photo}" alt="">${sessionScope.name}
+				</a>
 				<div class="dropdown-menu dropdown-usermenu pull-right"
 					aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="#">Profile</a> <a
 						class="dropdown-item" href="${guest}logout"><i
 						class="fa fa-sign-out pull-right"></i> Log Out</a>
 				</div>
-			</li>
-
-			<li role="presentation" class="nav-item dropdown open"><a
-				href="javascript:;" class="dropdown-toggle info-number"
-				id="navbarDropdown1" data-toggle="dropdown"
-				aria-expanded="false"> <i class="fa fa-envelope-o"></i> <span
-					class="badge bg-green">6</span>
-			</a>
-				<ul class="dropdown-menu list-unstyled msg_list" role="menu"
-					aria-labelledby="navbarDropdown1">
-					<li class="nav-item"><a class="dropdown-item"> <span>
-								<span>John Smith</span> <span class="time">3 mins ago</span>
-						</span> <span class="message"> Film festivals used to be
-								do-or-die moments for movie makers. They were where... </span>
-					</a></li>
-
-					<li class="nav-item">
-						<div class="text-center">
-							<a class="dropdown-item"> <strong>See All Alerts</strong>
-								<i class="fa fa-angle-right"></i>
-							</a>
-						</div>
-					</li>
-				</ul>
 			</li>
 		</ul>
 	</nav>

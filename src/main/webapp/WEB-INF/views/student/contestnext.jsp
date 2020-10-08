@@ -4,6 +4,9 @@
 <%@ page import="org.jsoup.nodes.Document" %>
 <%@ page import="org.jsoup.nodes.Element" %>
 <%@ page import="org.jsoup.select.Elements" %>
+<style>
+.dark-edition a {color:black;}
+</style>
 
 <%
         // 파싱할 사이트를 적어준다(해당 사이트에 대한 태그를 다 긁어옴)
@@ -23,7 +26,7 @@
 %>
 		<% if(i == 0) {i++; continue;} %>
 		<tr>
-			<td style="width:60%"><a id="other" href="#coninfo_detail" onclick="content1('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
+			<td style="width:60%"><a style="color:black;" id="other" href="#coninfo_detail" onclick="content2('<%=e.select(".tit a").attr("href")%>')"><%=e.select(".tit a").text()%></a></td>
 			<td id="detail" style="width:30%"><%=e.select(".organ").text()%></td>
 			<% String day = e.select(".day").text();
 				String day2 = "";

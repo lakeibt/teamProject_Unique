@@ -21,4 +21,15 @@ public interface StudentService {
 	public void studentTimeTable(HttpServletRequest req, Model model);
 	// 마이페이지 학생 정보 조회
 	public void studentSimpleInfo(HttpServletRequest req, Model model);
+	// 쪽지 목록
+	public void messageList(HttpServletRequest req, Model model);
+	// 쪽지 상세 확인
+	public void message(HttpServletRequest req, Model model);
+	// 쪽지 미리보기
+	public void messageSimple(HttpServletRequest req, Model model);
+	// 쪽지 보내기
+	public int messageSend(HttpServletRequest req, Model model);
+	public int messageReply(HttpServletRequest req, Model model);
+	// 쪽지 보내기 폼 - 수신자 : 학생/교수
+	public void addresseeList(HttpServletRequest req, Model model);
 }

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
 <table class="table">
 	<thead>
@@ -13,7 +12,9 @@
 	</thead>
 	<tbody>
 		<c:if test="${cnt > 0}">
-			<c:forEach var="dto" items="${dtos}">
+			<c:set var="total" value="0" />
+			<c:set var="count" value="0" />
+			<c:forEach var="dto" items="${score}">
 				<tr>
 					<td style="width: 10%;">${dto.P_CODE}</td>
 					<td style="width: 25%;">${dto.CO_NAME}</td>
@@ -36,8 +37,16 @@
 					<c:if test="${dto.SCORE != 'AA' && dto.SCORE != 'BB' && dto.SCORE != 'CC' && dto.SCORE != 'DD' }">
 						<td style="width: 10%;">${dto.SCORE }</td>
 					</c:if>
+					<c:set var="total" value="${total + dto.SCORE_POINT }" />
+					<c:set var="count" value="${count + 1 }" />
 				</tr>
 			</c:forEach>
+			<tr>
+				<td colspan="4" style="text-align:right">
+					<b>평균 학점 :</b> 
+				</td>
+				<td>${total/count}/4.5</td>
+			</tr>
 		</c:if>
 	</tbody>
 </table>

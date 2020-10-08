@@ -28,7 +28,7 @@ public class EduController {
 	public String home() {
 		logger.info("url ==> home");
 		
-		return "guest/main";
+		return "guest/login";
 	}
 	
 	// 로그인 페이지로 이동
@@ -39,11 +39,20 @@ public class EduController {
 		return "guest/login";
 	}
 	
+	// 로그인 페이지로 이동
+	@RequestMapping("/guest/toMain")
+	public String gue_toMain() {
+		logger.info("url ==> toMain");
+		
+		return "guest/toMain";
+	}
+	
 	@RequestMapping("/guest/logout")
 	public String gue_logout(HttpSession session, HttpServletRequest req) {
+		logger.info("url ==> logout");
 		session.invalidate();
 		
-		return "guest/login";
+		return "guest/logout";
 	}
 	
 	@RequestMapping("/guest/main")
@@ -52,13 +61,25 @@ public class EduController {
 		return "guest/login";
 	}
 	
-//	@RequestMapping("/guest/course")
-//	public String gue_course(HttpServletRequest req, Model model) {
-//		logger.info("url ==> course");
-//		
-//		eduService.studentList(req, model);
-//		return "guest/course";
-//	}
+	@RequestMapping("/guest/bcrypt")
+	public String bcrypt() {
+		logger.info("url ==> bcrypt");
+		
+		return "guest/bcrypt";
+	}
+	
+	@RequestMapping("/guest/bcrypt2")
+	public String bcrypt2(HttpServletRequest req, Model model) {
+		logger.info("url ==> bcrypt2");
+		
+		String pwd = req.getParameter("pwd");
+		System.out.println(pwd);
+		String enc_pwd = passwordEncoder.encode(pwd);
+		
+		model.addAttribute("enc_pwd", enc_pwd);
+		
+		return "guest/bcrypt2";
+	}
 	
 	@RequestMapping("/guest/sample")
 	public String gue_sample() {
