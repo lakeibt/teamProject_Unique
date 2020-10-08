@@ -23,9 +23,32 @@ function chnQnaType(type , select) {
     	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
         $('#schQnaType').append("<option value='김교수'>김교수</option>");
     } else if (type == 'BE') { 
-    	$('#schQnaType').append("<option selected disabled>교수님를 선택하세요</option>");
-    	$('#schQnaType').append("<option value='김뷰티'>김뷰티</option>");
-    }
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    	$('#schQnaType').append("<option value='최신애'>최신애</option>");
+    } else if (type == 'BI') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    	$('#schQnaType').append("<option value='강생명'>강생명</option>");
+    } else if (type == 'MA') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    	$('#schQnaType').append("<option value='한기부'>한기부</option>");
+    	$('#schQnaType').append("<option value='윤교수'>윤교수</option>");
+    } else if (type == 'CN') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'EN') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'FD') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'KO') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'JA') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'FR') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'AD') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } else if (type == 'SC') { 
+    	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    } 
     
     document.getElementById("schQnaType").style.display = "";
     

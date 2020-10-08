@@ -120,5 +120,27 @@ public class AndroidController {
 		return out;
 	}
 	
+	//PRO정보조회
+	@ResponseBody
+	@RequestMapping("/android/proinfo")
+	public Map<String, Object> androidProinfo(HttpServletRequest req){
+		logger.info("androidProinfo()");
+		
+		Map<String, Object> out = andService.proinfo(req);
+		
+		return out;
+	}
+	
+	//PRO정보 수정
+	@ResponseBody
+	@RequestMapping("/android/proinfosave")
+	public Map<String, Object> androidProinfoSave(HttpServletRequest req){
+		logger.info("androidProinfoSave()");
+		
+		Map<String, Object> out = andService.proinfosave(req);
+		
+		return out;
+	}
+	
 }
 
