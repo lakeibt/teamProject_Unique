@@ -46,4 +46,16 @@ public interface AndroidDAO {
 	//근퇴관리 리스트 출력
 	public ArrayList<nfcVO> workchecklist(String id);
 	
+	//ADM정보 조회
+	public Manager getManinfo(String id);
+	
+	//ADM정보 수정
+	public int maninfosave(Map<String, Object> map);
+	
+	//STU정보 조회
+	public StudentVO getStuInfo(String id);
+	
+	//STU정보 수정
+	public int stuinfosave(Map<String, Object> map);
+	
 }
