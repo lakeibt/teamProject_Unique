@@ -2,6 +2,7 @@ package com.kosmo.uni.controller;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.ProfessorDAO;
 import com.kosmo.uni.service.ProfessorService;
@@ -30,26 +32,11 @@ public class ProfessorController {
 		logger.info("url ==> main");
 		proService.infoList(req, model);
 		proService.courseList(req, model);
-		proService.calendarList(req, model);
+		//proService.calendarList(req, model);
 		
 		return "professor/main";
 	}
-	@RequestMapping("/professor/addPlanForm")
-	public String pro_addPlanForm(HttpServletRequest req, Model model) {
-		logger.info("url ==> addPlanForm");
-		
-		return "professor/main_addPlan";
-	}
-	 
 	
-	@RequestMapping("/professor/addPlan")
-	public void pro_addPlan(HttpServletRequest req, Model model){
-		logger.info("url ==> addPlan");
-		
-		proService.addPlan(req,model);
-	}
-	
-
 	// 메인  : 공지사항
 	@RequestMapping("/professor/info")
 	public String pro_info(HttpServletRequest req, Model model) {
@@ -59,7 +46,6 @@ public class ProfessorController {
 		
 		return "professor/info";
 	}
-	
 	
 	// 내정보
 	@RequestMapping("/professor/myPage")
@@ -130,6 +116,14 @@ public class ProfessorController {
 		return "professor/course_plan_modify";
 	}
 	
+	// 강의수정
+		@RequestMapping("/professor/lecture")
+		public String pro_lecture(HttpServletRequest req, Model model) {
+			logger.info("url ==> lecture");
+			
+			return "professor/lecture";
+		}
+	
 	
 	// 강의수정
 	@RequestMapping("/professor/course_modify")
@@ -149,9 +143,9 @@ public class ProfessorController {
 	
 	// 성적관리
 	@RequestMapping("/professor/score")
-	public String pro_score() {
+	public String pro_score(HttpServletRequest req, Model model) {
 		logger.info("url ==> score");
-		
+		proService.courseList(req, model);
 		return "professor/score";
 	}
 	

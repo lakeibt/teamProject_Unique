@@ -114,7 +114,7 @@
 							for="first-name">차번호
 						</label>
 						<div class="col-md-7 col-sm-7">
-							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가 0000'" onblur="this.placeholder = ' '" 
+							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가0000'" onblur="this.placeholder = ' '" 
 								class="form-control " value="${vo.getCarnum()}">
 						</div>
 					</div>

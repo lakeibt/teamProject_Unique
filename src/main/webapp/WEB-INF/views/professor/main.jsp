@@ -18,53 +18,7 @@
 <title>[유일대]</title>
 <%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
 <script  type="text/javascript">
-document.addEventListener('DOMContentLoaded', function() {
-	
-    var Calendar = FullCalendar.Calendar;
- 
-    var calendarEl = document.getElementById('calendar');
- 
-    var calendar = new Calendar(calendarEl, {
-    	 plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-    	 header: {
-    	    left: 'prev,next today',
-    	    center: 'title',
-    	    right: 'dayGridMonth,timeGridWeek,timeGridDay listMonth'
-    	 },
-    	 locale: 'ko',
-    	 navLinks: true,
-    	 businessHours: true,
-    	 editable: true,
-    	 events: [
-    		 <c:forEach items="${cal_dtos}" var="dto">
-    		 <fmt:formatDate var="startDate" pattern="yyyy-MM-dd" value="${dto.getStartDate()}" />
-    		 <fmt:formatDate var="endDate" pattern="yyyy-MM-dd" value="${dto.getStartDate()}" />
-    		 {
-    			title : '${dto.getTitle()}',
-    			start : '${startDate}',
-    			end : '${endDate}'
-    		 },
-    		 </c:forEach>
-    		 {
- 				title : 'default',
- 				start : '2020-01-01',
- 				end : '2020-01-01'
- 			 }
-    	  ],
-    	  eventClick: function(info) {
-    		  let eventFullDate = info.event.start;
-    		  
-    		  let eventYear = eventFullDate.getFullYear();
-    		  let eventMonth = eventFullDate.getMonth() + 1; 
-    		  let eventDate = eventFullDate.getDate();
-    		  let eventDay = eventFullDate.getDay();
-    		  
-    		  alert(eventYear);
-    	  }
-  });
 
-    calendar.render();
-  });
 
 function addTr(obj){
 	
@@ -102,10 +56,6 @@ function deleteTr(obj) {
 	$(obj).attr('onclick','addTr(this)');
 };
 
-
-function addPlanForm(){
-	window.open("${professor}addPlanForm", "네이버새창", "width=200, height=200, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
-}
 
 </script>
 <style>
@@ -196,12 +146,6 @@ function addPlanForm(){
 									</div>
 								</div>
 							</div>
-		                </div>
-		                <div class="col-md-6" >
-		                	<div class="card" style="padding: 10px;">
-		                	<button onclick="addPlanForm()">일정 추가</button>
-		                		<div id="calendar"></div>
-		                	</div>
 		                </div>
 					</div>
 				</div>

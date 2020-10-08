@@ -13,20 +13,15 @@ public interface ProfessorService {
 	// 공지 자세히보기
 	public void infoDetail(HttpServletRequest req, Model model);
 	
-	// 일정 가져오기
-	public void calendarList(HttpServletRequest req, Model model);
-	// 일정 추가
-	public void addPlan(HttpServletRequest req, Model model);
-	
-	
 	// 강의 계획 등록
 	public void coursePlanAdd(HttpServletRequest req, Model model);
 	// 강의 계획 수정
 	public void coursePlanModify(HttpServletRequest req, Model model);
-	
-	
 	// 강의 계획 보기
 	public void coursPlan(HttpServletRequest req, Model model);
+
+	// 성적 입력할 인원
+	public void gradeList(HttpServletRequest req, Model model);
 	
 	// 쪽지 목록
 	public void messageList(HttpServletRequest req, Model model);

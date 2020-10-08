@@ -78,6 +78,8 @@ function deleteDiv(obj) {
 }
 
 
+
+
 </script>
 
 </head>
@@ -119,7 +121,7 @@ function deleteDiv(obj) {
 							                      </div>	                      
 							                    </div>
 							                    <div class="col-md-12">
-						                    		<button type="button" onclick="" class="btn btn-primary pull-right">수업 관리</button>
+						                    		<button type="button" onClick="location.href='${professor}lecture'"  class="btn btn-primary pull-right">수업 관리</button>
 						                    		<c:if test="${dto.getPlan_chk() == 0}">
 						                    		<button type="button" onclick="course_plan_addForm(this)" id="${dto.getCo_code()}" class="btn btn-info pull-right">계획 등록</button>
 						                    		</c:if>

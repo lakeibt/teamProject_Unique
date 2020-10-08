@@ -3,9 +3,7 @@ package com.kosmo.uni.persistence;
 import java.util.List;
 import java.util.Map;
 
-import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
-import com.kosmo.uni.vo.CalendarVO;
 import com.kosmo.uni.vo.CoursePlanVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
@@ -23,11 +21,6 @@ public interface ProfessorDAO {
 	public int getCourseCnt(String p_name);
 	public List<CourseVO> getCourseList(Map<String, Object> map);
 	
-	// 일정 가져오기
-	public List<CalendarVO> getCalendarList(String id);
-	// 일정 추가
-	public int insertPlan(CalendarVO vo);
-	
 	// 내정보 수정
 	public int updateMyPage(HumanVO vo);
 	
@@ -37,8 +30,11 @@ public interface ProfessorDAO {
 	public int updateCoursePlanChk(Map<String, Object> map);
 	public int updateSyllabus(CoursePlanVO vo);
 	public int updateGradePoint(CoursePlanVO vo);
-	
 	public CoursePlanVO getCoursePlan(String co_code);
+	
+	// 성적
+	//public int getGradeCnt(String co_code);
+	
 	
 	// 받은 쪽지 갯수
 	public int getMessageCnt(String id);

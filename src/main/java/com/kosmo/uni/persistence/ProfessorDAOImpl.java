@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
-import com.kosmo.uni.vo.CalendarVO;
 import com.kosmo.uni.vo.CoursePlanVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
@@ -148,16 +147,6 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 	public int updateGradePoint(CoursePlanVO vo) {
 		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
 		return dao.updateGradePoint(vo);
-	}
-	@Override
-	public List<CalendarVO> getCalendarList(String id) {
-		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
-		return dao.getCalendarList(id);
-	}
-	@Override
-	public int insertPlan(CalendarVO vo) {
-		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
-		return dao.insertPlan(vo);
 	}
 	
 

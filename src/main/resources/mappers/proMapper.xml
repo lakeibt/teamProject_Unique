@@ -78,13 +78,13 @@
 	</select>
 
 	<select id="getInfoCnt" resultType="int">
-		SELECT COUNT(*) as cnt FROM p_info
+		SELECT COUNT(*) as cnt FROM a_info
 	</select>
 	
 	<select id="getInfoList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.InfoVO">
 	<![CDATA[
 		SELECT * FROM (SELECT num, title, content, writer, reg_date, rowNum rNum 
-		  FROM (SELECT * FROM p_info)) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT * FROM a_info)) WHERE rNum >= #{start} AND rNum <= #{end}
 	]]>
 	</select>
 	
@@ -94,13 +94,13 @@
 	
 	<select id="getCourseList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.CourseVO">
 	<![CDATA[
-		SELECT * FROM (SELECT co_code, co_name, co_day, le_code, grade, co_num, plan_chk, rowNum rNum 
+		SELECT * FROM (SELECT co_code, co_name, co_day, le_code, grade, co_num, plan_chk, grade_chk, rowNum rNum 
 		  FROM (SELECT * FROM a_course WHERE p_name = #{p_name} ORDER BY decode(co_day, '월','1','화','2','수','3','목','4','금','5'), le_code asc)) WHERE rNum >= #{start} AND rNum <= #{end}
 	]]>
 	</select>
 	
 	<select id="getInfoDetail" resultType="com.kosmo.uni.vo.InfoVO">
-		SELECT * FROM p_info where num = #{num}
+		SELECT * FROM a_info where num = #{num}
 	</select>
 
 	<update id="updateMyPage" parameterType="com.kosmo.uni.vo.HumanVO">
@@ -131,13 +131,5 @@
 	<update id="updateGradePoint" parameterType="com.kosmo.uni.vo.CoursePlanVO">
 		UPDATE p_grade_point SET attend = #{attend}, midterm = #{midterm}, finals = #{finals}, assign_report = #{assign_report}, assign_team = #{assign_team} WHERE co_code = #{co_code} 
 	</update>
-	
-	<select id="getCalendarList" resultType="com.kosmo.uni.vo.CalendarVO">
-		SELECT * FROM p_calendar where id=#{id}
-	</select>
-	
-	<insert id="insertPlan" parameterType="com.kosmo.uni.vo.CalendarVO">
-		INSERT INTO p_calendar(id, title, startDate, endDate) values(#{id},#{title},#{startDate},#{endDate})
-	</insert>
 	
 </mapper>
