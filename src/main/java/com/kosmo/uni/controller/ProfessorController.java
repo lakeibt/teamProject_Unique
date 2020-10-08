@@ -163,8 +163,7 @@ public class ProfessorController {
 	public String pro_messageSimple(HttpServletRequest req, Model model) {
 		logger.info("url ==> messageSimple");
 		
-		//proService.messageSimple(req, model);
-		
+		proService.messageSimple(req, model);
 		return "professor/messageList_simple";
 	}
 	
