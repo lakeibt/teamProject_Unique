@@ -185,13 +185,11 @@ $(document).ready(function(){
 			<div class="col-md-3 left_col">
 				<%@ include file="/WEB-INF/views/include/admin_sidebar.jsp"%>
 			</div>
-
 			<!-- top navigation -->
 			<div class="top_nav">
 				<%@ include file="/WEB-INF/views/include/admin_top_nav.jsp"%>
 			</div>
 			<!-- /top navigation -->
-
 			<!-- page content -->
 		<div class="right_col" role="main">
           <div class="">
@@ -213,7 +211,6 @@ $(document).ready(function(){
           </div>
         </div>
         <!-- /page content -->
-
 
 			<!-- footer content -->
 			<footer>

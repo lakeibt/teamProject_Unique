@@ -7,9 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.uni.vo.AdminVO;
+import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.CalendarVO;
 import com.kosmo.uni.vo.CoursePlanVO;
-import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
 import com.kosmo.uni.vo.MessageVO;
@@ -71,8 +72,32 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList_notRead", map);
 	}
 	@Override
+	public int insertMessage(Map<String, Object> map) {
+		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", map);
+	}
+	@Override
+	public List<Map<String, Object>> authenList(String authen) {
+		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.authenList", authen);
+	}
+	@Override
+	public String getReceiverName(Map<String, Object> map) {
+		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getReceiverName", map);
+	}
+	@Override
+	public int getCourseProCnt(String id) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getCourseProCnt(id);
+	}
+	@Override
+	public List<CourseVO> getCourseProList(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		List<CourseVO> dtos = dao.getCourseProList(map);
+		return dtos;
+	}
+	@Override
 	public int insertMessage(MessageVO vo) {
-		return sqlSession.insert("com.kosmo.uni.persistence.ProfessorDAO.insertMessage", vo);
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	@Override
 	public int getCourseCnt(String p_name) {

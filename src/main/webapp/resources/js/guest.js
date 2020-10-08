@@ -10,8 +10,8 @@
 		if(leftbar_position > footer_top) {
 			$('#leftbar').css('top', 100);
 		} 
-	});
-	
+	});*/
+	/*
 	//side bar - scroll banner - right
 	$(window).scroll(function() {
 		var position = $(document).scrollTop();

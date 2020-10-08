@@ -34,6 +34,7 @@ public class AdminController {
 		logger.info("admin_main");
 
 		adminService.info_list(req, model);
+
 		return "admin/main";
 	}
 	// ------------------------- 공지사항(메인) -------------------------
@@ -191,6 +192,35 @@ public class AdminController {
 		adminService.setting(req, model);
 		return "admin/human_resources/code_setting/setting";
 	}
+	
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_form")
+	public String setting_form(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_form");
+		
+		return "admin/human_resources/code_setting/setting_form";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_pro")
+	public String setting_pro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_pro");
+		
+		adminService.settingPro(req, model);
+		return "admin/human_resources/code_setting/setting_pro";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_humanList")
+	public String setting_humanList(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_humanList");
+		
+		adminService.settingHumanList(req, model);
+		return "admin/human_resources/code_setting/setting_humanList";
+	}
+	@RequestMapping(value = "/admin/human_resources/code_setting/setting_deletePro")
+	public String setting_deletePro(HttpServletRequest req, Model model) {
+		logger.info("human_resources/code_setting/setting_deletePro");
+		
+		adminService.settingDeletePro(req, model);
+		return "admin/human_resources/code_setting/setting_deletePro";
+	}
+	
 	// ------------------------- 인사정보 -------------------------
 	// 인사정보등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info")
@@ -355,7 +385,7 @@ public class AdminController {
 	// 급여대장 - 조회
 	@RequestMapping(value = "/admin/human_resources/pay/payroll")
 	public String thisM_list(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/thisM_list");
+		logger.info("human_resources/pay/payroll");
 		adminService.salaryInput(req, model);
 		return "admin/human_resources/pay/payroll";
 	}
@@ -398,14 +428,37 @@ public class AdminController {
 	}
 	
 	
-	// 급여대장 - 급여명세서
+	// 급여대장 - 급여명세서 
 	@RequestMapping(value = "/admin/human_resources/pay/payslip")
 	public String salary_payslip(HttpServletRequest req, Model model) {
 		logger.info("human_resources/pay/payslip");
 		adminService.salary_payslip(req, model);
 		return "admin/human_resources/pay/payslip";
 	}
-
+	
+	//급여대장 - 확정 
+	@RequestMapping(value = "/admin/human_resources/pay/commitSalary")
+	public String commitSalary(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/commitSalary");
+		adminService.commitSalary(req, model);
+		return "admin/human_resources/pay/commitSalary";
+	}
+	//급여대장 확정 버튼 후 조회 
+	@RequestMapping(value = "/admin/human_resources/pay/confirm_payroll")
+	public String confirm_payroll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/confirm_payroll");
+		adminService.confirm_payroll(req, model);
+		return "admin/human_resources/pay/confirm_payroll";
+	}
+	
+	//급여대장 조회 - 수정   modifyRoll
+	@RequestMapping(value = "/admin/human_resources/pay/modifyRoll")
+	public String modifyRoll(HttpServletRequest req, Model model) {
+		logger.info("human_resources/pay/modifyRoll");
+		adminService.modifyRoll(req, model);
+		return "admin/human_resources/pay/modifyRoll";
+	}
+	
 	// 급여명세
 	@RequestMapping(value = "/admin/human_resources/pay/salary_info")
 	public String salary_info(HttpServletRequest req, Model model) {
@@ -413,6 +466,8 @@ public class AdminController {
 
 		return "admin/human_resources/pay/salary_info";
 	}
+	
+	
 	
 	// 월별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_month")

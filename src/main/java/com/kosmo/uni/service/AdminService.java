@@ -60,6 +60,10 @@ public interface AdminService {
 	public void salarytotal(HttpServletRequest req, Model model);
 	//급여명세서 출력 
 	public void salary_payslip(HttpServletRequest req, Model model);
+	//급여 확정 클릭
+	public void commitSalary(HttpServletRequest req, Model model);
+	//급여 대장 조회 - 수정 팝업 
+	public void modifyRoll(HttpServletRequest req, Model model);
 	
 	// 인사 등록
 	public void addHuman(MultipartHttpServletRequest req, Model model);
@@ -96,9 +100,14 @@ public interface AdminService {
 	public void humanList(HttpServletRequest req, Model model);
 	public void humanInfo(HttpServletRequest req, Model model);
 	
+	// 기초 환경설정(직급별 급여)
+	public void setting(HttpServletRequest req, Model model);
+	public void settingPro(HttpServletRequest req, Model model);
+	public void settingHumanList(HttpServletRequest req, Model model);
+	public void settingDeletePro(HttpServletRequest req, Model model);
+	//급여 확정 후 조회 버튼 
+	public void confirm_payroll(HttpServletRequest req, Model model);
 	// 인사 정보 수정
 	public void updateHuman(MultipartHttpServletRequest req, Model model);
 	
-	// 기초 환경설정(직급별 급여)
-	public void setting(HttpServletRequest req, Model model);
 }

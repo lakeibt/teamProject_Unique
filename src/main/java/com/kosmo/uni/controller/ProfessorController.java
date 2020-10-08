@@ -196,7 +196,6 @@ public class ProfessorController {
 		logger.info("url ==> message_form");
 		
 		proService.message(req, model);
-		
 		return "professor/message_form";
 	}
 	
@@ -205,27 +204,40 @@ public class ProfessorController {
 	public String pro_message_send_form(HttpServletRequest req, Model model) {
 		logger.info("url ==> message_send_form");
 		
+		proService.addresseeList(req, model);
 		return "professor/message_send_form";
 	}	
-
+	@RequestMapping("/professor/message_reply_form")
+	public String pro_message_reply_form(HttpServletRequest req, Model model) {
+		logger.info("url ==> message_reply_form");
+		
+		model.addAttribute("sender_id", req.getParameter("sender_id"));
+		model.addAttribute("sender_name", req.getParameter("sender_name"));
+		return "professor/message_reply_form";
+	}	
+	@RequestMapping("/professor/message_send_authenList")
+	public String pro_message_send_authenList(HttpServletRequest req, Model model) {
+		logger.info("url ==> message_send_authenList");
+		
+		proService.addresseeList(req, model);
+		return "professor/message_send_authenList";
+	}	
 	// 쪽지 보내기
-	@RequestMapping("/professor/messageSend")
+	@ResponseBody
+	@RequestMapping("/professor/proMessageSend")
 	public int pro_messageSend(HttpServletRequest req, Model model) {
 		logger.info("url ==> messageSend");
-		int insertCnt = proService.messageSend(req, model);
 		
+		int insertCnt = proService.messageSend(req, model);
 		return insertCnt;
 	}	
 	
-
-	
-	// 연습
-	@RequestMapping("/professor/test")
-	public String test(HttpServletRequest req, Model model) {
-		logger.info("url ==> test");
+	@ResponseBody
+	@RequestMapping("/professor/proMessageReply")
+	public int pro_messageReply(HttpServletRequest req, Model model) {
+		logger.info("url ==> messageReply");
 		
-		proService.messageSimple(req, model);
-		
-		return "professor/test";
-	}	
+		int insertCnt = proService.messageReply(req, model);
+		return insertCnt;
+	}
 }

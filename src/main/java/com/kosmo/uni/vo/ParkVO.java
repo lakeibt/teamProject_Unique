@@ -6,7 +6,9 @@ public class ParkVO {
 	private String id;
 	private String pintime; 
 	private String pouttime;
-	private String carnum;
+	private String carNum;
+	private String name;
+	private String depart_name;
 	
 	public int getNum() {
 		return num;
@@ -32,11 +34,25 @@ public class ParkVO {
 	public void setPouttime(String pouttime) {
 		this.pouttime = pouttime;
 	}
-	public String getCarnum() {
-		return carnum;
+	public String getCarNum() {
+		return carNum;
 	}
-	public void setCarnum(String carnum) {
-		this.carnum = carnum;
+	public void setCarNum(String carNum) {
+		this.carNum = carNum;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDepart_name() {
+		return depart_name;
+	}
+	public void setDepart_name(String depart_name) {
+		this.depart_name = depart_name;
+	}
+	
+	
 	
 }
