@@ -208,7 +208,7 @@ function message_send(){
 //쪽지 답장 폼 불러오기
 function message_reply(sender_id, sender_name){
     var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");	
+    var header = $("meta[name='_csrf_header']").attr("content");
     
 	$.ajax({
 		url : '${student}message_reply_form?sender_id='+sender_id+'&sender_name='+sender_name,
@@ -270,6 +270,7 @@ function message_reply(sender_id, sender_name){
 			</button>
 			<div class="collapse navbar-collapse justify-content-end">
 				<ul class="navbar-nav">
+					<c:if test="${sessionScope.auth != null}">
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="material-icons">markunread</i> 
@@ -292,6 +293,7 @@ function message_reply(sender_id, sender_name){
 							</div>
 						</div>
 					</li>
+					</c:if>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="${guest}logout" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false"> 
 						<i class="material-icons">power_settings_new</i>
