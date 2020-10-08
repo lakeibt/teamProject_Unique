@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.uni.persistence.AndroidDAO;
@@ -20,6 +21,7 @@ import com.kosmo.uni.vo.nfcVO;
 
 @Service
 public class AndroidServiceImpl implements AndroidService {
+	
 	@Autowired
 	AndroidDAO andDAO;
 
@@ -258,5 +260,140 @@ public class AndroidServiceImpl implements AndroidService {
 		ArrayList<nfcVO> dtos = andDAO.workchecklist(id);
 		System.out.println("dtos : "+dtos);
 		return dtos;
+	}
+
+	@Override
+	public Map<String, Object> maninfo(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		System.out.println("id : " + id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Manager m = andDAO.getManinfo(id);
+		System.out.println("m : " + m);
+		String depart = "";
+		if(m.getDepart().equals("DE")) {
+			depart = "학사관리과";
+		}else if(m.getDepart().equals("HU")){
+			depart = "인사관리과";
+		}else if(m.getDepart().equals("FA")){
+			depart = "시설관리과";
+		} else {
+			depart = m.getDepart();
+		}
+		map.put("id", m.getId());
+		map.put("name", m.getName());
+		map.put("rank", m.getRank());
+		map.put("photo", m.getPhoto());
+		map.put("depart", depart);
+		map.put("tel", m.getTel());
+		map.put("email", m.getEmail());
+		map.put("address", m.getAddress());
+		map.put("de_address", m.getDe_address());
+		System.out.println("m.getId : " + m.getId());
+		System.out.println("m.getName : " + m.getName());
+		System.out.println("m.getRank : " + m.getRank());
+		System.out.println("m.getPhoto : " + m.getPhoto());
+		System.out.println("depart : " + depart);
+		System.out.println("m.getTel : " + m.getTel());
+		System.out.println("m.getEmail : " + m.getEmail());
+		System.out.println("m.getAddress : " + m.getAddress());
+		System.out.println("m.getDe_address : " + m.getDe_address());
+			
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> maninfosave(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String tel = req.getParameter("tel");
+		String email = req.getParameter("email");
+		String address = req.getParameter("address");
+		String address2 = req.getParameter("address2");
+		System.out.println("받은값1 : "+id);
+		System.out.println("받은값2 : "+tel);
+		System.out.println("받은값3 : "+email);
+		System.out.println("받은값4 : "+address);
+		System.out.println("받은값5 : "+address2);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("tel", tel);
+		map.put("email", email);
+		map.put("address", address);
+		map.put("address2", address2);
+		
+		andDAO.maninfosave(map);
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> stuinfo(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		System.out.println("id : " + id);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 회원정보 조회 - 이름 학과 학년 이메일 학번(아이디) 
+		StudentVO s = andDAO.getStudentInfo(id);
+		String mcode = "";
+		if(s.getM_code().equals("CO")) {
+			mcode = "기계공학과";
+		}else {
+			mcode = s.getM_code();
+		}
+		
+		map.put("id", s.getId());
+		map.put("photo", s.getPhoto());
+		map.put("name", s.getName());
+		map.put("m_code", mcode);
+		map.put("grade", s.getGrade());
+		map.put("entrancedate", s.getEntrancedate());
+		map.put("jumin1", s.getJumin1());
+		map.put("tel", s.getTel());
+		map.put("email", s.getEmail());
+		map.put("address", s.getAddress());
+		map.put("de_address", s.getDe_address());
+		System.out.println("id : "+ s.getId());
+		System.out.println("photo : "+ s.getPhoto());
+		System.out.println("name : "+ s.getName());
+		System.out.println("m_code : "+ mcode);
+		System.out.println("grade : "+ s.getGrade());
+		System.out.println("entrancedate : "+ s.getEntrancedate());
+		System.out.println("jumin1 : "+ s.getJumin1());
+		System.out.println("tel : "+ s.getTel());
+		System.out.println("email : "+ s.getEmail());
+		System.out.println("address : "+ s.getAddress());
+		System.out.println("de_address :"+ s.getDe_address());
+		
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> stuinfosave(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String tel = req.getParameter("tel");
+		String email = req.getParameter("email");
+		String address = req.getParameter("address");
+		String address2 = req.getParameter("address2");
+		System.out.println("받은값1 : "+id);
+		System.out.println("받은값2 : "+tel);
+		System.out.println("받은값3 : "+email);
+		System.out.println("받은값4 : "+address);
+		System.out.println("받은값5 : "+address2);
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("tel", tel);
+		map.put("email", email);
+		map.put("address", address);
+		map.put("address2", address2);
+		
+		andDAO.stuinfosave(map);
+		
+		return map;
 	}
 }

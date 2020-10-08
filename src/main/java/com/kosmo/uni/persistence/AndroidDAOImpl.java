@@ -97,6 +97,30 @@ public class AndroidDAOImpl implements AndroidDAO{
 		return dao.workchecklist(id);
 	}
 
+	@Override
+	public Manager getManinfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getManinfo(id);
+	}
+
+	@Override
+	public int maninfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.maninfosave(map);
+	}
+
+	@Override
+	public StudentVO getStuInfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getStuInfo(id);
+	}
+
+	@Override
+	public int stuinfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.stuinfosave(map);
+	}
+
 	
 
 

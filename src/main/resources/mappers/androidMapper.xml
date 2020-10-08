@@ -64,4 +64,24 @@
 		 WHERE a.pnum = b.tel AND id = #{id}
 	</select>
 	
+	<select id="getManinfo" resultType="com.kosmo.uni.vo.Manager">
+		SELECT * FROM A_ADMIN WHERE id=#{id}
+	</select>
+	
+	<update id="maninfosave" parameterType="java.util.Map">
+		UPDATE A_ADMIN
+		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getStuInfo" resultType="com.kosmo.uni.vo.StudentVO">
+		SELECT * FROM S_STUDENT WHERE id=#{id}
+	</select>
+	
+	<update id="stuinfosave" parameterType="java.util.Map">
+		UPDATE S_STUDENT
+		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
+		WHERE id = #{id}
+	</update>
+	
 </mapper>
