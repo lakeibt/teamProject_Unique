@@ -95,8 +95,30 @@ public class AndroidServiceImpl implements AndroidService {
 			StudentVO s = andDAO.getStudentInfo(id);
 			String mcode = "";
 			if(s.getM_code().equals("CO")) {
+				mcode = "컴퓨터공학과";
+			} else if (s.getM_code().equals("BE")) {
+				mcode = "뷰티미용과";
+			} else if (s.getM_code().equals("CN")) {
+				mcode = "건축학과";
+			} else if (s.getM_code().equals("EN")) {
+				mcode = "영어영문학과";
+			} else if (s.getM_code().equals("FD")) {
+				mcode = "패션디자인학과";
+			} else if (s.getM_code().equals("KO")) {
+				mcode = "국어국문학과";
+			} else if (s.getM_code().equals("JA")) {
+				mcode = "일어일문학과";
+			} else if (s.getM_code().equals("FR")) {
+				mcode = "불어불문학과";
+			} else if (s.getM_code().equals("MA")) {
 				mcode = "기계공학과";
-			}else {
+			} else if (s.getM_code().equals("BI")) {
+				mcode = "생명공학과";
+			} else if (s.getM_code().equals("AD")) {
+				mcode = "시각디자인학과";
+			} else if (s.getM_code().equals("SC")) {
+				mcode = "조소학과";
+			} else {
 				mcode = s.getM_code();
 			}
 			
@@ -340,8 +362,30 @@ public class AndroidServiceImpl implements AndroidService {
 		StudentVO s = andDAO.getStudentInfo(id);
 		String mcode = "";
 		if(s.getM_code().equals("CO")) {
+			mcode = "컴퓨터공학과";
+		} else if (s.getM_code().equals("BE")) {
+			mcode = "뷰티미용과";
+		} else if (s.getM_code().equals("CN")) {
+			mcode = "건축학과";
+		} else if (s.getM_code().equals("EN")) {
+			mcode = "영어영문학과";
+		} else if (s.getM_code().equals("FD")) {
+			mcode = "패션디자인학과";
+		} else if (s.getM_code().equals("KO")) {
+			mcode = "국어국문학과";
+		} else if (s.getM_code().equals("JA")) {
+			mcode = "일어일문학과";
+		} else if (s.getM_code().equals("FR")) {
+			mcode = "불어불문학과";
+		} else if (s.getM_code().equals("MA")) {
 			mcode = "기계공학과";
-		}else {
+		} else if (s.getM_code().equals("BI")) {
+			mcode = "생명공학과";
+		} else if (s.getM_code().equals("AD")) {
+			mcode = "시각디자인학과";
+		} else if (s.getM_code().equals("SC")) {
+			mcode = "조소학과";
+		} else {
 			mcode = s.getM_code();
 		}
 		
