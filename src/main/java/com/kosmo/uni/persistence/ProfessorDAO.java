@@ -24,6 +24,8 @@ public interface ProfessorDAO {
 	
 	// 일정 가져오기
 	public List<CalendarVO> getCalendarList(String id);
+	// 일정 추가
+	public int insertPlan(CalendarVO vo);
 	
 	// 내정보 수정
 	public int updateMyPage(HumanVO vo);

@@ -15,6 +15,9 @@ public interface ProfessorService {
 	
 	// 일정 가져오기
 	public void calendarList(HttpServletRequest req, Model model);
+	// 일정 추가
+	public void addPlan(HttpServletRequest req, Model model);
+	
 	
 	// 강의 계획 등록
 	public void coursePlanAdd(HttpServletRequest req, Model model);

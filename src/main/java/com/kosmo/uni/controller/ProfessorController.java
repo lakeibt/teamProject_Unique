@@ -1,20 +1,18 @@
 package com.kosmo.uni.controller;
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.ProfessorDAO;
 import com.kosmo.uni.service.ProfessorService;
-import com.kosmo.uni.vo.CoursePlanVO;
 
 @Controller
 public class ProfessorController {
@@ -36,6 +34,21 @@ public class ProfessorController {
 		
 		return "professor/main";
 	}
+	@RequestMapping("/professor/addPlanForm")
+	public String pro_addPlanForm(HttpServletRequest req, Model model) {
+		logger.info("url ==> addPlanForm");
+		
+		return "professor/main_addPlan";
+	}
+	 
+	
+	@RequestMapping("/professor/addPlan")
+	public void pro_addPlan(HttpServletRequest req, Model model){
+		logger.info("url ==> addPlan");
+		
+		proService.addPlan(req,model);
+	}
+	
 
 	// 메인  : 공지사항
 	@RequestMapping("/professor/info")

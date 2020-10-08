@@ -1,6 +1,9 @@
 package com.kosmo.uni.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -497,12 +500,42 @@ public class ProfessorServiceImpl implements ProfessorService{
  
 		String id = (String)req.getSession().getAttribute("memId");
 		System.out.println(id);
-		
+		 
 		List<CalendarVO> cal_dtos = proDAO.getCalendarList(id);
-		System.out.println(cal_dtos);
+		System.out.println(cal_dtos.get(0).getTitle());
 		
 		model.addAttribute("cal_dtos", cal_dtos);
 		
+	}
+
+	@Override
+	public void addPlan(HttpServletRequest req, Model model) {
+		
+		String id = req.getParameter("id");
+		String title = req.getParameter("title");
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = null;
+		Date endDate = null;
+		try {
+			startDate = fm.parse(req.getParameter("startDate"));
+			endDate = fm.parse(req.getParameter("endDate"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(id);
+		System.out.println(title);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		
+		CalendarVO vo = new CalendarVO();
+		
+		vo.setId(id);
+		vo.setStartDate(startDate);
+		vo.setEndDate(endDate);
+		vo.setTitle(title);
+
+		proDAO.insertPlan(vo);
 	}
 
 }

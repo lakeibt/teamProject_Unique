@@ -113,4 +113,8 @@
 		SELECT * FROM p_calendar where id=#{id}
 	</select>
 	
+	<insert id="insertPlan" parameterType="com.kosmo.uni.vo.CalendarVO">
+		INSERT INTO p_calendar(id, title, startDate, endDate) values(#{id},#{title},#{startDate},#{endDate})
+	</insert>
+	
 </mapper>

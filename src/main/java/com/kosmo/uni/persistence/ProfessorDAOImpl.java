@@ -129,6 +129,12 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
 		return dao.getCalendarList(id);
 	}
+	@Override
+	public int insertPlan(CalendarVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.insertPlan(vo);
+	}
+	
 
 
 
