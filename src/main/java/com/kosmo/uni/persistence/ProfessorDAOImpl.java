@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.CalendarVO;
+import com.kosmo.uni.vo.CoursePlanVO;
+import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InfoVO;
 import com.kosmo.uni.vo.MessageVO;
 
 @Repository
@@ -16,6 +20,17 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 
 	@Autowired
 	SqlSession sqlSession;
+	
+	@Override
+	public int getInfoCnt() {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getInfoCnt();
+	}
+	@Override
+	public List<InfoVO> getInfoList(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getInfoList(map);
+	}
 
 	@Override
 	public int getMessageCnt(String id) {
@@ -84,5 +99,62 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public int getCourseCnt(String p_name) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getCourseCnt(p_name);
+	}
+	@Override
+	public List<CourseVO> getCourseList(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getCourseList(map);
+	}
+	@Override
+	public InfoVO getInfoDetail(int num) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getInfoDetail(num);
+	}
+	@Override
+	public int updateMyPage(HumanVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateMyPage(vo);
+	}
+	@Override
+	public int insertSyllabus(CoursePlanVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.insertSyllabus(vo);
+	}
+	@Override
+	public int insertGradePoint(CoursePlanVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.insertGradePoint(vo);
+	}
+	@Override
+	public int updateCoursePlanChk(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateCoursePlanChk(map);
+	}
+	@Override
+	public CoursePlanVO getCoursePlan(String co_code) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getCoursePlan(co_code);
+	}
+	@Override
+	public int updateSyllabus(CoursePlanVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateSyllabus(vo);
+	}
+	@Override
+	public int updateGradePoint(CoursePlanVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateGradePoint(vo);
+	}
+	@Override
+	public List<CalendarVO> getCalendarList(String id) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getCalendarList(id);
+	}
+
+
 
 }

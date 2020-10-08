@@ -192,6 +192,7 @@ public class AdminController {
 		adminService.setting(req, model);
 		return "admin/human_resources/code_setting/setting";
 	}
+	
 	@RequestMapping(value = "/admin/human_resources/code_setting/setting_form")
 	public String setting_form(HttpServletRequest req, Model model) {
 		logger.info("human_resources/code_setting/setting_form");
@@ -219,15 +220,8 @@ public class AdminController {
 		adminService.settingDeletePro(req, model);
 		return "admin/human_resources/code_setting/setting_deletePro";
 	}
-	// ------------------------- 인사정보 -------------------------
-	// 테스트
-	@RequestMapping(value = "/admin/human_resources/info/test")
-	public String test(HttpServletRequest req, Model model) {
-		logger.info("human_resources/info/test");
-
-		return "admin/human_resources/info/test";
-	}
 	
+	// ------------------------- 인사정보 -------------------------
 	// 인사정보등록
 	@RequestMapping(value = "/admin/human_resources/info/human_info")
 	public String human_info(HttpServletRequest req, Model model) {
@@ -291,7 +285,14 @@ public class AdminController {
 	@RequestMapping(value = "/admin/human_resources/info/human_state")
 	public String human_state(HttpServletRequest req, Model model) {
 		logger.info("human_resources/info/human_state");
-
+		
+		String option = req.getParameter("option");
+		if(option == null) {
+			option = "adm";
+		}
+		
+		model.addAttribute("option", option);
+		
 		return "admin/human_resources/info/human_state";
 	}
 	// 인사 리스트 가져오기
@@ -330,14 +331,17 @@ public class AdminController {
 		
 		return "admin/human_resources/info/human_state_detail_stu";
 	}
- 
-	// 책정임금현황
-	@RequestMapping(value = "/admin/human_resources/info/salary_state")
-	public String salary_state(HttpServletRequest req, Model model) {
-		logger.info("human_resources/info/salary_state");
+	
+	@RequestMapping(value = "/admin/human_resources/info/human_state_modify")
+	public String human_state_modify_adm(MultipartHttpServletRequest req, Model model) {
+		logger.info("human_resources/info/human_state_modify_adm");
+		
+		adminService.updateHuman(req, model);
+		
+		return "admin/human_resources/info/human_state_modify";
+	}	
 
-		return "admin/human_resources/info/salary_state";
-	}
+
 
 	// ------------------------- 급여관리 -------------------------
 	// 근태관리

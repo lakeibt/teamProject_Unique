@@ -107,4 +107,7 @@ public interface AdminService {
 	public void settingDeletePro(HttpServletRequest req, Model model);
 	//급여 확정 후 조회 버튼 
 	public void confirm_payroll(HttpServletRequest req, Model model);
+	// 인사 정보 수정
+	public void updateHuman(MultipartHttpServletRequest req, Model model);
+	
 }

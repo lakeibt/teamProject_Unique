@@ -70,12 +70,13 @@ function addressSearch() {
                   <h4 class="card-title">${profile.get("NAME")}님의 정보</h4>
                 </div>
                 <div class="card-body">
-                  <form action = "${professor}myPageModify">
+                  <form action = "${professor}myPageModify?${_csrf.parameterName}=${_csrf.token}" method="post">
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <div class="row" style="margin:5px 0;">
                       <div class="col-md-4">
                         <div class="form-group">
                           <p>교번</p>                        	
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('ID').substring(1)}">
+                          <input type="text" class="card"  name="id" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('ID')}">
                         </div>
                       </div>
                       
@@ -98,7 +99,7 @@ function addressSearch() {
                       <div class="col-md-4">
                         <div class="form-group">
                         <p>전화번호</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" name = "tel" value = "${profile.get('TEL').substring(0,3)}-${profile.get('TEL').substring(3,7)}-${profile.get('TEL').substring(7,11)}">
+                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" name = "tel" value = "${profile.get('TEL')}">
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -166,7 +167,6 @@ function addressSearch() {
                 <div class="card-body">
                   <h6 class="card-category">${profile.get('POSITION')} / ${profile.get('M_NAME')}</h6>
                   <h4 class="card-title" style = "color:black;">${profile.get('NAME')}</h4>
-                  <a href="#" class="btn btn-primary btn-round">사진수정</a>
                 </div>
               </div>
             </div>

@@ -101,7 +101,7 @@ function endSelect() {
 									<div class="table-responsive">
 										<table class="table table-striped jambo_table">
 											<thead>
-												<tr class="headings" align="center">	
+												<tr class="headings" align="center">
 													<th class="column-title">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">출근</font>
