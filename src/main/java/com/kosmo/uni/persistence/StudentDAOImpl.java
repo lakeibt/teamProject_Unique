@@ -48,6 +48,48 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
+	public List<Map<String, Object>> getRegisterCourse(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getRegisterCourse(id);
+	}
+	
+	@Override
+	public int selectTimetable(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.selectTimetable(id);
+	}
+	
+	@Override
+	public int insertTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.insertTimetable(map);
+	}
+	
+	@Override
+	public int updateTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.updateTimetable(map);
+	}
+
+	@Override
+	public int deleteTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.deleteTimetable(map);
+	}
+	
+	@Override
+	public int plueCourseNumber(String code) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.plueCourseNumber(code);
+	}
+
+	@Override
+	public int minusCourseNumber(String code) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.minusCourseNumber(code);
+	}
+
+	@Override
 	public Map<String, Object> getCourseSyllabusInfo(String code) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getCourseSyllabusInfo(code);
@@ -86,6 +128,12 @@ public class StudentDAOImpl implements StudentDAO {
 	public List<Map<String, Object>> getStudyList(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getStudyList(map);
+	}
+	
+	@Override
+	public void updateView(String sql) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		dao.updateView(sql);
 	}
 
 	@Override
