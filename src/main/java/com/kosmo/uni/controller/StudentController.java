@@ -87,8 +87,25 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 	public String stu_course_register(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_register");
 		
+		stuService.myRegisterCourse(req, model);
 		stuService.courseList(req, model);
 		return "student/course_register";
+	}
+	
+	@RequestMapping("/student/course_register_add")
+	public String stu_course_register_add(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_register_add");
+		
+		stuService.addMyCourse(req, model);
+		return "student/course_register_add";
+	}
+	
+	@RequestMapping("/student/course_register_delete")
+	public String stu_course_register_delete(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_register_delete");
+		
+		stuService.deleteMyCourse(req, model);
+		return "student/course_register_delete";
 	}
 	
 	@RequestMapping("/student/course_timeTable")

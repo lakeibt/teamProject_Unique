@@ -11,6 +11,9 @@ public interface StudentService {
 	public void studentModifyPro(HttpServletRequest req, Model model);
 	// 강의 목록 
 	public void courseList(HttpServletRequest req, Model model);
+	public void myRegisterCourse(HttpServletRequest req, Model model);
+	public void addMyCourse(HttpServletRequest req, Model model);
+	public void deleteMyCourse(HttpServletRequest req, Model model);
 	// 강의 계획서
 	public void course_syllabus(HttpServletRequest req, Model model);
 	// 성적 조회
