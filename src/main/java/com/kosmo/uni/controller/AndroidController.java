@@ -3,6 +3,7 @@ package com.kosmo.uni.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
+import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.nfcVO;
 
 @Controller
@@ -139,6 +141,16 @@ public class AndroidController {
 		
 		Map<String, Object> out = andService.proinfosave(req);
 		
+		return out;
+	}
+	
+	//상담 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/consultList")
+	public ArrayList<ConsultVO> androidConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("consultList()");
+		
+		ArrayList<ConsultVO> out = andService.getConsultList(req);
 		return out;
 	}
 	

@@ -634,12 +634,12 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Override
 	public void getConsultList(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException {
 		Firestore db = initialize();
-		ApiFuture<QuerySnapshot> future = db.collection("teamUnique_Spring").whereEqualTo("proName", "김교수").get();
+		String name = (String)req.getSession().getAttribute("name");
+		ApiFuture<QuerySnapshot> future = db.collection("teamUnique_Spring").whereEqualTo("proName", name).get();
 		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 		List<ConsultVO> consultList = new ArrayList<ConsultVO>();
 		for(DocumentSnapshot document : documents) {
-			System.out.println(document.getId() + " => " + document.toObject(ConsultVO.class));
-			System.out.println(consultList.add(document.toObject(ConsultVO.class)));
+			consultList.add(document.toObject(ConsultVO.class));
 		}
 		model.addAttribute("consultCount", consultList.size());
 		model.addAttribute("consultList", consultList);

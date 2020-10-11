@@ -3,9 +3,13 @@ package com.kosmo.uni.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.ui.Model;
+
+import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.nfcVO;
 
 public interface AndroidService {
@@ -38,5 +42,8 @@ public interface AndroidService {
 	
 	//PRO 정보 수정
 	public Map<String, Object> proinfosave(HttpServletRequest req);
+	
+	//PRO 상담정보 가져오기
+	public ArrayList<ConsultVO> getConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException;
 
 }
