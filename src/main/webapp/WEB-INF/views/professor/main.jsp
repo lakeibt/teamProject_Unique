@@ -174,22 +174,26 @@ function deleteTr(obj) {
 								<div class="card-body">
 									<div class="table-responsive">
 										<table class="table table-striped jambo_table bulk_action">
+											<c:if test="${consultCount != 0}">
 											<thead class="text-primary">
 												<tr>
-													<th style="width: 20%">이름</th>
-													<th style="width: 20%">학번</th>
-													<th style="width: 40%">상담 경험</th>
-													<th style="width: 20%">상담 타입</th>
+													<th style="width: 10%">이름</th>
+													<th style="width: 13%">학번</th>
+													<th style="width: 34%">상담 제목</th>
+													<th style="width: 13%">상담 유형</th>
+													<th style="width: 15%">상담 경험</th>
+													<th style="width: 15%">신청일</th>
 												</tr>
 											</thead>
 											<tbody>
-											<c:if test="${consultCount != 0}">
 											<c:forEach var="con" items="${consultList}">
 												<tr>
-													<th style="width: 20%">${con.getStuName()}</th>
-													<th style="width: 20%">${con.getStuNumber()}</th>
-													<th style="width: 40%">${con.getConsultExp()}</th>
-													<th style="width: 20%">${con.getConsultType()}</th>
+													<th style="width: 10%">${con.getStuName()}</th>
+													<th style="width: 13%">${con.getStuNumber()}</th>
+													<th style="width: 34%">${con.getSubject()}</th>
+													<th style="width: 13%">${con.getConsultType()}</th>
+													<th style="width: 15%; text-align:center; padding-left:0px;">${con.getConsultExp()}</th>
+													<th style="width: 15%">${con.getDate().split(" ")[0].replace("-","/")}</th>
 												</tr>
 											</c:forEach>
 											</c:if>

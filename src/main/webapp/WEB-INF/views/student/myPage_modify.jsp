@@ -209,22 +209,15 @@ function addressSearch() {
 												<input type="text" class="form-control" name="stuName" value = "${vo.name}" readonly>
 											</div>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<div class="form-group bmd-form-group">
 												<label class="bmd-label-floating">학번</label>
 												<input type="text" class="form-control" name="stuNumber" value = "${vo.getId()}" readonly>
 											</div>
 										</div>
-									</div>
-									<div class="row">
 										<div class="col-md-1">
 											<div class="form-group bmd-form-group">
 												<label class="bmd-label-floating">신청 교수</label>
-												<%-- <select name = "professor">
-													<c:forEach var = "professorList" items = "${professors}" varStatus = "status">
-														<option value = "${professorList}">${professorList}</option>
-													</c:forEach>
-												</select> --%>
 												<input type="text" class="form-control" name="proName">
 											</div>
 										</div>
@@ -238,6 +231,14 @@ function addressSearch() {
 											<div class="form-group bmd-form-group">
 												<label class="bmd-label-floating">상담 경험</label>
 												<input type="text" class="form-control" name="consultExp">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group bmd-form-group">
+												<label class="bmd-label-floating">상담 제목</label>
+												<input type="text" class="form-control" name="subject">
 											</div>
 										</div>
 									</div>

@@ -1,7 +1,9 @@
 package com.kosmo.uni.service;
 
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -540,9 +542,13 @@ public class StudentServiceImpl implements StudentService{
 		String stuNumber = req.getParameter("stuNumber");
 		String proName = req.getParameter("proName");
 		String consultExp = req.getParameter("consultExp");
-		int consultType = Integer.parseInt(req.getParameter("consultType"));
+		String consultType = req.getParameter("consultType");
 		String content = req.getParameter("content");
-		
+		String subject = req.getParameter("subject");
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		String date = format1.format(time);
+		System.out.println(date);
 		
 		Firestore firestore = FirestoreClient.getFirestore();
 		ConsultVO vo = new ConsultVO();
@@ -553,13 +559,15 @@ public class StudentServiceImpl implements StudentService{
 		vo.setConsultType(consultType);
 		vo.setContent(content);
 		vo.setStatus("제출");
+		vo.setSubject(subject);
+		vo.setDate(date);
 		
-		ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document("unique_consult-" + vo.getStuName() + "-" + vo.getProName()).set(vo);
+		ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document("consult-" + vo.getStuName() + "-" + vo.getProName() + "-" + vo.getDate()).set(vo);
 
 		System.out.println(apiFuture.get().getUpdateTime().toString());
 	}
 	
-	public static void initialize() {
+	public static Firestore initialize() {
 		try {
 			String path = EduServiceImpl.class.getResource("").getPath();
 			
@@ -572,6 +580,7 @@ public class StudentServiceImpl implements StudentService{
 			    for(FirebaseApp app : firebaseApps){
 			        if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
 			            firebaseApp = app;
+			            
 			        }
 			    }
 			}else{
@@ -579,10 +588,12 @@ public class StudentServiceImpl implements StudentService{
 			        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
 			        .setDatabaseUrl("https://teamunique-dae26.firebaseio.com")
 			        .build();
-			    firebaseApp = FirebaseApp.initializeApp(options);              
+			    firebaseApp = FirebaseApp.initializeApp(options);
 			}
+			return FirestoreClient.getFirestore();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		return FirestoreClient.getFirestore();
 	}
 }
