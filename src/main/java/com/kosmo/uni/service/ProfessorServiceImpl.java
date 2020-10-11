@@ -1,9 +1,12 @@
 package com.kosmo.uni.service;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,10 +14,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.CollectionReference;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.ProfessorDAO;
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.CalendarVO;
+import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.CoursePlanVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
@@ -25,6 +41,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Autowired
 	ProfessorDAO proDAO;
+	
+	public static final String COLLECTION_NAME = "teamUnique_Spring";
 
 	@Override
 	public void messageList(HttpServletRequest req, Model model) {
@@ -579,6 +597,52 @@ public class ProfessorServiceImpl implements ProfessorService {
 		
 		model.addAttribute("cal_dtos", cal_dtos);
 		
+	}
+	
+	
+	
+	public static Firestore initialize() {
+		try {
+			String path = EduServiceImpl.class.getResource("").getPath();
+			
+			FileInputStream serviceAccount = new FileInputStream(path + "teamunique-dae26-firebase-adminsdk-w6e2x-bb00a614c7.json");
+			
+			FirebaseApp firebaseApp = null;
+			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+			 
+			if(firebaseApps != null && !firebaseApps.isEmpty()){
+			    for(FirebaseApp app : firebaseApps){
+			        if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+			            firebaseApp = app;
+			            
+			        }
+			    }
+			}else{
+			    FirebaseOptions options = new FirebaseOptions.Builder()
+			        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			        .setDatabaseUrl("https://teamunique-dae26.firebaseio.com")
+			        .build();
+			    firebaseApp = FirebaseApp.initializeApp(options);
+			}
+			return FirestoreClient.getFirestore();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return FirestoreClient.getFirestore();
+	}
+
+	@Override
+	public void getConsultList(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException {
+		Firestore db = initialize();
+		ApiFuture<QuerySnapshot> future = db.collection("teamUnique_Spring").whereEqualTo("proName", "김교수").get();
+		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+		List<ConsultVO> consultList = new ArrayList<ConsultVO>();
+		for(DocumentSnapshot document : documents) {
+			System.out.println(document.getId() + " => " + document.toObject(ConsultVO.class));
+			System.out.println(consultList.add(document.toObject(ConsultVO.class)));
+		}
+		model.addAttribute("consultCount", consultList.size());
+		model.addAttribute("consultList", consultList);
 	}
 
 }

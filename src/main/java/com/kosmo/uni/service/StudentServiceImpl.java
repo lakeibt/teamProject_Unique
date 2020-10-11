@@ -1,9 +1,11 @@
 package com.kosmo.uni.service;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +14,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.StudentDAO;
+import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentVO;
 
@@ -23,6 +33,8 @@ public class StudentServiceImpl implements StudentService{
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	public static final String COLLECTION_NAME = "teamUnique_Spring";
 	
 	// 학생 정보
 	@Override
@@ -512,5 +524,65 @@ public class StudentServiceImpl implements StudentService{
 		list = stuDAO.authenList(authen);
 		
 		model.addAttribute("authenList", list);
+	}
+
+	@Override
+	public void getProfessorName(Model model) {
+		ArrayList<String> proNameList = stuDAO.getProfessorName();
+		model.addAttribute("professors", proNameList);
+	}
+
+	@Override
+	public void submitConsult(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException {
+		initialize();
+		
+		String stuName = req.getParameter("stuName");
+		String stuNumber = req.getParameter("stuNumber");
+		String proName = req.getParameter("proName");
+		String consultExp = req.getParameter("consultExp");
+		int consultType = Integer.parseInt(req.getParameter("consultType"));
+		String content = req.getParameter("content");
+		
+		
+		Firestore firestore = FirestoreClient.getFirestore();
+		ConsultVO vo = new ConsultVO();
+		vo.setStuName(stuName);
+		vo.setStuNumber(stuNumber);
+		vo.setProName(proName);
+		vo.setConsultExp(consultExp);
+		vo.setConsultType(consultType);
+		vo.setContent(content);
+		vo.setStatus("제출");
+		
+		ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document("unique_consult-" + vo.getStuName() + "-" + vo.getProName()).set(vo);
+
+		System.out.println(apiFuture.get().getUpdateTime().toString());
+	}
+	
+	public static void initialize() {
+		try {
+			String path = EduServiceImpl.class.getResource("").getPath();
+			
+			FileInputStream serviceAccount = new FileInputStream(path + "teamunique-dae26-firebase-adminsdk-w6e2x-bb00a614c7.json");
+			
+			FirebaseApp firebaseApp = null;
+			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+			 
+			if(firebaseApps != null && !firebaseApps.isEmpty()){
+			    for(FirebaseApp app : firebaseApps){
+			        if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+			            firebaseApp = app;
+			        }
+			    }
+			}else{
+			    FirebaseOptions options = new FirebaseOptions.Builder()
+			        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			        .setDatabaseUrl("https://teamunique-dae26.firebaseio.com")
+			        .build();
+			    firebaseApp = FirebaseApp.initializeApp(options);              
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

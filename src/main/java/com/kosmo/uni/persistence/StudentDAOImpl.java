@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -208,5 +209,10 @@ public class StudentDAOImpl implements StudentDAO {
 	public String getReceiverName(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getReceiverName(map);
+	}
+	@Override
+	public ArrayList<String> getProfessorName() {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getProfessorName();
 	}
 }

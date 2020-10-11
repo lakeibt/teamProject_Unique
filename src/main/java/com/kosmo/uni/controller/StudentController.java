@@ -64,13 +64,14 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		logger.info("url ==> myPage");
 		
 		stuService.studentSimpleInfo(req, model);
+		
 		return "student/myPage";
 	}
 	
 	@RequestMapping("/student/myPage_modify")
 	public String stu_myPage_modify(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modify");
-		
+		stuService.getProfessorName(model);
 		stuService.studentinfo(req, model);
 		return "student/myPage_modify";
 	}
@@ -248,5 +249,15 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		
 		int insertCnt = stuService.messageReply(req, model);
 		return insertCnt;
+	}
+	
+	// 상담서 제출하기
+	@RequestMapping("/student/submitConsult")
+	public String submitConsult(HttpServletRequest req, Model model) throws Exception {
+		logger.info("url ==> submitConsult");
+		
+		stuService.submitConsult(req, model);
+		
+		return "student/submitConsultPro";
 	}
 }

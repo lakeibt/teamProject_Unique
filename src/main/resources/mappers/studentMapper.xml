@@ -182,6 +182,10 @@
 		SELECT * FROM p_message WHERE num = #{num}
 	</select>
 	
+	<select id = "getProfessorName" resultType = "String">
+		SELECT NAME FROM p_professor
+	</select>
+	
 	<update id="updateReadChk" parameterType="int">
 		UPDATE p_message SET readchk = 1 WHERE num = #{num} 
 	</update>

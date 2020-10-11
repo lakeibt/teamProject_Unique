@@ -1,6 +1,8 @@
 package com.kosmo.uni.controller;
 
 
+import java.util.concurrent.ExecutionException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,10 +30,11 @@ public class ProfessorController {
 	
 	// 메인
 	@RequestMapping("/professor/main")
-	public String pro_main(HttpServletRequest req, Model model) {
+	public String pro_main(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException  {
 		logger.info("url ==> main");
 		proService.infoList(req, model);
 		proService.courseList(req, model);
+		proService.getConsultList(req, model);
 		
 		return "professor/main";
 	}

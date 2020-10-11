@@ -132,7 +132,7 @@ function chnQnaType(type , select) {
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header card-header-primary">
-								<div class="card-title">취업지원 공고</div>
+								<h4 class="card-title">취업지원 공고</h4>
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">

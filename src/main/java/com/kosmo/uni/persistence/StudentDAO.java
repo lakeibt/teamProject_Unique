@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,4 +69,6 @@ public interface StudentDAO {
 	public int insertMessage(Map<String, Object> map);
 	public List<Map<String, Object>> authenList(String authen);
 	public String getReceiverName(Map<String, Object> map);
+	// 교수 이름 가져오기
+	public ArrayList<String> getProfessorName();
 }

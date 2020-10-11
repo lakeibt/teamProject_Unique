@@ -35,4 +35,7 @@ public interface StudentService {
 	public int messageReply(HttpServletRequest req, Model model);
 	// 쪽지 보내기 폼 - 수신자 : 학생/교수
 	public void addresseeList(HttpServletRequest req, Model model);
+	// 교수 이름 리스트 가져오기
+	public void getProfessorName(Model model);
+	public void submitConsult(HttpServletRequest req, Model model) throws Exception;
 }

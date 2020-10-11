@@ -166,6 +166,42 @@ function deleteTr(obj) {
 									</div>
 								</div>
 							</div>
+							<div style="height:1px;"></div>
+							<div class="card">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title mt-0">상담 신청 목록</h4>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-striped jambo_table bulk_action">
+											<thead class="text-primary">
+												<tr>
+													<th style="width: 20%">이름</th>
+													<th style="width: 20%">학번</th>
+													<th style="width: 40%">상담 경험</th>
+													<th style="width: 20%">상담 타입</th>
+												</tr>
+											</thead>
+											<tbody>
+											<c:if test="${consultCount != 0}">
+											<c:forEach var="con" items="${consultList}">
+												<tr>
+													<th style="width: 20%">${con.getStuName()}</th>
+													<th style="width: 20%">${con.getStuNumber()}</th>
+													<th style="width: 40%">${con.getConsultExp()}</th>
+													<th style="width: 20%">${con.getConsultType()}</th>
+												</tr>
+											</c:forEach>
+											</c:if>
+											
+											<c:if test="${consultCount == 0}">
+												신청 상담 내역이 없습니다.
+											</c:if>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 		                </div>
 		                <div class="col-md-6" >
 		                	<div class="card" style="padding: 10px;">

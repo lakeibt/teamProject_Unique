@@ -1,5 +1,7 @@
 package com.kosmo.uni.service;
 
+import java.util.concurrent.ExecutionException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -48,4 +50,7 @@ public interface ProfessorService {
 	public int messageReply(HttpServletRequest req, Model model);
 	// 쪽지 보내기 폼 - 수신자 : 학생/교수
 	public void addresseeList(HttpServletRequest req, Model model);
+	
+	// 교수 상담 내역 가져오기
+	public void getConsultList(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException ;
 }
