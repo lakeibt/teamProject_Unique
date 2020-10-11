@@ -232,4 +232,26 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		int insertCnt = stuService.messageReply(req, model);
 		return insertCnt;
 	}
+	
+	// 주차별 수업목록
+	@RequestMapping("/student/lecture")
+	public String stu_lecture(HttpServletRequest req, Model model) {
+		logger.info("url ==> lecture");
+		
+		model.addAttribute("co_code", req.getParameter("co_code"));
+		System.out.println(req.getParameter("co_code"));
+		
+		return "student/lecture";
+	}
+	// 주차별 수업 상세항목
+	@RequestMapping("/student/lecture_detail")
+	public String stu_lectureDetail(HttpServletRequest req, Model model) {
+		logger.info("url ==> lecture_detail");
+		
+		stuService.lectureDetail(req, model);
+		
+		return "student/lecture_detail";
+	}
+	
+	
 }

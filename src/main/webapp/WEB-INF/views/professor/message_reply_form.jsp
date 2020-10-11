@@ -33,8 +33,8 @@ function pro_reply_callback() {
 				
 				if(socket.readyState !== 1) return;
 				if(socket) {
-					var receiver = document.ReplySendMessageForm.receiver_id.value;
-					var title = document.ReplySendMessageForm.title.value;
+					var receiver = $("#receiver option:selected").val();
+					var title = document.directSendMessageForm.title.value;
 					var sessionId = "<%=session.getAttribute("memId")%>"
 						socket.send(title + "!@#" + receiver); // socket을 통해 보냄
 				}

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -30,6 +31,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.confirmIdPwdAdm(id);
 	}
+	
+	@Override
+	public HashMap<String, String> confirmIdPwdPro(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.confirmIdPwdPro(id);
+	}
 
 	@Override
 	public StudentVO getStudentInfo(String id) {
@@ -41,6 +48,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 	public Manager getAdminInfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getAdminInfo(id);
+	}
+	
+	@Override
+	public HumanVO getProinInfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getProinInfo(id);
 	}
 	
 	@Override
@@ -97,7 +110,44 @@ public class AndroidDAOImpl implements AndroidDAO{
 		return dao.workchecklist(id);
 	}
 
+	@Override
+	public Manager getManinfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getManinfo(id);
+	}
+
+	@Override
+	public int maninfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.maninfosave(map);
+	}
+
+	@Override
+	public StudentVO getStuInfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getStuInfo(id);
+	}
+
+	@Override
+	public int stuinfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.stuinfosave(map);
+	}
+
+	@Override
+	public HumanVO getProInfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getProInfo(id);
+	}
+
+	@Override
+	public int Proinfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.Proinfosave(map);
+	}
+
 	
 
+	
 
 }

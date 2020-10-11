@@ -28,8 +28,7 @@
 		var btn = $(obj).next();
 
 		$.ajax({
-			url : '${professor}lecture_detail?le_week=' + week + '&co_code='
-					+ co_code,
+			url : '${student}lecture_detail?le_week=' + week + '&co_code=' + co_code,
 			type : "POST",
 			beforeSend : function(xhr) {
 				xhr.setRequestHeader(header, token);
@@ -59,11 +58,11 @@
 </head>
 <body class="dark-edition">
 	<input type="hidden" id="co_code" value="${co_code}">
-	<%@ include file="../include/professor_sidebar.jsp"%>
+	<%@ include file="../include/student_sidebar.jsp"%>
 
 	<div class="main-panel">
 
-		<%@ include file="../include/professor_header.jsp"%>
+		<%@ include file="../include/student_header.jsp"%>
 
 		<div class="content">
 			<div class="container-fluid">
@@ -71,7 +70,7 @@
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header card-header-primary">
-								<h4 class="card-title ">수업목록</h4>
+								<h4 class="card-title ">주차별 수업목록</h4>
 							</div>
 							<div class="card-body">
 								<div class="card lecture"

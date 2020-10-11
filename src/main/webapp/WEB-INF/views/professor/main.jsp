@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
-<%@ page import = "java.util.ArrayList" %>
-<%@ page import = "java.util.List" %>
-<%@ page import = "com.kosmo.uni.vo.CalendarVO" %>
 
 <!DOCTYPE html>
 <html>
@@ -110,8 +107,9 @@ function deleteTr(obj) {
 									</div>
 								</div>
 							</div>
-							<div style="height:1px;"></div>
-				            <div class="card">
+				        </div>
+				        <div class="col-md-6">
+				        <div class="card">
 								<div class="card-header card-header-primary">
 									<h4 class="card-title mt-0">강의목록</h4>
 								</div>
@@ -146,7 +144,7 @@ function deleteTr(obj) {
 									</div>
 								</div>
 							</div>
-		                </div>
+				        </div>
 					</div>
 				</div>
 			</div>

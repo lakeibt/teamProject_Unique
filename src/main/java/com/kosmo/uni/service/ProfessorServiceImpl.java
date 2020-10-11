@@ -1,9 +1,10 @@
 package com.kosmo.uni.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.persistence.ProfessorDAO;
-import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.GradeVO;
 import com.kosmo.uni.vo.CoursePlanVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 
 @Service
@@ -374,7 +378,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Override
 	public void courseList(HttpServletRequest req, Model model) {
 		
-		int pageSize = 5;
+		int pageSize = 10;
 		int pageBlock = 5;
 		int cnt = 0;
 		int start = 0;
@@ -572,6 +576,308 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	public void gradeList(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		
+		CoursePlanVO vo = proDAO.getCoursePlan(co_code);
+		List<GradeVO> dtos = proDAO.getGradeList(co_code);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("dtos", dtos);
+		model.addAttribute("co_code", co_code);
+		
+	}
+
+	@Override
+	public int lectureDetail(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		int le_week = Integer.parseInt(req.getParameter("le_week"));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("co_code", co_code);
+		map.put("le_week", le_week);
+		
+		int cnt = proDAO.lectureChk(map);
+		
+		if(cnt != 0) {
+			LectureVO vo = proDAO.getLecture(map);
+			model.addAttribute("vo", vo);
+		}
+
+		model.addAttribute("co_code", co_code);
+		model.addAttribute("le_week", le_week);
+		
+		return cnt;
+		
+	}
+
+	@Override
+	public void lectureAdd(MultipartHttpServletRequest req, Model model) {
+		
+		int insertCnt = 0;
+		
+		MultipartFile file= req.getFile("le_file");
+		MultipartFile file_img= req.getFile("le_file_img");
+		
+		String saveDir_file = req.getRealPath("/resources/video/");
+		String saveDir_file_img = req.getRealPath("/resources/img/lecture/");
+		
+		String realDir_file = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\video\\";
+		String realDir_file_img = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\lecture\\";
+		
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
+		FileInputStream fis_img = null;
+		FileOutputStream fos_img = null;
+		
+		try {
+			file.transferTo(new File(saveDir_file + file.getOriginalFilename()));
+			fis = new FileInputStream(saveDir_file + file.getOriginalFilename());
+			fos = new FileOutputStream(realDir_file + file.getOriginalFilename());
+			
+			file_img.transferTo(new File(saveDir_file_img + file.getOriginalFilename()));
+			fis_img = new FileInputStream(saveDir_file_img + file_img.getOriginalFilename());
+			fos_img = new FileOutputStream(realDir_file_img + file_img.getOriginalFilename());
+		
+			int data = 0;
+			
+			while((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			
+			data = 0;
+			while((data = fis_img.read()) != -1) {
+				fos_img.write(data);
+			}
+			fis_img.close();
+			fos_img.close();
+			
+			String le_file = file.getOriginalFilename();
+			String le_file_img = file_img.getOriginalFilename();
+			String co_code = req.getParameter("co_code");
+			String le_title = req.getParameter("le_title");
+			String le_content = req.getParameter("le_content");
+			String le_writer = (String) req.getSession().getAttribute("name");
+			int le_week = Integer.parseInt(req.getParameter("le_week"));
+			System.out.println(le_file);
+			System.out.println(le_file_img);
+			System.out.println(co_code);
+			System.out.println(le_title);
+			System.out.println(le_content);
+			System.out.println(le_writer);
+			System.out.println(le_week);
+			LectureVO vo = new LectureVO();
+			
+			vo.setCo_code(co_code);
+			vo.setLe_content(le_content);
+			vo.setLe_file(le_file);
+			vo.setLe_file_img(le_file_img);
+			vo.setLe_title(le_title);
+			vo.setLe_week(le_week);
+			vo.setLe_writer(le_writer);
+			
+			
+			insertCnt = proDAO.insertLecture(vo);
+			
+			model.addAttribute("insertCnt", insertCnt);
+			model.addAttribute("co_code", co_code);
+		
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public void lectureModify(MultipartHttpServletRequest req, Model model) {
+		
+		int insertCnt = 0;
+		
+		MultipartFile file= req.getFile("le_file");
+		MultipartFile file_img= req.getFile("le_file_img");
+		
+		String saveDir_file = req.getRealPath("/resources/video/");
+		String saveDir_file_img = req.getRealPath("/resources/img/lecture/");
+		
+		String realDir_file = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\video\\";
+		String realDir_file_img = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\lecture\\";
+		
+		FileInputStream fis = null;
+		FileOutputStream fos = null;
+		FileInputStream fis_img = null;
+		FileOutputStream fos_img = null;
+		
+		try {
+			file.transferTo(new File(saveDir_file + file.getOriginalFilename()));
+			fis = new FileInputStream(saveDir_file + file.getOriginalFilename());
+			fos = new FileOutputStream(realDir_file + file.getOriginalFilename());
+			
+			file_img.transferTo(new File(saveDir_file_img + file.getOriginalFilename()));
+			fis_img = new FileInputStream(saveDir_file_img + file_img.getOriginalFilename());
+			fos_img = new FileOutputStream(realDir_file_img + file_img.getOriginalFilename());
+		
+			int data = 0;
+			
+			while((data = fis.read()) != -1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+			
+			data = 0;
+			while((data = fis_img.read()) != -1) {
+				fos_img.write(data);
+			}
+			fis_img.close();
+			fos_img.close();
+			
+			int le_num = Integer.parseInt(req.getParameter("le_num"));
+			String le_file = file.getOriginalFilename();
+			String le_file_img = file_img.getOriginalFilename();
+			String le_title = req.getParameter("le_title");
+			String le_content = req.getParameter("le_content");
+			System.out.println(le_file);
+			System.out.println(le_file_img);
+			System.out.println(le_title);
+			System.out.println(le_content);
+			LectureVO vo = new LectureVO();
+			
+			vo.setLe_content(le_content);
+			vo.setLe_file(le_file);
+			vo.setLe_file_img(le_file_img);
+			vo.setLe_title(le_title);
+			vo.setLe_num(le_num);
+			
+			insertCnt = proDAO.updateLecture(vo);
+			
+			String co_code = req.getParameter("co_code");
+			
+			model.addAttribute("insertCnt", insertCnt);
+			model.addAttribute("co_code", co_code);
+		
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void lectureDelete(MultipartHttpServletRequest req, Model model) {
+
+
+		int le_num = Integer.parseInt(req.getParameter("le_num"));
+		String co_code = req.getParameter("co_code");
+		
+		int deleteCnt = proDAO.deleteLecture(le_num);
+		
+		model.addAttribute("co_code", co_code);
+		model.addAttribute("deleteCnt", deleteCnt);
+		
+	}
+
+	@Override
+	public void gradeAdd(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		System.out.println(co_code);
+		int tr_cnt = Integer.parseInt(req.getParameter("tr_cnt"));
+		
+		for(int i = 1; i <= tr_cnt; i++) {
+			GradeVO vo = new GradeVO();
+			
+			String name = req.getParameter("name"+ i);
+			String id = req.getParameter("id"+ i);
+			float attend = Float.parseFloat(req.getParameter("attend"+ i));
+			float midterm = Float.parseFloat(req.getParameter("midterm"+ i));
+			float finals = Float.parseFloat(req.getParameter("finals"+ i));
+			float assign_report = Float.parseFloat(req.getParameter("assign_report"+ i));
+			float assign_team = Float.parseFloat(req.getParameter("assign_team"+ i));
+			String grades_code = req.getParameter("grades_code"+ i);
+			
+			vo.setName(name);
+			vo.setId(id);
+			vo.setAttend(attend);
+			vo.setMidterm(midterm);
+			vo.setFinals(finals);
+			vo.setAssign_report(assign_report);
+			vo.setAssign_team(assign_team);
+			vo.setGrades_code(grades_code);
+			vo.setCo_code(co_code);
+			
+			proDAO.insertGradeScore(vo);
+			
+		}
+		
+		int grade_chk = 1;
+		Map<String, Object> map = new HashMap<>();
+		map.put("grade_chk", grade_chk);
+		map.put("co_code", co_code);
+		
+		proDAO.updateGradeChk(map);
+		
+		model.addAttribute("co_code", co_code);
+		
+	}
+
+	@Override
+	public void gradeList_modify(HttpServletRequest req, Model model) {
+
+		String co_code = req.getParameter("co_code");
+		
+		CoursePlanVO vo = proDAO.getCoursePlan(co_code);
+		List<GradeVO> dtos = proDAO.getGradeList_modify(co_code);
+		
+		model.addAttribute("vo", vo);
+		model.addAttribute("dtos", dtos);
+		model.addAttribute("co_code", co_code);
+		
+	}
+
+	@Override
+	public void gradeModify(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		int tr_cnt = Integer.parseInt(req.getParameter("tr_cnt"));
+		
+		for(int i = 1; i <= tr_cnt; i++) {
+			GradeVO vo = new GradeVO();
+			
+			String name = req.getParameter("name"+ i);
+			String id = req.getParameter("id"+ i);
+			System.out.println(id);
+			float attend = Float.parseFloat(req.getParameter("attend"+ i));
+			float midterm = Float.parseFloat(req.getParameter("midterm"+ i));
+			float finals = Float.parseFloat(req.getParameter("finals"+ i));
+			float assign_report = Float.parseFloat(req.getParameter("assign_report"+ i));
+			float assign_team = Float.parseFloat(req.getParameter("assign_team"+ i));
+			String grades_code = req.getParameter("grades_code"+ i);
+			
+			vo.setName(name);
+			vo.setId(id);
+			vo.setAttend(attend);
+			vo.setMidterm(midterm);
+			vo.setFinals(finals);
+			vo.setAssign_report(assign_report);
+			vo.setAssign_team(assign_team);
+			vo.setGrades_code(grades_code);
+			vo.setCo_code(co_code);
+			
+			int chkCnt = proDAO.chkGrade(vo);
+			
+			if(chkCnt == 0) {
+				proDAO.insertGradeScore(vo);
+			} else {
+				proDAO.updateGradeScore(vo);
+			}
+			
+			
+		}
+		
+		model.addAttribute("co_code", co_code);
 		
 	}
 

@@ -20,5 +20,23 @@ public interface AndroidService {
 	
 	//근퇴 관리 리스트 출력
 	public ArrayList<nfcVO> workcheck(HttpServletRequest req);
+	
+	//ADM 정보 보기 
+	public Map<String, Object> maninfo(HttpServletRequest req);
+	
+	//ADM 정보 수정
+	public Map<String, Object> maninfosave(HttpServletRequest req);
+	
+	//STU 정보 보기 
+	public Map<String, Object> stuinfo(HttpServletRequest req);
+	
+	//STU 정보 수정
+	public Map<String, Object> stuinfosave(HttpServletRequest req);
+	
+	//PRO 정보 보기 
+	public Map<String, Object> proinfo(HttpServletRequest req);
+	
+	//PRO 정보 수정
+	public Map<String, Object> proinfosave(HttpServletRequest req);
 
 }

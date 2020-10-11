@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.GradeVO;
 import com.kosmo.uni.vo.CoursePlanVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 
 public interface ProfessorDAO {
@@ -31,9 +33,26 @@ public interface ProfessorDAO {
 	public int updateSyllabus(CoursePlanVO vo);
 	public int updateGradePoint(CoursePlanVO vo);
 	public CoursePlanVO getCoursePlan(String co_code);
+	public int updateGradeChk(Map<String, Object> map);
 	
-	// 성적
-	//public int getGradeCnt(String co_code);
+	// 성적 입력할 인원
+	public List<GradeVO> getGradeList(String co_code);
+	public int insertGradeScore(GradeVO vo);
+	public List<GradeVO> getGradeList_modify(String co_code);
+	public int chkGrade(GradeVO vo);
+	public int updateGradeScore(GradeVO vo);
+	
+	
+	// 주차별 강의 확인
+	public int lectureChk(Map<String, Object> map);
+	// 해당 강의 가져오기
+	public LectureVO getLecture(Map<String, Object> map);
+	// 수업 등록
+	public int insertLecture(LectureVO vo);
+	// 수업 수정
+	public int updateLecture(LectureVO vo);
+	// 수업 삭제
+	public int deleteLecture(int le_num);
 	
 	
 	// 받은 쪽지 갯수

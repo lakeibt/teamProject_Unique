@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.persistence.StudentDAO;
+import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentVO;
 
@@ -455,5 +457,30 @@ public class StudentServiceImpl implements StudentService{
 		list = stuDAO.authenList(authen);
 		
 		model.addAttribute("authenList", list);
+	}
+
+	@Override
+	public void lectureDetail(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		System.out.println(co_code);
+		int le_week = Integer.parseInt(req.getParameter("le_week"));
+		System.out.println(le_week);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("co_code", co_code);
+		map.put("le_week", le_week);
+		
+		int cnt = stuDAO.lectureChk(map);
+		
+		if(cnt != 0) {
+			LectureVO vo = stuDAO.getLecture(map);
+			model.addAttribute("vo", vo);
+		}
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("co_code", co_code);
+		model.addAttribute("le_week", le_week);
+		
 	}
 }

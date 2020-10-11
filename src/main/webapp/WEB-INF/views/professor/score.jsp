@@ -42,12 +42,84 @@ function score_register(obj){
 	});
 }
 
+function score_modify(obj){
+	var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+    var co_code = $(obj).attr("id");
+    var div = $('#score_div');
+    
+	$.ajax({
+		url : '${professor}score_modify?co_code=' + co_code,
+        type : "POST",
+        beforeSend: function (xhr) {
+        	xhr.setRequestHeader(header, token);
+        },
+        dataType : "html",
+        success : function(data){
+        	
+        	div.html(data);
+        	
+        }, error : function(){
+        	alert('오류!');
+        }
+	});
+}
+
 
 function deleteDiv(obj) {
 	var div = $(obj).parent().parent();
 	
 	div.remove();
 }
+
+function grade(obj){
+	
+	var pa = $(obj).parent().parent();
+	
+	var at_p = $('#at').val();
+	var mid_p = $('#mid').val();
+	var fi_p = $('#fi').val();
+	var asr_p = $('#asr').val();
+	var ast_p = $('#ast').val();
+	
+	var attend = parseInt(pa.children(":eq(1)").children().val());
+	var midterm = parseInt(pa.children(":eq(2)").children().val());
+	var finals  = parseInt(pa.children(":eq(3)").children().val());
+	var assign_report  = parseInt(pa.children(":eq(4)").children().val());
+	var assign_team  = parseInt(pa.children(":eq(5)").children().val());
+	var grade  = pa.children(":eq(6)").children();
+	var grades_code  = pa.children(":eq(7)").children();
+	
+	if(!attend) attend = 0;
+	if(!midterm) midterm = 0;
+	if(!finals) finals = 0;
+	if(!assign_report) assign_report = 0;
+	if(!assign_team) assign_team = 0;
+	
+	grade.val(attend/10*at_p + midterm/10*mid_p + finals/10*fi_p + assign_report/10*asr_p + assign_team/10*ast_p);
+	
+	if(parseInt(grade.val()) >= 95){
+		grades_code.val('AA');
+	} else if(parseInt(grade.val()) >= 90){
+		grades_code.val('A');
+	} else if(parseInt(grade.val()) >= 85){
+		grades_code.val('BB');
+	} else if(parseInt(grade.val()) >= 80){
+		grades_code.val('B');
+	} else if(parseInt(grade.val()) >= 75){
+		grades_code.val('CC');
+	} else if(parseInt(grade.val()) >= 70){
+		grades_code.val('C');
+	} else if(parseInt(grade.val()) >= 65){
+		grades_code.val('DD');
+	} else if(parseInt(grade.val()) >= 60){
+		grades_code.val('D');
+	} else{
+		grades_code.val('F');
+	}
+}
+
 
 
 </script>
@@ -92,10 +164,10 @@ function deleteDiv(obj) {
 							                    </div>
 							                    <div class="col-md-12">
 							                    	<c:if test="${dto.getGrade_chk() == 0}">
-						                    		<button type="button" onclick="score_register(this)" id="${dto.getCo_code()}" class="btn btn-info pull-right">성적 등록</button>
+						                    		<button type="button" onclick="score_register(this)" id="${dto.getCo_code()}" class="btn btn-primary pull-right" style="background-color:007bff;">성적 등록</button>
 						                    		</c:if>
 						                    		<c:if test="${dto.getGrade_chk() == 1}">
-						                    			<button type="button" onclick="" id="${dto.getCo_code()}" class="btn btn-primary pull-right">성적 보기</button>
+						                    			<button type="button" onclick="score_modify(this)" id="${dto.getCo_code()}" class="btn btn-primary pull-right">성적 보기</button>
 						                    		</c:if>
 						                    	</div>
 						                    </div>

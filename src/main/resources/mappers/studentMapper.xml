@@ -162,4 +162,13 @@
 	<select id="getReceiverName" parameterType="java.util.Map" resultType="String">
 		SELECT NAME FROM ${authen} WHERE ID = #{id}
 	</select>
+	
+	<select id="lectureChk" resultType="int" parameterType="java.util.Map">
+		SELECT count(*) cnt from p_lecture WHERE co_code = #{co_code} AND le_week = #{le_week}
+	</select>
+	
+	<select id="getLecture" resultType="com.kosmo.uni.vo.LectureVO">
+		SELECT * from p_lecture WHERE co_code = #{co_code} AND le_week = #{le_week}
+	</select>
+	
 </mapper>

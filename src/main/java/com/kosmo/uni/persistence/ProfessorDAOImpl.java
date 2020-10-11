@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.GradeVO;
 import com.kosmo.uni.vo.CoursePlanVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InfoVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 
 @Repository
@@ -148,6 +150,62 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
 		return dao.updateGradePoint(vo);
 	}
+	@Override
+	public int lectureChk(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.lectureChk(map);
+	}
+	@Override
+	public LectureVO getLecture(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getLecture(map);
+	}
+	@Override
+	public int insertLecture(LectureVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.insertLecture(vo);
+	}
+	@Override
+	public int updateLecture(LectureVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateLecture(vo);
+	}
+	@Override
+	public int deleteLecture(int le_num) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.deleteLecture(le_num);
+	}
+	@Override
+	public List<GradeVO> getGradeList(String co_code) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getGradeList(co_code);
+	}
+	@Override
+	public int insertGradeScore(GradeVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.insertGradeScore(vo);
+	}
+	@Override
+	public int updateGradeChk(Map<String, Object> map) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateGradeChk(map);
+	}
+	@Override
+	public List<GradeVO> getGradeList_modify(String co_code) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.getGradeList_modify(co_code);
+	}
+	@Override
+	public int updateGradeScore(GradeVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.updateGradeScore(vo);
+	}
+	@Override
+	public int chkGrade(GradeVO vo) {
+		ProfessorDAO dao = sqlSession.getMapper(ProfessorDAO.class);
+		return dao.chkGrade(vo);
+	}
+
 	
 
 
