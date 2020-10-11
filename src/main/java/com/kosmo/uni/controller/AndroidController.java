@@ -47,6 +47,24 @@ public class AndroidController {
 		
 		return map;
 	}
+
+	// 앱 학생 강의 정보 - 리스트
+	@ResponseBody
+	@RequestMapping("/android/stuCourse")
+	public List<Map<String, Object>> androidStudentCourse(HttpServletRequest req) {
+		logger.info("androidStudentCourse()");
+		
+		return andService.StuCourse(req);
+	}
+
+	// 앱 학생 성적 정보 - 리스트
+	@ResponseBody
+	@RequestMapping("/android/stuScore")
+	public List<Map<String, Object>> androidStudentScore(HttpServletRequest req) {
+		logger.info("androidStudentScore()");
+		
+		return andService.StuScore(req);
+	}
 	
 	// nfc 태그
 	@ResponseBody

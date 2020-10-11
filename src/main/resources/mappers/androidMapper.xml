@@ -102,4 +102,27 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getMyCourse" resultType="java.util.Map">
+		SELECT C.CO_NAME CO_NAME, C.P_NAME P_NAME, T.DAY DAY, T.TIME TIME, C.GRADE GRADE
+			 , S.NAME NAME, M.M_NAME, S.PHOTO PHOTO
+		FROM VIEW_TIMETABLE T, A_COURSE C, S_STUDENT S, A_MAJOR M
+		WHERE T.CO_CODE = C.CO_CODE
+		AND T.ID = S.ID
+		AND S.M_CODE = M.M_CODE
+		AND T.ID = #{id} 
+		AND C.CO_YEAR = #{year} 
+		AND C.CO_SEMESTER = #{semester}
+		AND T.DAY = #{day}
+	</select>
+
+	<select id="getMyScore" resultType="java.util.Map">
+		SELECT S.PHOTO, P.ID, S.NAME, M.M_NAME, C.CO_NAME, C.P_NAME, C.CO_DAY, C.LE_CODE, C.GRADE, P.GRADES_CODE
+		FROM P_STUDENT_SCORE P, S_STUDENT S, A_COURSE C, A_MAJOR M
+		WHERE P.CO_CODE = C.CO_CODE
+		AND P.ID = S.ID
+		AND S.M_CODE = M.M_CODE
+		AND P.ID = #{id}
+		AND C.CO_YEAR = #{year}
+		AND C.CO_SEMESTER = #{semester}
+	</select>
 </mapper>

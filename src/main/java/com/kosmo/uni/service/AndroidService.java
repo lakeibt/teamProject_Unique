@@ -38,5 +38,9 @@ public interface AndroidService {
 	
 	//PRO 정보 수정
 	public Map<String, Object> proinfosave(HttpServletRequest req);
+	
+	//STU 강의 확인
+	public List<Map<String, Object>> StuCourse(HttpServletRequest req);
+	public List<Map<String, Object>> StuScore(HttpServletRequest req);
 
 }
