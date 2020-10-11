@@ -35,6 +35,7 @@ public interface ProfessorService {
 
 	// 교수 프로필 정보 가져오기
 	public void getProfessorProfile(HttpServletRequest req, Model model);
+	
 
 	public void myPageModify(HttpServletRequest req, Model model);
 	
