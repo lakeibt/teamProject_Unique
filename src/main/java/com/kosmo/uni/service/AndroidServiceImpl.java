@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.uni.persistence.AndroidDAO;
+import com.kosmo.uni.vo.FingerPrintVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -28,47 +29,47 @@ public class AndroidServiceImpl implements AndroidService {
 		// 안드로이드에서 전달할 값
 		String id = req.getParameter("id");
 		String pwd = req.getParameter("pwd");
-		
+
 		Map<String, String> out = new HashMap<String, String>();
-		
+
 		System.out.println(id);
 		System.out.println(pwd);
-		
+
 		// 로그인
-		if(id.substring(0,1).equals("s")) {
+		if (id.substring(0, 1).equals("s")) {
 			HashMap<String, String> map = andDAO.confirmIdPwdStu(id);
 			System.out.println("--------------");
 			System.out.println(map.get("ID"));
 			System.out.println(map.get("NAME"));
 			System.out.println(map.get("PWD"));
 			// 웹에서 안드로이드로 전달할 값
-			if(checkPass(pwd, map.get("PWD"))) {
+			if (checkPass(pwd, map.get("PWD"))) {
 				System.out.println("로그인 성공 : " + map.get("ID"));
 				out.put("id", id);
 				out.put("name", map.get("NAME"));
 				out.put("pwd", map.get("PWD"));
 				System.out.println("id : " + map.get("ID"));
-				System.out.println("pwd : " +  map.get("PWD"));
-				System.out.println("name : " +  map.get("NAME"));
+				System.out.println("pwd : " + map.get("PWD"));
+				System.out.println("name : " + map.get("NAME"));
 			} else {
 				System.out.println("로그인 실패");
 				out.put("id", null);
 			}
-		} else if(id.substring(0,1).equals("a")) {
+		} else if (id.substring(0, 1).equals("a")) {
 			HashMap<String, String> map = andDAO.confirmIdPwdAdm(id);
 			System.out.println("--------------");
 			System.out.println(map.get("ID"));
 			System.out.println(map.get("NAME"));
 			System.out.println(map.get("PWD"));
 			// 웹에서 안드로이드로 전달할 값
-			if(checkPass(pwd, map.get("PWD"))) {
+			if (checkPass(pwd, map.get("PWD"))) {
 				System.out.println("로그인 성공 : " + map.get("ID"));
 				out.put("id", id);
 				out.put("name", map.get("NAME"));
 				out.put("pwd", map.get("PWD"));
 				System.out.println("id : " + map.get("ID"));
-				System.out.println("pwd : " +  map.get("PWD"));
-				System.out.println("name : " +  map.get("NAME"));
+				System.out.println("pwd : " + map.get("PWD"));
+				System.out.println("name : " + map.get("NAME"));
 			} else {
 				System.out.println("로그인 실패");
 				out.put("id", null);
@@ -82,22 +83,22 @@ public class AndroidServiceImpl implements AndroidService {
 	public Map<String, Object> MyPage(HttpServletRequest req) {
 		// 안드로이드에서 전달한 id값
 		String id = req.getParameter("id");
-		
+
 		System.out.println("id : " + id);
-		System.out.println("서브스트링 값 : "+ id.substring(0,1));
-		
+		System.out.println("서브스트링 값 : " + id.substring(0, 1));
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		// 회원정보 조회 - 이름 학과 학년 이메일 학번(아이디) 
-		if(id.substring(0,1).equals("s")) {
+
+		// 회원정보 조회 - 이름 학과 학년 이메일 학번(아이디)
+		if (id.substring(0, 1).equals("s")) {
 			StudentVO s = andDAO.getStudentInfo(id);
 			String mcode = "";
-			if(s.getM_code().equals("CO")) {
+			if (s.getM_code().equals("CO")) {
 				mcode = "기계공학과";
-			}else {
+			} else {
 				mcode = s.getM_code();
 			}
-			
+
 			map.put("data1", s.getId());
 			map.put("data2", s.getName());
 			map.put("data3", mcode);
@@ -108,16 +109,16 @@ public class AndroidServiceImpl implements AndroidService {
 			map.put("data8", s.getEmail());
 			map.put("data9", s.getAddress());
 			map.put("data10", s.getDe_address());
-			
-		} else if(id.substring(0,1).equals("a")) {
+
+		} else if (id.substring(0, 1).equals("a")) {
 			Manager m = andDAO.getAdminInfo(id);
 			System.out.println("m : " + m);
 			String depart = "";
-			if(m.getDepart().equals("DE")) {
+			if (m.getDepart().equals("DE")) {
 				depart = "학사관리과";
-			}else if(m.getDepart().equals("HU")){
+			} else if (m.getDepart().equals("HU")) {
 				depart = "인사관리과";
-			}else if(m.getDepart().equals("FA")){
+			} else if (m.getDepart().equals("FA")) {
 				depart = "시설관리과";
 			} else {
 				depart = m.getDepart();
@@ -129,11 +130,11 @@ public class AndroidServiceImpl implements AndroidService {
 			map.put("data5", depart);
 			System.out.println("m.id : " + m.getId());
 			System.out.println("m.name : " + m.getName());
-			
+
 		}
 		return map;
 	}
-	
+
 	private boolean checkPass(String pwd, String encPwd) {
 		if (BCrypt.checkpw(pwd, encPwd)) {
 			return true;
@@ -144,34 +145,34 @@ public class AndroidServiceImpl implements AndroidService {
 
 	@Override
 	public Map<String, String> NfcTag(HttpServletRequest req) {
-		SimpleDateFormat format1 = new SimpleDateFormat ("MM/dd");
-		String today = format1.format (System.currentTimeMillis());
+		SimpleDateFormat format1 = new SimpleDateFormat("MM/dd");
+		String today = format1.format(System.currentTimeMillis());
 		// 안드로이드에서 전달할 값
-		System.out.println("today오늘 : "+today);
+		System.out.println("today오늘 : " + today);
 		String phonenum = req.getParameter("phonenum");
 		String tagid = req.getParameter("tagid");
-		
+
 		Map<String, String> out = new HashMap<String, String>();
-		
-		System.out.println("phonenum : " +phonenum);
-		System.out.println("tagid : " +tagid);
-		
+
+		System.out.println("phonenum : " + phonenum);
+		System.out.println("tagid : " + tagid);
+
 		Map<String, String> going = new HashMap<String, String>();
 		going.put("phonenum", phonenum);
 		going.put("today", today);
-		
+
 		int what = andDAO.whatNfc(going);
-		System.out.println("what 있니?없니? : "+what);
-		
-		if(what == 1) {
-			//값있음 update 퇴근
-			//04F459A2816B80 <== 출근 스티커 아이디값
-			if(phonenum != null && tagid.equals("04F459A2816B80") ) {
-				
+		System.out.println("what 있니?없니? : " + what);
+
+		if (what == 1) {
+			// 값있음 update 퇴근
+			// 04F459A2816B80 <== 출근 스티커 아이디값
+			if (phonenum != null && tagid.equals("04F459A2816B80")) {
+
 				Map<String, String> going2 = new HashMap<String, String>();
 				going2.put("phonenum", phonenum);
 				going2.put("today", today);
-				//전화번호 서버로 보내기
+				// 전화번호 서버로 보내기
 				andDAO.byeNfc(going2);
 				System.out.println("--------------");
 				// 웹에서 안드로이드로 전달할 값
@@ -183,11 +184,11 @@ public class AndroidServiceImpl implements AndroidService {
 				out.put("phonenum", null);
 				out.put("tagid", null);
 			}
-		} else if(what == 0) {
-			//값없음 신규로 등록 insert 출근
-			//04F459A2816B80 <== 출근 스티커 아이디값
-			if(phonenum != null && tagid.equals("04F459A2816B80") ) {
-				//전화번호 서버로 보내기
+		} else if (what == 0) {
+			// 값없음 신규로 등록 insert 출근
+			// 04F459A2816B80 <== 출근 스티커 아이디값
+			if (phonenum != null && tagid.equals("04F459A2816B80")) {
+				// 전화번호 서버로 보내기
 				andDAO.hiNfc(phonenum);
 				System.out.println("--------------");
 				// 웹에서 안드로이드로 전달할 값
@@ -206,29 +207,29 @@ public class AndroidServiceImpl implements AndroidService {
 	@Override
 	public Map<String, String> Parking(HttpServletRequest req) {
 		String carNum = req.getParameter("carNum");
-		carNum = carNum.replaceAll("\n","");
-		System.out.println("차량번호 :!"+carNum+"!");
-		
+		carNum = carNum.replaceAll("\n", "");
+		System.out.println("차량번호 :!" + carNum + "!");
+
 		Map<String, String> out = new HashMap<String, String>();
-		
-		//admin인 사람이 차가 있는지 확인
+
+		// admin인 사람이 차가 있는지 확인
 		int have = andDAO.whatCar(carNum);
-		System.out.println("admin의 차량인가요? : "+have);
-		if(have > 0) { 
-			//등록된 차량
-			//오늘 입차 내역 있음?
-			SimpleDateFormat format1 = new SimpleDateFormat ("MM/dd");
-			String today = format1.format (System.currentTimeMillis());
+		System.out.println("admin의 차량인가요? : " + have);
+		if (have > 0) {
+			// 등록된 차량
+			// 오늘 입차 내역 있음?
+			SimpleDateFormat format1 = new SimpleDateFormat("MM/dd");
+			String today = format1.format(System.currentTimeMillis());
 			String realCarNum = andDAO.carNum(carNum);
-			System.out.println("차량번호 : "+realCarNum);
-			
+			System.out.println("차량번호 : " + realCarNum);
+
 			Map<String, String> going2 = new HashMap<String, String>();
 			going2.put("carNum", realCarNum);
 			going2.put("today", today);
 			int incount = andDAO.todayCar(going2);
-			System.out.println("오늘 입차내역이 있나요? : "+incount);
-		    
-			if(incount == 1) {
+			System.out.println("오늘 입차내역이 있나요? : " + incount);
+
+			if (incount == 1) {
 				System.out.println("차량 퇴근");
 				Map<String, String> going3 = new HashMap<String, String>();
 				going3.put("carNum", realCarNum);
@@ -240,15 +241,13 @@ public class AndroidServiceImpl implements AndroidService {
 				andDAO.hiParking(realCarNum);
 				out.put("carNum", realCarNum);
 			}
-			
-			
-		}else {
-			//미등록 차량
+
+		} else {
+			// 미등록 차량
 			System.out.println("미등록 차량");
 			out.put("carnum", null);
 		}
-		
-		
+
 		return out;
 	}
 
@@ -256,7 +255,57 @@ public class AndroidServiceImpl implements AndroidService {
 	public ArrayList<nfcVO> workcheck(HttpServletRequest req) {
 		String id = req.getParameter("id");
 		ArrayList<nfcVO> dtos = andDAO.workchecklist(id);
-		System.out.println("dtos : "+dtos);
+		System.out.println("dtos : " + dtos);
 		return dtos;
 	}
+
+	@Override
+	public Map<String, String> bioCheck(HttpServletRequest req) {
+		int cnt = 0;
+
+		String id = req.getParameter("id");
+		String uuid = req.getParameter("uuid");
+
+		Map<String, String> bio_check = new HashMap<String, String>();
+		bio_check.put("id", id);
+		bio_check.put("uuid", uuid);
+
+		cnt = andDAO.bio_check(bio_check);
+		System.out.println("bio_check > " + cnt);
+		return bio_check;
+	}
+
+	@Override
+	public Map<String, String> bioAdd(HttpServletRequest req) {
+		int cnt = 0;
+
+		String id = req.getParameter("id");
+		String uuid = req.getParameter("uuid");
+
+		Map<String, String> bio_add = new HashMap<String, String>();
+
+		bio_add.put("id", id);
+		bio_add.put("uuid", uuid);
+
+		cnt = andDAO.bio_add(bio_add);
+		System.out.println("bio_add > " + cnt);
+		return bio_add;
+	}
+
+	@Override
+	public Map<String, Object> bioSignCheck(HttpServletRequest req) {
+		
+		String uuid = req.getParameter("uuid");
+		System.out.println("uuid : " + uuid);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		FingerPrintVO v = andDAO.bio_Sign_check(uuid);
+		
+		map.put("id", v.getId());
+		map.put("pwd", v.getPwd());
+		map.put("uuid", v.getUuid());
+		
+		return map;
+	}
+
 }

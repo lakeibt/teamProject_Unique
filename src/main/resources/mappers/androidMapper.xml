@@ -64,4 +64,19 @@
 		 WHERE a.pnum = b.tel AND id = #{id}
 	</select>
 	
+	<select id="bio_check" parameterType="java.util.Map" resultType="int">
+	SELECT COUNT (*) as cnt 
+ 	FROM A_Admin 
+	WHERE id=#{id} AND uuid=#{uuid, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="bio_add" parameterType="String" resultType="int">
+		UPDATE A_Admin SET uuid=#{uuid} WHERE id=#{id}
+	</select>
+	
+	<select id="bio_Sign_check" parameterType="String" resultType="com.kosmo.uni.vo.FingerPrintVO">
+		SELECT id,pwd,uuid FROM a_admin WHERE uuid = #{uuid}
+	</select>
+	
+	
 </mapper>
