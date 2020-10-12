@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -156,6 +157,18 @@ public class AndroidDAOImpl implements AndroidDAO{
 	public List<Map<String, Object>> getMyScore(Map<String, Object> map) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getMyScore(map);
+	}
+
+	@Override
+	public ArrayList<InClassHowVO> getclasscheck(String name) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getclasscheck(name);
+	}
+
+	@Override
+	public ArrayList<InClassHowVO> getclasschecknext(String title) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getclasschecknext(title);
 	}
 
 }

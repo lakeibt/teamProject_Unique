@@ -29,6 +29,7 @@ import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.persistence.StudentDAO;
 import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -590,6 +591,24 @@ public class AndroidServiceImpl implements AndroidService {
 	}
 	
 	@Override
+	public ArrayList<InClassHowVO> getClassInHow(HttpServletRequest req) throws InterruptedException, ExecutionException {
+		
+		String name = req.getParameter("name");
+		System.out.println("타이틀 : "+name);
+		ArrayList<InClassHowVO> dtos = andDAO.getclasscheck(name);
+		
+		return dtos;
+	}
+	
+	@Override
+	public ArrayList<InClassHowVO> getClassInHowNext(HttpServletRequest req) throws InterruptedException, ExecutionException {
+		String push = req.getParameter("title");
+		System.out.println("2번 :"+push);
+		ArrayList<InClassHowVO> dtos = andDAO.getclasscheck(push);
+		return dtos;
+	}
+	
+	@Override
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req) {
 		String id = req.getParameter("id");
 		String year_text = req.getParameter("year");
@@ -632,4 +651,6 @@ public class AndroidServiceImpl implements AndroidService {
 		List<Map<String, Object>> map = andDAO.getMyScore(info);
 		return map;
 	}
+
+	
 }

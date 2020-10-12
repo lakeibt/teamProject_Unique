@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.kosmo.uni.vo.ConsultVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.nfcVO;
 
 public interface AndroidService {
@@ -45,7 +46,13 @@ public interface AndroidService {
 	
 	//PRO 상담정보 가져오기
 	public ArrayList<ConsultVO> getConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException;
-
+	
+	//PRO 강의 정보 가져오기
+	public ArrayList<InClassHowVO> getClassInHow(HttpServletRequest req) throws InterruptedException, ExecutionException;
+	
+	//PRO 강의 정보 가져오기 next
+	public ArrayList<InClassHowVO> getClassInHowNext(HttpServletRequest req) throws InterruptedException, ExecutionException;
+	
 	//STU 강의 확인
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req);
 	public List<Map<String, Object>> StuScore(HttpServletRequest req);
