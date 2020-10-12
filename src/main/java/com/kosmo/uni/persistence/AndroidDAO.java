@@ -22,6 +22,9 @@ public interface AndroidDAO {
 	public Manager getAdminInfo(String id);
 	public HumanVO getProinInfo(String id);
 	
+	public List<Map<String, Object>> getMyCourse(Map<String, Object> map);
+	public List<Map<String, Object>> getMyScore(Map<String, Object> map);
+	
 	//nfc 오늘 날짜에 있는지 없는지 체크
 	public int whatNfc(Map<String, String> map);
 	

@@ -27,6 +27,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.ConsultVO;
+import com.kosmo.uni.persistence.StudentDAO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
@@ -38,7 +39,7 @@ public class AndroidServiceImpl implements AndroidService {
 	
 	@Autowired
 	AndroidDAO andDAO;
-
+	
 	@Override
 	public Map<String, String> login(HttpServletRequest req) {
 		// 안드로이드에서 전달할 값
@@ -223,9 +224,6 @@ public class AndroidServiceImpl implements AndroidService {
 			map.put("data3", p.getRank());
 			map.put("data4", p.getPhoto());
 			map.put("data5", mcode);
-			System.out.println("p.id : " + p.getId());
-			System.out.println("p.name : " + p.getName());
-			
 		}
 		return map;
 	}
@@ -336,14 +334,11 @@ public class AndroidServiceImpl implements AndroidService {
 				andDAO.hiParking(realCarNum);
 				out.put("carNum", realCarNum);
 			}
-			
-			
 		}else {
 			//미등록 차량
 			System.out.println("미등록 차량");
 			out.put("carnum", null);
 		}
-		
 		
 		return out;
 	}
@@ -352,19 +347,16 @@ public class AndroidServiceImpl implements AndroidService {
 	public ArrayList<nfcVO> workcheck(HttpServletRequest req) {
 		String id = req.getParameter("id");
 		ArrayList<nfcVO> dtos = andDAO.workchecklist(id);
-		System.out.println("dtos : "+dtos);
 		return dtos;
 	}
 
 	@Override
 	public Map<String, Object> maninfo(HttpServletRequest req) {
 		String id = req.getParameter("id");
-		System.out.println("id : " + id);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Manager m = andDAO.getManinfo(id);
-		System.out.println("m : " + m);
 		String depart = "";
 		if(m.getDepart().equals("DE")) {
 			depart = "학사관리과";
@@ -384,15 +376,6 @@ public class AndroidServiceImpl implements AndroidService {
 		map.put("email", m.getEmail());
 		map.put("address", m.getAddress());
 		map.put("de_address", m.getDe_address());
-		System.out.println("m.getId : " + m.getId());
-		System.out.println("m.getName : " + m.getName());
-		System.out.println("m.getRank : " + m.getRank());
-		System.out.println("m.getPhoto : " + m.getPhoto());
-		System.out.println("depart : " + depart);
-		System.out.println("m.getTel : " + m.getTel());
-		System.out.println("m.getEmail : " + m.getEmail());
-		System.out.println("m.getAddress : " + m.getAddress());
-		System.out.println("m.getDe_address : " + m.getDe_address());
 			
 		return map;
 	}
@@ -404,12 +387,6 @@ public class AndroidServiceImpl implements AndroidService {
 		String email = req.getParameter("email");
 		String address = req.getParameter("address");
 		String address2 = req.getParameter("address2");
-		System.out.println("받은값1 : "+id);
-		System.out.println("받은값2 : "+tel);
-		System.out.println("받은값3 : "+email);
-		System.out.println("받은값4 : "+address);
-		System.out.println("받은값5 : "+address2);
-		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
@@ -472,17 +449,6 @@ public class AndroidServiceImpl implements AndroidService {
 		map.put("email", s.getEmail());
 		map.put("address", s.getAddress());
 		map.put("de_address", s.getDe_address());
-		System.out.println("id : "+ s.getId());
-		System.out.println("photo : "+ s.getPhoto());
-		System.out.println("name : "+ s.getName());
-		System.out.println("m_code : "+ mcode);
-		System.out.println("grade : "+ s.getGrade());
-		System.out.println("entrancedate : "+ s.getEntrancedate());
-		System.out.println("jumin1 : "+ s.getJumin1());
-		System.out.println("tel : "+ s.getTel());
-		System.out.println("email : "+ s.getEmail());
-		System.out.println("address : "+ s.getAddress());
-		System.out.println("de_address :"+ s.getDe_address());
 		
 		return map;
 	}
@@ -494,12 +460,6 @@ public class AndroidServiceImpl implements AndroidService {
 		String email = req.getParameter("email");
 		String address = req.getParameter("address");
 		String address2 = req.getParameter("address2");
-		System.out.println("받은값1 : "+id);
-		System.out.println("받은값2 : "+tel);
-		System.out.println("받은값3 : "+email);
-		System.out.println("받은값4 : "+address);
-		System.out.println("받은값5 : "+address2);
-		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
@@ -562,17 +522,6 @@ public class AndroidServiceImpl implements AndroidService {
 		map.put("email", p.getEmail());
 		map.put("address", p.getAddress());
 		map.put("de_address", p.getDe_address());
-		System.out.println("id : "+ p.getId());
-		System.out.println("photo : "+ p.getPhoto());
-		System.out.println("name : "+ p.getName());
-		System.out.println("m_code : "+ mcode);
-		System.out.println("grade : "+ p.getGrade());
-		System.out.println("entrancedate : "+ p.getEntrancedate());
-		System.out.println("jumin1 : "+ p.getJumin1());
-		System.out.println("tel : "+ p.getTel());
-		System.out.println("email : "+ p.getEmail());
-		System.out.println("address : "+ p.getAddress());
-		System.out.println("de_address :"+ p.getDe_address());
 			
 		return map;
 	}
@@ -584,12 +533,6 @@ public class AndroidServiceImpl implements AndroidService {
 		String email = req.getParameter("email");
 		String address = req.getParameter("address");
 		String address2 = req.getParameter("address2");
-		System.out.println("받은값1 : "+id);
-		System.out.println("받은값2 : "+tel);
-		System.out.println("받은값3 : "+email);
-		System.out.println("받은값4 : "+address);
-		System.out.println("받은값5 : "+address2);
-		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
@@ -644,5 +587,49 @@ public class AndroidServiceImpl implements AndroidService {
 			consultList.add(document.toObject(ConsultVO.class));
 		}
 		return consultList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> StuCourse(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String year_text = req.getParameter("year");
+		String semester_text = req.getParameter("semester");
+		String day = req.getParameter("day").substring(0, 1);
+		int year = 0, semester = 0;
+		
+		if(year_text.equals("2020")) year = 2020;
+		else year = 2019;
+		if(semester_text.equals("1학기")) semester = 1;
+		else semester = 2;
+		
+		Map<String, Object> info = new HashMap<>();
+		info.put("id", id);
+		info.put("year", year);
+		info.put("semester", semester);
+		info.put("day", day);
+		
+		List<Map<String, Object>> map = andDAO.getMyCourse(info);
+		return map;
+	}
+
+	@Override
+	public List<Map<String, Object>> StuScore(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String year_text = req.getParameter("year");
+		String semester_text = req.getParameter("semester");
+		int year = 0, semester = 0;
+		
+		if(year_text.equals("2020")) year = 2020;
+		else year = 2019;
+		if(semester_text.equals("1학기")) semester = 1;
+		else semester = 2;
+		
+		Map<String, Object> info = new HashMap<>();
+		info.put("id", id);
+		info.put("year", year);
+		info.put("semester", semester);
+		
+		List<Map<String, Object>> map = andDAO.getMyScore(info);
+		return map;
 	}
 }

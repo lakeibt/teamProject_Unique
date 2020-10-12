@@ -46,4 +46,8 @@ public interface AndroidService {
 	//PRO 상담정보 가져오기
 	public ArrayList<ConsultVO> getConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException;
 
+	//STU 강의 확인
+	public List<Map<String, Object>> StuCourse(HttpServletRequest req);
+	public List<Map<String, Object>> StuScore(HttpServletRequest req);
+
 }
