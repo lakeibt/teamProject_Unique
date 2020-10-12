@@ -91,6 +91,7 @@ function endSelect() {
 													id="endDate" onchange="endSelect()"></th>
 												<th><input type="button" class="btn"
 													style="padding: 6px 6px;" id="attendance_Search" value="검색">
+													style="padding: 6px 6px;" id="attendance_Search" value="검색"><a href="http://192.168.219.143:3000"></a>
 													<input type="button" class="btn" style="padding: 6px 6px;"
 													onclick="location.reload();" value="초기화"></th>
 											</tr>
@@ -136,7 +137,7 @@ function endSelect() {
 									<div class="table-responsive">
 										<table class="table table-striped jambo_table">
 											<thead>
-												<tr class="headings" align="center">	
+												<tr class="headings" align="center">
 													<th class="column-title">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">출근</font>

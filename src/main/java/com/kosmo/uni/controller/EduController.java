@@ -81,31 +81,11 @@ public class EduController {
 		return "guest/bcrypt2";
 	}
 	
-	@RequestMapping("/guest/sample")
-	public String gue_sample() {
-		logger.info("url ==> sample");
-		
-		return "guest/sample";
-	}
-	
 	@RequestMapping("/guest/sample2")
 	public String gue_sample2() {
 		logger.info("url ==> sample2");
 		
 		return "guest/sample2";
-	}
-	
-	
-	@RequestMapping("/guest/testSignIn")
-	public String testSignIn() {
-		return "guest/testSignIn";
-	}
-	
-	@RequestMapping("/guest/testSignInPro")
-	public String testSignInPro(HttpServletRequest req, Model model) {
-		eduService.insertUser(req, model);
-		
-		return "guest/main";
 	}
 	
 	@RequestMapping("/guest/denied")
@@ -115,9 +95,4 @@ public class EduController {
 		return "guest/denied";
 	}
 	
-	@RequestMapping("/guest/ttttt")
-	public String ttttt(HttpServletRequest req, Model model) {
-		
-		return "guest/ttttt";
-	}
 }

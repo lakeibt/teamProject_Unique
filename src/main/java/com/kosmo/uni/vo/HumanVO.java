@@ -41,7 +41,7 @@ public class HumanVO {
 	private String account_number;
 	private int car;
 	private String carnum;
-	
+	private String bank;
 	
 	public String getId() {
 		return id;
@@ -204,6 +204,12 @@ public class HumanVO {
 	}
 	public void setCarnum(String carnum) {
 		this.carnum = carnum;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 	
 	

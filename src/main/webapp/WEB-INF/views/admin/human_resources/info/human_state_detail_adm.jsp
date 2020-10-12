@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var = "adm_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/admin/"/>
+
 
 <tr class="detail_tr">
 	<td colspan="7">
 		<div>
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_state_modify?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 				<div class="col-md-4  form-group">
 					<div class="item form-group">
@@ -18,27 +20,13 @@
 						</div>
 					</div>
 					
-					<br><br><br><br>
+					<br><br>
 					<div class="item form-group">
 						<label class="col-form-label col-md-3 col-sm-3 label-align">입사일 
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input id="birthday" class="date-picker form-control" name="enterday" value="${vo.getEnterday()}"
-								required="required"
-								type="text"
-								onfocus="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-								onmouseover="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-								onclick="if (!window.__cfRLUnblockHandlers) return false; this.type='date'"
-								onblur="if (!window.__cfRLUnblockHandlers) return false; this.type='text'"
-								onmouseout="if (!window.__cfRLUnblockHandlers) return false; timeFunctionLong(this)"
-								data-cf-modified-ed641bf6e1354c9585fdbfb0-="">
-								<script type="ed641bf6e1354c9585fdbfb0-text/javascript">
-													function timeFunctionLong(input) {
-														setTimeout(function() {
-															input.type = 'text';
-														}, 60000);
-													}
-								</script>
+							<fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${vo.getEnterday()}" />
+							<input class="form-control" type="date" name="enterday" value="${date}">
 						</div>
 					</div>
 					<div class="item form-group">
@@ -47,11 +35,12 @@
 						</label>
 						<div class="col-md-7 col-sm-7" id="selectBox_depart">
 							<select class="form-control" name="depart">
-								<option value="${vo.getDepart()}" selected>${vo.getDepart()}</option>
-								<c:forEach var="dto" items="${departList}">
-									<option value="${dto.getDepart()}">${dto.getDepart_name()}</option>
-								</c:forEach>
+								<option value="${vo.getDepart()}" selected>${vo.getDepart_name()}</option>
+								<option value="DE">학사관리과</option>
+								<option value="HU">인사관리과</option>
+								<option value="FA">시설관리과</option>
 							</select>
+							
 						</div>
 					</div>
 					<div class="item form-group">
@@ -61,9 +50,12 @@
 						<div class="col-md-7 col-sm-7 ">
 							<select class="form-control" name="rank">
 								<option value="${vo.getRank()}" selected>${vo.getRank()}</option>
-								<c:forEach var="dto" items="${rankList}">
-									<option value="${dto.getRank()}">${dto.getRank()}</option>
-								</c:forEach>
+								<option value="사원">사원</option>
+								<option value="주임">주임</option>
+								<option value="계장">계장</option>
+								<option value="과장">과장</option>
+								<option value="부장">부장</option>
+								<option value="총장">총장</option>
 							</select>
 						</div>
 					</div>
@@ -71,9 +63,28 @@
 						<label class="col-form-label col-md-3 col-sm-3 label-align"
 							for="first-name">계좌번호
 						</label>
-						<div class="col-md-7 col-sm-7">
+						<div class="col-md-4 col-sm-4">
 							<input type="text" name="account_number" required="required"
 								class="form-control " value="${vo.getAccount_number()}">
+						</div>
+						<div class="col-md-3 col-sm-3">
+							<select class="form-control" name="bank">
+								<option value="${vo.getBank()}">${vo.getBank()}</option>
+		                        <option value="국민은행">국민은행</option>
+		                        <option value="기업은행">기업은행</option>
+		                        <option value="농협은행">농협은행</option>
+		                        <option value="산업은행">산업은행</option>
+		                        <option value="새마을금고">새마을금고</option>
+		                        <option value="신한은행">신한은행</option>
+		                        <option value="외환은행">외환은행</option>
+		                        <option value="우리은행">우리은행</option>
+		                        <option value="우체국">우체국</option>
+		                        <option value="카카오뱅크">카카오뱅크</option>
+		                        <option value="케이뱅크">케이뱅크</option>
+		                        <option value="하나은행">하나은행</option>
+		                        <option value="한국씨티은행">한국씨티은행</option>
+		                        <option value="SC제일은행">SC제일은행</option>
+							</select>
 						</div>
 					</div>
 					<div class="item form-group">
@@ -98,6 +109,38 @@
 							</c:if>
 						</div>
 					</div>
+					<div class="item form-group"  id="car_num_div">
+						<label class="col-form-label col-md-3 col-sm-3 label-align"
+							for="first-name">차번호
+						</label>
+						<div class="col-md-7 col-sm-7">
+							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가 0000'" onblur="this.placeholder = ' '" 
+								class="form-control " value="${vo.getCarnum()}">
+						</div>
+					</div>
+					<script>
+					$(document).ready(function(){
+						
+						if($("input[name=car]:checked").val() == "0"){
+							$('#car_num_div').hide();
+						}
+						
+						$("input:radio[name=car]").change(function(){
+							
+							if($("input[name=car]:checked").val() == "1"){
+								
+								$('#car_num_div').show();
+					 
+					        }else if($("input[name=car]:checked").val() == "0"){
+					        	
+					        	$('#car_num_div').hide();
+					           
+					        }
+							
+						});
+						
+					});
+					</script>
 				</div>
 				<div class="col-md-4  form-group">
 					<div class="item form-group">
@@ -198,6 +241,32 @@
 					</div>
 					
 				</div>
+				<script>
+				$(document).ready(function(){
+					var fileTarget = $('.filebox .upload-hidden');
+					fileTarget.on('change', function(){
+						// 값이 변경되면
+						if(window.FileReader){		// modern browser
+							var filename = $(this)[0].files[0].name; 
+						} else { 	// old IE var
+							filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+						}
+						// 추출한 파일명 삽입
+						$(this).siblings('.upload-name').val(filename);
+					}); 
+				});
+				
+				function setThumbnail(event) {
+					var reader = new FileReader();
+					reader.onload = function(event) {
+						var img = document.createElement("img");
+						img.setAttribute("src", event.target.result);
+						$('#image_container').children().remove();
+						document.querySelector("div#image_container").appendChild(img);
+						};
+						reader.readAsDataURL(event.target.files[0]);
+				}
+				</script>
 				<div class="col-md-4  form-group" align="center">
 					<div style="height: 50px;">
 					</div>

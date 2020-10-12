@@ -3,9 +3,13 @@ package com.kosmo.uni.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.ui.Model;
+
+import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.nfcVO;
 
 public interface AndroidService {
@@ -29,5 +33,25 @@ public interface AndroidService {
 
 	//지문로그인 가능 여부 확인
 	public Map<String, Object> bioSignCheck(HttpServletRequest req);
+	//ADM 정보 보기 
+	public Map<String, Object> maninfo(HttpServletRequest req);
+	
+	//ADM 정보 수정
+	public Map<String, Object> maninfosave(HttpServletRequest req);
+	
+	//STU 정보 보기 
+	public Map<String, Object> stuinfo(HttpServletRequest req);
+	
+	//STU 정보 수정
+	public Map<String, Object> stuinfosave(HttpServletRequest req);
+	
+	//PRO 정보 보기 
+	public Map<String, Object> proinfo(HttpServletRequest req);
+	
+	//PRO 정보 수정
+	public Map<String, Object> proinfosave(HttpServletRequest req);
+	
+	//PRO 상담정보 가져오기
+	public ArrayList<ConsultVO> getConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException;
 
 }

@@ -3,6 +3,7 @@ package com.kosmo.uni.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
+import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.nfcVO;
 
 @Controller
@@ -56,7 +58,7 @@ public class AndroidController {
 		Map<String, String> out = andService.NfcTag(req);
 		return out;
 	}
-
+	//주차
 	@ResponseBody
 	@RequestMapping("/android/parking")
 	public Map<String, String> androidParking(HttpServletRequest req) {
@@ -64,7 +66,7 @@ public class AndroidController {
 		Map<String, String> out = andService.Parking(req);
 		return out;
 	}
-
+	
 	@ResponseBody
 	@RequestMapping("/android/workcheck")
 	public ArrayList<nfcVO> androidWorkcheck(HttpServletRequest req) {
@@ -73,7 +75,83 @@ public class AndroidController {
 		ArrayList<nfcVO> out = andService.workcheck(req);
 		return out;
 	}
-
+	
+	//ADM정보조회
+	@ResponseBody
+	@RequestMapping("/android/maninfo")
+	public Map<String, Object> androidManinfo(HttpServletRequest req){
+		logger.info("androidManinfo()");
+		
+		Map<String, Object> out = andService.maninfo(req);
+		
+		return out;
+	}
+	
+	//ADM정보 수정
+	@ResponseBody
+	@RequestMapping("/android/maninfosave")
+	public Map<String, Object> androidManinfoSave(HttpServletRequest req){
+		logger.info("androidManinfoSave()");
+		
+		Map<String, Object> out = andService.maninfosave(req);
+		
+		return out;
+	}
+	
+	//STU정보 수정
+	@ResponseBody
+	@RequestMapping("/android/stuinfo")
+	public Map<String, Object> androidStuinfo(HttpServletRequest req){
+		logger.info("androidStuinfo()");
+		
+		Map<String, Object> out = andService.stuinfo(req);
+		
+		return out;
+	}
+	
+	//STU정보 수정
+	@ResponseBody
+	@RequestMapping("/android/stuinfosave")
+	public Map<String, Object> androidStuinfoSave(HttpServletRequest req){
+		logger.info("androidStuinfoSave()");
+		
+		Map<String, Object> out = andService.stuinfosave(req);
+		
+		return out;
+	}
+	
+	//PRO정보조회
+	@ResponseBody
+	@RequestMapping("/android/proinfo")
+	public Map<String, Object> androidProinfo(HttpServletRequest req){
+		logger.info("androidProinfo()");
+		
+		Map<String, Object> out = andService.proinfo(req);
+		
+		return out;
+	}
+	
+	//PRO정보 수정
+	@ResponseBody
+	@RequestMapping("/android/proinfosave")
+	public Map<String, Object> androidProinfoSave(HttpServletRequest req){
+		logger.info("androidProinfoSave()");
+		
+		Map<String, Object> out = andService.proinfosave(req);
+		
+		return out;
+	}
+	
+	//상담 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/consultList")
+	public ArrayList<ConsultVO> androidConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("consultList()");
+		
+		ArrayList<ConsultVO> out = andService.getConsultList(req);
+		return out;
+	}
+	
 	// 지문인식
 	@ResponseBody
 	@RequestMapping("/android/android_bio_check")

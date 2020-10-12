@@ -10,6 +10,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 </head>
 <body class="dark-edition">
+
 <div class="wrapper">
 	<%@ include file="../include/student_sidebar.jsp"%>
 	<div class="main-panel">
@@ -32,6 +33,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="col-xl-10 col-lg-12">
 						<div class="row">
 							<div class="card">

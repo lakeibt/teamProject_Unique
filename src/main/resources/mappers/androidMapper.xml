@@ -10,12 +10,20 @@
 		SELECT * FROM A_ADMIN WHERE id=#{id}
 	</select>
 	
+	<select id="confirmIdPwdPro" resultType="java.util.Map" parameterType = "String">
+		SELECT * FROM P_PROFESSOR WHERE id=#{id}
+	</select>
+	
 	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
 		SELECT * FROM S_STUDENT WHERE id=#{id}
 	</select>
 	
 	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.Manager">
 		SELECT * FROM A_ADMIN WHERE id=#{id}
+	</select>
+	
+	<select id="getProinInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		SELECT * FROM P_PROFESSOR WHERE id=#{id}
 	</select>
 
 	<select id="whatNfc" parameterType="java.util.Map" resultType="int">
@@ -78,5 +86,34 @@
 		SELECT id,pwd,uuid FROM a_admin WHERE uuid = #{uuid}
 	</select>
 	
+	<select id="getManinfo" resultType="com.kosmo.uni.vo.Manager">
+		SELECT * FROM A_ADMIN WHERE id=#{id}
+	</select>
+	
+	<update id="maninfosave" parameterType="java.util.Map">
+		UPDATE A_ADMIN
+		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getStuInfo" resultType="com.kosmo.uni.vo.StudentVO">
+		SELECT * FROM S_STUDENT WHERE id=#{id}
+	</select>
+	
+	<update id="stuinfosave" parameterType="java.util.Map">
+		UPDATE S_STUDENT
+		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getProInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		SELECT * FROM P_PROFESSOR WHERE id=#{id}
+	</select>
+	
+	<update id="Proinfosave" parameterType="java.util.Map">
+		UPDATE P_PROFESSOR
+		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
+		WHERE id = #{id}
+	</update>
 	
 </mapper>

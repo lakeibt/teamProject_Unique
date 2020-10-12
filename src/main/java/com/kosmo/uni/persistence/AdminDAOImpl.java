@@ -588,6 +588,7 @@ public class AdminDAOImpl implements AdminDAO {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.getSettingList();
 	}
+
 	@Override
 	public int addRank(String rank) {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
@@ -627,4 +628,22 @@ public class AdminDAOImpl implements AdminDAO {
 		dao.deleteBonusConfirm(salary_input_num);
 	}
 
+	@Override
+	public int updateAdminInfo(HumanVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateAdminInfo(vo);
+	}
+
+	@Override
+	public int updateProfessorInfo(HumanVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateProfessorInfo(vo);
+	}
+
+	@Override
+	public int updateStudentInfo(HumanVO vo) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.updateStudentInfo(vo);
+	}
+	
 }

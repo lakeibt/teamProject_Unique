@@ -54,8 +54,6 @@
 									href="${path}admin/human_resources/info/human_info">인사정보등록</a></li>
 								<li><a
 									href="${path}admin/human_resources/info/human_state">인사정보현황</a></li>
-								<li><a
-									href="${path}admin/human_resources/info/salary_state">책정임금현황</a></li>
 							</ul></li>
 						<li><a>급여관리<span class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">
@@ -64,8 +62,8 @@
 								<li><a href="${path}admin/human_resources/pay/salary">급여등록</a></li>
 								<li><a
 									href="${path}admin/human_resources/pay/salary_list">급여대장</a></li>
-								<li><a
-									href="${path}admin/human_resources/pay/salary_info">급여명세</a></li>
+								<%-- <li><a
+									href="${path}admin/human_resources/pay/salary_info">급여명세</a></li> --%>
 								<li><a
 									href="${path}admin/human_resources/pay/salary_list_month">월별
 										급/상여지급현황</a></li>

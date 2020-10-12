@@ -11,6 +11,9 @@ public interface StudentService {
 	public void studentModifyPro(HttpServletRequest req, Model model);
 	// 강의 목록 
 	public void courseList(HttpServletRequest req, Model model);
+	public void myRegisterCourse(HttpServletRequest req, Model model);
+	public void addMyCourse(HttpServletRequest req, Model model);
+	public void deleteMyCourse(HttpServletRequest req, Model model);
 	// 강의 계획서
 	public void course_syllabus(HttpServletRequest req, Model model);
 	// 성적 조회
@@ -25,4 +28,14 @@ public interface StudentService {
 	public void messageList(HttpServletRequest req, Model model);
 	// 쪽지 상세 확인
 	public void message(HttpServletRequest req, Model model);
+	// 쪽지 미리보기
+	public void messageSimple(HttpServletRequest req, Model model);
+	// 쪽지 보내기
+	public int messageSend(HttpServletRequest req, Model model);
+	public int messageReply(HttpServletRequest req, Model model);
+	// 쪽지 보내기 폼 - 수신자 : 학생/교수
+	public void addresseeList(HttpServletRequest req, Model model);
+	// 교수 이름 리스트 가져오기
+	public void getProfessorName(Model model);
+	public void submitConsult(HttpServletRequest req, Model model) throws Exception;
 }

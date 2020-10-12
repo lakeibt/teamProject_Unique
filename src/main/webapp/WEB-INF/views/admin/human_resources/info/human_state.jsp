@@ -14,7 +14,7 @@ $(document).ready(function(){
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
  	$.ajax({
-		url : '${admin}human_resources/info/human_state_list?option=adm',
+		url : '${admin}human_resources/info/human_state_list?option=${option}',
         type : "POST",
         dataType : "html",
         beforeSend: function (xhr) {
@@ -75,6 +75,60 @@ function detail_state_adm(obj){
 	        }
 	    });
 };
+
+function detail_state_pro(obj){
+	 var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+	 var tr = $(obj).parent().parent();
+	 var id = $(obj).parent().parent().attr('id');
+	
+	 $.ajax({
+	    	url: '${admin}human_resources/info/human_state_detail_pro?id=' + id,
+	    	type : "POST",
+	        dataType : "text",
+	        beforeSend: function (xhr) {
+	        	xhr.setRequestHeader(header, token);
+	        },
+	        success : function(data){
+					tr.after(data);
+					
+					$(obj).text('Close');
+					$(obj).attr('onclick','deleteTr_pro(this)')
+					
+	        	
+	        }, error : function(){
+	        	swal('Error!','불러오기 실패!','error');
+	        }
+	    });
+};
+
+function detail_state_stu(obj){
+	 var token = $("meta[name='_csrf']").attr("content");
+   var header = $("meta[name='_csrf_header']").attr("content");
+   
+	 var tr = $(obj).parent().parent();
+	 var id = $(obj).parent().parent().attr('id');
+	
+	 $.ajax({
+	    	url: '${admin}human_resources/info/human_state_detail_stu?id=' + id,
+	    	type : "POST",
+	        dataType : "text",
+	        beforeSend: function (xhr) {
+	        	xhr.setRequestHeader(header, token);
+	        },
+	        success : function(data){
+					tr.after(data);
+					
+					$(obj).text('Close');
+					$(obj).attr('onclick','deleteTr_stu(this)')
+					
+	        	
+	        }, error : function(){
+	        	swal('Error!','불러오기 실패!','error');
+	        }
+	    });
+};
 	
 	
 function deleteTr_adm(obj) {
@@ -84,7 +138,44 @@ function deleteTr_adm(obj) {
 	
 	$(obj).text('View');
 	$(obj).attr('onclick','detail_state_adm(this)');
-}
+};
+
+function deleteTr_pro(obj) {
+	
+	var tr = $(obj).parent().parent().next();
+	tr.remove();
+	
+	$(obj).text('View');
+	$(obj).attr('onclick','detail_state_pro(this)');
+};
+
+function deleteTr_stu(obj) {
+	
+	var tr = $(obj).parent().parent().next();
+	tr.remove();
+	
+	$(obj).text('View');
+	$(obj).attr('onclick','detail_state_stu(this)');
+};
+
+
+$(document).ready(function(){
+	
+	$("input:radio[name=car]").change(function(){
+		
+		if($("input[name=car]:checked").val() == "1"){
+			
+			$('#car_num_div').show();
+ 
+        }else if($("input[name=car]:checked").val() == "0"){
+        	
+        	$('#car_num_div').hide();
+           
+        }
+		
+	});
+	
+});
 
 </script>
 </head>
@@ -111,10 +202,6 @@ function deleteTr_adm(obj) {
             <div class="clearfix"></div>
 
             <div class="row" style="display: block;">
-                       
-
-             
-
               <div class="clearfix"></div>
 
               <div class="col-md-12 col-sm-12"  id="human_state_list_div">

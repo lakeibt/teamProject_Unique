@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,48 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	@Override
+	public List<Map<String, Object>> getRegisterCourse(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getRegisterCourse(id);
+	}
+	
+	@Override
+	public int selectTimetable(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.selectTimetable(id);
+	}
+	
+	@Override
+	public int insertTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.insertTimetable(map);
+	}
+	
+	@Override
+	public int updateTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.updateTimetable(map);
+	}
+
+	@Override
+	public int deleteTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.deleteTimetable(map);
+	}
+	
+	@Override
+	public int plueCourseNumber(String code) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.plueCourseNumber(code);
+	}
+
+	@Override
+	public int minusCourseNumber(String code) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.minusCourseNumber(code);
+	}
+
+	@Override
 	public Map<String, Object> getCourseSyllabusInfo(String code) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getCourseSyllabusInfo(code);
@@ -87,6 +130,12 @@ public class StudentDAOImpl implements StudentDAO {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getStudyList(map);
 	}
+	
+	@Override
+	public void updateView(String sql) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		dao.updateView(sql);
+	}
 
 	@Override
 	public List<Map<String, Object>> getCourseList(Map<String, Object> map) {
@@ -104,27 +153,66 @@ public class StudentDAOImpl implements StudentDAO {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getStudentSimpleInfo(id);
 	}
-	
 	@Override
 	public int getMessageCnt(String id) {
-		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessageCnt", id);
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessageCnt(id);
 	}
 	@Override
 	public int getMessageCnt_send(String id) {
-		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessageCnt_send", id);
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessageCnt_send(id);
+	}
+	@Override
+	public int getMessageCnt_notRead(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessageCnt_notRead(id);
 	}
 	
 	@Override
 	public List<MessageVO> getMessageList(Map<String, Object> map) {
-		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList", map);
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessageList(map);
 	}
 	@Override
 	public List<MessageVO> getMessageList_send(Map<String, Object> map) {
-		return sqlSession.selectList("com.kosmo.uni.persistence.ProfessorDAO.getMessageList_send", map);
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessageList_send(map);
 	}
 
 	@Override
 	public MessageVO getMessage(int num) {
-		return sqlSession.selectOne("com.kosmo.uni.persistence.ProfessorDAO.getMessage", num);
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessage(num);
+	}
+	@Override
+	public int updateReadChk(int num) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.updateReadChk(num);
+	}
+	@Override
+	public List<MessageVO> getMessageList_notRead(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getMessageList_notRead(map);
+	}
+	@Override
+	public int insertMessage(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.insertMessage(map);
+	}
+	@Override
+	public List<Map<String, Object>> authenList(String authen) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.authenList(authen);
+	}
+	@Override
+	public String getReceiverName(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getReceiverName(map);
+	}
+	@Override
+	public ArrayList<String> getProfessorName() {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getProfessorName();
 	}
 }
