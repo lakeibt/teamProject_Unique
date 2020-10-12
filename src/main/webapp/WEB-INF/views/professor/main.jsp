@@ -185,11 +185,6 @@ function deleteTr(obj) {
 								</div>
 							</div>
 		                </div>
-		                <div class="col-md-6" >
-		                	<div class="card" style="padding: 10px;">
-		                		<div id="calendar"></div>
-		                	</div>
-		                </div>
 					</div>
 				</div>
 			</div>
