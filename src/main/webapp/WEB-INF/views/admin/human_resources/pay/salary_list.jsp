@@ -302,12 +302,8 @@ function selectSalaryConfirm() {
 						</div>
 					</div>
 				</div>
-
-
 				<br>
-
 				<div id="pay_payroll"></div>
-
 			</div>
 
 		</div>

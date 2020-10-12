@@ -172,5 +172,14 @@ public class AndroidController {
 		return out;
 	}
 	
+	// 앱 교수 강의 정보 - 리스트
+	@ResponseBody
+	@RequestMapping("/android/proCourse")
+	public List<Map<String, Object>> androidProfessorCourse(HttpServletRequest req) {
+		logger.info("androidProfessorCourse()");
+		
+		return andService.proCourse(req);
+	}
+	
 }
 

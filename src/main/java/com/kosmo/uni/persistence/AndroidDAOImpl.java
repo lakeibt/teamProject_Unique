@@ -157,5 +157,11 @@ public class AndroidDAOImpl implements AndroidDAO{
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getMyScore(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> getMyCourse_pro(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getMyCourse_pro(map);
+	}
 
 }

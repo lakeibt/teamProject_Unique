@@ -632,4 +632,30 @@ public class AndroidServiceImpl implements AndroidService {
 		List<Map<String, Object>> map = andDAO.getMyScore(info);
 		return map;
 	}
+	
+	@Override
+	public List<Map<String, Object>> proCourse(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String year_text = req.getParameter("year");
+		String semester_text = req.getParameter("semester");
+		int year = 0, semester = 0;
+		
+		if(year_text.equals("2020")) year = 2020;
+		else year = 2019;
+		if(semester_text.equals("1학기")) semester = 1;
+		else semester = 2;
+		
+		Map<String, Object> info = new HashMap<>();
+		info.put("id", id);
+		info.put("year", year);
+		info.put("semester", semester);
+		
+		List<Map<String, Object>> map = andDAO.getMyCourse_pro(info);
+		
+		for(int i=0; i < map.size(); i++) {
+			System.out.println("결과 : " + map.get(i));
+		}
+		
+		return map;
+	}
 }

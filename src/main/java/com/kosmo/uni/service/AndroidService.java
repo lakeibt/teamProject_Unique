@@ -49,5 +49,7 @@ public interface AndroidService {
 	//STU 강의 확인
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req);
 	public List<Map<String, Object>> StuScore(HttpServletRequest req);
+	
+	public List<Map<String, Object>> proCourse(HttpServletRequest req);
 
 }

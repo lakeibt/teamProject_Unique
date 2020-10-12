@@ -70,4 +70,6 @@ public interface AndroidDAO {
 	//PRO정보 수정
 	public int Proinfosave(Map<String, Object> map);
 	
+	public List<Map<String, Object>> getMyCourse_pro(Map<String, Object> map);
+
 }
