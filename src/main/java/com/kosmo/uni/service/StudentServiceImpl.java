@@ -25,6 +25,8 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.StudentDAO;
 import com.kosmo.uni.vo.ConsultVO;
+import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentVO;
 
@@ -595,5 +597,30 @@ public class StudentServiceImpl implements StudentService{
 			e.printStackTrace();
 		}
 		return FirestoreClient.getFirestore();
+	}
+	
+	@Override
+	public void lectureDetail(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		System.out.println(co_code);
+		int le_week = Integer.parseInt(req.getParameter("le_week"));
+		System.out.println(le_week);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("co_code", co_code);
+		map.put("le_week", le_week);
+		
+		int cnt = stuDAO.lectureChk(map);
+		
+		if(cnt != 0) {
+			LectureVO vo = stuDAO.getLecture(map);
+			model.addAttribute("vo", vo);
+		}
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("co_code", co_code);
+		model.addAttribute("le_week", le_week);
+		
 	}
 }

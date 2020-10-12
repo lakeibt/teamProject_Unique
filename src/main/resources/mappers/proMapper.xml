@@ -78,13 +78,13 @@
 	</select>
 
 	<select id="getInfoCnt" resultType="int">
-		SELECT COUNT(*) as cnt FROM p_info
+		SELECT COUNT(*) as cnt FROM a_info
 	</select>
 	
 	<select id="getInfoList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.InfoVO">
 	<![CDATA[
 		SELECT * FROM (SELECT num, title, content, writer, reg_date, rowNum rNum 
-		  FROM (SELECT * FROM p_info)) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT * FROM a_info)) WHERE rNum >= #{start} AND rNum <= #{end}
 	]]>
 	</select>
 	
@@ -94,13 +94,13 @@
 	
 	<select id="getCourseList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.CourseVO">
 	<![CDATA[
-		SELECT * FROM (SELECT co_code, co_name, co_day, le_code, grade, co_num, plan_chk, rowNum rNum 
+		SELECT * FROM (SELECT co_code, co_name, co_day, le_code, grade, co_num, plan_chk, grade_chk, rowNum rNum 
 		  FROM (SELECT * FROM a_course WHERE p_name = #{p_name} ORDER BY decode(co_day, '월','1','화','2','수','3','목','4','금','5'), le_code asc)) WHERE rNum >= #{start} AND rNum <= #{end}
 	]]>
 	</select>
 	
 	<select id="getInfoDetail" resultType="com.kosmo.uni.vo.InfoVO">
-		SELECT * FROM p_info where num = #{num}
+		SELECT * FROM a_info where num = #{num}
 	</select>
 
 	<update id="updateMyPage" parameterType="com.kosmo.uni.vo.HumanVO">
@@ -132,8 +132,65 @@
 		UPDATE p_grade_point SET attend = #{attend}, midterm = #{midterm}, finals = #{finals}, assign_report = #{assign_report}, assign_team = #{assign_team} WHERE co_code = #{co_code} 
 	</update>
 	
-	<select id="getCalendarList" resultType="com.kosmo.uni.vo.CalendarVO">
-		SELECT * FROM p_calendar where id=#{id}
+	<select id="lectureChk" resultType="int" parameterType="java.util.Map">
+		SELECT count(*) cnt from p_lecture WHERE co_code = #{co_code} AND le_week = #{le_week}
 	</select>
+	
+	<select id="getLecture" resultType="com.kosmo.uni.vo.LectureVO">
+		SELECT * from p_lecture WHERE co_code = #{co_code} AND le_week = #{le_week}
+	</select>
+	
+	<insert id="insertLecture" parameterType="com.kosmo.uni.vo.LectureVO">
+		INSERT INTO p_lecture values(p_lecture_seq.nextval, #{co_code}, #{le_title}, #{le_content}, #{le_writer}, sysdate, #{le_file}, #{le_week}, #{le_file_img})
+	</insert>
+	
+	<update id="updateLecture" parameterType="com.kosmo.uni.vo.LectureVO">
+		UPDATE p_lecture
+		SET
+		le_title = #{le_title}, 
+		le_content = #{le_content}, 
+		le_file = #{le_file}, 
+		le_file_img = #{le_file_img}
+		WHERE le_num = #{le_num}
+	</update>
+	
+	<delete id="deleteLecture" parameterType="int">
+		delete p_lecture WHERE le_num = #{le_num}
+	</delete>
+	
+	<select id="getGradeList" resultType="com.kosmo.uni.vo.GradeVO">
+		SELECT s.id, s.name, t.co_code from view_timetable t, s_student s WHERE t.id = s.id and co_code = #{co_code}
+	</select>
+	
+	<insert id="insertGradeScore" parameterType="com.kosmo.uni.vo.GradeVO">
+		INSERT INTO p_student_score values(#{id}, #{co_code}, #{grades_code}, #{attend}, #{midterm}, #{finals}, #{assign_report}, #{assign_team})
+	</insert>
+	
+	<update id="updateGradeChk" parameterType="java.util.Map">
+		UPDATE a_course SET grade_chk = #{grade_chk} WHERE co_code = #{co_code} 
+	</update>
+	
+	<select id="getGradeList_modify" resultType="com.kosmo.uni.vo.GradeVO">
+		SELECT s.id, s.name, co_code, grades_code, attend, midterm, finals, assign_report, assign_team from p_student_score t, s_student s WHERE t.id = s.id and co_code = #{co_code}
+	</select>
+	
+	<select id="chkGrade" resultType="int">
+		SELECT count(*) cnt FROM p_student_score WHERE id=#{id} and co_code=#{co_code}
+	</select>
+	
+	<update id="updateGradeScore" parameterType="java.util.Map">
+		UPDATE p_student_score
+		SET
+		grades_code = #{grades_code}, 
+		attend = #{attend}, 
+		midterm = #{midterm}, 
+		finals = #{finals},
+		assign_report = #{assign_report},
+		assign_team = #{assign_team}
+		WHERE id = #{id} AND co_code = #{co_code}
+	</update>
+	
+	
+	
 	
 </mapper>

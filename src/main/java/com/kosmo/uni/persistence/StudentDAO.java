@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -71,4 +72,9 @@ public interface StudentDAO {
 	public String getReceiverName(Map<String, Object> map);
 	// 교수 이름 가져오기
 	public ArrayList<String> getProfessorName();
+	
+	// 주차별 강의 확인
+	public int lectureChk(Map<String, Object> map);
+	// 해당 강의 가져오기
+	public LectureVO getLecture(Map<String, Object> map);
 }

@@ -38,4 +38,8 @@ public interface StudentService {
 	// 교수 이름 리스트 가져오기
 	public void getProfessorName(Model model);
 	public void submitConsult(HttpServletRequest req, Model model) throws Exception;
+	
+	// 수업 상세보기
+	public void lectureDetail(HttpServletRequest req, Model model);
+	
 }

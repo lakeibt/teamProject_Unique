@@ -4,7 +4,6 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var = "stu_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/student/"/>
 
-
 <tr class="detail_tr">
 	<td colspan="7">
 		<div>
@@ -190,10 +189,10 @@
 						<img src="${stu_photo}${vo.getPhoto()}">
 					</div>
 					<div class="filebox">
-						<input class="upload-name"  value="${vo.getPhoto()}" name="photo2" value="파일선택" disabled="disabled">
+						<input class="upload-name"  value="${vo.getPhoto()}" name="photo2" disabled="disabled">
 						
 						<label for="ex_filename" style="margin-bottom: 0px;">업로드</label>
-						<input type="file" id="ex_filename" name="photo" class="upload-hidden" onchange="setThumbnail(event);">
+						<input type="file" id="ex_filename" name="photo" value="${vo.getPhoto()}" class="upload-hidden" onchange="setThumbnail(event);">
 					</div>
 					<div id="human_info_btn_div">
 						<button class="btn btn-success" id="submitBtn" type="submit">수정하기</button>

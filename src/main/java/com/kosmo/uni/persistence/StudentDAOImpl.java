@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -214,5 +215,15 @@ public class StudentDAOImpl implements StudentDAO {
 	public ArrayList<String> getProfessorName() {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getProfessorName();
+	}
+	@Override
+	public int lectureChk(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.lectureChk(map);
+	}
+	@Override
+	public LectureVO getLecture(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getLecture(map);
 	}
 }

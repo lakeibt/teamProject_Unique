@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/setting.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,33 +14,8 @@
 <script src='${pageContext.request.contextPath}/resources/packages/daygrid/main.js'></script>
 <title>[유일대]</title>
 <%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var Calendar = FullCalendar.Calendar;
- 
-    var calendarEl = document.getElementById('calendar');
- 
-    var calendar = new Calendar(calendarEl, {
-    	plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-    	  header: {
-    	    left: 'prev,next today',
-    	    center: 'title',
-    	    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    	  },
-    	  editable: true,
-    	  droppable: true, // this allows things to be dropped onto the calendar
-    	  drop: function(info) {
-    	    // is the "remove after drop" checkbox checked?
-    	    if (checkbox.checked) {
-    	      // if so, remove the element from the "Draggable Events" list
-    	      info.draggedEl.parentNode.removeChild(info.draggedEl);
-    	    }
-    	  },
-    	  locale: 'ko'
-    });
+<script  type="text/javascript">
 
-    calendar.render();
-  });
 
 function addTr(obj){
 	
@@ -76,6 +52,7 @@ function deleteTr(obj) {
 	$(obj).text('View');
 	$(obj).attr('onclick','addTr(this)');
 };
+
 
 </script>
 <style>
@@ -130,8 +107,9 @@ function deleteTr(obj) {
 									</div>
 								</div>
 							</div>
-							<div style="height:1px;"></div>
-				            <div class="card">
+				        </div>
+				        <div class="col-md-6">
+				        <div class="card">
 								<div class="card-header card-header-primary">
 									<h4 class="card-title mt-0">강의목록</h4>
 								</div>
