@@ -161,15 +161,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 		model.addAttribute("updateCnt", updateCnt);
 	}
 
-//	@Override
-//	public void myPageModify(HttpServletRequest req, Model model) {
-//		String tel = req.getParameter("tel");
-//		String email = req.getParameter("email");
-//		String address = req.getParameter("address");
-//		
-//		Map<String, Object> 
-//	}
-
 	public void messageSimple(HttpServletRequest req, Model model) {
 		int pageSize = 5;
 		int pageBlock = 5;

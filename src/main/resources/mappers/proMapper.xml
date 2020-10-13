@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="getMessageCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) as cnt FROM p_message where receiver_id = #{id}
+		SELECT COUNT(*) as cnt FROM p_message where sender_id = #{id}
 	</select>
 	
 	<select id="getMessageCnt_send" parameterType="String" resultType="int">
@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="getMessageCnt_notRead" parameterType="String" resultType="int">
-		SELECT COUNT(*) as cnt FROM p_message where sender_id = #{id} AND readchk = 0
+		SELECT COUNT(*) as cnt FROM p_message where receiver_id = #{id} AND readchk = 0
 	</select>
 	
 	<select id="getMessageList" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">

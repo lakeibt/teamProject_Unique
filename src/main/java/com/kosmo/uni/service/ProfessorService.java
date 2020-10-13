@@ -68,5 +68,7 @@ public interface ProfessorService {
 	
 	// 교수 상담 내역 가져오기
 	public void getConsultList(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException ;
+	
+	// 쪽지 수 가져오기
 	public int getMessageCnt(HttpServletRequest req);
 }

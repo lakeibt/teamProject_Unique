@@ -15,13 +15,45 @@ function calendar(){
 }
 </script>
 <script>
+//메시지 카운트값 가져오기
+$(document).ready(function() {
+	$.ajax({
+		url : '${student}getMessageCount',	// '{컨트롤러}/매핑주소'
+		type : 'GET',
+		dataType : 'json',
+		success : function(result) {
+		//	alert(result['messageCnt']);
+			$('#messageCount').html(result['messageCnt']);
+		},
+		error : function() {
+			alert('오류');
+		}
+	});
+	
+});
+
+function a(){
+	$.ajax({
+		url : '${student}getMessageCount',	// '{컨트롤러}/매핑주소'
+		type : 'GET',
+		dataType : 'json',
+		success : function(result) {
+		//	alert(result['messageCnt']);
+			$('#messageCount').html(result['messageCnt']);
+		},
+		error : function() {
+			alert('오류');
+		}
+	});
+}
+
 //Websocket 강좌
 var socket = null;
 $(document).ready(function() {
 	connectWS();
 });
 function connectWS() {
-	var ws = new WebSocket("ws://192.168.219.111/uni/message/websocket");
+	var ws = new WebSocket("ws://localhost/uni/message/websocket");
 	socket = ws;
 
 	ws.onopen = function() {
@@ -32,6 +64,7 @@ function connectWS() {
 		// alert msg 창 만들어주기
 		$('div#alertForm').css('display', 'block');
 		$('#message-data').text(event.data);
+		a()
 	}
 	ws.onclose = function(event) {
 		console.log("Info: connection closed");
@@ -170,6 +203,8 @@ function message_load(num) {
 				
 				$('#message').html(data);
 			}
+			
+			a();
 		},
 		error : function() {
 			alert('오류!!!!');	
@@ -288,7 +323,7 @@ function message_reply(sender_id, sender_name){
 						<a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							
 							<i class="material-icons">markunread</i> 
-							<span class="notification">${sessionScope.nr_cnt}</span>
+							<span class="notification" id = "messageCount"></span>
 							<p class="d-lg-none d-md-block">Some Actions</p>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" id="message-form">

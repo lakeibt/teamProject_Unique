@@ -622,4 +622,11 @@ public class StudentServiceImpl implements StudentService{
 		model.addAttribute("le_week", le_week);
 		
 	}
+
+	@Override
+	public int getMessageCnt(HttpServletRequest req) {
+		String id = (String) req.getSession().getAttribute("memId");
+		System.out.println(id);
+		return stuDAO.getMessageCnt_notRead(id);
+	}
 }

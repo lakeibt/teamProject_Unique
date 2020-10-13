@@ -31,7 +31,6 @@ function rememberId() {
 	<div class="wrapper">
 		<%@ include file="../include/student_sidebar.jsp"%>
 		<div class="main-panel">
-		<%@ include file="../include/student_header.jsp"%>
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">

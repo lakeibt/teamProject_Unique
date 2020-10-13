@@ -42,4 +42,7 @@ public interface StudentService {
 	// 수업 상세보기
 	public void lectureDetail(HttpServletRequest req, Model model);
 	
+	// 쪽지 수 가져오기
+	public int getMessageCnt(HttpServletRequest req);
+	
 }

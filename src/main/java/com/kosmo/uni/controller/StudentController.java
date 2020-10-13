@@ -2,6 +2,8 @@ package com.kosmo.uni.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -278,5 +280,17 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		stuService.lectureDetail(req, model);
 		
 		return "student/lecture_detail";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/student/getMessageCount")
+	public JSONObject stu_getMessageCount(HttpServletRequest req) throws ParseException {
+		logger.info("url ==> messageReply");
+		int i = stuService.getMessageCnt(req);
+		JSONObject messageCount = new JSONObject();
+		System.out.println(i);
+		messageCount.put("messageCnt", i);
+		
+		return messageCount;
 	}
 }
