@@ -77,4 +77,6 @@ public interface StudentDAO {
 	public int lectureChk(Map<String, Object> map);
 	// 해당 강의 가져오기
 	public LectureVO getLecture(Map<String, Object> map);
+	// 강의 년도 가져오기
+	public List<Integer> getCourseYear(String id);
 }

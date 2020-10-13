@@ -46,13 +46,14 @@ public class StudentServiceImpl implements StudentService{
 		String id = (String) req.getSession().getAttribute("memId");
 		
 		int check = stuDAO.studentIdCheck(id); // users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
-		
+		List<Integer> courseYear = stuDAO.getCourseYear(id);
 		int selectCnt = 0;
 		StudentVO vo = null;
 		if (check == 1) {
 			vo = stuDAO.getStudentInfo(id);
 			selectCnt = 1;
 		}
+		model.addAttribute("courseYear", courseYear);
 		model.addAttribute("vo", vo);
 		model.addAttribute("selectCnt", selectCnt);
 	}
@@ -448,7 +449,6 @@ public class StudentServiceImpl implements StudentService{
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock -1;
 		if(endPage > pageCount) endPage = pageCount;
-		
 		req.getSession().setAttribute("nr_cnt", cnt);
 		model.addAttribute("cnt", cnt);			
 		model.addAttribute("number", number);	 

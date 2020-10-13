@@ -23,7 +23,6 @@ public class EduController {
 	@Autowired
 	EduService eduService;
 	
-	// HomeController.java는 주석처리
 	@RequestMapping("/")
 	public String home() {
 		logger.info("url ==> home");
@@ -52,13 +51,14 @@ public class EduController {
 		logger.info("url ==> logout");
 		session.invalidate();
 		
-		return "guest/logout";
+		return "redirect:login";
 	}
 	
 	@RequestMapping("/guest/main")
 	public String gue_main(HttpServletRequest req, Model model) {
 		logger.info("url ==> main");
-		return "guest/login";
+		
+		return "redirect:login";
 	}
 	
 	@RequestMapping("/guest/bcrypt")

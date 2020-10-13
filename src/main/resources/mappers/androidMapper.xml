@@ -125,4 +125,15 @@
 		AND C.CO_YEAR = #{year}
 		AND C.CO_SEMESTER = #{semester}
 	</select>
+	
+	<select id="getMyCourse_pro" resultType="java.util.Map">
+		SELECT distinct(c.co_code), t.day, t.time , c.grade, c.co_name, p.name, m.m_name, p.photo FROM A_COURSE c, p_professor p, A_MAJOR m  ,VIEW_TIMETABLE T
+	    WHERE c.p_name = p.name
+	    AND p.M_CODE = m.M_CODE
+	    AND t.co_code = c.co_code
+	    AND p.ID = #{id} 
+	    AND C.CO_YEAR = #{year} 
+	    AND C.CO_SEMESTER = #{semester}
+	    ORDER BY decode(day, '월','1','화','2','수','3','목','4','금','5')
+	</select>
 </mapper>

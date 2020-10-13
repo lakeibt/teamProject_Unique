@@ -945,4 +945,10 @@ public class ProfessorServiceImpl implements ProfessorService {
 		model.addAttribute("consultList", consultList);
 	}
 
+	@Override
+	public int getMessageCnt(HttpServletRequest req) {
+		String id = (String) req.getSession().getAttribute("memId");
+		return proDAO.getMessageCnt_notRead(id);
+	}
+
 }

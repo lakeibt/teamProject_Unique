@@ -126,7 +126,7 @@
 						      var data = httpRequest.responseText;
 						      result.innerHTML = data;
 						      } else result.innerHTML = "Error!";
-						   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+						   }
 						}
 						</script>
 						<div class="row">

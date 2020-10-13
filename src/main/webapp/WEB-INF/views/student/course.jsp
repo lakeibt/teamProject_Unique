@@ -29,8 +29,9 @@
 											<tr>
 												<th>
 													<select id="select1" class="form-control">
-														<option>2019</option>		
-														<option>2020</option>		
+														<c:forEach var = "year" items = "${courseYear}">
+															<option>${year}</option>
+														</c:forEach>
 													</select>
 												</th>
 												<th colspan="5">
@@ -45,7 +46,7 @@
 										<thead class="text-primary">
 											<tr>
 												<td>학과</td>
-												<td><input class="form-control" type="text" value="${vo.m_code}" disabled></td>
+												<td><input class="form-control" type="text" value="${vo.m_name}(${vo.m_code})" disabled></td>
 												<td>학번</td>
 												<td><input class="form-control" type="text" value="${vo.id}" disabled></td>
 												<td>이름</td>

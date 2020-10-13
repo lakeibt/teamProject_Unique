@@ -226,4 +226,9 @@ public class StudentDAOImpl implements StudentDAO {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getLecture(map);
 	}
+	@Override
+	public List<Integer> getCourseYear(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getCourseYear(id);
+	}
 }

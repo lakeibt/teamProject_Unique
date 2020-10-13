@@ -3,6 +3,9 @@ package com.kosmo.uni.controller;
 import java.util.concurrent.ExecutionException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.persistence.ProfessorDAO;
 import com.kosmo.uni.service.ProfessorService;
+
+import io.grpc.internal.JsonParser;
 
 @Controller
 public class ProfessorController {
@@ -303,5 +308,16 @@ public class ProfessorController {
 		
 		int insertCnt = proService.messageReply(req, model);
 		return insertCnt;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/professor/getMessageCount")
+	public JSONObject pro_getMessageCount(HttpServletRequest req) throws ParseException {
+		logger.info("url ==> messageReply");
+		int i = proService.getMessageCnt(req);
+		JSONObject messageCount = new JSONObject();
+		messageCount.put("messageCnt", i);
+		
+		return messageCount;
 	}
 }
