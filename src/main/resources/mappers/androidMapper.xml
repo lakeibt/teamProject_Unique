@@ -136,4 +136,20 @@
 	    AND C.CO_SEMESTER = #{semester}
 	    ORDER BY decode(day, '월','1','화','2','수','3','목','4','금','5')
 	</select>
+	
+	<select id="getclasscheck" parameterType="String" resultType="com.kosmo.uni.vo.InClassHowVO">
+		SELECT c.CO_NAME co_name FROM A_COURSE c , P_PROFESSOR p WHERE c.P_NAME = p.name AND p.name = #{name}
+	</select>
+	
+	<select id="getclasschecknext" parameterType="String" resultType="com.kosmo.uni.vo.InClassHowVO">
+		SELECT s.name student, s.id id, m.m_name m_name
+		  FROM A_COURSE a
+		     , S_STUDENT s
+		     , VIEW_TIMETABLE v
+		     , A_MAJOR m
+		 WHERE v.id = s.id
+		   AND m.m_code = s.m_code
+		   AND a.CO_CODE = v.CO_CODE
+		   AND a.co_name = #{title}
+	</select>
 </mapper>

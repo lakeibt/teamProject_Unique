@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -72,4 +73,10 @@ public interface AndroidDAO {
 	
 	public List<Map<String, Object>> getMyCourse_pro(Map<String, Object> map);
 
+	//교수 강의조회 리스트 출력
+	public ArrayList<InClassHowVO> getclasscheck(String name);
+	
+	//교수 강의조회 리스트 출력
+	public ArrayList<InClassHowVO> getclasschecknext(String title);
+	
 }

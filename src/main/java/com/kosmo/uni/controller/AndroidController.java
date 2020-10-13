@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
 import com.kosmo.uni.vo.ConsultVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.nfcVO;
 
 @Controller
@@ -179,6 +180,27 @@ public class AndroidController {
 		logger.info("androidProfessorCourse()");
 		
 		return andService.proCourse(req);
+	}
+	
+	//강의 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/proclasscheck")
+	public ArrayList<InClassHowVO> androidProclasscheck(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("androidProclasscheck()");
+		
+		ArrayList<InClassHowVO> out = andService.getClassInHow(req);
+		
+		return out;
+	}
+	
+	//강의 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/proclasschecknext")
+	public ArrayList<InClassHowVO> androidProclasschecknext(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("androidProclasschecknext()");
+		
+		ArrayList<InClassHowVO> out = andService.getClassInHowNext(req);	
+		return out;
 	}
 	
 }

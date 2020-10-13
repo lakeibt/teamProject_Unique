@@ -29,6 +29,7 @@ import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.persistence.StudentDAO;
 import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -587,6 +588,24 @@ public class AndroidServiceImpl implements AndroidService {
 			consultList.add(document.toObject(ConsultVO.class));
 		}
 		return consultList;
+	}
+	
+	@Override
+	public ArrayList<InClassHowVO> getClassInHow(HttpServletRequest req) throws InterruptedException, ExecutionException {
+		
+		String name = req.getParameter("name");
+		System.out.println("타이틀 : "+name);
+		ArrayList<InClassHowVO> dtos = andDAO.getclasscheck(name);
+		
+		return dtos;
+	}
+	
+	@Override
+	public ArrayList<InClassHowVO> getClassInHowNext(HttpServletRequest req) throws InterruptedException, ExecutionException {
+		String push = req.getParameter("title");
+		System.out.println("2번 :"+push);
+		ArrayList<InClassHowVO> dtos = andDAO.getclasschecknext(push);
+		return dtos;
 	}
 	
 	@Override
