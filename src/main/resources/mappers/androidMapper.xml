@@ -152,4 +152,8 @@
 		   AND a.CO_CODE = v.CO_CODE
 		   AND a.co_name = #{title}
 	</select>
+	
+	<select id="getshoplist" resultType="com.kosmo.uni.vo.ShopVO">
+		SELECT * FROM S_SHOP
+	</select>
 </mapper>

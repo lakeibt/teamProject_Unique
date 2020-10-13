@@ -32,6 +32,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.ShopVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -609,6 +610,12 @@ public class AndroidServiceImpl implements AndroidService {
 	}
 	
 	@Override
+	public ArrayList<ShopVO> getShopList() throws InterruptedException, ExecutionException {
+		ArrayList<ShopVO> dtos = andDAO.getshoplist();
+		return dtos;
+	}
+	
+	@Override
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req) {
 		String id = req.getParameter("id");
 		String year_text = req.getParameter("year");
@@ -677,4 +684,5 @@ public class AndroidServiceImpl implements AndroidService {
 		
 		return map;
 	}
+
 }

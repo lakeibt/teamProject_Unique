@@ -18,6 +18,7 @@ import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.InClassHowVO;
+import com.kosmo.uni.vo.ShopVO;
 import com.kosmo.uni.vo.nfcVO;
 
 @Controller
@@ -200,6 +201,16 @@ public class AndroidController {
 		logger.info("androidProclasschecknext()");
 		
 		ArrayList<InClassHowVO> out = andService.getClassInHowNext(req);	
+		return out;
+	}
+	
+	//당근나라 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/shoplist")
+	public ArrayList<ShopVO> androidShoplist() throws InterruptedException, ExecutionException{
+		logger.info("androidShoplist()");
+		
+		ArrayList<ShopVO> out = andService.getShopList();	
 		return out;
 	}
 	
