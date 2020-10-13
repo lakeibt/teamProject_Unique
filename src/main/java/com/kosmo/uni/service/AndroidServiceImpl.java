@@ -604,7 +604,7 @@ public class AndroidServiceImpl implements AndroidService {
 	public ArrayList<InClassHowVO> getClassInHowNext(HttpServletRequest req) throws InterruptedException, ExecutionException {
 		String push = req.getParameter("title");
 		System.out.println("2번 :"+push);
-		ArrayList<InClassHowVO> dtos = andDAO.getclasscheck(push);
+		ArrayList<InClassHowVO> dtos = andDAO.getclasschecknext(push);
 		return dtos;
 	}
 	
