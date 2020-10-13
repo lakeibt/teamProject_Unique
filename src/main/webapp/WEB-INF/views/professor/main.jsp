@@ -15,8 +15,6 @@
 <title>[유일대]</title>
 <%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
 <script  type="text/javascript">
-
-
 function addTr(obj){
 	
 	var token = $("meta[name='_csrf']").attr("content");
@@ -51,9 +49,29 @@ function deleteTr(obj) {
 	
 	$(obj).text('View');
 	$(obj).attr('onclick','addTr(this)');
-};
+}
 
+function addConsult(obj, content) {
+	var tr = $(obj).parent().parent();
+	
+	tr.after("<tr>"
+			+ "<td colspan = '6'>"
+			+ "<h5 style = 'margin:5px; font-weight:bold; font-size:16px;'>"
+			+ content
+			+ "</h5>"
+			+ "</td>"
+			+ "</tr>");
+	
+	$(obj).attr('onClick', 'deleteConsult(this)')
+}
 
+function deleteConsult(obj) {
+	var tr = $(obj).parent().parent().next();
+	var content = $(obj).parent().children('.test').val();
+	tr.remove();
+	
+	$(obj).attr('onclick', "addConsult(this, '" + content + "')");
+}
 </script>
 <style>
   #calendar {
@@ -66,7 +84,6 @@ function deleteTr(obj) {
 <body class="dark-edition">
 	<div class="wrapper ">
 		<%@ include file="../include/professor_sidebar.jsp"%>
-
 
 		<div class="main-panel" >
 
@@ -99,7 +116,7 @@ function deleteTr(obj) {
 													<td>${dto.getTitle()}</td>
 													<fmt:formatDate var="date" pattern="yyyy-MM-dd" value="${dto.getReg_date()}" />
 													<td>${date}</td>
-													<td><a href="javascript:void(0)" onclick="addTr(this)">View</a></td>
+													<td><a href="#" onclick="addTr(this)">View</a></td>
 												</tr>
 											</c:forEach>
 											</tbody>
@@ -168,7 +185,9 @@ function deleteTr(obj) {
 												<tr>
 													<th style="width: 10%">${con.getStuName()}</th>
 													<th style="width: 13%">${con.getStuNumber()}</th>
-													<th style="width: 34%">${con.getSubject()}</th>
+													<th style="width: 34%">
+														<input type = "hidden" class = "test" value = "${con.getContent()}">
+														<a href="#" onclick="addConsult(this, '${con.getContent()}')">${con.getSubject()}</a></th>
 													<th style="width: 13%">${con.getConsultType()}</th>
 													<th style="width: 15%; text-align:center; padding-left:0px;">${con.getConsultExp()}</th>
 													<th style="width: 15%">${con.getDate().split(" ")[0].replace("-","/")}</th>

@@ -2,11 +2,9 @@ package com.kosmo.uni.service;
 
 import java.io.FileInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +20,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
@@ -924,6 +919,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 			        .build();
 			    firebaseApp = FirebaseApp.initializeApp(options);
 			}
+			
 			return FirestoreClient.getFirestore();
 		} catch(Exception e) {
 			e.printStackTrace();

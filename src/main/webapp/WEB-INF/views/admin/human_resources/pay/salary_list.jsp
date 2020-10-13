@@ -267,7 +267,7 @@ function selectSalaryConfirm() {
 								<!-- 페이지 컨트롤  -->
 								<table style="width: 100%; margin: auto;">
 									<tr style="width: 100%; margin: auto; algin: center">
-										<td colspan="9" algin="center">
+										<td colspan="9" align="center">
 											<!-- 게시글이 있으면 --> <c:if test="${cnt>0 }">
 												<!-- 처음[◀◀] /이전 블록 [◀] -->
 												<c:if test="${startPage > pageBlock }">

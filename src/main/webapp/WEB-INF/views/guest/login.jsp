@@ -4,10 +4,31 @@
 <html lang="en">
 <head>
 <title>[유일대]로그인</title>
+<script type = "text/javascript">
+function rememberCheck() {
+	var rememberId = document.getElementsByName('rememberId')[0].checked;
+	if(rememberId) {
+		var id = document.getElementById('id').value;
+		sessionStorage.setItem("rememberId", rememberId);
+		sessionStorage.setItem("id", id)
+	} else {
+		sessionStorage.removeItem("rememberId");
+		sessionStorage.removeItem("id");
+	}
+	return true;
+};
+
+function rememberId() {
+	if(sessionStorage.getItem("rememberId")) {
+		document.getElementById('id').value = sessionStorage.getItem("id");
+		document.getElementsByName('rememberId')[0].checked = true;
+	}
+}
+</script>
 <%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
 </head>
-<body class="dark-edition">
-	<div class="wrapper ">
+<body class="dark-edition" onload = "rememberId();">
+	<div class="wrapper">
 		<%@ include file="../include/student_sidebar.jsp"%>
 		<div class="main-panel">
 		<%@ include file="../include/student_header.jsp"%>
@@ -28,13 +49,13 @@
 									</p>
 									<hr width="100%" style="margin: 0 auto; margin-bottom: 15px;">
 									<c:if test="${sessionScope.auth == null}">
-										<form action="${path}guest/loginPro" method="post" style="width: 100%; margin: 0 auto;">
+										<form action="${path}guest/loginPro" method="post" style="width: 100%; margin: 0 auto;" onsubmit = 'return rememberCheck();'>
 											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-											<input type="text" name="id" placeholder="학번/교직원번호" style="width: 100%; height: 50px; margin: 3px;">
-											<input type="password" name="pwd" placeholder="비밀번호" style="width: 100%; height: 50px; margin: 3px;">
+											<input type="text" id = "id" name="id" placeholder="학번/교직원번호" style="width: 100%; height: 50px; margin: 3px;">
+											<input type="password" id = "pwd" name="pwd" placeholder="비밀번호" style="width: 100%; height: 50px; margin: 3px;">
 											<table style="width: 100%; margin-top: 10px; margin-bottom: 30px;">
 												<tr>
-													<td><input type="checkbox">학번/교직원번호 저장</td>
+													<td><input type="checkbox" name = "rememberId" id = "rememberId">학번/교직원번호 저장</td>
 													<td style="float: right; text-decoration: none;">
 														<a class="quote" href="#" style="color: black;">비밀번호 초기화</a>
 													</td>

@@ -1,7 +1,6 @@
 package com.kosmo.uni.vo;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 public class PayslipVO {
 

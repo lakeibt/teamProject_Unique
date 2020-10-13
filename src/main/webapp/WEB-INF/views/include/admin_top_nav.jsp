@@ -17,8 +17,7 @@
 				</a>
 				<div class="dropdown-menu dropdown-usermenu pull-right"
 					aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Profile</a> <a
-						class="dropdown-item" href="${guest}logout"><i
+					<a class="dropdown-item" href="${guest}logout"><i
 						class="fa fa-sign-out pull-right"></i> Log Out</a>
 				</div>
 			</li>

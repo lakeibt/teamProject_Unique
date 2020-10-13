@@ -25,7 +25,6 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.StudentDAO;
 import com.kosmo.uni.vo.ConsultVO;
-import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentVO;

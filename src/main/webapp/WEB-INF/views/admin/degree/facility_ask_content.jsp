@@ -11,8 +11,8 @@
 </head>
 <div class="x_panel">
 	<div class="x_content">
-		<div class="table-responsive">
-			<form style="opacity:1" name="askForm" action="${admin }degree/facility_ask_Pro" onsubmit="return confirm();">
+		<div class="table-responsive" style = "overflow:hidden;">
+			<form style="opacity:1" name="askForm" action="${admin}degree/facility_ask_Pro" onsubmit="return confirm();">
 				<table class="table table-striped jambo_table">
 					<thead>
 						<tr class="headings">	
@@ -46,10 +46,8 @@
 							<th colspan="8">요청사항(상세)</th>
 						</tr>
 						<tr>
-							<td colspan="8"> <!-- 세로 중앙 정렬이 안 먹힘... -->
-								<textarea cols="50" rows="50" style="width:100%; height:200px;" name="content" class="form-control" readOnly>
-								${content.CONTENT }
-								</textarea>
+							<td colspan="8">
+								<textarea cols="50" rows="50" style="width:100%; height:200px;" name="content" class="form-control" readOnly>${content.CONTENT}</textarea>
 							</td>
 						</tr>
 					</tbody>

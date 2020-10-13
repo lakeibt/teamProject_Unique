@@ -25,7 +25,7 @@ public class EduController {
 	
 	@RequestMapping("/")
 	public String home() {
-		logger.info("url ==> home");
+		logger.info("url ==> /");
 		
 		return "guest/login";
 	}
@@ -61,6 +61,7 @@ public class EduController {
 		return "redirect:login";
 	}
 	
+	// 프로젝트 마무리 시 삭제 시작
 	@RequestMapping("/guest/bcrypt")
 	public String bcrypt() {
 		logger.info("url ==> bcrypt");
@@ -80,13 +81,7 @@ public class EduController {
 		
 		return "guest/bcrypt2";
 	}
-	
-	@RequestMapping("/guest/sample2")
-	public String gue_sample2() {
-		logger.info("url ==> sample2");
-		
-		return "guest/sample2";
-	}
+	// 프로젝트 마무리 시 삭제 끝
 	
 	@RequestMapping("/guest/denied")
 	public String denied() {

@@ -19,10 +19,10 @@
 <body>
 <div class="x_panel">
 	<div class="x_content">
-		<div class="table-responsive">
-			<form style="opacity:1" action="${admin}degree/coursewm" method="post" name="w_m_form">
+		<div class="table-responsive" style = "overflow:hidden;">
+			<form style="opacity:1; margin:0px;" action="${admin}degree/coursewm" method="post" name="w_m_form">
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-				<table class="table table-striped jambo_table">
+				<table class="table table-striped jambo_table" style = "margin:0px;">
 					<thead>
 						<tr class="headings">	
 							<th class="column-title" colspan="8">
@@ -97,15 +97,15 @@
 							<td>시작시간</td>
 							<td>
 								<select class="form-control" name="le_code">
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-									<option value="7">7</option>
-									<option value="8">8</option>
-									<option value="9">9</option>
+									<option value="1">1교시[09:00]</option>
+									<option value="2">2교시[10:00]</option>
+									<option value="3">3교시[11:00]</option>
+									<option value="4">4교시[12:00]</option>
+									<option value="5">5교시[13:00]</option>
+									<option value="6">6교시[14:00]</option>
+									<option value="7">7교시[15:00]</option>
+									<option value="8">8교시[16:00]</option>
+									<option value="9">9교시[17:00]</option>
 								</select>
 							</td>
 							<td>학점</td>

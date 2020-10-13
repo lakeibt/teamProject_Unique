@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -27,11 +25,9 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.ConsultVO;
-import com.kosmo.uni.persistence.StudentDAO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
-import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -581,7 +577,7 @@ public class AndroidServiceImpl implements AndroidService {
 	public ArrayList<ConsultVO> getConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException {
 		Firestore db = initialize();
 		String name = req.getParameter("name");
-		ApiFuture<QuerySnapshot> future = db.collection("teamUnique_Spring").whereEqualTo("proName", "김교수").get();
+		ApiFuture<QuerySnapshot> future = db.collection("teamUnique_Spring").whereEqualTo("proName", name).get();
 		List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 		ArrayList<ConsultVO> consultList = new ArrayList<ConsultVO>();
 		for(DocumentSnapshot document : documents) {

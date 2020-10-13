@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="sidebar" data-color="purple" data-background-color="black" data-image="${assets}img/sidebar-2.jpg">
-	<div class="logo"><a href="${student}myPage" class="simple-text logo-normal">Unique Universal</a></div>
+	<div class="logo">
+	<c:if test = "${sessionScope.auth == null}">
+		<a href="${guest}login" class="simple-text logo-normal">Unique Universal</a>
+	</c:if>
+	<c:if test = "${sessionScope.auth == 'ROLE_STUDENT'}">
+		<a href="${student}myPage" class="simple-text logo-normal">Unique Universal</a>
+	</c:if>
+	<c:if test = "${sessionScope.auth == 'ROLE_PROFESSOR'}">
+		<a href="${professor}main" class="simple-text logo-normal">Unique Universal</a>
+	</c:if>
+	<c:if test = "${sessionScope.auth == 'ROLE_ADMIN'}">
+		<a href="${admin}main" class="simple-text logo-normal">Unique Universal</a>
+	</c:if>
+	</div>
 	<div class="sidebar-wrapper">
 		<ul class="nav">
 			<c:if test="${sessionScope.auth != null}">

@@ -191,27 +191,27 @@ function endMonthSelect() {
 												<tr align="center">
 													<th>
 														<!-- 게시글이 있으면 --> 
-														<c:if test="${cnt > 0}">
+														<c:if test="${salary_list_cnt > 0}">
 															<!-- 처음[◀◀] /  이전블록[◀]  , 특수문자 : 한글상태 ㅁ+한자키-->
 															<c:if test="${startPage > pageBlock}">
-																<a href="attendance"> [◀◀] </a>
-																<a href="attendance?pageNum=${startPage - pageBlock}"> [◀] </a>
+																<a href="salary_list_month"> [◀◀] </a>
+																<a href="salary_list_month?pageNum=${startPage - pageBlock}"> [◀] </a>
 															</c:if>
 															<!-- 블록내의 페이지 번호 -->
 															<c:forEach var="i" begin="${startPage}" end="${endPage}">
 																<c:if test="${i == currentPage}">
 																	<span>	
-																		<a href="attendance?pageNum=${i}"><input type="button" value="${i}"></a>
+																		<a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a>
 																	</span>
 																</c:if>
 																<c:if test="${i != currentPage}">
-																	<a href="attendance?pageNum=${i}"><input type="button" value="${i}"></a>
+																	<a href="salary_list_month?pageNum=${i}"><input type="button" value="${i}"></a>
 																</c:if>
 															</c:forEach>
 															<!-- 다음블록[▶] / 마지막[▶▶] -->
 															<c:if test="${pageCount > endPage}">
-																<a href="attendance?pageNum=${startPage + pageBlock}"> [▶]</a>
-																<a href="attendance?pageNum=${pageCount}"> [▶▶]</a>
+																<a href="salary_list_month?pageNum=${startPage + pageBlock}"> [▶]</a>
+																<a href="salary_list_month?pageNum=${pageCount}"> [▶▶]</a>
 															</c:if>
 														</c:if>
 													</th>

@@ -191,7 +191,7 @@ function chnQnaType(type , select) {
 												<c:if test="${course_Cnt > 0}">
 													<c:forEach var="dto" items="${dtos}">
 														<tr>
-															<td>${dto.co_code}</td>
+															<td valign = middle>${dto.co_code}</td>
 															<td><a onclick="content2('${dto.co_code}')">${dto.co_name}</a></td>
 															<td>${dto.m_code}</td>
 															<td>${dto.school_year}</td>

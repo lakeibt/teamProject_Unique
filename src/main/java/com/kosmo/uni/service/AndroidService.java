@@ -7,8 +7,6 @@ import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.ui.Model;
-
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.nfcVO;

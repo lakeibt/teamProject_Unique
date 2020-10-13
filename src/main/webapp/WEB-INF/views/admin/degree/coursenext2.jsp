@@ -19,7 +19,7 @@
 <body>
 <div class="x_panel">
 	<div class="x_content">
-		<div class="table-responsive">
+		<div class="table-responsive" style = "overflow:hidden;">
 			<form style="opacity:1" action="${admin}degree/coursewm2" method="post" name="w_m_form">
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
 				<table class="table table-striped jambo_table">
