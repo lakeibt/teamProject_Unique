@@ -456,7 +456,7 @@
 	
 	
 	<insert id="insertAdmin" parameterType="com.kosmo.uni.vo.HumanVO">
-		INSERT INTO a_admin 
+		INSERT INTO a_admin
 		VALUES ('a' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(ADM_SEQ.nextval),
 				#{pwd},
 				#{photo},
@@ -478,9 +478,10 @@
 				1,
 				#{de_address},
 				#{carnum},
-				#{bank})
+				#{bank},
+				null)
 	</insert>
-	<insert id="insertProfesser" parameterType="com.kosmo.uni.vo.HumanVO">
+	<insert id="insertProfessor" parameterType="com.kosmo.uni.vo.HumanVO">
 		INSERT INTO p_professor 
 		VALUES ('p' || TO_CHAR(SYSDATE,'YYYY') || TO_CHAR(PRO_SEQ.nextval),
 				#{pwd},
@@ -705,4 +706,10 @@
 	<delete id="deleteBonusConfirm" parameterType="int">
 		delete from a_bonus where salary_input_num=#{salary_input_num}
 	</delete>
+	
+	<select id = "getProfessorListByMajor" parameterType = "String" resultType = "String">
+		SELECT NAME
+		  FROM P_PROFESSOR
+		 WHERE M_CODE = #{m_code}
+	</select>
 </mapper>

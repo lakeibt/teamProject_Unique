@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
+import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.ShopVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -174,6 +176,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 	public ArrayList<InClassHowVO> getclasschecknext(String title) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getclasschecknext(title);
+	}
+
+	@Override
+	public ArrayList<ShopVO> getshoplist() {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getshoplist();
 	}
 
 }

@@ -19,6 +19,17 @@ function chnQnaType(type , select) {
     
     $('#schQnaType').empty();
     
+    /* <c:forEach var = "major" items = "${professorListByMajor}">
+    	if(type == '${major.m_code}') {
+    		console.Log("if탐");
+    		$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
+    		<c:forEach var = "professors" items = "${major.professors}">
+    			console.Log("forEach탐");
+    			$('#schQnaType').append("<option value='${professors}'>${professors}</option>");
+    		</c:forEach>
+    	}
+    </c:forEach> */
+    
     if(type == 'CO') { 
     	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
         $('#schQnaType').append("<option value='김교수'>김교수</option>");
@@ -48,7 +59,7 @@ function chnQnaType(type , select) {
     	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
     } else if (type == 'SC') { 
     	$('#schQnaType').append("<option selected disabled>교수님을 선택하세요</option>");
-    } 
+    }
     
     document.getElementById("schQnaType").style.display = "";
     

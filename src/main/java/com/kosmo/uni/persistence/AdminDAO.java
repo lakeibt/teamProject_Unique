@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -101,7 +102,7 @@ public interface AdminDAO {
 	
 	// 인사 등록
 	public int insertAdmin(HumanVO vo);
-	public int insertProfesser(HumanVO vo);
+	public int insertProfessor(HumanVO vo);
 	public int insertStudent(HumanVO vo);
 	
 	// 직원 등록폼
@@ -179,4 +180,6 @@ public interface AdminDAO {
 	public void deleteSalaryConfirm(int salary_input_num);
 	//급여 확정 후 삭제 - 상여 
 	public void deleteBonusConfirm(int salary_input_num);
+	// 코드로 교수 리스트 가져오기
+	public ArrayList<String> getProfessorListByMajor(String m_code);
 }

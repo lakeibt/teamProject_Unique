@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -437,9 +438,9 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public int insertProfesser(HumanVO vo) {
+	public int insertProfessor(HumanVO vo) {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
-		return dao.insertProfesser(vo);
+		return dao.insertProfessor(vo);
 	}
 
 	@Override
@@ -644,6 +645,12 @@ public class AdminDAOImpl implements AdminDAO {
 	public int updateStudentInfo(HumanVO vo) {
 		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
 		return dao.updateStudentInfo(vo);
+	}
+
+	@Override
+	public ArrayList<String> getProfessorListByMajor(String m_code) {
+		AdminDAO dao = sqlSession.getMapper(AdminDAO.class);
+		return dao.getProfessorListByMajor(m_code);
 	}
 	
 }

@@ -42,14 +42,9 @@
 							<td>
 								<select name="m_code" class="form-control" id="select1" onChange="chnQnaType(this.value)" >
 									<option selected disabled value="0">전공을 선택하세요</option>
-								    <option value="CO">컴퓨터공학과[CO]</option>
-									<option value="BE">뷰티미용과[BE]</option>
-									<option value="CN">건축학과[CN]</option>
-									<option value="EN">영어영문학과[EN]</option>
-									<option value="FD">패션디자인학과[FD]</option>
-									<option value="KO">국어국문학과[KO]</option>
-									<option value="JA">일어일문학과[JA]</option>
-									<option value="FR">불어불문학과[FR]</option>
+									<c:forEach var = "major" items = "${professorListByMajor}" >
+										<option value="${major.m_code}">${major.m_name}[${major.m_code}]</option>
+									</c:forEach>
 								</select>  
 							</td>
 							<td>학년</td>

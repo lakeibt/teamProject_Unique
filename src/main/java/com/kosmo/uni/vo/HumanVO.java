@@ -24,6 +24,7 @@ public class HumanVO {
 	private String depart;
 	private String rank;	
 	private String depart_name;
+	private String uuid;
 	
 	// 교수
 	private String position;
@@ -211,8 +212,11 @@ public class HumanVO {
 	public void setBank(String bank) {
 		this.bank = bank;
 	}
-	
-	
-	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	
 }

@@ -75,6 +75,8 @@ public class AdminController {
 	public String coursenext(HttpServletRequest req, Model model) {
 		logger.info("degree/coursenext");
 		
+		adminService.professorList(model);
+		
 		return "admin/degree/coursenext";
 	}
 	

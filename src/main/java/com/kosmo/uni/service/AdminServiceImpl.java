@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.kosmo.uni.vo.AdminVO;
 import com.kosmo.uni.vo.CourseVO;
 import com.kosmo.uni.vo.DepartVO;
 import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.MajorProfessorVO;
 import com.kosmo.uni.vo.MajorVO;
 import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.PayslipVO;
@@ -939,9 +941,13 @@ public class AdminServiceImpl implements AdminService {
 		String saveDir_pro = req.getRealPath("/resources/img/profile_photo/professor/");
 		String saveDir_stu = req.getRealPath("/resources/img/profile_photo/student/");
 		
-		String realDir_adm = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\admin\\";
-		String realDir_pro = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\professor\\";
-		String realDir_stu = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\student\\";
+		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\";
+		
+		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
+		
+		String realDir_adm = realDir + realDir_detail + "admin\\";
+		String realDir_pro = realDir + realDir_detail + "professor\\";
+		String realDir_stu = realDir + realDir_detail + "student\\";
 		
 		try {
 			FileInputStream fis = null;
@@ -1029,6 +1035,29 @@ public class AdminServiceImpl implements AdminService {
 				vo.setCarnum(carnum);
 				vo.setBank(bank);
 				
+				System.out.println(vo.getId());
+				System.out.println(vo.getPwd());
+				System.out.println(vo.getPhoto());
+				System.out.println(vo.getName());
+				System.out.println(vo.getEng_name());
+				System.out.println(vo.getJumin1());
+				System.out.println(vo.getJumin2());
+				System.out.println(vo.getGender());
+				System.out.println(vo.getFrgn());
+				System.out.println(vo.getNation());
+				System.out.println(vo.getTel());
+				System.out.println(vo.getEmail());
+				System.out.println(vo.getAddress());
+				System.out.println(vo.getDepart());
+				System.out.println(vo.getRank());
+				System.out.println(vo.getEnterday());
+				System.out.println(vo.getAccount_number());
+				System.out.println(vo.getCar());
+				System.out.println(vo.getDe_address());
+				System.out.println(vo.getCarnum());
+				System.out.println(vo.getBank());
+				System.out.println(vo.getUuid());
+				
 				insertCnt = dao.insertAdmin(vo);
 				
 			} else if(option.equals("pro")) {
@@ -1058,7 +1087,7 @@ public class AdminServiceImpl implements AdminService {
 				vo.setCarnum(carnum);
 				vo.setBank(bank);
 				
-				insertCnt = dao.insertProfesser(vo);
+				insertCnt = dao.insertProfessor(vo);
 				
 			} else {
 				// r_code = 1;
@@ -1088,6 +1117,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void nextAdminId(HttpServletRequest req, Model model) {
 		String nextId = dao.getNextAdminId();
+		System.out.println(nextId);
 		model.addAttribute("nextId", nextId);
 	}
 	@Override
@@ -1425,9 +1455,13 @@ public class AdminServiceImpl implements AdminService {
 		String saveDir_pro = req.getRealPath("/resources/img/profile_photo/professor/");
 		String saveDir_stu = req.getRealPath("/resources/img/profile_photo/student/");
 		
-		String realDir_adm = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\admin\\";
-		String realDir_pro = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\professor\\";
-		String realDir_stu = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\student\\";
+		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\";
+		
+		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
+		
+		String realDir_adm = realDir + realDir_detail + "admin\\";
+		String realDir_pro = realDir + realDir_detail + "professor\\";
+		String realDir_stu = realDir + realDir_detail + "student\\";
 		
 		try {
 			FileInputStream fis = null;
@@ -1565,6 +1599,21 @@ public class AdminServiceImpl implements AdminService {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public void professorList(Model model) {
+		List<MajorVO> map = dao.getMajorList();
+		ArrayList<MajorProfessorVO> vo = new ArrayList<MajorProfessorVO>();
+		
+		for(MajorVO mVo : map) {
+			MajorProfessorVO sVo = new MajorProfessorVO();
+			sVo.setM_code(mVo.getM_code());
+			sVo.setM_name(mVo.getM_name());
+			sVo.setProfessors(dao.getProfessorListByMajor(mVo.getM_code()));
+			vo.add(sVo);
+		}
+		
+		model.addAttribute("professorListByMajor", vo);
 	}
 	
 }
