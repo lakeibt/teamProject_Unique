@@ -2,11 +2,9 @@ package com.kosmo.uni.persistence;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.kosmo.uni.vo.Manager;
-import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -57,5 +55,4 @@ public interface AndroidDAO {
 	
 	//STU정보 수정
 	public int stuinfosave(Map<String, Object> map);
-	
 }

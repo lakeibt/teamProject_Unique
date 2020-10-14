@@ -3,19 +3,16 @@ package com.kosmo.uni.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.vo.Manager;
-import com.kosmo.uni.vo.ParkVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 

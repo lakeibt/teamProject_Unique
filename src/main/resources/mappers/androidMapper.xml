@@ -83,5 +83,4 @@
 		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
 		WHERE id = #{id}
 	</update>
-	
 </mapper>

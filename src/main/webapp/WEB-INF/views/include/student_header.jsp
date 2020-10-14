@@ -9,8 +9,8 @@
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
 function calendar(){
-	var url ="http://192.168.219.119:8081/";
-	var setting = 'height=800, width=800';
+	var url ="http://192.168.219.141:8081/";
+	var setting = 'height=800, width=800';	
 	window.open(url ,'캘린더', setting);
 }
 </script>
