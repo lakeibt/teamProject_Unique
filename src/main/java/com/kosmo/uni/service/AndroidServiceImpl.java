@@ -382,6 +382,9 @@ public class AndroidServiceImpl implements AndroidService {
 		String uuid = req.getParameter("uuid");
 
 		Map<String, String> bio_add = new HashMap<String, String>();
+		
+		System.out.println("id" + id);
+		System.out.println("uuid" + uuid);
 
 		bio_add.put("id", id);
 		bio_add.put("uuid", uuid);
@@ -393,16 +396,24 @@ public class AndroidServiceImpl implements AndroidService {
 
 	@Override
 	public Map<String, Object> bioSignCheck(HttpServletRequest req) {
-		
 		String uuid = req.getParameter("uuid");
 		System.out.println("uuid : " + uuid);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		FingerPrintVO v = andDAO.bio_Sign_check(uuid);
+		FingerPrintVO v = andDAO.bioSignCheck(uuid);
 		
-		map.put("id", v.getId());
-		map.put("pwd", v.getPwd());
-		map.put("uuid", v.getUuid());
+		try {
+			if(v.getId()==null && v.getPwd()==null) {
+				map.put("id", null);
+				map.put("pwd",null);
+				map.put("uuid",null);
+			} else {
+				map.put("id", v.getId());
+				map.put("pwd", v.getPwd());
+				map.put("uuid", v.getUuid());
+			}	
+		} catch (NullPointerException e) {
+		}
 		
 		return map;
 	}

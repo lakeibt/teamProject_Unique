@@ -57,7 +57,7 @@ public interface AndroidDAO {
 	public int bio_add(Map<String, String> map);
 	
 	//지문 로그인 확인
-	public FingerPrintVO bio_Sign_check(String uuid);
+	public FingerPrintVO bioSignCheck(String uuid);
 	
 	//ADM정보 조회
 	public Manager getManinfo(String id);

@@ -124,10 +124,11 @@ public class AndroidDAOImpl implements AndroidDAO{
 	}
 
 	@Override
-	public FingerPrintVO bio_Sign_check(String uuid) {
+	public FingerPrintVO bioSignCheck(String uuid) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
-		return dao.bio_Sign_check(uuid);
+		return dao.bioSignCheck(uuid);
 	}
+	
 	public Manager getManinfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getManinfo(id);
