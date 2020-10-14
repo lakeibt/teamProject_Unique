@@ -6,6 +6,22 @@
 <html>
 
 <head>
+<script type = "text/javascript">
+	function scoreChk() {
+		var attend = Number(document.getElementsByName('attend')[0].value);
+		var midterm = Number(document.getElementsByName('midterm')[0].value);
+		var finals = Number(document.getElementsByName('finals')[0].value);
+		var assign_report = Number(document.getElementsByName('assign_report')[0].value);
+		var assign_team = Number(document.getElementsByName('assign_team')[0].value);
+		
+		if(attend + midterm + finals + assign_report + assign_team == 100) {
+			return true;
+		} else {
+			alert("학점 기준 항목에서 점수 총합이 100이 되게 설정해 주십시오");
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 <div class="col-md-12">
@@ -21,7 +37,7 @@
 		<div class="col-md-12" id="course_plan">
 			<div class="card" style="padding: 40px;">
 				<div class="course_plan">
-					<form action="${professor}coursePlan_add?${_csrf.parameterName}=${_csrf.token}" method="post">
+					<form action="${professor}coursePlan_add?${_csrf.parameterName}=${_csrf.token}" method="post" onsubmit = 'return scoreChk()'>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					<input type="hidden" name="co_code" value="${co_code}">
 					<input type="hidden" name="id" value="${sessionScope.memId}">
@@ -31,7 +47,7 @@
 							</tr>
 							<tr>
 								<td colspan="8" style="display: table-cell; vertical-align: middle;">
-									<textarea name="subject" rows="10" style="width: 100%;"></textarea>
+									<textarea name="subject" rows="10" style="width: 100%;" required></textarea>
 								</td>
 							</tr>
 							<tr>
@@ -40,23 +56,23 @@
 									<table class="table">
 										<tr>
 											<td>출석</td>
-											<td><input type="text" name="attend" placeholder="ex) 10"></td>
+											<td><input type="text" name="attend" placeholder="ex) 10" required></td>
 										</tr>
 										<tr>
 											<td>시험(중간)</td>
-											<td><input type="text" name="midterm"  placeholder="ex) 30"></td>
+											<td><input type="text" name="midterm"  placeholder="ex) 30" required></td>
 										</tr>
 										<tr>
 											<td>시험(기말)</td>
-											<td><input type="text" name="finals"  placeholder="ex) 30"></td>
+											<td><input type="text" name="finals"  placeholder="ex) 30" required></td>
 										</tr>
 										<tr>
 											<td>과제(개별 레포트/프레젠테이션)</td>
-											<td><input type="text" name="assign_report"  placeholder="ex) 15"></td>
+											<td><input type="text" name="assign_report"  placeholder="ex) 15" required></td>
 										</tr>
 										<tr>
 											<td>과제(팀 프로젝트)</td>
-											<td><input type="text" name="assign_team"  placeholder="ex) 15"></td>
+											<td><input type="text" name="assign_team"  placeholder="ex) 15" required></td>
 										</tr>
 									</table>
 								</th>
@@ -71,7 +87,7 @@
 									1주차
 								</td>
 								<td>
-									<input type="text" name="week_1" placeholder="강의내용">
+									<input type="text" name="week_1" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -79,7 +95,7 @@
 									2주차
 								</td>
 								<td>
-									<input type="text" name="week_2" placeholder="강의내용">
+									<input type="text" name="week_2" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -87,7 +103,7 @@
 									3주차
 								</td>
 								<td>
-									<input type="text" name="week_3" placeholder="강의내용">
+									<input type="text" name="week_3" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -95,7 +111,7 @@
 									4주차
 								</td>
 								<td>
-									<input type="text" name="week_4" placeholder="강의내용">
+									<input type="text" name="week_4" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -103,7 +119,7 @@
 									5주차
 								</td>
 								<td>
-									<input type="text" name="week_5" placeholder="강의내용">
+									<input type="text" name="week_5" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -111,7 +127,7 @@
 									6주차
 								</td>
 								<td>
-									<input type="text" name="week_6" placeholder="강의내용">
+									<input type="text" name="week_6" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -119,7 +135,7 @@
 									7주차
 								</td>
 								<td>
-									<input type="text" name="week_7" placeholder="강의내용">
+									<input type="text" name="week_7" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -127,7 +143,7 @@
 									8주차
 								</td>
 								<td>
-									<input type="text" name="week_8" placeholder="강의내용">
+									<input type="text" name="week_8" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -135,7 +151,7 @@
 									9주차
 								</td>
 								<td>
-									<input type="text" name="week_9" placeholder="강의내용">
+									<input type="text" name="week_9" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -143,7 +159,7 @@
 									10주차
 								</td>
 								<td>
-									<input type="text" name="week_10" placeholder="강의내용">
+									<input type="text" name="week_10" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -151,7 +167,7 @@
 									11주차
 								</td>
 								<td>
-									<input type="text" name="week_11" placeholder="강의내용">
+									<input type="text" name="week_11" placeholder="강의내용" required>
 								</td>
 							</tr>
 							<tr class="plan_tr">
@@ -159,7 +175,7 @@
 									12주차
 								</td>
 								<td>
-									<input type="text" name="week_12" placeholder="강의내용">
+									<input type="text" name="week_12" placeholder="강의내용" required>
 								</td>
 							</tr>
 						</table>

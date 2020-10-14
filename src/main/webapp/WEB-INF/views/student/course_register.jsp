@@ -65,7 +65,7 @@ function deleteMyCourse(code) {
 												<th style="width:5%;">학년</th>
 												<th style="width:15%;">교과목명</th>
 												<th style="width:10%;">담당교수</th>
-												<th style="width:15%;">강의시간 및 강의실</th>
+												<th style="width:15%;">강의시간</th>
 												<th style="width:5%;">학점</th>
 												<th style="width:5%;">수용인원</th>
 												<th style="width:5%;">신청인원</th>
@@ -74,7 +74,7 @@ function deleteMyCourse(code) {
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach var="dto" items="${dtos }" varStatus="status">
+											<c:forEach var="dto" items="${dtos}" varStatus="status">
 											<tr>
 												<td style="width:5%;">${dto.P_CODE }</td>
 												<td style="width:5%;">${dto.SCHOOL_YEAR }</td>
@@ -86,10 +86,19 @@ function deleteMyCourse(code) {
 												<td style="width:5%;">${dto.CO_NUM }</td>
 												<td style="width:5%;"><button class="btn btn-primary pull-left" onclick="openSyllabus('${dto.CO_CODE}');">조회</button></td>
 												<td style="width:5%;">
-													<button id="${status.index }" 
+												<c:choose>
+													<c:when test = "${dto.LIMIT_NUM > dto.CO_NUM}">
+														<button id="${status.index }" 
 															class="btn btn-primary pull-left" 
 															onclick="addMyCourse('${dto.CO_CODE}', '${dto.CO_DAY }', '${dto.LE_CODE }', '${dto.GRADE_1 }');" 
 															style="background-color:orange;">신청</button>
+													</c:when>
+													<c:otherwise>
+														<button id="unable + ${status.index}" 
+															class="btn btn-primary pull-left" 
+															style="background-color:red;" disabled>초과</button>
+													</c:otherwise>
+												</c:choose>
 												</td>
 											</tr>
 											</c:forEach>

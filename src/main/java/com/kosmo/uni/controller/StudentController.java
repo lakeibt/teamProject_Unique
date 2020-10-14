@@ -188,7 +188,7 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		
 		stuService.messageSimple(req, model);
 		return "student/messageList_simple";
-	}
+	} 
 	
 	// 쪽지 전체 가져오기
 	@RequestMapping("/student/messageList_form")

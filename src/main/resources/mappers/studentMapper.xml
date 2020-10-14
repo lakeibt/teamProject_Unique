@@ -51,6 +51,8 @@
   		  FROM S_STUDENT s, A_COURSE c, P_PROFESSOR p
 		 WHERE c.p_name=p.name AND s.m_code=c.m_code
 		   AND C.CO_YEAR=2020 AND C.CO_SEMESTER=2
+		   AND c.plan_chk = 1
+		 ORDER BY CO_NAME DESC
 	</select>
 	
 	<select id="getRegisterCourse" parameterType="String" resultType="java.util.Map">
@@ -180,7 +182,7 @@
 	</select>
 	
 	<select id="getMessageCnt" parameterType="String" resultType="int">
-		SELECT COUNT(*) as cnt FROM p_message where sender_id=#{id}
+		SELECT COUNT(*) as cnt FROM p_message where receiver_id=#{id}
 	</select>
 	
 	<select id="getMessageCnt_send" parameterType="String" resultType="int">
@@ -220,7 +222,7 @@
 	<select id="getMessageList_notRead" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.MessageVO">
 		<![CDATA[
 		SELECT * FROM (SELECT num, title, content, receiver_id, receiver, sender_id, sender, readchk, reg_date, rowNum rNum 
-		  FROM (SELECT * FROM p_message where sender_id=#{id} AND readchk=0)) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT * FROM p_message where receiver_id=#{id} AND readchk=0)) WHERE rNum >= #{start} AND rNum <= #{end}
 		]]>
 	</select>
 	
