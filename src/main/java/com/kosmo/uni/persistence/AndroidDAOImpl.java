@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.uni.vo.FingerPrintVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
@@ -113,6 +114,23 @@ public class AndroidDAOImpl implements AndroidDAO{
 	}
 
 	@Override
+	public int bio_check(Map<String, String> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.bio_check(map);
+	}
+
+	@Override
+	public int bio_add(Map<String, String> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.bio_add(map);
+	}
+
+	@Override
+	public FingerPrintVO bioSignCheck(String uuid) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.bioSignCheck(uuid);
+	}
+	
 	public Manager getManinfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getManinfo(id);

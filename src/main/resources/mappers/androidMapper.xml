@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
+
 <mapper namespace="com.kosmo.uni.persistence.AndroidDAO">
+
 	<select id="confirmIdPwdStu" resultType="java.util.Map" parameterType = "String">
 		SELECT * FROM S_STUDENT WHERE id=#{id}
 	</select>
@@ -70,6 +71,20 @@
 		SELECT a.tagintime tagintime , a.tagouttime tagouttime 
 		  FROM A_NFC a, A_ADMIN b
 		 WHERE a.pnum = b.tel AND id = #{id}
+	</select>
+	
+	<select id="bio_check" parameterType="java.util.Map" resultType="int">
+	SELECT COUNT (*) as cnt 
+ 	FROM A_Admin 
+	WHERE id=#{id} AND uuid=#{uuid, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="bio_add" parameterType="java.util.Map">
+		UPDATE A_Admin SET uuid=#{uuid, jdbcType=VARCHAR} WHERE id=#{id, jdbcType=VARCHAR}
+	</update>
+	
+	<select id="bioSignCheck" parameterType="String" resultType="com.kosmo.uni.vo.FingerPrintVO">
+		SELECT ID,PWD,UUID FROM a_admin WHERE uuid = #{uuid}
 	</select>
 	
 	<select id="getManinfo" resultType="com.kosmo.uni.vo.Manager">

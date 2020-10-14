@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.kosmo.uni.vo.FingerPrintVO;
 import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
@@ -53,6 +54,15 @@ public interface AndroidDAO {
 	
 	//근퇴관리 리스트 출력
 	public ArrayList<nfcVO> workchecklist(String id);
+	
+	//uuid 유무 확인
+	public int bio_check(Map<String, String> map);
+	
+	//uuid 다를 시
+	public int bio_add(Map<String, String> map);
+	
+	//지문 로그인 확인
+	public FingerPrintVO bioSignCheck(String uuid);
 	
 	//ADM정보 조회
 	public Manager getManinfo(String id);

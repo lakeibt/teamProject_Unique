@@ -627,8 +627,15 @@ public class ProfessorServiceImpl implements ProfessorService {
 		String saveDir_file = req.getRealPath("/resources/video/");
 		String saveDir_file_img = req.getRealPath("/resources/img/lecture/");
 		
-		String realDir_file = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\video\\";
-		String realDir_file_img = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\lecture\\";
+		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\";
+		
+		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
+		
+		String realDir_file = realDir + realDir_detail + "video\\";
+		String realDir_file_img = realDir + realDir_detail + "img\\lecture\\";
+		
+		System.out.println(realDir_file);
+		System.out.println(realDir_file_img);
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
@@ -640,7 +647,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 			fis = new FileInputStream(saveDir_file + file.getOriginalFilename());
 			fos = new FileOutputStream(realDir_file + file.getOriginalFilename());
 			
-			file_img.transferTo(new File(saveDir_file_img + file.getOriginalFilename()));
+			file_img.transferTo(new File(saveDir_file_img + file_img.getOriginalFilename()));
 			fis_img = new FileInputStream(saveDir_file_img + file_img.getOriginalFilename());
 			fos_img = new FileOutputStream(realDir_file_img + file_img.getOriginalFilename());
 		
@@ -707,8 +714,12 @@ public class ProfessorServiceImpl implements ProfessorService {
 		String saveDir_file = req.getRealPath("/resources/video/");
 		String saveDir_file_img = req.getRealPath("/resources/img/lecture/");
 		
-		String realDir_file = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\video\\";
-		String realDir_file_img = "D:\\DEV\\git\\team\\teamProject_Unique\\src\\main\\webapp\\resources\\img\\lecture\\";
+		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\";
+		
+		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
+		
+		String realDir_file = realDir + realDir_detail + "video\\";
+		String realDir_file_img = realDir + realDir_detail + "img\\lecture\\";
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;

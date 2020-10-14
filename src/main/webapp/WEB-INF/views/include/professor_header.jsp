@@ -7,6 +7,13 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <link href="${resources}css/professor_header_style.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script type="text/javascript">
+function calendar(){
+	var url ="http://192.168.219.146:8081/";
+	var setting = 'height=800, width=800';
+	window.open(url ,'캘린더', setting);
+}
+</script>
 <script>
 //메시지 카운트값 가져오기
 $(document).ready(function() {
@@ -305,6 +312,11 @@ function message_reply(sender_id, sender_name){
 			</button>
 			<div class="collapse navbar-collapse justify-content-end">
 				<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+						<a class="nav-link" onclick="calendar();" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false"> 
+						<i class="material-icons" style="cursor:hand;">date_range</i>
+						</a>
+					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="material-icons">markunread</i> 

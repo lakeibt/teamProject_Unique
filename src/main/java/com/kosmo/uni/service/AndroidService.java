@@ -25,6 +25,14 @@ public interface AndroidService {
 	//근퇴 관리 리스트 출력
 	public ArrayList<nfcVO> workcheck(HttpServletRequest req);
 	
+	//지문 등록 키값 확인
+	public Map<String, String> bioCheck(HttpServletRequest req);
+	
+	//지문 등록 키값 저장
+	public Map<String, String> bioAdd(HttpServletRequest req);
+
+	//지문로그인 가능 여부 확인
+	public Map<String, Object> bioSignCheck(HttpServletRequest req);
 	//ADM 정보 보기 
 	public Map<String, Object> maninfo(HttpServletRequest req);
 	
