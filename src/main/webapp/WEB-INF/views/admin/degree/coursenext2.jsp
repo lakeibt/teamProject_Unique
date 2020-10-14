@@ -42,18 +42,9 @@
 							<td width="15%">
 								<select name="m_code" class="form-control" id="select1" onChange="chnQnaType(this.value)" >
 									<option selected disabled value="0">전공을 선택하세요</option>
-								    <option value="CO" <c:if test="${vo.m_code eq 'CO'}">selected</c:if>>컴퓨터공학과[CO]</option>
-									<option value="BE" <c:if test="${vo.m_code eq 'BE'}">selected</c:if>>뷰티미용과[BE]</option>
-									<option value="CN" <c:if test="${vo.m_code eq 'CN'}">selected</c:if>>건축학과[CN]</option>
-									<option value="EN" <c:if test="${vo.m_code eq 'EN'}">selected</c:if>>영어영문학과[EN]</option>
-									<option value="FD" <c:if test="${vo.m_code eq 'FD'}">selected</c:if>>패션디자인학과[FD]</option>
-									<option value="KO" <c:if test="${vo.m_code eq 'KO'}">selected</c:if>>국어국문학과[KO]</option>
-									<option value="JA" <c:if test="${vo.m_code eq 'JA'}">selected</c:if>>일어일문학과[JA]</option>
-									<option value="FR" <c:if test="${vo.m_code eq 'FR'}">selected</c:if>>불어불문학과[FR]</option>
-									<option value="MA" <c:if test="${vo.m_code eq 'MA'}">selected</c:if>>기계공학과[MA]</option>
-									<option value="BI" <c:if test="${vo.m_code eq 'BI'}">selected</c:if>>생명공학과[BI]</option>
-									<option value="AD" <c:if test="${vo.m_code eq 'AD'}">selected</c:if>>시각디자인학과[AD]</option>
-									<option value="SC" <c:if test="${vo.m_code eq 'SC'}">selected</c:if>>조소학과[SC]</option>
+									<c:forEach var = "major" items = "${professorListByMajor}" >
+								    	<option value="${major.m_code}" <c:if test="${vo.m_code eq major.m_code}">selected</c:if>>${major.m_name}[${major.m_code}]</option>
+									</c:forEach>	
 								</select>  
 							</td>
 							<td width="7%">학년</td>
@@ -119,6 +110,7 @@
 							<td>담당교수</td>
 							<td>
 								<select id="schQnaType" class="form-control" name="p_name">
+									<option value="${vo.p_name}" selected>${vo.p_name}</option>
 								</select>
 							</td>
 						</tr>

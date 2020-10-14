@@ -66,6 +66,7 @@ public class AdminController {
 		logger.info("degree/course");
 		
 		adminService.course_list(req, model);
+		adminService.professorList(model);
 		
 		return "admin/degree/course";
 	}
@@ -88,6 +89,8 @@ public class AdminController {
 		adminService.classmod(req, model);
 		String co_code = req.getParameter("co_code");
 		model.addAttribute("co_code",co_code);
+
+		adminService.professorList(model);
 		
 		return "admin/degree/coursenext2";
 	}

@@ -195,7 +195,7 @@
 		INSERT INTO A_COURSE
 		VALUES (#{m_code} || CASE WHEN #{co_year} > 2000 THEN TO_CHAR(MOD(#{co_year},2000)) || LPAD(COU_SEQ.nextval, 4, '0') ELSE TO_CHAR(MOD(#{co_year},1900)) || LPAD(COU_SEQ.nextval, 4, '0') END,#{co_name},#{m_code},
 		#{p_name},#{p_code},#{limit_num},#{co_num},#{grade},
-		#{co_year},#{co_semester},#{co_day},#{le_code},#{school_year})
+		#{co_year},#{co_semester},#{co_day},#{le_code},#{school_year}, 0, 0)
 	</insert>
 	
 	<select id="classInfo" resultType="com.kosmo.uni.vo.CourseVO">
