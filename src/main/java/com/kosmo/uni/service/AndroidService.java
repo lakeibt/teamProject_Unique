@@ -57,6 +57,12 @@ public interface AndroidService {
 	//당근나라 리스트 가져오기
 	public ArrayList<ShopVO> getShopList() throws InterruptedException, ExecutionException;
 	
+	//당근나라 리스트 가져오기2
+	public ArrayList<ShopVO> getShopListnext(HttpServletRequest req) throws InterruptedException, ExecutionException;
+	
+	//당근나라 판매완료
+	public Map<String, Object> getShopListclear(HttpServletRequest req);
+	
 	//STU 강의 확인
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req);
 	public List<Map<String, Object>> StuScore(HttpServletRequest req);

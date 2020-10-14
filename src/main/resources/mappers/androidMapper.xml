@@ -154,6 +154,15 @@
 	</select>
 	
 	<select id="getshoplist" resultType="com.kosmo.uni.vo.ShopVO">
-		SELECT * FROM S_SHOP
+		SELECT * FROM S_SHOP WHERE SALES = 0 ORDER BY num DESC
 	</select>
+	
+	<select id="getshoplistnext" resultType="com.kosmo.uni.vo.ShopVO">
+		SELECT * FROM S_SHOP WHERE num = #{num}
+	</select>
+	
+	<update id="getshoplistclear" parameterType="String">
+		UPDATE S_SHOP SET SALES = 1 WHERE num = #{num}
+	</update>
+	
 </mapper>
