@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>급여대장</title>
+<title>급여명세표</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
 <script type="text/javascript">
@@ -43,12 +43,13 @@ function saveCSV(fileName){
     downLink.download = fileName; // 인자로 받은 다운로드 파일명을 지정
 }
 
+
 </script>
 
 <body>
 
 
-<div class="row">
+<div class="row"> 
 	<div class="col-md-12">
 		<div class="x_panel"  style="height:600px;">
 				<div class="x_title">
@@ -90,9 +91,7 @@ function saveCSV(fileName){
 							<c:if test="${vo.salary_division == 1}">
 								<tr style="color: #73879C;">
 									<td style="width: 10%">이메일</td>
-									<td style="width: 10%"><input
-										class="form-control input-sm" type="text"
-										value="${vo.email}" readOnly></td>
+									<td style="width: 10%">${vo.email}</td>
 									<td style="width: 10%">지급총액</td>
 									<fmt:formatNumber var="totalpay" type="number" maxFractionDigits="3" value="${vo.salary+vo.meal+vo.contract_vehicle}"/>
 									<td style="width: 10%"><input

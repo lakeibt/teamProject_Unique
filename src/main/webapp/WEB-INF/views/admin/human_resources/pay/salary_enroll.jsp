@@ -8,8 +8,8 @@
 <body>
 	<c:if test="${inputNum == 1}">
 		<script type="text/javascript">
-				alert("급여 탭이 등록 되었습니다.");
-				window.location='salary_list';
+			alert("급여대장이 등록되었습니다.");
+			window.location='salary_list';
 		</script>
 	</c:if>
 		<c:if test="${inputNum != 1}">

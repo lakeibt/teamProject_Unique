@@ -10,7 +10,6 @@
 <body>
 	<c:if test="${insertCnt == 1}">
 		<script type="text/javascript">
-				alert("급여가 확정 되었습니다.");
 				window.location='salary_list';
 		</script>
 	</c:if>

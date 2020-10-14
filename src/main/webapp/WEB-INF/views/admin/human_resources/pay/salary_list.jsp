@@ -174,9 +174,7 @@ function selectSalaryConfirm() {
 													<th class="column-title">급여계산</th>
 													<th class="column-title">인원수</th>
 													<th class="column-title">급여대장</th>
-													<th class="column-title">명세서</th>
 													<th class="column-title">지급총액</th>
-
 													<th class="bulk-actions" colspan="7"><a class="antoo"
 														style="color: #fff; font-weight: 500;">Bulk Actions (
 															<span class="action-cnt"> </span> ) <i
@@ -213,7 +211,7 @@ function selectSalaryConfirm() {
 															<td><fmt:formatDate type="both" pattern="yyyy-MM-dd"
 																	value="${atos.salary_inday}" /></td>
 															<c:if test="${atos.salary_confirm==1}">
-																<td><a class="btn btn-app"
+																<td><a class="btn"
 																	style="height: 30px; padding: 5px;" id="cntAndTotal">급여계산</a>
 															</c:if>
 															<c:if test="${atos.salary_confirm!=1}">
@@ -239,9 +237,6 @@ function selectSalaryConfirm() {
 																	style="height: 30px; padding: 5px;" id="delete">삭제</a></td>
 															</c:if>
 															<td>
-																<a class="btn btn-app"
-																style="height: 30px; padding: 5px;">email</a></td>
-															<td>
 																<div id="total_all">
 																	<fmt:formatNumber type="number" maxFractionDigits="3"
 																		value="${atos.salary_total}" /> 원
@@ -265,9 +260,9 @@ function selectSalaryConfirm() {
 									</div>
 								</div>
 								<!-- 페이지 컨트롤  -->
-								<table style="width: 100%; margin: auto;">
-									<tr style="width: 100%; margin: auto; algin: center">
-										<td colspan="9" algin="center">
+								<table class="table table-striped jambo_table">
+									<tr align="center">
+										<th>
 											<!-- 게시글이 있으면 --> <c:if test="${cnt>0 }">
 												<!-- 처음[◀◀] /이전 블록 [◀] -->
 												<c:if test="${startPage > pageBlock }">
@@ -279,11 +274,11 @@ function selectSalaryConfirm() {
 												<!-- 블록내의 페이지 번호  -->
 												<c:forEach var="i" begin="${startPage}" end="${endPage}">
 													<c:if test="${i ==  currentPage}">
-														<span><b>[${i}]</b></span>
+														<a href="salary_list?pageNum=${i}"><input type="button" value="${i}"></a>
 													</c:if>
 
 													<c:if test="${i !=  currentPage}">
-														<a href="salary_list?pageNum=${i}">[${i}]</a>
+														<a href="salary_list?pageNum=${i}"><input type="button" value="${i}"></a>
 													</c:if>
 												</c:forEach>
 
@@ -295,7 +290,7 @@ function selectSalaryConfirm() {
 												</c:if>
 
 											</c:if>
-										</td>
+										</th>
 									</tr>
 								</table>
 							</div>

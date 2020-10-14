@@ -4,8 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>급여대장</title>
+<title>급여대장 조회</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
+<script src="http://code.jquery.com/jquery-1.12.1.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin.js"></script>
+<script type="text/javascript">
+
+
+</script>
+
 </head>
 <body>
 	<div class="row">
@@ -59,6 +66,7 @@
 							<c:forEach var="stos" items="${stos}">
 							<input type="hidden" id="salaryNum" name="salaryNum" value="${salary_input_num}">
 							<input type="hidden" id="divisionNum" name="divisionNum" value="${atos.payments_division}">
+							<input type="hidden" id="id" name="id" value="${stos.id}">
 								<c:if test="${stos.salary_division==1}">
 									<tr class="even pointer">
 										<td>
@@ -90,6 +98,7 @@
 				</div>
 			</div>
 		</div>
+		<div id="pay_slip"></div>
 	</div>
 	</div>
 </body>
