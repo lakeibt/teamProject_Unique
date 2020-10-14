@@ -90,7 +90,13 @@ public interface AndroidDAO {
 	//교수 강의조회 리스트 출력
 	public ArrayList<InClassHowVO> getclasschecknext(String title);
 	
-	//교수 강의조회 리스트 출력
+	//당근나라 리스트 불러오기
 	public ArrayList<ShopVO> getshoplist();
+	
+	//당근나라 각 정보 불러오기
+	public ArrayList<ShopVO> getshoplistnext(String num);
+	
+	//당근나라 판매완료
+	public int getshoplistclear(String num);
 	
 }

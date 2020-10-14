@@ -674,6 +674,22 @@ public class AndroidServiceImpl implements AndroidService {
 	}
 	
 	@Override
+	public ArrayList<ShopVO> getShopListnext(HttpServletRequest req) throws InterruptedException, ExecutionException {
+		String push = req.getParameter("num");
+		ArrayList<ShopVO> dtos = andDAO.getshoplistnext(push);
+		return dtos;
+	}
+	
+	@Override
+	public Map<String, Object> getShopListclear(HttpServletRequest req) {
+		String push = req.getParameter("num");
+		System.out.println(push);
+		andDAO.getshoplistclear(push);
+		
+		return null;
+	}
+	
+	@Override
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req) {
 		String id = req.getParameter("id");
 		String year_text = req.getParameter("year");

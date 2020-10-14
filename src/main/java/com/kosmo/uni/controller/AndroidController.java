@@ -12,7 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
@@ -209,6 +212,27 @@ public class AndroidController {
 		logger.info("androidShoplist()");
 		
 		ArrayList<ShopVO> out = andService.getShopList();	
+		return out;
+	}
+	
+	//당근나라 정보 불러오기2
+	@ResponseBody
+	@RequestMapping("/android/shoplistnext")
+	public ArrayList<ShopVO> androidShoplistnext(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("androidShoplistnext()");
+		
+		ArrayList<ShopVO> out = andService.getShopListnext(req);	
+		return out;
+	}
+	
+	//당근나라 판매 완료
+	@ResponseBody
+	@RequestMapping("/android/shoplistclear")
+	public Map<String, Object> androidShoplistclear(HttpServletRequest req){
+		logger.info("androidShoplistclear()");
+		
+		Map<String, Object> out = andService.getShopListclear(req);
+		
 		return out;
 	}
 	

@@ -202,4 +202,16 @@ public class AndroidDAOImpl implements AndroidDAO{
 		return dao.getshoplist();
 	}
 
+	@Override
+	public ArrayList<ShopVO> getshoplistnext(String num) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getshoplistnext(num);
+	}
+
+	@Override
+	public int getshoplistclear(String num) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getshoplistclear(num);
+	}
+
 }
