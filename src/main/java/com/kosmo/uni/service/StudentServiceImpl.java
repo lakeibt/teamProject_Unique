@@ -1,9 +1,13 @@
 package com.kosmo.uni.service;
 
+import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,33 +16,44 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import com.kosmo.uni.persistence.StudentDAO;
+import com.kosmo.uni.vo.ConsultVO;
+import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentVO;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-	
 	@Autowired
 	StudentDAO stuDAO;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
+	public static final String COLLECTION_NAME = "teamUnique_Spring";
+	
 	// 학생 정보
 	@Override
 	public void studentinfo(HttpServletRequest req, Model model) {
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("세션 : " + (String) req.getSession().getAttribute("memId"));
-		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
-		int check = stuDAO.studentIdCheck(id);
-		//
+		
+		int check = stuDAO.studentIdCheck(id); // users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
+		List<Integer> courseYear = stuDAO.getCourseYear(id);
 		int selectCnt = 0;
 		StudentVO vo = null;
 		if (check == 1) {
 			vo = stuDAO.getStudentInfo(id);
 			selectCnt = 1;
 		}
+		model.addAttribute("courseYear", courseYear);
 		model.addAttribute("vo", vo);
 		model.addAttribute("selectCnt", selectCnt);
 	}
@@ -49,7 +64,6 @@ public class StudentServiceImpl implements StudentService{
 		vo.setId((String) req.getSession().getAttribute("memId"));
 		String tel = req.getParameter("student_tel");
 		vo.setTel(tel);
-		// email
 		String email = req.getParameter("student_email");
 		String address = req.getParameter("address");
 		String De_address = req.getParameter("de_address");
@@ -57,9 +71,8 @@ public class StudentServiceImpl implements StudentService{
 		vo.setAddress(address);
 		vo.setDe_address(De_address);
 		int updateCnt = stuDAO.updateStudentInfo(vo);
-		// request나 ssesion으로 처리 결과를 저장
+		
 		model.addAttribute("updateCnt", updateCnt);
-		System.out.println("updateCnt: " + updateCnt);
 	}
 
 	// 강의 목록
@@ -79,38 +92,34 @@ public class StudentServiceImpl implements StudentService{
 		int endPage =0;    // 마지막  페이지
 		
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("id :" + id );
 		cnt = stuDAO.getCourseCnt();
-		System.out.println("cnt => " + cnt);
 		pageNum=req.getParameter("pageNum");
 		
-		if(pageNum == null) pageNum ="1";  // 첫페이지를 1페이지로 지정
-			currentPage = Integer.parseInt(pageNum);  // 현재페이지 : 1
+		if(pageNum == null) pageNum ="1";  
 		
+		currentPage = Integer.parseInt(pageNum);
 		pageCount = (cnt/pageSize) + (cnt%pageSize > 0 ? 1 : 0); // 페이지 갯수 + 나머지 있으면 1 없으면 0
-		
 		start = (currentPage - 1) * pageSize +1;
 		end = start +pageSize -1;
 		number = cnt -(currentPage - 1) *pageSize;
+		
 		if(cnt > 0) {
 			Map<String, Object> map = new HashMap<>();
 			map.put("start", start);
 			map.put("end", end);
 			map.put("id",id);
-			// 5-2단계. 게시글 목록 조회
+			
 			List<Map<String, Object>> dtos = stuDAO.getCourseList(map);
 			model.addAttribute("dtos", dtos);
-			// (1 / 3) *3 + 1;
+
 			startPage = (currentPage / pageBlock) * pageBlock + 1;
-			if (currentPage % pageBlock == 0)
-				startPage -= pageBlock;
-			// 마지막페이지
+			if (currentPage % pageBlock == 0) startPage -= pageBlock;
 			endPage = startPage + pageBlock - 1;
-			if (endPage > pageCount)
-				endPage = pageCount;
+			if (endPage > pageCount) endPage = pageCount;
 			model.addAttribute("cnt", cnt); // 글갯수
 			model.addAttribute("number", number); // 출력용 글번호
 			model.addAttribute("pageNum", pageNum); // 페이지 번호
+			
 			if (cnt > 0) {
 				model.addAttribute("startPage", startPage); // 시작페이지
 				model.addAttribute("endPage", endPage); // 마지막페이지
@@ -122,9 +131,78 @@ public class StudentServiceImpl implements StudentService{
 	}
 	
 	@Override
+	public void addMyCourse(HttpServletRequest req, Model model) {
+		String[] fullDay = {"월", "화", "수", "목", "금"};
+		int[] fullTime = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		
+		String id = (String) req.getSession().getAttribute("memId");
+		String code = req.getParameter("code");
+		String day = req.getParameter("day");
+		int time = Integer.parseInt(req.getParameter("time"));
+		int grade = Integer.parseInt(req.getParameter("grade"));
+		
+		// 학생 강의 목록 - timetable에 학생이 있는지부터 select ==> timetable 형태로 값을 insert 해줘야 함
+		int cnt = stuDAO.selectTimetable(id);
+		
+		// 없으면 timetable 형태로 값 insert 먼저 >> 그 다음 update
+		if(cnt == 0) {
+			for(int i = 0; i < 5; i++) {
+				for(int j = 0; j < 9; j++) {
+					Map<String, Object> map = new HashMap<>();
+					map.put("id", id);
+					map.put("day", fullDay[i]);
+					map.put("time", fullTime[j]);
+					stuDAO.insertTimetable(map); //학생 수강중인 강의 테이블 만들기
+				}
+			}
+			
+			for(int i = 0; i < grade; i++) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("id", id);
+				map.put("day", day);
+				map.put("time", time+i);
+				map.put("code", code);
+				stuDAO.updateTimetable(map);
+			}
+		// 있으면 timetable에 값 update
+		} else {
+			for(int i = 0; i < grade; i++) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("id", id);
+				map.put("day", day);
+				map.put("time", time+i);
+				map.put("code", code);
+				stuDAO.updateTimetable(map);
+			}
+		}
+		stuDAO.plueCourseNumber(code);// 학생이 추가할 경우 원래 강의 테이블의 신청 인원 +1을 한다.
+	}
+
+	@Override
+	public void deleteMyCourse(HttpServletRequest req, Model model) {
+		String id = (String) req.getSession().getAttribute("memId");
+		String code = req.getParameter("code");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("code", code);
+		stuDAO.deleteTimetable(map);
+		
+		stuDAO.minusCourseNumber(code); // 학생이 취소할 경우 원래 강의 테이블의 신청 인원 -1을 한다.
+	}
+	
+	@Override
+	public void myRegisterCourse(HttpServletRequest req, Model model) {
+		String id = (String) req.getSession().getAttribute("memId");
+
+		List<Map<String, Object>> list = stuDAO.getRegisterCourse(id);
+		model.addAttribute("study", list);
+		model.addAttribute("listCnt", list.size());
+	}
+	
+	@Override
 	public void course_syllabus(HttpServletRequest req, Model model) {
 		String code = req.getParameter("code");
-		System.out.println(code);
 		
 		Map<String, Object> syllabus_info = stuDAO.getCourseSyllabusInfo(code); // 강의계획서 정보(강의코드, 담당교수 등/학점 기준표)
 		Map<String, Object> syllabus_list = stuDAO.getCourseSyllabusList(code); // 강의계획서 주차 리스트(1주차, 2주차, .., 12주차)
@@ -150,9 +228,7 @@ public class StudentServiceImpl implements StudentService{
 		int endPage =0;    // 마지막  페이지
 		
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("id :" + id);
 		cnt = stuDAO.getGradeCnt(id);
-		System.out.println("cnt => " + cnt);
 		int year = Integer.parseInt(req.getParameter("year"));
 		int semester = Integer.parseInt(req.getParameter("semester"));
 		pageNum=req.getParameter("pageNum");
@@ -170,20 +246,18 @@ public class StudentServiceImpl implements StudentService{
 			map.put("id", id);
 			map.put("year", year);
 			map.put("semester", semester);
-			// 5-2단계. 게시글 목록 조회
+
 			List<Map<String, Object>> dtos = stuDAO.getGradeList(map);
 			model.addAttribute("score", dtos);
-			// (1 / 3) *3 + 1;
+
 			startPage = (currentPage / pageBlock) * pageBlock + 1;
-			if (currentPage % pageBlock == 0)
-				startPage -= pageBlock;
-			// 마지막페이지
+			if (currentPage % pageBlock == 0) startPage -= pageBlock;
 			endPage = startPage + pageBlock - 1;
-			if (endPage > pageCount)
-				endPage = pageCount;
+			if (endPage > pageCount) endPage = pageCount;
 			model.addAttribute("cnt", cnt); // 글갯수
 			model.addAttribute("number", number); // 출력용 글번호
 			model.addAttribute("pageNum", pageNum); // 페이지 번호
+			
 			if (cnt > 0) {
 				model.addAttribute("startPage", startPage); // 시작페이지
 				model.addAttribute("endPage", endPage); // 마지막페이지
@@ -199,7 +273,6 @@ public class StudentServiceImpl implements StudentService{
 	public void studentList(HttpServletRequest req, Model model) {
 		int cnt=0;
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("id :" + id);
 		int year = Integer.parseInt(req.getParameter("year"));
 		int semester = Integer.parseInt(req.getParameter("semester"));
 		
@@ -209,7 +282,6 @@ public class StudentServiceImpl implements StudentService{
 		map.put("semester", semester);
 		
 		cnt = stuDAO.getStudyCnt(id);
-		System.out.println("cnt => " + cnt);
 		List<Map<String, Object>> dtos = stuDAO.getStudyList(map);
 		model.addAttribute("study", dtos);
 		model.addAttribute("cnt", cnt);
@@ -220,7 +292,6 @@ public class StudentServiceImpl implements StudentService{
 	public void studentTimeTable(HttpServletRequest req, Model model) {
 		int cnt=0;
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("id :" + id);
 		int year = Integer.parseInt(req.getParameter("year"));
 		int semester = Integer.parseInt(req.getParameter("semester"));
 		
@@ -228,6 +299,11 @@ public class StudentServiceImpl implements StudentService{
 		map.put("id", id);
 		map.put("year", year);
 		map.put("semester", semester);
+		
+		// view 수정
+		String sql = "CREATE OR REPLACE VIEW SELECT_ID_TIMETABLE " + "AS " +
+					 "SELECT * FROM S_TIMETABLE WHERE ID = "+ "'" + id + "'";
+		stuDAO.updateView(sql);
 		
 		List<Map<String, Object>> dtos = stuDAO.getTimeTable(map);
 		model.addAttribute("dtos", dtos);
@@ -309,16 +385,14 @@ public class StudentServiceImpl implements StudentService{
 		int num = Integer.parseInt(req.getParameter("num"));
 		MessageVO vo = stuDAO.getMessage(num);
 		
-		if(vo.getReadchk() == 0) {
-			stuDAO.updateReadChk(num);
-		}
+		if(vo.getReadchk() == 0) stuDAO.updateReadChk(num);
+
 		model.addAttribute("dto", vo);
 	}
 	
 	@Override
 	public void studentSimpleInfo(HttpServletRequest req, Model model) {
 		String id = (String) req.getSession().getAttribute("memId");
-		System.out.println("세션 : " + (String) req.getSession().getAttribute("memId"));
 		// users 아이디 값과 student 아이디 값이 일치 하는지 확인한다.
 		int check = stuDAO.studentIdCheck(id);
 
@@ -375,7 +449,6 @@ public class StudentServiceImpl implements StudentService{
 		if(currentPage % pageBlock == 0) startPage -= pageBlock;
 		endPage = startPage + pageBlock -1;
 		if(endPage > pageCount) endPage = pageCount;
-		
 		req.getSession().setAttribute("nr_cnt", cnt);
 		model.addAttribute("cnt", cnt);			
 		model.addAttribute("number", number);	 
@@ -455,5 +528,99 @@ public class StudentServiceImpl implements StudentService{
 		list = stuDAO.authenList(authen);
 		
 		model.addAttribute("authenList", list);
+	}
+
+	@Override
+	public void getProfessorName(Model model) {
+		ArrayList<String> proNameList = stuDAO.getProfessorName();
+		model.addAttribute("professors", proNameList);
+	}
+
+	@Override
+	public void submitConsult(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException {
+		initialize();
+		
+		String stuName = req.getParameter("stuName");
+		String stuNumber = req.getParameter("stuNumber");
+		String proName = req.getParameter("proName");
+		String consultExp = req.getParameter("consultExp");
+		String consultType = req.getParameter("consultType");
+		String content = req.getParameter("content");
+		String subject = req.getParameter("subject");
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+		Date time = new Date();
+		String date = format1.format(time);
+		System.out.println(date);
+		
+		Firestore firestore = FirestoreClient.getFirestore();
+		ConsultVO vo = new ConsultVO();
+		vo.setStuName(stuName);
+		vo.setStuNumber(stuNumber);
+		vo.setProName(proName);
+		vo.setConsultExp(consultExp);
+		vo.setConsultType(consultType);
+		vo.setContent(content);
+		vo.setStatus("제출");
+		vo.setSubject(subject);
+		vo.setDate(date);
+		
+		ApiFuture<WriteResult> apiFuture = firestore.collection(COLLECTION_NAME).document("consult-" + vo.getStuName() + "-" + vo.getProName() + "-" + vo.getDate()).set(vo);
+
+		System.out.println(apiFuture.get().getUpdateTime().toString());
+	}
+	
+	public static Firestore initialize() {
+		try {
+			String path = EduServiceImpl.class.getResource("").getPath();
+			
+			FileInputStream serviceAccount = new FileInputStream(path + "teamunique-dae26-firebase-adminsdk-w6e2x-bb00a614c7.json");
+			
+			FirebaseApp firebaseApp = null;
+			List<FirebaseApp> firebaseApps = FirebaseApp.getApps();
+			 
+			if(firebaseApps != null && !firebaseApps.isEmpty()){
+			    for(FirebaseApp app : firebaseApps){
+			        if(app.getName().equals(FirebaseApp.DEFAULT_APP_NAME)) {
+			            firebaseApp = app;
+			            
+			        }
+			    }
+			}else{
+			    FirebaseOptions options = new FirebaseOptions.Builder()
+			        .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+			        .setDatabaseUrl("https://teamunique-dae26.firebaseio.com")
+			        .build();
+			    firebaseApp = FirebaseApp.initializeApp(options);
+			}
+			return FirestoreClient.getFirestore();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return FirestoreClient.getFirestore();
+	}
+	
+	@Override
+	public void lectureDetail(HttpServletRequest req, Model model) {
+		
+		String co_code = req.getParameter("co_code");
+		System.out.println(co_code);
+		int le_week = Integer.parseInt(req.getParameter("le_week"));
+		System.out.println(le_week);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("co_code", co_code);
+		map.put("le_week", le_week);
+		
+		int cnt = stuDAO.lectureChk(map);
+		
+		if(cnt != 0) {
+			LectureVO vo = stuDAO.getLecture(map);
+			model.addAttribute("vo", vo);
+		}
+
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("co_code", co_code);
+		model.addAttribute("le_week", le_week);
+		
 	}
 }

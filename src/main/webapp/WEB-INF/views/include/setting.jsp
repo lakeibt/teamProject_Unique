@@ -9,6 +9,8 @@
 <c:set var = "stu_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/student/"/>
 <c:set var = "pro_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/professor/"/>
 <c:set var = "adm_photo" value = "${pageContext.request.contextPath}/resources/img/profile_photo/admin/"/>
+<c:set var = "le_video" value = "${pageContext.request.contextPath}/resources/video/"/>
+<c:set var = "le_img" value = "${pageContext.request.contextPath}/resources/img/lecture/"/>
 
 <script src = "${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script src = "${pageContext.request.contextPath}/resources/js/guest.js"></script>

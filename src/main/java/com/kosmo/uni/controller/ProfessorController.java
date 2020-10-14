@@ -1,9 +1,11 @@
 package com.kosmo.uni.controller;
 
-
+import java.util.concurrent.ExecutionException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.uni.persistence.ProfessorDAO;
 import com.kosmo.uni.service.ProfessorService;
-import com.kosmo.uni.vo.CoursePlanVO;
+
+import io.grpc.internal.JsonParser;
 
 @Controller
 public class ProfessorController {
@@ -28,15 +32,15 @@ public class ProfessorController {
 	
 	// 메인
 	@RequestMapping("/professor/main")
-	public String pro_main(HttpServletRequest req, Model model) {
+	public String pro_main(HttpServletRequest req, Model model) throws InterruptedException, ExecutionException  {
 		logger.info("url ==> main");
 		proService.infoList(req, model);
 		proService.courseList(req, model);
-		proService.calendarList(req, model);
+		proService.getConsultList(req, model);
 		
 		return "professor/main";
 	}
-
+	
 	// 메인  : 공지사항
 	@RequestMapping("/professor/info")
 	public String pro_info(HttpServletRequest req, Model model) {
@@ -46,7 +50,6 @@ public class ProfessorController {
 		
 		return "professor/info";
 	}
-	
 	
 	// 내정보
 	@RequestMapping("/professor/myPage")
@@ -97,7 +100,7 @@ public class ProfessorController {
 		return "professor/course_plan_add";
 	}
 	
-	// 계획서 가져오기
+	// 강의 계획서 가져오기
 	@RequestMapping("/professor/course_plan")
 	public String pro_course_plan(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_plan");
@@ -107,7 +110,7 @@ public class ProfessorController {
 		return "professor/course_plan";
 	}
 	
-	// 계획서 수정
+	// 강의 계획서 수정
 	@RequestMapping("/professor/coursePlan_modify")
 	public String pro_coursePlan_modify(HttpServletRequest req, Model model) {
 		logger.info("url ==> coursePlan_modify");
@@ -117,6 +120,59 @@ public class ProfessorController {
 		return "professor/course_plan_modify";
 	}
 	
+	// 수업목록
+	@RequestMapping("/professor/lecture")
+	public String pro_lecture(HttpServletRequest req, Model model) {
+		logger.info("url ==> lecture");
+		
+		model.addAttribute("co_code",req.getParameter("co_code"));
+		
+		return "professor/lecture";
+	}
+	
+	// 수업보기
+	@RequestMapping("/professor/lecture_detail")
+	public String pro_lecture_detail(HttpServletRequest req, Model model) {
+		logger.info("url ==> lecture_detail");
+		
+		int cnt = proService.lectureDetail(req, model);
+		
+		if(cnt == 0) {
+			return "professor/lecture_addForm";
+		} else {
+			return "professor/lecture_detail";
+		}
+	}
+	
+	// 수업등록
+	@RequestMapping("/professor/lecture_add")
+	public String pro_lecture_add(MultipartHttpServletRequest req, Model model) {
+		logger.info("url ==> lecture_add");
+		
+		proService.lectureAdd(req, model);
+		
+		return "professor/lecture_add";
+	}
+	
+	// 수업수정
+	@RequestMapping("/professor/lecture_modify")
+	public String pro_lecture_modify(MultipartHttpServletRequest req, Model model) {
+		logger.info("url ==> lecture_modify");
+		
+		proService.lectureModify(req, model);
+		
+		return "professor/lecture_modify";
+	}
+	
+	// 수업삭제
+	@RequestMapping("/professor/lecture_delete")
+	public String pro_lecture_delete(MultipartHttpServletRequest req, Model model) {
+		logger.info("url ==> lecture_delete");
+		
+		proService.lectureDelete(req, model);
+		
+		return "professor/lecture_delete";
+	}
 	
 	// 강의수정
 	@RequestMapping("/professor/course_modify")
@@ -136,27 +192,54 @@ public class ProfessorController {
 	
 	// 성적관리
 	@RequestMapping("/professor/score")
-	public String pro_score() {
+	public String pro_score(HttpServletRequest req, Model model) {
 		logger.info("url ==> score");
-		
+		proService.courseList(req, model);
 		return "professor/score";
 	}
 	
-	// 성적등록
+	
+	// 성적등록폼
 	@RequestMapping("/professor/score_register")
-	public String pro_score_register() {
+	public String pro_score_register(HttpServletRequest req, Model model) {
 		logger.info("url ==> score_register");
+		
+		proService.gradeList(req, model);
 		
 		return "professor/score_register";
 	}
 	
-	// 성적수정
+	// 성적등록
+	@RequestMapping("/professor/score_registerPro")
+	public String pro_score_registerPro(HttpServletRequest req, Model model) {
+		logger.info("url ==> score_registerPro");
+		
+		proService.gradeAdd(req, model);
+		
+		return "professor/score_registerPro";
+	}
+	
+	// 성적수정폼
 	@RequestMapping("/professor/score_modify")
-	public String pro_score_modify() {
+	public String pro_score_modify(HttpServletRequest req, Model model) {
 		logger.info("url ==> score_modify");
 		
+		proService.gradeList_modify(req, model);
+		
 		return "professor/score_modify";
+	} 
+	 
+	// 성적수정
+	@RequestMapping("/professor/score_modifyPro")
+	public String pro_score_modifyPro(HttpServletRequest req, Model model) {
+		logger.info("url ==> score_modifyPro");
+		
+		proService.gradeModify(req, model);
+		
+		return "professor/score_modifyPro";
 	}
+	
+	
 	
 	// 쪽지 간단히 가져오기
 	@RequestMapping("/professor/messageSimple")
@@ -225,5 +308,16 @@ public class ProfessorController {
 		
 		int insertCnt = proService.messageReply(req, model);
 		return insertCnt;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/professor/getMessageCount")
+	public JSONObject pro_getMessageCount(HttpServletRequest req) throws ParseException {
+		logger.info("url ==> messageReply");
+		int i = proService.getMessageCnt(req);
+		JSONObject messageCount = new JSONObject();
+		messageCount.put("messageCnt", i);
+		
+		return messageCount;
 	}
 }

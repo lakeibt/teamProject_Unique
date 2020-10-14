@@ -459,16 +459,6 @@ public class AdminController {
 		return "admin/human_resources/pay/modifyRoll";
 	}
 	
-	// 급여명세
-	@RequestMapping(value = "/admin/human_resources/pay/salary_info")
-	public String salary_info(HttpServletRequest req, Model model) {
-		logger.info("human_resources/pay/salary_info");
-
-		return "admin/human_resources/pay/salary_info";
-	}
-	
-	
-	
 	// 월별 급/상여지급현황
 	@RequestMapping(value = "/admin/human_resources/pay/salary_list_month")
 	public String salary_list_month(HttpServletRequest req, Model model) {

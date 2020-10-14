@@ -18,6 +18,7 @@ public class CourseVO {
 	private String grade_code;
 	private int school_year;
 	private int plan_chk;
+	private int grade_chk;
 	
 	
 	public int getSchool_year() {
@@ -128,6 +129,12 @@ public class CourseVO {
 	}
 	public void setPlan_chk(int plan_chk) {
 		this.plan_chk = plan_chk;
+	}
+	public int getGrade_chk() {
+		return grade_chk;
+	}
+	public void setGrade_chk(int grade_chk) {
+		this.grade_chk = grade_chk;
 	}
 	
 }

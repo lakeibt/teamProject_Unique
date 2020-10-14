@@ -76,21 +76,21 @@ function addressSearch() {
                       <div class="col-md-4">
                         <div class="form-group">
                           <p>교번</p>                        	
-                          <input type="text" class="card"  name="id" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('ID')}">
+                          <input type="text"  class="form-control"  name="id" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('ID')}">
                         </div>
                       </div>
                       
                       <div class="col-md-4">
                         <div class="form-group">
                         <p>이름</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('NAME')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('NAME')}">
                         </div>
                       </div>
                       
                       <div class="col-md-4">
                         <div class="form-group">
                         <p>영문이름</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('ENG_NAME')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('ENG_NAME')}">
                         </div>
                       </div>
                       
@@ -99,19 +99,19 @@ function addressSearch() {
                       <div class="col-md-4">
                         <div class="form-group">
                         <p>전화번호</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" name = "tel" value = "${profile.get('TEL')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" name = "tel" value = "${profile.get('TEL')}">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                         <p>전공</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('M_NAME')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('M_NAME')}">
                         </div>
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
                         <p>직책</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('POSITION')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" readonly value = "${profile.get('POSITION')}">
                         </div>
                       </div>
                       </div>
@@ -119,26 +119,26 @@ function addressSearch() {
                        	<div class="col-md-6">
 	                        <div class="form-group">
 	                          <p>이메일</p>
-	                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" name = "email" value = "${profile.get('EMAIL')}">
+	                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" name = "email" value = "${profile.get('EMAIL')}">
 	                        </div>
 	                      </div>
 	                      <div class="col-md-6">
 	                        <div class="form-group">
 	                          <p>생년월일</p>
-	                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" readonly value = "${Integer.toString(profile.get('JUMIN1')).substring(0,2)}/${Integer.toString(profile.get('JUMIN1')).substring(2,4)}/${Integer.toString(profile.get('JUMIN1')).substring(4,6)}">
+	                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" readonly value = "${Integer.toString(profile.get('JUMIN1')).substring(0,2)}/${Integer.toString(profile.get('JUMIN1')).substring(2,4)}/${Integer.toString(profile.get('JUMIN1')).substring(4,6)}">
 	                        </div>
 	                      </div>
                       </div>
                       <div class="row" style="margin:5px 0;">
-                       <div class="col-md-12">
+                       <div class="col-md-11">
                         <div class="form-group">
                           <p>집주소</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" name = "address" value = "${profile.get('ADDRESS')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" name = "address" value = "${profile.get('ADDRESS')}">
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-1">
                         <div class="form-group">
-                          <button type="button" class="btn btn-primary pull-left" onclick="addressSearch();" style="width:70px; height:30px; padding:0px;">주소찾기</button>
+                          <button type="button" class="btn btn-primary pull-left" onclick="addressSearch();" style="width:70px; height:80%; padding:0px;">주소찾기</button>
                         </div>
                       </div>
                       </div>
@@ -146,7 +146,7 @@ function addressSearch() {
                        <div class="col-md-12">
                         <div class="form-group">
                           <p>상세주소</p>
-                          <input type="text" class="card" style="height: 45px; margin-top: 0px;" name = "de_address" value = "${profile.get('DE_ADDRESS')}">
+                          <input type="text"  class="form-control" style="height: 45px; margin-top: 0px;" name = "de_address" value = "${profile.get('DE_ADDRESS')}">
                         </div>
                       </div>
                       </div>

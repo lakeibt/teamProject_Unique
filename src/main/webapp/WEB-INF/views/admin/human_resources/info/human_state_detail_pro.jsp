@@ -119,7 +119,7 @@
 							for="first-name">차번호
 						</label>
 						<div class="col-md-7 col-sm-7">
-							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가 0000'" onblur="this.placeholder = ' '" 
+							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가0000'" onblur="this.placeholder = ' '" 
 								class="form-control " value="${vo.getCarnum()}">
 						</div>
 					</div>
@@ -279,10 +279,10 @@
 						<img src="${pro_photo}${vo.getPhoto()}">
 					</div>
 					<div class="filebox">
-						<input class="upload-name"  value="${vo.getPhoto()}" name="photo2" value="파일선택" disabled="disabled">
+						<input class="upload-name"  value="${vo.getPhoto()}" name="photo2" disabled="disabled">
 						
 						<label for="ex_filename" style="margin-bottom: 0px;">업로드</label>
-						<input type="file" id="ex_filename" name="photo" class="upload-hidden" onchange="setThumbnail(event);">
+						<input type="file" id="ex_filename" name="photo" value="${vo.getPhoto()}" class="upload-hidden" onchange="setThumbnail(event);">
 					</div>
 					<div id="human_info_btn_div">
 						<button class="btn btn-success" id="submitBtn" type="submit">수정하기</button>

@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
@@ -28,6 +30,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.confirmIdPwdAdm(id);
 	}
+	
+	@Override
+	public HashMap<String, String> confirmIdPwdPro(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.confirmIdPwdPro(id);
+	}
 
 	@Override
 	public StudentVO getStudentInfo(String id) {
@@ -39,6 +47,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 	public Manager getAdminInfo(String id) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getAdminInfo(id);
+	}
+	
+	@Override
+	public HumanVO getProinInfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getProinInfo(id);
 	}
 	
 	@Override
@@ -119,4 +133,49 @@ public class AndroidDAOImpl implements AndroidDAO{
 		return dao.stuinfosave(map);
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public HumanVO getProInfo(String id) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getProInfo(id);
+	}
+
+	@Override
+	public int Proinfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.Proinfosave(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getMyCourse(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getMyCourse(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> getMyScore(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getMyScore(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getMyCourse_pro(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getMyCourse_pro(map);
+	}
+
+	@Override
+	public ArrayList<InClassHowVO> getclasscheck(String name) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getclasscheck(name);
+	}
+
+	@Override
+	public ArrayList<InClassHowVO> getclasschecknext(String title) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getclasschecknext(title);
+	}
+
+>>>>>>> a035bfff9bfb26b04a06f5ef3d1e8f3e9f83115a
 }

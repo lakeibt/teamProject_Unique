@@ -38,9 +38,4 @@ public class HomeController {
 	 * return "home"; }
 	 */
 	
-	/*@RequestMapping("/guest/main")
-	public String main() {
-		return "guest/main";
-	}*/
-	
 }

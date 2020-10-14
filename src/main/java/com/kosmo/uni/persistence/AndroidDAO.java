@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.kosmo.uni.vo.HumanVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
@@ -13,9 +15,14 @@ public interface AndroidDAO {
 	
 	public HashMap<String, String> confirmIdPwdStu(String id);
 	public HashMap<String, String> confirmIdPwdAdm(String id);
+	public HashMap<String, String> confirmIdPwdPro(String id);
 	
 	public StudentVO getStudentInfo(String id);
 	public Manager getAdminInfo(String id);
+	public HumanVO getProinInfo(String id);
+	
+	public List<Map<String, Object>> getMyCourse(Map<String, Object> map);
+	public List<Map<String, Object>> getMyScore(Map<String, Object> map);
 	
 	//nfc 오늘 날짜에 있는지 없는지 체크
 	public int whatNfc(Map<String, String> map);
@@ -55,4 +62,22 @@ public interface AndroidDAO {
 	
 	//STU정보 수정
 	public int stuinfosave(Map<String, Object> map);
+<<<<<<< HEAD
+=======
+	
+	//PRO정보 조회
+	public HumanVO getProInfo(String id);
+	
+	//PRO정보 수정
+	public int Proinfosave(Map<String, Object> map);
+	
+	public List<Map<String, Object>> getMyCourse_pro(Map<String, Object> map);
+
+	//교수 강의조회 리스트 출력
+	public ArrayList<InClassHowVO> getclasscheck(String name);
+	
+	//교수 강의조회 리스트 출력
+	public ArrayList<InClassHowVO> getclasschecknext(String title);
+	
+>>>>>>> a035bfff9bfb26b04a06f5ef3d1e8f3e9f83115a
 }

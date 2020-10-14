@@ -307,12 +307,12 @@ function message_reply(sender_id, sender_name){
 							</div>
 						</div>
 					</li>
-					</c:if>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="${guest}logout" id="navbarDropdownMenuLink" aria-haspopup="true" aria-expanded="false"> 
 						<i class="material-icons">power_settings_new</i>
 						</a>
 					</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

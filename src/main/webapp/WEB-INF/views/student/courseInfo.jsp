@@ -11,11 +11,12 @@
 	<thead class="text-primary">
 		<tr>
 			<th style="width:10%;">이수구분</th>
-			<th style="width:25%;">교과목명</th>
-			<th style="width:15%;">담당교수</th>
-			<th style="width:20%;">강의시간</th>
+			<th style="width:20%;">교과목명</th>
+			<th style="width:10%;">담당교수</th>
+			<th style="width:10%;">강의시간</th>
 			<th style="width:10%;">학점</th>
 			<th style="width:15%;">수업계획서</th>
+			<th style="width:10%;">수업듣기</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,6 +29,7 @@
 			<td style="width:20%;">${dto.DAY}/${dto.TIME}-${dto.TIME + dto.GRADE - 1}</td>
 			<td style="width:10%;">${dto.GRADE}</td>
 			<td style="width:15%;"><button class="btn btn-primary pull-left" onclick="syllabus('${dto.CO_CODE}');">조회</button></td>
+			<td style="width:15%;"><button class="btn btn-primary pull-left" onclick="window.location='${student}lecture?co_code=${dto.CO_CODE}'">이동</button></td>
 		</tr>
 		</c:forEach>
 	</c:if>

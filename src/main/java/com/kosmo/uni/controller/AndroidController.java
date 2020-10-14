@@ -2,6 +2,7 @@ package com.kosmo.uni.controller;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
+import com.kosmo.uni.vo.ConsultVO;
+import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.nfcVO;
 
 @Controller
@@ -45,6 +48,24 @@ public class AndroidController {
 		Map<String, Object> map = andService.MyPage(req); 
 		
 		return map;
+	}
+
+	// 앱 학생 강의 정보 - 리스트
+	@ResponseBody
+	@RequestMapping("/android/stuCourse")
+	public List<Map<String, Object>> androidStudentCourse(HttpServletRequest req) {
+		logger.info("androidStudentCourse()");
+		
+		return andService.StuCourse(req);
+	}
+
+	// 앱 학생 성적 정보 - 리스트
+	@ResponseBody
+	@RequestMapping("/android/stuScore")
+	public List<Map<String, Object>> androidStudentScore(HttpServletRequest req) {
+		logger.info("androidStudentScore()");
+		
+		return andService.StuScore(req);
 	}
 	
 	// nfc 태그
@@ -119,8 +140,73 @@ public class AndroidController {
 		return out;
 	}
 	
+<<<<<<< HEAD
 		
 	
 	 
+=======
+	//PRO정보조회
+	@ResponseBody
+	@RequestMapping("/android/proinfo")
+	public Map<String, Object> androidProinfo(HttpServletRequest req){
+		logger.info("androidProinfo()");
+		
+		Map<String, Object> out = andService.proinfo(req);
+		
+		return out;
+	}
+	
+	//PRO정보 수정
+	@ResponseBody
+	@RequestMapping("/android/proinfosave")
+	public Map<String, Object> androidProinfoSave(HttpServletRequest req){
+		logger.info("androidProinfoSave()");
+		
+		Map<String, Object> out = andService.proinfosave(req);
+		
+		return out;
+	}
+	
+	//상담 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/consultList")
+	public ArrayList<ConsultVO> androidConsultList(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("consultList()");
+		
+		ArrayList<ConsultVO> out = andService.getConsultList(req);
+		return out;
+	}
+	
+	// 앱 교수 강의 정보 - 리스트
+	@ResponseBody
+	@RequestMapping("/android/proCourse")
+	public List<Map<String, Object>> androidProfessorCourse(HttpServletRequest req) {
+		logger.info("androidProfessorCourse()");
+		
+		return andService.proCourse(req);
+	}
+	
+	//강의 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/proclasscheck")
+	public ArrayList<InClassHowVO> androidProclasscheck(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("androidProclasscheck()");
+		
+		ArrayList<InClassHowVO> out = andService.getClassInHow(req);
+		
+		return out;
+	}
+	
+	//강의 정보 불러오기
+	@ResponseBody
+	@RequestMapping("/android/proclasschecknext")
+	public ArrayList<InClassHowVO> androidProclasschecknext(HttpServletRequest req) throws InterruptedException, ExecutionException{
+		logger.info("androidProclasschecknext()");
+		
+		ArrayList<InClassHowVO> out = andService.getClassInHowNext(req);	
+		return out;
+	}
+	
+>>>>>>> a035bfff9bfb26b04a06f5ef3d1e8f3e9f83115a
 }
 

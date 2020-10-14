@@ -50,6 +50,10 @@
 									<option value="KO" <c:if test="${vo.m_code eq 'KO'}">selected</c:if>>국어국문학과[KO]</option>
 									<option value="JA" <c:if test="${vo.m_code eq 'JA'}">selected</c:if>>일어일문학과[JA]</option>
 									<option value="FR" <c:if test="${vo.m_code eq 'FR'}">selected</c:if>>불어불문학과[FR]</option>
+									<option value="MA" <c:if test="${vo.m_code eq 'MA'}">selected</c:if>>기계공학과[MA]</option>
+									<option value="BI" <c:if test="${vo.m_code eq 'BI'}">selected</c:if>>생명공학과[BI]</option>
+									<option value="AD" <c:if test="${vo.m_code eq 'AD'}">selected</c:if>>시각디자인학과[AD]</option>
+									<option value="SC" <c:if test="${vo.m_code eq 'SC'}">selected</c:if>>조소학과[SC]</option>
 								</select>  
 							</td>
 							<td width="7%">학년</td>

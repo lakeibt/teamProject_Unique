@@ -1,5 +1,6 @@
 package com.kosmo.uni.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.uni.vo.CourseVO;
+import com.kosmo.uni.vo.LectureVO;
 import com.kosmo.uni.vo.MessageVO;
 import com.kosmo.uni.vo.StudentStudyListVO;
 import com.kosmo.uni.vo.StudentVO;
@@ -45,6 +47,48 @@ public class StudentDAOImpl implements StudentDAO {
 	public List<CourseVO> getCourseList() {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getCourseList();
+	}
+
+	@Override
+	public List<Map<String, Object>> getRegisterCourse(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getRegisterCourse(id);
+	}
+	
+	@Override
+	public int selectTimetable(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.selectTimetable(id);
+	}
+	
+	@Override
+	public int insertTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.insertTimetable(map);
+	}
+	
+	@Override
+	public int updateTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.updateTimetable(map);
+	}
+
+	@Override
+	public int deleteTimetable(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.deleteTimetable(map);
+	}
+	
+	@Override
+	public int plueCourseNumber(String code) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.plueCourseNumber(code);
+	}
+
+	@Override
+	public int minusCourseNumber(String code) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.minusCourseNumber(code);
 	}
 
 	@Override
@@ -86,6 +130,12 @@ public class StudentDAOImpl implements StudentDAO {
 	public List<Map<String, Object>> getStudyList(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getStudyList(map);
+	}
+	
+	@Override
+	public void updateView(String sql) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		dao.updateView(sql);
 	}
 
 	@Override
@@ -160,5 +210,25 @@ public class StudentDAOImpl implements StudentDAO {
 	public String getReceiverName(Map<String, Object> map) {
 		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
 		return dao.getReceiverName(map);
+	}
+	@Override
+	public ArrayList<String> getProfessorName() {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getProfessorName();
+	}
+	@Override
+	public int lectureChk(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.lectureChk(map);
+	}
+	@Override
+	public LectureVO getLecture(Map<String, Object> map) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getLecture(map);
+	}
+	@Override
+	public List<Integer> getCourseYear(String id) {
+		StudentDAO dao = sqlSession.getMapper(StudentDAO.class);
+		return dao.getCourseYear(id);
 	}
 }

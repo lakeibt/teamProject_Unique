@@ -64,13 +64,14 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		logger.info("url ==> myPage");
 		
 		stuService.studentSimpleInfo(req, model);
+		
 		return "student/myPage";
 	}
 	
 	@RequestMapping("/student/myPage_modify")
 	public String stu_myPage_modify(HttpServletRequest req, Model model) {
 		logger.info("url ==> myPage_modify");
-		
+		stuService.getProfessorName(model);
 		stuService.studentinfo(req, model);
 		return "student/myPage_modify";
 	}
@@ -87,8 +88,25 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 	public String stu_course_register(HttpServletRequest req, Model model) {
 		logger.info("url ==> course_register");
 		
+		stuService.myRegisterCourse(req, model);
 		stuService.courseList(req, model);
 		return "student/course_register";
+	}
+	
+	@RequestMapping("/student/course_register_add")
+	public String stu_course_register_add(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_register_add");
+		
+		stuService.addMyCourse(req, model);
+		return "student/course_register_add";
+	}
+	
+	@RequestMapping("/student/course_register_delete")
+	public String stu_course_register_delete(HttpServletRequest req, Model model) {
+		logger.info("url ==> course_register_delete");
+		
+		stuService.deleteMyCourse(req, model);
+		return "student/course_register_delete";
 	}
 	
 	@RequestMapping("/student/course_timeTable")
@@ -231,5 +249,35 @@ private static final Logger logger = LoggerFactory.getLogger(StudentController.c
 		
 		int insertCnt = stuService.messageReply(req, model);
 		return insertCnt;
+	}
+	
+	// 상담서 제출하기
+	@RequestMapping("/student/submitConsult")
+	public String submitConsult(HttpServletRequest req, Model model) throws Exception {
+		logger.info("url ==> submitConsult");
+		
+		stuService.submitConsult(req, model);
+		
+		return "student/submitConsultPro";
+	}
+	
+	// 주차별 수업목록
+	@RequestMapping("/student/lecture")
+	public String stu_lecture(HttpServletRequest req, Model model) {
+		logger.info("url ==> lecture");
+		
+		model.addAttribute("co_code", req.getParameter("co_code"));
+		System.out.println(req.getParameter("co_code"));
+		
+		return "student/lecture";
+	}
+	// 주차별 수업 상세항목
+	@RequestMapping("/student/lecture_detail")
+	public String stu_lectureDetail(HttpServletRequest req, Model model) {
+		logger.info("url ==> lecture_detail");
+		
+		stuService.lectureDetail(req, model);
+		
+		return "student/lecture_detail";
 	}
 }

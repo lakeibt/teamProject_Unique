@@ -9,7 +9,7 @@
 	        <h4>${vo.getTitle()}</h4>
 	      </div>
 	      <div class="x_content"  style="padding: 10px;">
-			<textarea rows="6" style="width: 100%; border:solid 1px #ddd; border-radius:6px; padding: 10px;" readonly>${vo.getContent()}</textarea>
+			<textarea rows="10" style="width: 100%; border:solid 1px #ddd; border-radius:6px; padding: 10px;" readonly>${vo.getContent()}</textarea>
 	      </div>
 	    </div>
 	</td>

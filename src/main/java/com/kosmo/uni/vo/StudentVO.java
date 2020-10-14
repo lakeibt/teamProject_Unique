@@ -15,6 +15,7 @@ public class StudentVO {
 	private String email;
 	private String address;
 	private String m_code;
+	private String m_name;
 	private int grade;
 	private int r_code;
 	private int entrancedate;
@@ -127,6 +128,12 @@ public class StudentVO {
 	}
 	public void setDe_address(String de_address) {
 		this.de_address = de_address;
+	}
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	
 //	@Override

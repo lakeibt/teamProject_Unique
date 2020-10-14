@@ -9,8 +9,7 @@
 <script src="/uni/resources/js/request.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 </head>
-<body class="dark-edition">
-
+<body class="dark-edition"  onload = "contentHome1('${vo.get('M_NAME')}');">
 <div class="wrapper">
 	<%@ include file="../include/student_sidebar.jsp"%>
 	<div class="main-panel">
@@ -127,7 +126,7 @@
 						      var data = httpRequest.responseText;
 						      result.innerHTML = data;
 						      } else result.innerHTML = "Error!";
-						   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+						   }
 						}
 						</script>
 						<div class="row">

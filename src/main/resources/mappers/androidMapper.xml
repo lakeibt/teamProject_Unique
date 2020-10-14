@@ -10,12 +10,20 @@
 		SELECT * FROM A_ADMIN WHERE id=#{id}
 	</select>
 	
+	<select id="confirmIdPwdPro" resultType="java.util.Map" parameterType = "String">
+		SELECT * FROM P_PROFESSOR WHERE id=#{id}
+	</select>
+	
 	<select id="getStudentInfo" resultType="com.kosmo.uni.vo.StudentVO">
 		SELECT * FROM S_STUDENT WHERE id=#{id}
 	</select>
 	
 	<select id="getAdminInfo" resultType="com.kosmo.uni.vo.Manager">
 		SELECT * FROM A_ADMIN WHERE id=#{id}
+	</select>
+	
+	<select id="getProinInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		SELECT * FROM P_PROFESSOR WHERE id=#{id}
 	</select>
 
 	<select id="whatNfc" parameterType="java.util.Map" resultType="int">
@@ -83,4 +91,68 @@
 		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
 		WHERE id = #{id}
 	</update>
+<<<<<<< HEAD
+=======
+	
+	<select id="getProInfo" resultType="com.kosmo.uni.vo.HumanVO">
+		SELECT * FROM P_PROFESSOR WHERE id=#{id}
+	</select>
+	
+	<update id="Proinfosave" parameterType="java.util.Map">
+		UPDATE P_PROFESSOR
+		SET TEL = #{tel}, EMAIL = #{email}, ADDRESS = #{address}, DE_ADDRESS = #{address2}
+		WHERE id = #{id}
+	</update>
+	
+	<select id="getMyCourse" resultType="java.util.Map">
+		SELECT C.CO_NAME CO_NAME, C.P_NAME P_NAME, T.DAY DAY, T.TIME TIME, C.GRADE GRADE
+			 , S.NAME NAME, M.M_NAME, S.PHOTO PHOTO
+		FROM VIEW_TIMETABLE T, A_COURSE C, S_STUDENT S, A_MAJOR M
+		WHERE T.CO_CODE = C.CO_CODE
+		AND T.ID = S.ID
+		AND S.M_CODE = M.M_CODE
+		AND T.ID = #{id} 
+		AND C.CO_YEAR = #{year} 
+		AND C.CO_SEMESTER = #{semester}
+		AND T.DAY = #{day}
+	</select>
+
+	<select id="getMyScore" resultType="java.util.Map">
+		SELECT S.PHOTO, P.ID, S.NAME, M.M_NAME, C.CO_NAME, C.P_NAME, C.CO_DAY, C.LE_CODE, C.GRADE, P.GRADES_CODE
+		FROM P_STUDENT_SCORE P, S_STUDENT S, A_COURSE C, A_MAJOR M
+		WHERE P.CO_CODE = C.CO_CODE
+		AND P.ID = S.ID
+		AND S.M_CODE = M.M_CODE
+		AND P.ID = #{id}
+		AND C.CO_YEAR = #{year}
+		AND C.CO_SEMESTER = #{semester}
+	</select>
+	
+	<select id="getMyCourse_pro" resultType="java.util.Map">
+		SELECT distinct(c.co_code), t.day, t.time , c.grade, c.co_name, p.name, m.m_name, p.photo FROM A_COURSE c, p_professor p, A_MAJOR m  ,VIEW_TIMETABLE T
+	    WHERE c.p_name = p.name
+	    AND p.M_CODE = m.M_CODE
+	    AND t.co_code = c.co_code
+	    AND p.ID = #{id} 
+	    AND C.CO_YEAR = #{year} 
+	    AND C.CO_SEMESTER = #{semester}
+	    ORDER BY decode(day, '월','1','화','2','수','3','목','4','금','5')
+	</select>
+	
+	<select id="getclasscheck" parameterType="String" resultType="com.kosmo.uni.vo.InClassHowVO">
+		SELECT c.CO_NAME co_name FROM A_COURSE c , P_PROFESSOR p WHERE c.P_NAME = p.name AND p.name = #{name}
+	</select>
+	
+	<select id="getclasschecknext" parameterType="String" resultType="com.kosmo.uni.vo.InClassHowVO">
+		SELECT s.name student, s.id id, m.m_name m_name
+		  FROM A_COURSE a
+		     , S_STUDENT s
+		     , VIEW_TIMETABLE v
+		     , A_MAJOR m
+		 WHERE v.id = s.id
+		   AND m.m_code = s.m_code
+		   AND a.CO_CODE = v.CO_CODE
+		   AND a.co_name = #{title}
+	</select>
+>>>>>>> a035bfff9bfb26b04a06f5ef3d1e8f3e9f83115a
 </mapper>

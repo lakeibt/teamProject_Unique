@@ -77,7 +77,7 @@ function addressSearch() {
 										<div class="col-md-3">
 											<div class="form-group bmd-form-group">
 												<label class="bmd-label-floating">학번</label>
-												<input type="text" class="form-control" value="${vo.getId() }" disabled>
+												<input type="text" class="form-control" value="${vo.getId()}" disabled>
 											</div>
 										</div>
 										<div class="col-md-3">
@@ -200,76 +200,60 @@ function addressSearch() {
 								<p class="card-category">상담지를 작성하여 상담 신청을 해주시기 바랍니다.</p>
 							</div>
 							<div class="card-body" style="margin-top:25px;">
-								<form action="" name="" method="post">
+								<form action="${student}submitConsult" name="" method="post">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-1">
 											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">취미/특기</label>
-												<input type="text" class="form-control" name="hobby">
+												<label class="bmd-label-floating">이름</label>
+												<input type="text" class="form-control" name="stuName" value = "${vo.name}" readonly>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group bmd-form-group">
+												<label class="bmd-label-floating">학번</label>
+												<input type="text" class="form-control" name="stuNumber" value = "${vo.getId()}" readonly>
+											</div>
+										</div>
+										<div class="col-md-1">
+											<div class="form-group bmd-form-group">
+												<label class="bmd-label-floating">신청 교수</label>
+												<input type="text" class="form-control" name="proName">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group bmd-form-group">
+												<label class="bmd-label-floating">상담 타입(임시)</label>
+												<input type="text" class="form-control" name="consultType">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group bmd-form-group">
+												<label class="bmd-label-floating">상담 경험</label>
+												<input type="text" class="form-control" name="consultExp">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group bmd-form-group">
+												<label class="bmd-label-floating">상담 제목</label>
+												<input type="text" class="form-control" name="subject">
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">졸업 후 계획</label>
-												<input type="text" class="form-control" name="plan">
+												<label class="bmd-label-floating">상담 내용</label>
+												<input type="text" class="form-control" name="content">
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">희망 직종</label>
-												<input type="text" class="form-control" name="job">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">학업 문제</label>
-												<input type="text" class="form-control" name="study_problem">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">진로 문제</label>
-												<input type="text" class="form-control" name="plan_problem">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">학교 적응 문제</label>
-												<input type="text" class="form-control" name="adapt_problem">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">대인 관계 문제</label>
-												<input type="text" class="form-control" name="friend_problem">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">학생생활상담소에 요청하고 싶은 프로그램이 있다면?</label>
-												<input type="text" class="form-control" name="question">
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group bmd-form-group">
-												<button style="width:100%; margin:auto;" class="btn btn-primary pull-left" onclick="">상담신청</button>
+												<input type = "submit" style="width:100%; margin:auto;" class="btn btn-primary pull-left" value = "상담 제출">
 											</div>
 										</div>
 									</div>
