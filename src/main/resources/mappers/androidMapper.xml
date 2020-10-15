@@ -122,9 +122,8 @@
 			 , S.NAME NAME, M.M_NAME, S.PHOTO PHOTO
 		FROM VIEW_TIMETABLE T, A_COURSE C, S_STUDENT S, A_MAJOR M
 		WHERE T.CO_CODE = C.CO_CODE
-		AND T.ID = S.ID
+		AND #{id} = S.ID
 		AND S.M_CODE = M.M_CODE
-		AND T.ID = #{id} 
 		AND C.CO_YEAR = #{year} 
 		AND C.CO_SEMESTER = #{semester}
 		AND T.DAY = #{day}
