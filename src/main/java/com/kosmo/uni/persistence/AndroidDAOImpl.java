@@ -14,7 +14,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
-import com.kosmo.uni.vo.ShopVO;
+import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -197,13 +197,13 @@ public class AndroidDAOImpl implements AndroidDAO{
 	}
 
 	@Override
-	public ArrayList<ShopVO> getshoplist() {
+	public ArrayList<TableinfoVO> getshoplist() {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getshoplist();
 	}
 
 	@Override
-	public ArrayList<ShopVO> getshoplistnext(String num) {
+	public ArrayList<TableinfoVO> getshoplistnext(String num) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getshoplistnext(num);
 	}
@@ -212,6 +212,12 @@ public class AndroidDAOImpl implements AndroidDAO{
 	public int getshoplistclear(String num) {
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getshoplistclear(num);
+	}
+
+	@Override
+	public int tableinfosave(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.tableinfosave(map);
 	}
 
 }

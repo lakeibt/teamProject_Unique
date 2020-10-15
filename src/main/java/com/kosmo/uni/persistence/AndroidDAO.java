@@ -10,7 +10,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
-import com.kosmo.uni.vo.ShopVO;
+import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -90,13 +90,16 @@ public interface AndroidDAO {
 	//교수 강의조회 리스트 출력
 	public ArrayList<InClassHowVO> getclasschecknext(String title);
 	
-	//당근나라 리스트 불러오기
-	public ArrayList<ShopVO> getshoplist();
+	//정보방 리스트 불러오기
+	public ArrayList<TableinfoVO> getshoplist();
 	
-	//당근나라 각 정보 불러오기
-	public ArrayList<ShopVO> getshoplistnext(String num);
+	//정보방 각 정보 불러오기
+	public ArrayList<TableinfoVO> getshoplistnext(String num);
 	
-	//당근나라 판매완료
+	//정보방 삭제
 	public int getshoplistclear(String num);
+	
+	//정보방 수정
+	public int tableinfosave(Map<String, Object> map);
 	
 }

@@ -167,16 +167,21 @@
 		   AND a.co_name = #{title}
 	</select>
 	
-	<select id="getshoplist" resultType="com.kosmo.uni.vo.ShopVO">
-		SELECT * FROM S_SHOP WHERE SALES = 0 ORDER BY num DESC
+	<select id="getshoplist" resultType="com.kosmo.uni.vo.TableinfoVO">
+		SELECT * FROM S_INFOTABLE WHERE DELTEXT = 0 ORDER BY num DESC
 	</select>
 	
-	<select id="getshoplistnext" resultType="com.kosmo.uni.vo.ShopVO">
-		SELECT * FROM S_SHOP WHERE num = #{num}
+	<select id="getshoplistnext" resultType="com.kosmo.uni.vo.TableinfoVO">
+		SELECT * FROM S_INFOTABLE WHERE num = #{num}
 	</select>
 	
 	<update id="getshoplistclear" parameterType="String">
-		UPDATE S_SHOP SET SALES = 1 WHERE num = #{num}
+		UPDATE S_INFOTABLE SET DELTEXT = 1 WHERE num = #{num}
 	</update>
+	
+	<insert id="tableinfosave" parameterType="java.util.Map">
+		INSERT INTO S_INFOTABLE (num, title, id, text) 
+		VALUES (shop_seq.nextval,#{title},#{id},#{text})
+	</insert>
 	
 </mapper>
