@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>급여명세서</title>
+<title>급여명세표</title>
 <%@ include file="/WEB-INF/views/bootstrap/admin_bootstrap.jsp"%>
 </head>
 <script type="text/javascript">
@@ -43,12 +43,13 @@ function saveCSV(fileName){
     downLink.download = fileName; // 인자로 받은 다운로드 파일명을 지정
 }
 
+
 </script>
 
 <body>
 
 
-<div class="row">
+<div class="row"> 
 	<div class="col-md-12">
 		<div class="x_panel"  style="height:600px;">
 				<div class="x_title">
