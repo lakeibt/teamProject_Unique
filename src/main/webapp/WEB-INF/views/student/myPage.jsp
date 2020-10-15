@@ -9,7 +9,7 @@
 <script src="/uni/resources/js/request.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 </head>
-<body class="dark-edition"  onload = "contentHome1('${vo.get('M_NAME')}'); test();">
+<body class="dark-edition"<%--   onload = "contentHome1('${vo.get('M_NAME')}'); test(); --%>">
 <div class="wrapper">
 	<%@ include file="../include/student_sidebar.jsp"%>
 	<div class="main-panel">

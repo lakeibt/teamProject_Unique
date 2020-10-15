@@ -22,12 +22,13 @@
 		}
 	}
 </script>
+<link href="${resources}css/professor.css" rel="stylesheet">
 </head>
 <body>
 <div class="col-md-12">
 	<div class="card" style="padding: 20px;">
 		<div>
-			<button class="coures_plan_title_button3" onclick="deleteDiv(this)">
+			<button class="coures_plan_title_button3" onclick="deleteDiv1(this)">
 				<i class="fas fa-times"></i>
 			</button>
 		</div>

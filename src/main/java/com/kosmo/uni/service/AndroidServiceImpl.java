@@ -260,7 +260,7 @@ public class AndroidServiceImpl implements AndroidService {
 		if (what == 1) {
 			// 값있음 update 퇴근
 			// 04F459A2816B80 <== 출근 스티커 아이디값
-			if (phonenum != null && tagid.equals("04F459A2816B80")) {
+			if (phonenum != null && tagid.equals("04E259A2816B80")) {
 
 				Map<String, String> going2 = new HashMap<String, String>();
 				going2.put("phonenum", phonenum);
@@ -280,7 +280,7 @@ public class AndroidServiceImpl implements AndroidService {
 		} else if (what == 0) {
 			// 값없음 신규로 등록 insert 출근
 			// 04F459A2816B80 <== 출근 스티커 아이디값
-			if (phonenum != null && tagid.equals("04F459A2816B80")) {
+			if (phonenum != null && tagid.equals("04E259A2816B80")) {
 				// 전화번호 서버로 보내기
 				andDAO.hiNfc(phonenum);
 				System.out.println("--------------");

@@ -77,8 +77,12 @@ function deleteDiv(obj) {
 	div.remove();
 }
 
-
-
+function deleteDiv1(obj) {
+	var div = $(obj).parent().parent().parent();
+	var button = $(obj).parent().parent().parent().parent().children().children().next().next().children().next().attr('onclick','course_plan_addForm(this)');
+	
+	div.remove();
+}
 
 </script>
 

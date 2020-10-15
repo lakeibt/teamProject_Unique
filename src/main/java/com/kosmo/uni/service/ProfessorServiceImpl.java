@@ -502,6 +502,27 @@ public class ProfessorServiceImpl implements ProfessorService {
 		vo.setAssign_report(assign_report);
 		vo.setAssign_team(assign_team);
 		
+		System.out.println(vo.getId());
+		System.out.println(vo.getCo_code());
+		System.out.println(vo.getWeek_1());
+		System.out.println(vo.getWeek_2());
+		System.out.println(vo.getWeek_3());
+		System.out.println(vo.getWeek_4());
+		System.out.println(vo.getWeek_5());
+		System.out.println(vo.getWeek_6());
+		System.out.println(vo.getWeek_7());
+		System.out.println(	vo.getWeek_8());
+		System.out.println(vo.getWeek_9());
+		System.out.println(vo.getWeek_10());
+		System.out.println(	vo.getWeek_11());
+		System.out.println(	vo.getWeek_12());
+		System.out.println(	vo.getSubject());
+		System.out.println(	vo.getAttend());
+		System.out.println(	vo.getMidterm());
+		System.out.println(	vo.getFinals());
+		System.out.println(	vo.getAssign_report());
+		System.out.println(	vo.getAssign_team());
+		
 		int plan_chk = 1;
 		
 		int insertCnt = proDAO.insertSyllabus(vo);
