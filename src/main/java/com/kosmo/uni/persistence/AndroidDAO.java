@@ -99,4 +99,6 @@ public interface AndroidDAO {
 	//당근나라 판매완료
 	public int getshoplistclear(String num);
 	
+	//급여조회
+	public Map<String, Object> getSalary(Map<String, Object> map);
 }

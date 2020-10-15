@@ -214,4 +214,9 @@ public class AndroidDAOImpl implements AndroidDAO{
 		return dao.getshoplistclear(num);
 	}
 
+	@Override
+	public Map<String, Object> getSalary(Map<String, Object> map) {
+		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+		return dao.getSalary(map);
+	}
 }
