@@ -14,6 +14,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.api.Http;
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -785,5 +786,23 @@ public class AndroidServiceImpl implements AndroidService {
 		return map;
 	}
 
-	
+	@Override
+	public Map<String, Object> getSalary(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String year = req.getParameter("year").substring(2, 4);
+		int month_num = Integer.parseInt(req.getParameter("month")) - 1;
+		String month = "";
+		if(month_num >= 10) month = String.valueOf(month_num);
+		else month = "0"+String.valueOf(month_num);
+		
+		Map<String, Object> info = new HashMap<>();
+		System.out.println(year);
+		System.out.println(month);
+		info.put("id", id);
+		info.put("year", year);
+		info.put("month", month);
+		
+		Map<String, Object> map = andDAO.getSalary(info);
+		return map;
+	}
 }

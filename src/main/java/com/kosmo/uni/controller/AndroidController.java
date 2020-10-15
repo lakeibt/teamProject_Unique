@@ -278,5 +278,15 @@ public class AndroidController {
 		
 		return map;
 	}
+
+	// 급여지급
+	@ResponseBody
+	@RequestMapping("/android/Salary")
+	public Map<String, Object> androidSalary(HttpServletRequest req) {
+		logger.info("androidSalary()");
+		
+		Map<String, Object> map = andService.getSalary(req);
+		return map;
+	}
 	
 }

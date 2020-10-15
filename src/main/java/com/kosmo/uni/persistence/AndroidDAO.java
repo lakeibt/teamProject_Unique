@@ -102,4 +102,6 @@ public interface AndroidDAO {
 	//정보방 수정
 	public int tableinfosave(Map<String, Object> map);
 	
+	//급여조회
+	public Map<String, Object> getSalary(Map<String, Object> map);
 }

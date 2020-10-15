@@ -78,4 +78,6 @@ public interface AndroidService {
 	
 	public List<Map<String, Object>> proCourse(HttpServletRequest req);
 
+	//급여조회
+	public Map<String, Object> getSalary(HttpServletRequest req);
 }

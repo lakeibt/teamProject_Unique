@@ -184,4 +184,11 @@
 		VALUES (shop_seq.nextval,#{title},#{id},#{text})
 	</insert>
 	
+	<select id="getSalary" resultType="java.util.Map">
+		SELECT A.NAME, A.PHOTO, D.DEPART_NAME DEPART, S.PAY PAY, S.PAYTOTAL TOTAL, S.MEAL MEAL, S.CONTRACT_VEHICLE CAR
+		FROM A_SALARY S, A_ADMIN A, A_DEPART D
+		WHERE S.ID = A.ID
+		AND A.DEPART = D.DEPART 
+		AND S.SALARY_MONTH LIKE #{year}||'/'||#{month}||'%' AND S.ID = #{id}
+	</select>
 </mapper>
