@@ -30,7 +30,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
-import com.kosmo.uni.vo.ShopVO;
+import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -668,15 +668,15 @@ public class AndroidServiceImpl implements AndroidService {
 	}
 	
 	@Override
-	public ArrayList<ShopVO> getShopList() throws InterruptedException, ExecutionException {
-		ArrayList<ShopVO> dtos = andDAO.getshoplist();
+	public ArrayList<TableinfoVO> getShopList() throws InterruptedException, ExecutionException {
+		ArrayList<TableinfoVO> dtos = andDAO.getshoplist();
 		return dtos;
 	}
 	
 	@Override
-	public ArrayList<ShopVO> getShopListnext(HttpServletRequest req) throws InterruptedException, ExecutionException {
+	public ArrayList<TableinfoVO> getShopListnext(HttpServletRequest req) throws InterruptedException, ExecutionException {
 		String push = req.getParameter("num");
-		ArrayList<ShopVO> dtos = andDAO.getshoplistnext(push);
+		ArrayList<TableinfoVO> dtos = andDAO.getshoplistnext(push);
 		return dtos;
 	}
 	
@@ -688,6 +688,27 @@ public class AndroidServiceImpl implements AndroidService {
 		
 		return null;
 	}
+	
+	@Override
+	public Map<String, Object> tableinfosave(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String title = req.getParameter("title");
+		String text = req.getParameter("text");
+		
+		System.out.println("id"+id);
+		System.out.println("title"+title);
+		System.out.println("text"+text);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("title", title);
+		map.put("text", text);
+		
+		andDAO.tableinfosave(map);
+		
+		return null;
+	}
+
 	
 	@Override
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req) {
@@ -764,4 +785,5 @@ public class AndroidServiceImpl implements AndroidService {
 		return map;
 	}
 
+	
 }

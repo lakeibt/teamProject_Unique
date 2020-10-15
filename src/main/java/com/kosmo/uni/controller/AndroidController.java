@@ -21,7 +21,7 @@ import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.InClassHowVO;
-import com.kosmo.uni.vo.ShopVO;
+import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.nfcVO;
 
 @Controller
@@ -205,27 +205,27 @@ public class AndroidController {
 		return out;
 	}
 	
-	//당근나라 정보 불러오기
+	//정보방 정보 불러오기
 	@ResponseBody
 	@RequestMapping("/android/shoplist")
-	public ArrayList<ShopVO> androidShoplist() throws InterruptedException, ExecutionException{
+	public ArrayList<TableinfoVO> androidShoplist() throws InterruptedException, ExecutionException{
 		logger.info("androidShoplist()");
 		
-		ArrayList<ShopVO> out = andService.getShopList();	
+		ArrayList<TableinfoVO> out = andService.getShopList();	
 		return out;
 	}
 	
-	//당근나라 정보 불러오기2
+	//정보방 정보 불러오기2
 	@ResponseBody
 	@RequestMapping("/android/shoplistnext")
-	public ArrayList<ShopVO> androidShoplistnext(HttpServletRequest req) throws InterruptedException, ExecutionException{
+	public ArrayList<TableinfoVO> androidShoplistnext(HttpServletRequest req) throws InterruptedException, ExecutionException{
 		logger.info("androidShoplistnext()");
 		
-		ArrayList<ShopVO> out = andService.getShopListnext(req);	
+		ArrayList<TableinfoVO> out = andService.getShopListnext(req);	
 		return out;
 	}
 	
-	//당근나라 판매 완료
+	//정보방 판매 완료
 	@ResponseBody
 	@RequestMapping("/android/shoplistclear")
 	public Map<String, Object> androidShoplistclear(HttpServletRequest req){
@@ -234,6 +234,17 @@ public class AndroidController {
 		Map<String, Object> out = andService.getShopListclear(req);
 		
 		return out;
+	}
+	
+	//정보방 판매 완료
+	@ResponseBody
+	@RequestMapping("/android/tableinfosave")
+	public Map<String, Object> androidTableinfosave(HttpServletRequest req){
+		logger.info("androidTableinfosave()");
+		
+		andService.tableinfosave(req);
+		
+		return null;
 	}
 	
 

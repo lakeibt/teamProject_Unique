@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.InClassHowVO;
-import com.kosmo.uni.vo.ShopVO;
+import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.nfcVO;
 
 public interface AndroidService {
@@ -61,13 +61,16 @@ public interface AndroidService {
 	public ArrayList<InClassHowVO> getClassInHowNext(HttpServletRequest req) throws InterruptedException, ExecutionException;
 	
 	//당근나라 리스트 가져오기
-	public ArrayList<ShopVO> getShopList() throws InterruptedException, ExecutionException;
+	public ArrayList<TableinfoVO> getShopList() throws InterruptedException, ExecutionException;
 	
 	//당근나라 리스트 가져오기2
-	public ArrayList<ShopVO> getShopListnext(HttpServletRequest req) throws InterruptedException, ExecutionException;
+	public ArrayList<TableinfoVO> getShopListnext(HttpServletRequest req) throws InterruptedException, ExecutionException;
 	
 	//당근나라 판매완료
 	public Map<String, Object> getShopListclear(HttpServletRequest req);
+	
+	//당근나라 판매완료
+	public Map<String, Object> tableinfosave(HttpServletRequest req);
 	
 	//STU 강의 확인
 	public List<Map<String, Object>> StuCourse(HttpServletRequest req);
