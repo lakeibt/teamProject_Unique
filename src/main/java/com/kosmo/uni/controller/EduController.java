@@ -24,7 +24,7 @@ public class EduController {
 	EduService eduService;
 	
 	@RequestMapping("/")
-	public String home() {
+	public String home() {	
 		logger.info("url ==> /");
 		
 		return "guest/login";

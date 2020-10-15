@@ -162,10 +162,10 @@ function humanSearch() {
 															<td>${dto.id}</td>
 															<td>${dto.name}</td>
 															<td>${dto.depart_name}</td>
-															<td>${dto.paytotal}</td>
-															<td>${dto.pay}</td>
-															<td>${dto.meal}</td>
-															<td>${dto.contract_vehicle}</td>
+															<td><fmt:formatNumber type="number" maxFractionDigits = "3" value="${dto.paytotal}" /></td>
+															<td><fmt:formatNumber type="number" maxFractionDigits = "3" value="${dto.pay}" /></td>
+															<td><fmt:formatNumber type="number" maxFractionDigits = "3" value="${dto.meal}" /></td>
+															<td><fmt:formatNumber type="number" maxFractionDigits = "3" value="${dto.contract_vehicle}" /></td>
 															<td>${dto.overtime}</td>
 															<!-- 기본급:1, 연장근무:2, 식대:3, 차량유지비:4 -->
 														</tr>

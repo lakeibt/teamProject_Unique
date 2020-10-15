@@ -118,9 +118,9 @@ function show(num, rank) {
 												<c:forEach var="list" items="${list }" varStatus="status">
 													<tr>
 														<td style="width:20%">${list.RANK }</td>
-														<td style="width:20%">${list.SALARY }</td>
-														<td style="width:20%">${list.SALARY * 12 }</td>
-														<td style="width:20%;">${list.SALARYDAY }</td>
+														<td style="width:20%"><fmt:formatNumber type="number" maxFractionDigits = "3" value="${list.SALARY}" /> 원</td>
+														<td style="width:20%"><fmt:formatNumber type="number" maxFractionDigits = "3" value="${list.SALARY * 12}" /> 원</td>
+														<td style="width:20%"><fmt:formatDate value = "${list.SALARYDAY}" pattern = "yyyy-MM-dd" /></td>
 														<td style="width:10%">
 															<a id="open${status.index+1 }" onclick="show('${status.index+1}', '${list.RANK}');" class="glyphicon glyphicon-chevron-down"></a>
 														</td>
