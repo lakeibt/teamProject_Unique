@@ -695,6 +695,11 @@ public class AndroidServiceImpl implements AndroidService {
 		String year_text = req.getParameter("year");
 		String semester_text = req.getParameter("semester");
 		String day = req.getParameter("day").substring(0, 1);
+		
+		System.out.println(id);
+		System.out.println(year_text);
+		System.out.println(semester_text);
+		System.out.println(day);
 		int year = 0, semester = 0;
 		
 		if(year_text.equals("2020")) year = 2020;
