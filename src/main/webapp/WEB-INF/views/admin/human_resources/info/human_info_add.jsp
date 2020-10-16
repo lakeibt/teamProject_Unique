@@ -11,13 +11,13 @@
 	<c:if test="${insertCnt == 1}">
 		<script type = "text/javascript">
 			// 마지막 "info,success,warning,error" 중 택1
-			swal('등록 성공!', '성공적으로 등록되었습니다.', 'success');
+			alert('성공적으로 등록되었습니다.');
 			window.location="${admin}human_resources/info/human_info?option=${option}";
 		</script>
 	</c:if>
 	<c:if test="${insertCnt != 1}">
 		<script type = "text/javascript">
-			swal('등록 실패!', '등록에 실패하였습니다.', 'error');
+			alert('등록에 실패하였습니다.');
 			window.location="${admin}human_resources/info/human_info?option=${option}";
 		</script>
 	</c:if>

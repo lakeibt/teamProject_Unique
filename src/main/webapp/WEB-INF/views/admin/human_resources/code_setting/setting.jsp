@@ -84,23 +84,23 @@ function show(num, rank) {
 										</p>
 										<table class="table table-striped jambo_table">
 											<thead>
-												<tr class="headings">
-													<th class="column-title" style="width:20%">
+												<tr class="headings" align="center">
+													<th class="column-title" style="width:10%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">직급</font>
 														</font>
 													</th>
-													<th class="column-title" style="width:20%">
+													<th class="column-title" style="width:23%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">기본급(월)</font>
 														</font>
 													</th>
-													<th class="column-title" style="width:20%">
+													<th class="column-title" style="width:23%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">연봉</font>
 														</font>
 													</th>
-													<th class="column-title" style="width:20%;">
+													<th class="column-title" style="width:23%;">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">급여지급일</font>
 														</font>
@@ -116,11 +116,11 @@ function show(num, rank) {
 											</thead>
 											<tbody>
 												<c:forEach var="list" items="${list }" varStatus="status">
-													<tr>
-														<td style="width:20%">${list.RANK }</td>
-														<td style="width:20%"><fmt:formatNumber type="number" maxFractionDigits = "3" value="${list.SALARY}" /> 원</td>
-														<td style="width:20%"><fmt:formatNumber type="number" maxFractionDigits = "3" value="${list.SALARY * 12}" /> 원</td>
-														<td style="width:20%"><fmt:formatDate value = "${list.SALARYDAY}" pattern = "yyyy-MM-dd" /></td>
+													<tr align="center">
+														<td style="width:10%">${list.RANK }</td>
+														<td style="width:23%"><fmt:formatNumber type="number" maxFractionDigits = "3" value="${list.SALARY}" /> 원</td>
+														<td style="width:23%"><fmt:formatNumber type="number" maxFractionDigits = "3" value="${list.SALARY * 12}" /> 원</td>
+														<td style="width:23%"><fmt:formatDate value = "${list.SALARYDAY}" pattern = "yyyy-MM-dd" /></td>
 														<td style="width:10%">
 															<a id="open${status.index+1 }" onclick="show('${status.index+1}', '${list.RANK}');" class="glyphicon glyphicon-chevron-down"></a>
 														</td>

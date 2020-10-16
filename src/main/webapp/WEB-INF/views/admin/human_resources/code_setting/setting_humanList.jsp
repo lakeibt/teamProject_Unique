@@ -4,7 +4,7 @@
 <html>
 <body>
 <c:forEach var="human" items="${human }">
-<tr style="background-color:white;">
+<tr style="background-color:white;"  align="center">
 	<td>${human.ID }</td>
 	<td>${human.DEPART }</td>
 	<td>${human.NAME }</td>

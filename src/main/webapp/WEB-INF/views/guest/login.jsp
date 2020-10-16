@@ -1,126 +1,128 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ include file = "../include/setting.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>[유일대]로그인</title>
-<script type = "text/javascript">
-function rememberCheck() {
-	var rememberId = document.getElementsByName('rememberId')[0].checked;
-	if(rememberId) {
-		var id = document.getElementById('id').value;
-		sessionStorage.setItem("rememberId", rememberId);
-		sessionStorage.setItem("id", id)
-	} else {
-		sessionStorage.removeItem("rememberId");
-		sessionStorage.removeItem("id");
+	<title>[유일대]로그인</title>
+	<script type = "text/javascript">
+	function rememberCheck() {
+		var rememberId = document.getElementsByName('rememberId')[0].checked;
+		if(rememberId) {
+			var id = document.getElementById('id').value;
+			sessionStorage.setItem("rememberId", rememberId);
+			sessionStorage.setItem("id", id)
+		} else {
+			sessionStorage.removeItem("rememberId");
+			sessionStorage.removeItem("id");
+		}
+		return true;
+	};
+	
+	function rememberId() {
+		if(sessionStorage.getItem("rememberId")) {
+			document.getElementById('id').value = sessionStorage.getItem("id");
+			document.getElementsByName('rememberId')[0].checked = true;
+		}
 	}
-	return true;
-};
-
-function rememberId() {
-	if(sessionStorage.getItem("rememberId")) {
-		document.getElementById('id').value = sessionStorage.getItem("id");
-		document.getElementsByName('rememberId')[0].checked = true;
-	}
-}
-</script>
-<%@ include file="../bootstrap/guest_bootstrap2.jsp"%>
+	</script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="${resources}images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}vendor2/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}vendor2/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${resources}vendor2/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}vendor2/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}vendor2/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="${resources}vendor2/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="${resources}css/util.css">
+	<link rel="stylesheet" type="text/css" href="${resources}css/main.css">
+<!--===============================================================================================-->
 </head>
-<body class="dark-edition" onload = "rememberId();">
-	<div class="wrapper">
-		<%@ include file="../include/student_sidebar.jsp"%>
-		<div class="main-panel">
-			<div class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<div style="width: 50%; margin: 0 auto; margin-top:200px;">
-								<div style="width: 63%; margin: 0 auto;">
-									<b style="font-size: 50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;통합로그인</b>
-								</div>
-								<div>
-									<p style="font-weight: normal;">
-										<img src="${img}phone.png" style="width: 30px;">&nbsp;시스템 문의처
-									</p>
-									<p style="color: #003cbc; font-size: 30px; font-weight: normal;">
-										<img src="${img}lock2.png" style="width: 30px;">LOGIN
-									</p>
-									<hr width="100%" style="margin: 0 auto; margin-bottom: 15px;">
-									<c:if test="${sessionScope.auth == null}">
-										<form action="${path}guest/loginPro" method="post" style="width: 100%; margin: 0 auto;" onsubmit = 'return rememberCheck();'>
-											<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-											<input type="text" id = "id" name="id" placeholder="학번/교직원번호" style="width: 100%; height: 50px; margin: 3px;">
-											<input type="password" id = "pwd" name="pwd" placeholder="비밀번호" style="width: 100%; height: 50px; margin: 3px;">
-											<table style="width: 100%; margin-top: 10px; margin-bottom: 30px;">
-												<tr>
-													<td><input type="checkbox" name = "rememberId" id = "rememberId">학번/교직원번호 저장</td>
-													<td style="float: right; text-decoration: none;">
-														<a class="quote" href="#" style="color: black;">비밀번호 초기화</a>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2" style="text-align: right; text-decoration: none;">
-														<a href="#" style="color: black;">학번/교직원번호 조회</a>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2" style="text-align: right; text-decoration: none;">
-														<a href="#" style="color: black;">로그인/로그아웃 요구사항</a>
-													</td>
-												</tr>
-											</table>
-											<input type="submit" value="로그인" style="width: 100%; background-color: #0d2735; margin: 0 auto; color: white; height: 50px;">
-										</form>
-									</c:if>
-									<c:if test="${sessionScope.auth != null}">
-										<div style="margin: 0 auto; padding-top: 30px;">
-											<p style="text-align: center; font-size: 20px; font-weight: bold;">
-												귀하는 로그인되어 있는 상태입니다.
-											</p><br>
-											<p style="text-align: center; font-size: 20px; font-weight: bold;">
-												로그아웃하시려면 아래 버튼을 누르시면 됩니다.
-											</p><br>
-											
-										</div>
-										<input type="button" value="로그아웃"
-											style="height: 50px; width: 100%; margin: 0 auto; color: white; background-color: #0d2735;"
-											onClick="window.location = '${guest}logout'">
-									</c:if>
-								</div>
-							</div>
+<body onload = "rememberId();">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(${resources}images/YorkHighSchool.jpg);">
+					<span class="login100-form-title-1" style = "font-size: 35px;">
+						통합 로그인
+					</span>
+				</div>
+				<div style = "padding:5px; text-align:center">
+				<c:if test = "${errMsg != null}">
+					<b style = "color:red;">${errMsg}</b>
+				</c:if>
+				<c:if test = "${errMsg == null}">
+					<span style = "color:red;">&nbsp;</span>
+				</c:if>
+				</div>
+				<form class="login100-form validate-form" action="${path}guest/loginPro" method="post" style = "padding-top:17px;" onsubmit = 'return rememberCheck();'>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Id is required">
+						<span class="label-input100">ID</span>
+						<input class="input100" type="text" name="id" placeholder="학번/교직원번호" id = "id">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+						<span class="label-input100">Password</span>
+						<input class="input100" type="password" name="pwd" placeholder="비밀번호">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="flex-sb-m w-full p-b-30">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberId">
+							<label class="label-checkbox100" for="ckb1">
+								학번/교직원번호 저장
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1">
+								Forgot Password?
+							</a>
 						</div>
 					</div>
-				</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							로그인
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
-		<div class="container-fluid">
-			<nav class="float-left">
-				<ul>
-					<li><a href="https://www.creative-tim.com"> Creative Tim </a>
-					</li>
-					<li><a href="https://creative-tim.com/presentation"> About
-							Us </a></li>
-					<li><a href="http://blog.creative-tim.com"> Blog </a></li>
-					<li><a href="https://www.creative-tim.com/license">
-							Licenses </a></li>
-				</ul>
-			</nav>
-			<div class="copyright float-right" id="date">
-				, made with <i class="material-icons">favorite</i> by <a
-					href="https://www.creative-tim.com" target="_blank">Creative
-					Tim</a> for a better web.
-			</div>
-		</div>
-	</footer>
-	<script>
-        const x = new Date().getFullYear();
-        let date = document.getElementById('date');
-        date.innerHTML = '&copy; ' + x + date.innerHTML;
-      </script>
-	<%@ include file="../bootstrap/guest_bootstrap_js2.jsp"%>
-</body>
+	
+<!--===============================================================================================-->
+	<script src="${resources}vendor2/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${resources}vendor2/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${resources}vendor2/bootstrap/js/popper.js"></script>
+	<script src="${resources}vendor2/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${resources}vendor2/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="${resources}vendor2/daterangepicker/moment.min.js"></script>
+	<script src="${resources}vendor2/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="${resources}vendor2/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="${resources}js2/main.js"></script>
 
+</body>
 </html>

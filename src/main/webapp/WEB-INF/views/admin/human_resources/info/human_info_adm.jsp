@@ -8,6 +8,17 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}" />
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 <script>
+function checkPwd() {
+	var pwd = document.getElementById("pwd").value;
+	var pwd_re = document.getElementById("pwd_re").value;
+	if(pwd == pwd_re) {
+		return true
+	} else {
+		alert("비밀번호 확인란을 설정해주세요.");
+		return false;
+	}
+}
+
 $(document).ready(function(){
 	var fileTarget = $('.filebox .upload-hidden');
 	fileTarget.on('change', function(){
@@ -49,15 +60,29 @@ $(document).ready(function(){
 		if($("input[name=car]:checked").val() == "1"){
 			
 			$('#car_num_div').show();
+			$('#car_num_div').attr("required", true);
  
         }else if($("input[name=car]:checked").val() == "0"){
         	
         	$('#car_num_div').hide();
+        	$('#car_num_div').removeAttr("required");
            
         }
 		
 	});
 	
+});
+
+$(document).ready(function() {
+	$("input:radio[name=frgn]").change(function(){
+	    if($("input[name=frgn]:checked").val() == "0"){
+	        $("input[name=nation]").val("대한민국");
+	        $("input[name=nation]").attr("readonly", true);
+	    }else if($("input[name=frgn]:checked").val() == "1"){
+	        $("input[name=nation]").val('');                    
+	        $("input[name=nation]").removeAttr("readonly");
+	    }
+	});
 });
 
 </script>
@@ -66,7 +91,7 @@ $(document).ready(function(){
 <div class="col-md-12 col-sm-12 ">
 	<div class="x_panel">
 		<div class="x_content">
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="${admin}human_resources/info/human_info_add?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" onsubmit = "return checkPwd()">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<div class="x_title">
 				<h2>
@@ -144,7 +169,6 @@ $(document).ready(function(){
 						</label>
 						<div class="col-md-7 col-sm-7" id="selectBox_depart">
 							<select class="form-control" name="depart">
-								<option value=""> </option>
 								<c:forEach var="dto" items="${departList}">
 									<option value="${dto.getDepart()}">${dto.getDepart_name()}</option>
 								</c:forEach>
@@ -210,7 +234,7 @@ $(document).ready(function(){
 							for="first-name">차번호
 						</label>
 						<div class="col-md-7 col-sm-7">
-							<input type="text" name="carnum" required="required" onfocus="this.placeholder = '00가0000'" onblur="this.placeholder = ' '" 
+							<input type="text" name="carnum" onfocus="this.placeholder = '00가0000'" onblur="this.placeholder = ' '" 
 								class="form-control ">
 						</div>
 					</div>
@@ -256,8 +280,8 @@ $(document).ready(function(){
 							for="first-name">주민번호
 						</label>
 						<div class="col-md-7 col-sm-7 ">
-							<input type="text" id="jumin1" name="jumin1" required="required" class="form-control" style="width:47%; display:inline-block;">&nbsp;&nbsp;-&nbsp;
-							<input type="text" id="jumin2" name="jumin2" required="required" class="form-control" style="width:47%; display:inline-block;">
+							<input type="text" id="jumin1" name="jumin1" required="required" maxlength = "6" class="form-control" style="width:43%; display:inline-block;">&nbsp;&nbsp;-&nbsp;
+							<input type="text" id="jumin2" name="jumin2" required="required" maxlength = "7" class="form-control" style="width:50%; display:inline-block;">
 						</div>
 					</div>
 					<div class="item form-group">

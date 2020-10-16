@@ -39,7 +39,7 @@
 				<table class="table table-striped jambo_table bulk_action">
 					<thead>
 						<c:if test="${option == 'adm'}">
-							<tr class="headings">
+							<tr class="headings" align="center">
 								<th class="column-title">사번</th>
 								<th class="column-title">이름</th>
 								<th class="column-title">전화번호</th>
@@ -51,7 +51,7 @@
 							</tr>
 						</c:if>
 						<c:if test="${option == 'pro'}">
-							<tr class="headings">
+							<tr class="headings" align="center">
 								<th class="column-title">교번</th>
 								<th class="column-title">이름</th>
 								<th class="column-title">전화번호</th>
@@ -62,7 +62,7 @@
 							</tr>
 						</c:if>
 						<c:if test="${option == 'stu'}">
-							<tr class="headings">
+							<tr class="headings" align="center">
 								<th class="column-title">교번</th>
 								<th class="column-title">이름</th>
 								<th class="column-title">전화번호</th>
@@ -78,7 +78,7 @@
 					<tbody>
 						<c:forEach var="dto" items="${dtos}">
 							<c:if test="${option == 'adm'}">
-								<tr class="even pointer" id="${dto.getId()}">
+								<tr class="even pointer" id="${dto.getId()}" align="center">
 									<td class=" ">${dto.getId()}</td>
 									<td class=" ">${dto.getName()}</td>
 									<td class=" ">${dto.getTel()}</td>
@@ -91,7 +91,7 @@
 
 							</c:if>
 							<c:if test="${option == 'pro'}">
-								<tr class="even pointer" id="${dto.getId()}">
+								<tr class="even pointer" id="${dto.getId()}" align="center">
 									<td class=" ">${dto.getId()}</td>
 									<td class=" ">${dto.getName()}</td>
 									<td class=" ">${dto.getTel()}</td>
@@ -103,7 +103,7 @@
 								</tr>
 							</c:if>
 							<c:if test="${option == 'stu'}">
-								<tr class="even pointer" id="${dto.getId()}">
+								<tr class="even pointer" id="${dto.getId()}" align="center">
 									<td class=" ">${dto.getId()}</td>
 									<td class=" ">${dto.getName()}</td>
 									<td class=" ">${dto.getTel()}</td>

@@ -96,7 +96,7 @@
 															<td style="width:5%;">${dto.NUM }</td>
 															<td style="width:55%;"><a onclick="content('${dto.NUM }');">${dto.TITLE }</a></td>
 															<td style="width:15%;">${dto.WRITER }</td>
-															<td style="width:15%;"><fmt:parseDate value = "${dto.REG_DATE }" pattern = "yyyy-MM-dd HH:mm:ss"/></td>
+															<td style="width:15%;">${dto.REG_DATE}</td>
 															<td style="width:10%;">${dto.READCNT }</td>
 														</tr>
 													</c:forEach>

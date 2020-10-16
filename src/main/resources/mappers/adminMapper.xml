@@ -537,21 +537,21 @@
 	<select id="getAdminList" resultType="com.kosmo.uni.vo.HumanVO">
 		<![CDATA[
 		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, dep depart, depname depart_name , rank, enterday, account_number, car, de_address, rowNum rNum 
-		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, a.depart dep, d.depart_name depname, rank, enterday, account_number, car, de_address FROM a_admin a, a_depart d WHERE a.depart = d.depart)) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, a.depart dep, d.depart_name depname, rank, enterday, account_number, car, de_address FROM a_admin a, a_depart d WHERE a.depart = d.depart ORDER BY ID ASC)) WHERE rNum >= #{start} AND rNum <= #{end}
 		]]>
 	</select>
 	
 	<select id="getProfessorList" resultType="com.kosmo.uni.vo.HumanVO">
 		<![CDATA[
 		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, position, enterday, account_number, car, de_address, rowNum rNum 
-		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, p.m_code co, m.m_name na, position, enterday, account_number, car, de_address FROM p_professor p, a_major m WHERE p.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, p.m_code co, m.m_name na, position, enterday, account_number, car, de_address FROM p_professor p, a_major m WHERE p.m_code = m.m_code ORDER BY ID ASC)) WHERE rNum >= #{start} AND rNum <= #{end}
 		]]>
 	</select>
 	
 	<select id="getStudentList" resultType="com.kosmo.uni.vo.HumanVO">
 		<![CDATA[
 		SELECT * FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, co m_code, na m_name, grade, r_code, entrancedate, de_address, rowNum rNum 
-		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, s.m_code co, m.m_name na,grade, r_code, entrancedate, de_address FROM s_student s, a_major m WHERE s.m_code = m.m_code)) WHERE rNum >= #{start} AND rNum <= #{end}
+		  FROM (SELECT id, name, eng_name, jumin1, jumin2, gender, nation, tel, email, address, s.m_code co, m.m_name na,grade, r_code, entrancedate, de_address FROM s_student s, a_major m WHERE s.m_code = m.m_code ORDER BY ID ASC)) WHERE rNum >= #{start} AND rNum <= #{end}
 		]]>
 	</select>
 	

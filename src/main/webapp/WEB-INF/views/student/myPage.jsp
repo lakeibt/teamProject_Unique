@@ -9,7 +9,7 @@
 <script src="/uni/resources/js/request.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 </head>
-<body class="dark-edition"<%--   onload = "contentHome1('${vo.get('M_NAME')}'); test(); --%>">
+<body class="dark-edition" onload = "contentHome1('${vo.get('M_NAME')}');">
 <div class="wrapper">
 	<%@ include file="../include/student_sidebar.jsp"%>
 	<div class="main-panel">
@@ -68,7 +68,7 @@
 						function content2(i) {
 							window.location="${student}contest";
 						}
-						function contentHome1(major) {
+						/* function contentHome1(major) {
 						   var major = major;
 						   var value = 0;
 						   var num = 1;
@@ -97,7 +97,48 @@
 						      result.innerHTML = data;
 						      } else result.innerHTML = "Error!";
 						   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+						} */
+						
+						function contentHome1(major) {
+						   var value2 = 0;
+						   var value = 0;
+						   var mbn ="";
+						   
+						   if(major == '컴퓨터공학과') { value = 5; mbn = "공학"; value2 = 2463 }
+						   else if(major == '미용과') { value = 7; mbn = "예%2F체능학"; value2 = 9080 }
+						   else if(major == '건축학과') { value = 5; mbn = "공학"; value2 = 6 }
+						   else if(major == '영어영문과') { value = 5; mbn = "공학"; value2 = 3017 }
+						   else if(major == '디자인과') { value = 7; mbn = "예%2F체능학"; value2 = 1956 }
+						   else if(major == '국어국문학과') { value = 1; mbn = "어문학"; value2 = 2463 }
+						   else if(major == '일본어과') { value = 1; mbn = "어문학"; value2 = 2672 }
+						   else if(major == '프랑스어과') { value = 1; mbn = "어문학"; value2 = 3089 }
+						   else if(major == '기계공학과') { value = 5; mbn = "공학"; value2 = 1 }
+						   else if(major == '생명공학과') { value = 5; mbn = "공학"; value2 = 109 }
+						   else if(major == '실용미술과') { value = 7; mbn = "예%2F체능학"; value2 = 5541 }
+						   else if(major == '순수미술과') { value = 7; mbn = "예%2F체능학"; value2 = 10637 }
+							   
+						   console.log(value);
+						   console.log(value2);
+						   console.log(mbn);
+						   console.log(major);
+						   var param = "Major_Big_Code="+ value +"&"+"Major_Big_Name="+ mbn +"&"+"Major_Code="+ value2 +"&"+"Major_Name="+major;
+						   
+						   sendRequest(content_callback1,"employmentnext", "get", param);
+						   console.log(param);
 						}
+
+						function content_callback1() {
+						   var result = document.getElementById("coninfo");
+						   if(httpRequest.readyState == 4) { 
+						      if(httpRequest.status == 200) { 
+						         
+						      var data = httpRequest.responseText;
+						      result.innerHTML = data;
+						      
+						      } else result.innerHTML = "Error!";
+						   } else result.innerHTML = "ErrorCode : " + httpRequest.readyState;
+						}
+						
 						function contentHome2(major) {
 						   var major = major;
 						   var value = 0;

@@ -39,6 +39,14 @@ public class EduController {
 	}
 	
 	// 로그인 페이지로 이동
+	@RequestMapping("/guest/login2")
+	public String gue_login2() {
+		logger.info("url ==> login2");
+		
+		return "guest/login2";
+	}
+	
+	// 로그인 페이지로 이동
 	@RequestMapping("/guest/toMain")
 	public String gue_toMain() {
 		logger.info("url ==> toMain");

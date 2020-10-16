@@ -103,47 +103,40 @@ function endSelect() {
 										<table class="table table-striped jambo_table">
 											<thead>
 												<tr class="headings" align="center">
-													<th class="column-title">
+													<th class="column-title" style = "width:10%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">출근</font>
 														</font>
 													</th>
-													<th class="column-title">
+													<th class="column-title" style = "width:10%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">퇴근</font>
 														</font>
 													</th>
-													<th class="column-title">
+													<th class="column-title" style = "width:30%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">이름(소속)</font>
 														</font>
 													</th>
-													<th class="column-title">
+													<th class="column-title" style = "width:20%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">날짜</font>
 														</font>
 													</th>
-													<th class="column-title">
+													<th class="column-title" style = "width:10%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">출근시간</font>
 														</font>
 													</th>
-													<th class="column-title">
+													<th class="column-title" style = "width:10%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">퇴근시간</font>
 														</font>
 													</th>
-													<th class="column-title">
+													<th class="column-title" style = "width:10%">
 														<font style="vertical-align:inherit;">
 															<font style="vertical-align:inherit;">근무시간</font>
 														</font>
-													</th>
-													<th class="column-title no-link last">
-														<span class="nobr">
-															<font style="vertical-align:inherit;">
-																<font style="vertical-align:inherit;">특근</font>
-															</font>
-														</span>
 													</th>
 												</tr>
 											</thead>
@@ -184,15 +177,6 @@ function endSelect() {
 															</c:if>
 															<c:if test="${!empty ot}">
 																<td>${o-i}시간</td>
-															</c:if>
-															<fmt:formatDate var="dayOfTheWeek" value="${intime}"
-																pattern="E" />
-															<c:if test="${dayOfTheWeek == '토' || dayOfTheWeek == '일'}">
-																<td>O</td>
-															</c:if>
-															<c:if
-																test="${dayOfTheWeek == '월' || dayOfTheWeek == '화' || dayOfTheWeek == '수' || dayOfTheWeek == '목' || dayOfTheWeek == '금'}">
-																<td>-</td>
 															</c:if>
 														</tr>
 													</c:forEach>

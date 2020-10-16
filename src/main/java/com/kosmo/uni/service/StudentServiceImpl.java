@@ -142,7 +142,7 @@ public class StudentServiceImpl implements StudentService{
 		
 		// 학생 강의 목록 - timetable에 학생이 있는지부터 select ==> timetable 형태로 값을 insert 해줘야 함
 		int cnt = stuDAO.selectTimetable(id);
-		
+
 		// 없으면 timetable 형태로 값 insert 먼저 >> 그 다음 update
 		if(cnt == 0) {
 			for(int i = 0; i < 5; i++) {
