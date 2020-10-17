@@ -4,28 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>[유일대]로그인</title>
-	<script type = "text/javascript">
-	function rememberCheck() {
-		var rememberId = document.getElementsByName('rememberId')[0].checked;
-		if(rememberId) {
-			var id = document.getElementById('id').value;
-			sessionStorage.setItem("rememberId", rememberId);
-			sessionStorage.setItem("id", id)
-		} else {
-			sessionStorage.removeItem("rememberId");
-			sessionStorage.removeItem("id");
-		}
-		return true;
-	};
-	
-	function rememberId() {
-		if(sessionStorage.getItem("rememberId")) {
-			document.getElementById('id').value = sessionStorage.getItem("id");
-			document.getElementsByName('rememberId')[0].checked = true;
-		}
-	}
-	</script>
+	<title>[유일대]비밀번호 재설정</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -50,55 +29,63 @@
 	<link rel="stylesheet" type="text/css" href="${resources}css/util.css">
 	<link rel="stylesheet" type="text/css" href="${resources}css/main.css">
 <!--===============================================================================================-->
+<script>
+	function goBack() {
+		window.location.href = "${guest}login";
+	}
+	
+	function checkPwd() {
+		var pwd = document.getElementById('pwd').value;
+		var pwd_re = document.getElementById('pwd_re').value;
+		if(pwd == pwd_re) {
+			return true;
+		} else {
+			alert("비밀번호를 확인해주세요");
+			return false;
+		}
+	}
+</script>
 </head>
-<body onload = "rememberId();">
+<body>
+	<c:if test = "${updateFail != null}">
+		<script type = "text/javascript">
+			alert("${updateFail}");
+		</script>
+	</c:if>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(${resources}images/YorkHighSchool.jpg);">
 					<span class="login100-form-title-1" style = "font-size: 35px;">
-						통합 로그인
+						비밀번호 재설정
 					</span>
 				</div>
-				<div style = "margin-top:20px; text-align:center;">
-				<c:if test = "${errMsg != null}">
-					<b style = "color:red;">${errMsg}</b>
-				</c:if>
-				<c:if test = "${errMsg == null}">
+				<div style = "text-align:center; margin-top:20px;">
 					<span style = "color:red;">&nbsp;</span>
-				</c:if>
 				</div>
-				<form class="login100-form validate-form" action="${path}guest/loginPro" method="post" style = "padding-top:17px;" onsubmit = 'return rememberCheck();'>
+				<form class="login100-form validate-form" action="${path}guest/setPwdPro" method="post" style = "padding-top:17px;" onsubmit = 'return checkPwd();'>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="ID를 입력해주세요">
-						<span class="label-input100">ID</span>
-						<input class="input100" type="text" name="id" placeholder="학번/교직원번호" id = "id">
+					<input type= "hidden" name = "id" value = "${id}">
+					<input type= "hidden" name = "position" value = "${position}">
+					<div class="wrap-input100 validate-input m-b-18" data-validate="비밀번호를 입력해주세요">
+						<span class="label-input100">새 비밀번호</span>
+						<input class="input100" type="password" name="pwd" id = "pwd" placeholder="새 비밀번호 입력">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "비밀번호를 입력해주세요">
-						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pwd" placeholder="비밀번호">
+						<span class="label-input100">새 비밀번호 확인</span>
+						<input class="input100" type="password" name="pwd_re" id = "pwd_re" placeholder="새 비밀번호 입력">
 						<span class="focus-input100"></span>
 					</div>
-
-					<div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberId">
-							<label class="label-checkbox100" for="ckb1">
-								학번/교직원번호 저장
-							</label>
-						</div>
-
-						<div>
-							<a href="${guest}findPwd" class="txt1">
-								비밀번호 찾기
-							</a>
-						</div>
-					</div>
-
+					
 					<div class="container-login100-form-btn">
-						<input class="login100-form-btn" type = "submit" value = "로그인">
+						<button class="login100-form-btn">
+							확인
+						</button>
+						<button class="login100-form-btn" style = "margin-left:10%;" onclick = "goBack()">
+							돌아가기
+						</button>
 					</div>
 				</form>
 			</div>

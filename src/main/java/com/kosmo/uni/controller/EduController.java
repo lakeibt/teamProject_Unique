@@ -38,6 +38,50 @@ public class EduController {
 		return "guest/login";
 	}
 	
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping("/guest/findPwd")
+	public String gue_findPwd() {
+		logger.info("url ==> findPwd");
+		
+		return "guest/findPwd";
+	}
+	
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping("/guest/setPwd")
+	public String gue_setPwd() {
+		logger.info("url ==> setPwd");
+		
+		return "guest/setPwd";
+	}
+	
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping("/guest/setPwdPro")
+	public String gue_setPwdPro(HttpServletRequest req, Model model) {
+		logger.info("url ==> setPwdPro");
+		
+		eduService.setPwd(req, model);
+		
+		if((Integer)req.getAttribute("result") == 0) {
+			return "setPwd";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	// 비밀번호 찾기 과정
+	@RequestMapping("/guest/findPwdPro")
+	public String gue_findPwdPro(HttpServletRequest req, Model model) {
+		logger.info("url ==> findPwdPro");
+		
+		eduService.findPwd(req, model);
+		
+		if((Integer)req.getAttribute("result") == 1) {
+			return "redirect:setPwd";
+		}
+		
+		return "guest/findPwd";
+	}
+	
 	// 로그인 페이지로 이동
 	@RequestMapping("/guest/login2")
 	public String gue_login2() {

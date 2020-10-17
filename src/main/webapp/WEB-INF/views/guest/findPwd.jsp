@@ -4,28 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>[유일대]로그인</title>
-	<script type = "text/javascript">
-	function rememberCheck() {
-		var rememberId = document.getElementsByName('rememberId')[0].checked;
-		if(rememberId) {
-			var id = document.getElementById('id').value;
-			sessionStorage.setItem("rememberId", rememberId);
-			sessionStorage.setItem("id", id)
-		} else {
-			sessionStorage.removeItem("rememberId");
-			sessionStorage.removeItem("id");
-		}
-		return true;
-	};
-	
-	function rememberId() {
-		if(sessionStorage.getItem("rememberId")) {
-			document.getElementById('id').value = sessionStorage.getItem("id");
-			document.getElementsByName('rememberId')[0].checked = true;
-		}
-	}
-	</script>
+	<title>[유일대]비밀번호 찾기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -50,55 +29,74 @@
 	<link rel="stylesheet" type="text/css" href="${resources}css/util.css">
 	<link rel="stylesheet" type="text/css" href="${resources}css/main.css">
 <!--===============================================================================================-->
+<script type = "text/javascript">
+	function goBack() {
+		window.location.href = "${guest}login";
+	}
+</script>
 </head>
-<body onload = "rememberId();">
+<body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(${resources}images/YorkHighSchool.jpg);">
 					<span class="login100-form-title-1" style = "font-size: 35px;">
-						통합 로그인
+						비밀번호 찾기
 					</span>
 				</div>
-				<div style = "margin-top:20px; text-align:center;">
-				<c:if test = "${errMsg != null}">
-					<b style = "color:red;">${errMsg}</b>
+				<div style = "text-align:center; margin-top:20px;">
+				<c:if test = "${result == null}">
+					<span style = "color:red;">이하 내용을 입력해주세요</span>
 				</c:if>
-				<c:if test = "${errMsg == null}">
-					<span style = "color:red;">&nbsp;</span>
+				<c:if test = "${result == 0}">
+					<span style = "color:red;">입력하신 정보에 맞는 계정이 존재하지 않습니다</span>
+				</c:if>
+				<c:if test = "${result == 2}">
+					<span style = "color:red;">해당 아이디가 존재하지 않습니다</span>
 				</c:if>
 				</div>
-				<form class="login100-form validate-form" action="${path}guest/loginPro" method="post" style = "padding-top:17px;" onsubmit = 'return rememberCheck();'>
+				<form class="login100-form validate-form" action="${path}guest/findPwdPro" method="post" style = "padding-top:17px;">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="ID를 입력해주세요">
+					<div data-validate="Id is required" style = "width:100%; position:relative; padding:5px; padding-left:0px;">
+						<span class="label-input100">구분</span>
+						<select id="select1" name = "position" style="float:left; width:50%; font-size:15px; color:#909090; border:1px solid #aaa; border-radius: 5px; padding:5px;">
+							<option value="학생">학생</option>
+							<option value="교수">교수</option>
+							<option value="직원">직원</option>
+						</select>
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 validate-input m-b-18" data-validate="아이디를 입력해주세요">
 						<span class="label-input100">ID</span>
-						<input class="input100" type="text" name="id" placeholder="학번/교직원번호" id = "id">
+						<input class="input100" type="text" name="id" placeholder="학번/교직원번호">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input m-b-18" data-validate = "비밀번호를 입력해주세요">
-						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pwd" placeholder="비밀번호">
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "이름을 입력해주세요">
+						<span class="label-input100">이름</span>
+						<input class="input100" type="text" name="name" placeholder="이름">
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "전화번호를 입력해주세요">
+						<span class="label-input100">전화번호</span>
+						<input class="input100" type="text" name="tel" placeholder="000-0000-0000">
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="flex-sb-m w-full p-b-30">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberId">
-							<label class="label-checkbox100" for="ckb1">
-								학번/교직원번호 저장
-							</label>
-						</div>
-
-						<div>
-							<a href="${guest}findPwd" class="txt1">
-								비밀번호 찾기
-							</a>
-						</div>
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "이메일을 입력해주세요">
+						<span class="label-input100">이메일</span>
+						<input class="input100" type="text" name="email" placeholder="이메일">
+						<span class="focus-input100"></span>
 					</div>
-
+					
 					<div class="container-login100-form-btn">
-						<input class="login100-form-btn" type = "submit" value = "로그인">
+						<button class="login100-form-btn">
+							비밀번호 찾기
+						</button>
+						<button class="login100-form-btn" style = "margin-left:10%;" onclick = "goBack()">
+							돌아가기
+						</button>
 					</div>
 				</form>
 			</div>

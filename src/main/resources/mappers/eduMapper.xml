@@ -17,4 +17,67 @@
 		  FROM A_ADMIN
 		 WHERE ID = #{id}
 	</select>
+	
+	<select id = "findIdStu" parameterType = "String" resultType = "int">
+		SELECT count(id)
+		  FROM S_STUDENT
+		 WHERE ID = #{id}
+	</select>
+	
+	<select id = "findIdPro" parameterType = "String" resultType = "int">
+		SELECT count(id)
+		  FROM P_PROFESSOR
+		 WHERE ID = #{id}
+	</select>
+	
+	<select id = "findIdAdm" parameterType = "String" resultType = "int">
+		SELECT count(id)
+		  FROM A_ADMIN
+		 WHERE ID = #{id}
+	</select>
+	
+	<select id = "confirmIdStu" parameterType = "java.util.Map" resultType = "int">
+		SELECT count(id)
+		  FROM S_STUDENT
+		 WHERE ID = #{id}
+		   AND name = #{name}
+		   AND tel = #{tel}
+		   AND email = #{email}
+	</select>
+	
+	<select id = "confirmIdPro" parameterType = "java.util.Map" resultType = "int">
+		SELECT count(id)
+		  FROM P_PROFESSOR
+		 WHERE ID = #{id}
+		   AND name = #{name}
+		   AND tel = #{tel}
+		   AND email = #{email}
+	</select>
+	
+	<select id = "confirmIdAdm" parameterType = "java.util.Map" resultType = "int">
+		SELECT count(id)
+		  FROM A_ADMIN
+		 WHERE ID = #{id}
+		   AND name = #{name}
+		   AND tel = #{tel}
+		   AND email = #{email}
+	</select>
+	
+	<update id = "setPwdStu" parameterType = "java.util.Map">
+		UPDATE S_STUDENT
+		   SET PWD = #{pwd}
+		 WHERE ID = #{id}
+	</update>
+	
+	<update id = "setPwdPro" parameterType = "java.util.Map">
+		UPDATE P_PROFESSOR
+		   SET PWD = #{pwd}
+		 WHERE ID = #{id}
+	</update>
+	
+	<update id = "setPwdAdm" parameterType = "java.util.Map">
+		UPDATE A_ADMIN
+		   SET PWD = #{pwd}
+		 WHERE ID = #{id}
+	</update>
 </mapper>
