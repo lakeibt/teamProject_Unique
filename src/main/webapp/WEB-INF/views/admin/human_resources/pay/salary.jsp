@@ -91,9 +91,9 @@
 												<td><input class="form-control input-sm" type="text" name="salary_name"></td>
 											</tr>
 											<tr align="center">
-												<td style="algin:center;">
-													<input class="form-control input-sm" type="submit" style="float:left; width:100px;" value="등록"> 
-													<input class="form-control input-sm" type="reset" value="취소" style="float:left; width:100px;">
+												<td colspan="2" align="center">
+													<input class="form-control input-sm" type="submit" style="width:100px; display:inline-block;" value="등록"> 
+													<input class="form-control input-sm" type="reset" value="취소" style="width:100px;  display:inline-block;">
 												</td>
 											</tr>
 										</thead>
