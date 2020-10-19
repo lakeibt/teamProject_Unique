@@ -20,14 +20,6 @@
 					</video>
 					<div align="left" style="margin-top: 30px;">
 						<div class="col-md-12"  style="display:inline-block; padding:0">
-							<div style="float:right; height:100%;">
-								<a class="nav-link" href="javscript:void(0)" id="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-qrcode" style="font-size:40px"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="a" style="width:300px; height: 300px;">
-									<img src="${le_img}${vo.getLe_file_img()}" style="width:100%; height: 100%;">
-								</div>
-							</div>
 							<h4 style="display: inline-block">
 								${vo.getLe_title()}
 							</h4>
@@ -40,10 +32,6 @@
 					</div>
 				</div>
 			</td>
-		</tr>
-		<tr>
-			<th colspan="2" style="height:50px;">
-			</th>
 		</tr>
 	</table>
 </c:if>

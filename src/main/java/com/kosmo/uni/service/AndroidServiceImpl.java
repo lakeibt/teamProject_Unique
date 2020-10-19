@@ -242,21 +242,17 @@ public class AndroidServiceImpl implements AndroidService {
 		SimpleDateFormat format1 = new SimpleDateFormat("MM/dd");
 		String today = format1.format(System.currentTimeMillis());
 		// 안드로이드에서 전달할 값
-		System.out.println("today오늘 : " + today);
 		String phonenum = req.getParameter("phonenum");
 		String tagid = req.getParameter("tagid");
 
 		Map<String, String> out = new HashMap<String, String>();
 
-		System.out.println("phonenum : " + phonenum);
-		System.out.println("tagid : " + tagid);
 
 		Map<String, String> going = new HashMap<String, String>();
 		going.put("phonenum", phonenum);
 		going.put("today", today);
 
 		int what = andDAO.whatNfc(going);
-		System.out.println("what 있니?없니? : " + what);
 
 		if (what == 1) {
 			// 값있음 update 퇴근
@@ -268,7 +264,6 @@ public class AndroidServiceImpl implements AndroidService {
 				going2.put("today", today);
 				// 전화번호 서버로 보내기
 				andDAO.byeNfc(going2);
-				System.out.println("--------------");
 				// 웹에서 안드로이드로 전달할 값
 				System.out.println("NFC 출석 태깅 성공 ");
 				out.put("phonenum", phonenum);

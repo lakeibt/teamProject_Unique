@@ -32,7 +32,7 @@ public class EduController {
 	
 	// 로그인 페이지로 이동
 	@RequestMapping("/guest/login")
-	public String gue_login() {
+	public String gue_login() {	
 		logger.info("url ==> login");
 		
 		return "guest/login";

@@ -21,12 +21,6 @@
 					<div align="left" style="margin-top: 30px;">
 						<div class="col-md-12"  style="display:inline-block; padding:0">
 							<div style="float:right; height:100%;">
-								<a class="nav-link" href="javscript:void(0)" id="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-qrcode" style="font-size:40px"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="a" style="width:300px; height: 300px;">
-									<img src="${le_img}${vo.getLe_file_img()}" style="width:100%; height: 100%;">
-								</div>
 							</div>
 							<h4 style="display: inline-block">
 								<input type="text" class="form-control" name="le_title" value="${vo.getLe_title()}">
@@ -56,15 +50,6 @@
 							
 							<label for="le_file" style="margin-bottom: 0px;">업로드</label>
 							<input type="file" class="upload-hidden" id="le_file" name="le_file" value="${vo.getLe_file()}"  onchange="setFile_name(this);">
-						</td>
-					</tr>
-					<tr class="filebox">
-						<td style="width:100px;">첨부 이미지</td>
-						<td>
-							<input class="upload-name_img" name="le_file_img2" value="${vo.getLe_file_img()}" disabled="disabled">
-							
-							<label for="le_file_img" style="margin-bottom: 0px;">업로드</label>
-							<input type="file" class="upload-hidden_img" id="le_file_img" name="le_file_img" value="${vo.getLe_file_img()}" onchange="setThumbnail_img(event);">
 						</td>
 					</tr>
 				</table>

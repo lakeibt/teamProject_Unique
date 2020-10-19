@@ -643,35 +643,25 @@ public class ProfessorServiceImpl implements ProfessorService {
 		int insertCnt = 0;
 		
 		MultipartFile file= req.getFile("le_file");
-		MultipartFile file_img= req.getFile("le_file_img");
 		
 		String saveDir_file = req.getRealPath("/resources/video/");
-		String saveDir_file_img = req.getRealPath("/resources/img/lecture/");
 		
 		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\";
 		
 		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
 		
 		String realDir_file = realDir + realDir_detail + "video\\";
-		String realDir_file_img = realDir + realDir_detail + "img\\lecture\\";
 		
 		System.out.println(realDir_file);
-		System.out.println(realDir_file_img);
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
-		FileInputStream fis_img = null;
-		FileOutputStream fos_img = null;
 		
 		try {
 			file.transferTo(new File(saveDir_file + file.getOriginalFilename()));
 			fis = new FileInputStream(saveDir_file + file.getOriginalFilename());
 			fos = new FileOutputStream(realDir_file + file.getOriginalFilename());
 			
-			file_img.transferTo(new File(saveDir_file_img + file_img.getOriginalFilename()));
-			fis_img = new FileInputStream(saveDir_file_img + file_img.getOriginalFilename());
-			fos_img = new FileOutputStream(realDir_file_img + file_img.getOriginalFilename());
-		
 			int data = 0;
 			
 			while((data = fis.read()) != -1) {
@@ -681,21 +671,14 @@ public class ProfessorServiceImpl implements ProfessorService {
 			fos.close();
 			
 			data = 0;
-			while((data = fis_img.read()) != -1) {
-				fos_img.write(data);
-			}
-			fis_img.close();
-			fos_img.close();
 			
 			String le_file = file.getOriginalFilename();
-			String le_file_img = file_img.getOriginalFilename();
 			String co_code = req.getParameter("co_code");
 			String le_title = req.getParameter("le_title");
 			String le_content = req.getParameter("le_content");
 			String le_writer = (String) req.getSession().getAttribute("name");
 			int le_week = Integer.parseInt(req.getParameter("le_week"));
 			System.out.println(le_file);
-			System.out.println(le_file_img);
 			System.out.println(co_code);
 			System.out.println(le_title);
 			System.out.println(le_content);
@@ -706,7 +689,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 			vo.setCo_code(co_code);
 			vo.setLe_content(le_content);
 			vo.setLe_file(le_file);
-			vo.setLe_file_img(le_file_img);
 			vo.setLe_title(le_title);
 			vo.setLe_week(le_week);
 			vo.setLe_writer(le_writer);
@@ -730,32 +712,23 @@ public class ProfessorServiceImpl implements ProfessorService {
 		int insertCnt = 0;
 		
 		MultipartFile file= req.getFile("le_file");
-		MultipartFile file_img= req.getFile("le_file_img");
 		
 		String saveDir_file = req.getRealPath("/resources/video/");
-		String saveDir_file_img = req.getRealPath("/resources/img/lecture/");
 		
 		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\";
 		
 		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
 		
 		String realDir_file = realDir + realDir_detail + "video\\";
-		String realDir_file_img = realDir + realDir_detail + "img\\lecture\\";
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;
-		FileInputStream fis_img = null;
-		FileOutputStream fos_img = null;
 		
 		try {
 			file.transferTo(new File(saveDir_file + file.getOriginalFilename()));
 			fis = new FileInputStream(saveDir_file + file.getOriginalFilename());
 			fos = new FileOutputStream(realDir_file + file.getOriginalFilename());
 			
-			file_img.transferTo(new File(saveDir_file_img + file.getOriginalFilename()));
-			fis_img = new FileInputStream(saveDir_file_img + file_img.getOriginalFilename());
-			fos_img = new FileOutputStream(realDir_file_img + file_img.getOriginalFilename());
-		
 			int data = 0;
 			
 			while((data = fis.read()) != -1) {
@@ -765,26 +738,18 @@ public class ProfessorServiceImpl implements ProfessorService {
 			fos.close();
 			
 			data = 0;
-			while((data = fis_img.read()) != -1) {
-				fos_img.write(data);
-			}
-			fis_img.close();
-			fos_img.close();
 			
 			int le_num = Integer.parseInt(req.getParameter("le_num"));
 			String le_file = file.getOriginalFilename();
-			String le_file_img = file_img.getOriginalFilename();
 			String le_title = req.getParameter("le_title");
 			String le_content = req.getParameter("le_content");
 			System.out.println(le_file);
-			System.out.println(le_file_img);
 			System.out.println(le_title);
 			System.out.println(le_content);
 			LectureVO vo = new LectureVO();
 			
 			vo.setLe_content(le_content);
 			vo.setLe_file(le_file);
-			vo.setLe_file_img(le_file_img);
 			vo.setLe_title(le_title);
 			vo.setLe_num(le_num);
 			

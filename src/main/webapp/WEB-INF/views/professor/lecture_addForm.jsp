@@ -22,10 +22,6 @@
 						<td style="width:100px;">첨부 동영상</td>
 						<td><input type="file" multiple="multiple" name="le_file"></td>
 					</tr>
-					<tr>
-						<td style="width:100px;">첨부 이미지</td>
-						<td><input type="file" multiple="multiple" name="le_file_img"></td>
-					</tr>
 				</table>
 			</th>
 		</tr>

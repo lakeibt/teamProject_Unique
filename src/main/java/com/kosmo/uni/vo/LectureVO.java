@@ -12,7 +12,6 @@ public class LectureVO {
 	private Timestamp le_date;
 	private String le_file;
 	private int le_week;
-	private String le_file_img;
 	
 	public int getLe_num() {
 		return le_num;
@@ -62,12 +61,5 @@ public class LectureVO {
 	public void setLe_week(int le_week) {
 		this.le_week = le_week;
 	}
-	public String getLe_file_img() {
-		return le_file_img;
-	}
-	public void setLe_file_img(String le_file_img) {
-		this.le_file_img = le_file_img;
-	}
-	
 	
 }

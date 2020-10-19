@@ -223,7 +223,7 @@ function addressSearch() {
 										</div>
 										<div class="col-md-3">
 											<div class="form-group bmd-form-group">
-												<label class="bmd-label-floating">상담 타입(임시)</label>
+												<label class="bmd-label-floating">상담 분류</label>
 												<input type="text" class="form-control" name="consultType">
 											</div>
 										</div>

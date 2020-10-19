@@ -141,7 +141,7 @@
 	</select>
 	
 	<insert id="insertLecture" parameterType="com.kosmo.uni.vo.LectureVO">
-		INSERT INTO p_lecture values(p_lecture_seq.nextval, #{co_code}, #{le_title}, #{le_content}, #{le_writer}, sysdate, #{le_file}, #{le_week}, #{le_file_img})
+		INSERT INTO p_lecture values(p_lecture_seq.nextval, #{co_code}, #{le_title}, #{le_content}, #{le_writer}, sysdate, #{le_file}, #{le_week})
 	</insert>
 	
 	<update id="updateLecture" parameterType="com.kosmo.uni.vo.LectureVO">
@@ -149,8 +149,7 @@
 		SET
 		le_title = #{le_title}, 
 		le_content = #{le_content}, 
-		le_file = #{le_file}, 
-		le_file_img = #{le_file_img}
+		le_file = #{le_file}
 		WHERE le_num = #{le_num}
 	</update>
 	

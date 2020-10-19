@@ -14,7 +14,11 @@
 	String param2 = request.getParameter("Major_Big_Name");
 	String param3 = request.getParameter("Major_Code");
 	String param4 = request.getParameter("Major_Name");
-	Document doc2 = Jsoup.connect("http://www.jobkorea.co.kr/Top100/?Main_Career_Type=1&Search_Type=2&BizJobtype_Bctgr_Code=0&BizJobtype_Bctgr_Name=%EC%A0%84%EC%B2%B4&BizJobtype_Code=0&BizJobtype_Name=%EC%A0%84%EC%B2%B4&Major_Big_Code="+param1+"&Major_Big_Name="+param2+"&Major_Code="+param3+"&Major_Name="+param4+"&Edu_Level_Code=9&Edu_Level_Name=%EC%A0%84%EC%B2%B4&Edu_Level_Name=%EC%A0%84%EC%B2%B4&MidScroll=&duty-depth1=on").get();
+	Document doc2 = Jsoup.connect("http://www.jobkorea.co.kr/Top100/?Main_Career_" + 
+	"Type=1&Search_Type=2&BizJobtype_Bctgr_Code=0&BizJobtype_Bctgr_Name=%EC%A0%84%EC%B2%B4" + 
+	"&BizJobtype_Code=0&BizJobtype_Name=%EC%A0%84%EC%B2%B4&Major_Big_Code="+param1+
+	"&Major_Big_Name="+param2+"&Major_Code="+param3+"&Major_Name="+param4+
+	"&Edu_Level_Code=9&Edu_Level_Name=%EC%A0%84%EC%B2%B4&Edu_Level_Name=%EC%A0%84%EC%B2%B4&MidScroll=&duty-depth1=on").get();
 %>
 
 <%
