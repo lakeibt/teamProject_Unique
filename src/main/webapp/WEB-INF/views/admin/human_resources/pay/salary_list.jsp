@@ -222,17 +222,17 @@ function selectSalaryConfirm() {
 															</td>
 															<c:if test="${atos.salary_confirm==1}">
 																<td><a id="payroll" class="btn btn-app"
-																	style="height: 30px; padding: 5px;">조회</a><br> <a
+																	style="height: 30px; padding: 5px;">조회</a><a
 																	class="btn btn-app" style="height: 30px; padding: 5px;"
-																	href="${path}admin/human_resources/pay/commitSalary?salary_input_num=${atos.salary_input_num}">확정</a><br>
+																	href="${path}admin/human_resources/pay/commitSalary?salary_input_num=${atos.salary_input_num}">확정</a>
 																	<a id="modify" class="btn btn-app"
-																	style="height: 30px; padding: 5px;">수정</a><br>
+																	style="height: 30px; padding: 5px;">수정</a>
 																	<a class="btn btn-app"
-																	style="height: 30px; padding: 5px;" id="delete">삭제</a></td>
+																	style="height: 30px; padding: 5px;" id="delete">삭제</a>
 															</c:if>
 															<c:if test="${atos.salary_confirm!=1}">
 																<td><a id="confirm_payroll" class="btn btn-app"
-																	style="height: 30px; padding: 5px;">조회</a><br>
+																	style="height: 30px; padding: 5px;">조회</a>
 																	<a class="btn btn-app"
 																	style="height: 30px; padding: 5px;" id="delete">삭제</a></td>
 															</c:if>

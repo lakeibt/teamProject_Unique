@@ -8,6 +8,20 @@
 <script src="/uni/resources/js/jquery-3.5.1.min.js"></script>
 <script src="/uni/resources/js/request.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+<script>
+function freeboard() {
+   var url ="http://192.168.219.153:3000/Input/${sessionScope.memId}";
+   var setting = 'height=800, width=1300';
+   window.open(url ,'자유게시판', setting);
+}
+
+function danggenBoard() {
+   var url ="http://192.168.219.126:3000/Input/${sessionScope.memId}";
+   var setting = 'height=800, width=1300';
+   window.open(url ,'자유게시판', setting);
+}
+</script>
+
 </head>
 <body class="dark-edition"<%--   onload = "contentHome1('${vo.get('M_NAME')}'); test(); --%>">
 <div class="wrapper">
@@ -31,6 +45,27 @@
 								<p class="card-description">${vo.get('GRADE')}학년</p>
 							</div>
 						</div>
+						<div class="card">
+		                     <div class="card-header card-header-primary" style="margin:0px;">
+		                        <div class="nav-tabs-navigation">
+		                           <div class="nav-tabs-wrapper">
+		                              <span class="nav-tabs-title"></span>
+			                              <ul class="nav nav-tabs" data-tabs="tabs">
+			                                 <li class="nav-item">
+			                                    <a class="nav-link active show" data-toggle="tab" onclick="freeboard();">
+			                                       <i class="material-icons">list</i>자유게시판
+			                                    </a>
+			                                     <a class="nav-link active show" data-toggle="tab" onclick="danggenBoard();">
+			                                       <i class="material-icons">list</i>자유 장터
+			                                    </a>
+			                                 </li>
+			                                 
+			                              </ul>
+		                           	 </div>
+			                       </div>
+			                   </div>
+			               </div>
+						
 					</div>
 					
 					<div class="col-xl-10 col-lg-12">
