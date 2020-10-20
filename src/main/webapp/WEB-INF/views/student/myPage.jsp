@@ -91,7 +91,10 @@ function danggenBoard() {
 									</div>
 								</div>
 								<div class="card-body">
-									<div class="table-responsive" id="coninfo" style="padding-top:40px; height:300px;">
+									<div class="table-responsive"  style="padding-top:20px; height:420px;">
+										<table id="coninfo" style="width: 100%">
+										
+										</table>
 									</div>
 								</div>
 							</div>

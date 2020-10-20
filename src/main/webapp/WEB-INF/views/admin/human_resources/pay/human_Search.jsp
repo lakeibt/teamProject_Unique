@@ -90,11 +90,11 @@ var pageNum = ${pageNum}
 						<td>${dto.id}</td>
 						<td>${dto.name}</td>
 						<td>${dto.depart_name}</td>
-						<td>${dto.paytotal}</td>
-						<td>${dto.pay}</td>
-						<td>${dto.meal}</td>
-						<td>${dto.contract_vehicle}</td>
-						<td>${dto.overtime}</td>
+						<td><fmt:formatNumber value="${dto.paytotal}" pattern="#,###" /></td>
+						<td><fmt:formatNumber value="${dto.pay}" pattern="#,###" /></td>
+						<td><fmt:formatNumber value="${dto.meal}" pattern="#,###" /></td>
+						<td><fmt:formatNumber value="${dto.contract_vehicle}" pattern="#,###" /></td>
+						<td><fmt:formatNumber value="${dto.overtime}" pattern="#,###" /></td>
 						<!-- 기본급:1, 연장근무:2, 식대:3, 차량유지비:4 -->
 					</tr>
 				</c:forEach>
