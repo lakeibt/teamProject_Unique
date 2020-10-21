@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
 function calendar(){
-	var url ="http://192.168.219.154:8081/";
+	var url ="http://192.168.219.150:8081/";
 	var setting = 'height=800, width=800';
 	window.open(url ,'캘린더', setting);
 }
@@ -302,7 +302,7 @@ function message_reply(sender_id, sender_name){
 	<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
 		<div class="container-fluid">
 			<div class="navbar-wrapper">
-				<a class="navbar-brand" href="javascript:void(0)">Home</a>
+				<a class="navbar-brand" href="javascript:void(0)" style = "color:white;">Home</a>
 			</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false"
 					aria-label="Toggle navigation" data-target="#navigation-example">

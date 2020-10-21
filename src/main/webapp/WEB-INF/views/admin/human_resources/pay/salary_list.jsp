@@ -211,7 +211,7 @@ function selectSalaryConfirm() {
 															<td><fmt:formatDate type="both" pattern="yyyy-MM-dd"
 																	value="${atos.salary_inday}" /></td>
 															<c:if test="${atos.salary_confirm==1}">
-																<td><a class="btn"
+																<td><a class="btn btn-app"
 																	style="height: 30px; padding: 5px;" id="cntAndTotal">급여계산</a>
 															</c:if>
 															<c:if test="${atos.salary_confirm!=1}">

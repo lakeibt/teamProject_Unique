@@ -1,71 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="sidebar" data-color="purple" data-background-color="black" data-image="${assets}img/sidebar-2.jpg">
 	<div class="logo">
-	<c:if test = "${sessionScope.auth == null}">
-		<a href="${guest}login" class="simple-text logo-normal">Unique Universal</a>
-	</c:if>
-	<c:if test = "${sessionScope.auth == 'ROLE_STUDENT'}">
 		<a href="${student}myPage" class="simple-text logo-normal">Unique Universal</a>
-	</c:if>
-	<c:if test = "${sessionScope.auth == 'ROLE_PROFESSOR'}">
-		<a href="${professor}main" class="simple-text logo-normal">Unique Universal</a>
-	</c:if>
-	<c:if test = "${sessionScope.auth == 'ROLE_ADMIN'}">
-		<a href="${admin}main" class="simple-text logo-normal">Unique Universal</a>
-	</c:if>
 	</div>
 	<div class="sidebar-wrapper">
 		<ul class="nav">
-			<c:if test="${sessionScope.auth != null}">
 			<li class="nav-item">
 				<a class="nav-link" href="${student}myPage">
-					<i class="material-icons">dashboard</i>
-					<p>홈</p>
+					<i class="material-icons" style = "color:white;">dashboard</i>
+					<p style = "color:white; font-size:18px;">홈</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}myPage_modify"> 
-					<i class="material-icons">person</i>
-					<p>내 정보</p>
+					<i class="material-icons" style = "color:white;">person</i>
+					<p style = "color:white; font-size:18px;">내 정보</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}course_register">
-					<i class="material-icons">schedule</i>
-					<p>수강신청</p>
+					<i class="material-icons" style = "color:white;">schedule</i>
+					<p style = "color:white; font-size:18px;">수강신청</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}course">
-					<i class="material-icons">library_books</i>
-					<p>수강목록</p>
+					<i class="material-icons" style = "color:white;">library_books</i>
+					<p style = "color:white; font-size:18px;">수강목록</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}course_timeTable">
-					<i class="material-icons">event</i>
-					<p>시간표</p>
+					<i class="material-icons" style = "color:white;">event</i>
+					<p style = "color:white; font-size:18px;">시간표</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}score">
-					<i class="material-icons">rule</i>
-					<p>학점</p>
+					<i class="material-icons" style = "color:white;">rule</i>
+					<p style = "color:white; font-size:18px;">학점</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}employment">
-					<i class="material-icons">assignment_ind</i>
-					<p>취업 정보</p>
+					<i class="material-icons" style = "color:white;">assignment_ind</i>
+					<p style = "color:white; font-size:18px;">취업 정보</p>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="${student}contest">
-					<i class="material-icons">supervisor_account</i>
-					<p>공모전 정보</p>
+					<i class="material-icons" style = "color:white;">supervisor_account</i>
+					<p style = "color:white; font-size:18px;">공모전 정보</p>
 				</a>
 			</li>
-			</c:if>
 		</ul>
 	</div>
 </div>

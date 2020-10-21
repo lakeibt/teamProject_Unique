@@ -25,6 +25,7 @@
 	Elements posts = doc2.body().getElementsByClass("rankList");
 	Elements file = posts.select("li");
 %>
+<table class="table" style="font-size: 15px; margin-top: -18px;">
 <%
     for(Element e : file){
 %>
@@ -42,3 +43,4 @@
 <%
     }
 %>
+</table>

@@ -87,7 +87,7 @@ $("[id^=btn]").on('click', function(nextValue){
 				<c:forEach var="dto" items="${dtos}">
 					<tr align="center">
 						<td><fmt:formatDate value="${dto.salary_month}"
-								pattern="YY/MM" /></td>
+								pattern="YYYY/MM" /></td>
 						<td>${dto.id}</td>
 						<td>${dto.name}</td>
 						<td>${dto.depart_name}</td>

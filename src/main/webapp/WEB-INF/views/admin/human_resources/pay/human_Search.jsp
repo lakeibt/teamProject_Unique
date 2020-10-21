@@ -86,7 +86,7 @@ var pageNum = ${pageNum}
 			<c:if test="${humanSearch_Cnt > 0}">
 				<c:forEach var="dto" items="${dtos}">
 					<tr align="center">
-						<td><fmt:formatDate value="${dto.salary_month}" pattern="YY/MM" /></td>
+						<td><fmt:formatDate value="${dto.salary_month}" pattern="YYYY/MM" /></td>
 						<td>${dto.id}</td>
 						<td>${dto.name}</td>
 						<td>${dto.depart_name}</td>

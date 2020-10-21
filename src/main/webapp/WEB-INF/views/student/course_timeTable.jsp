@@ -50,7 +50,7 @@
 										<thead class="text-primary">
 											<tr>
 												<td>학과</td>
-												<td><input class="form-control" type="text" value="${vo.m_code}" disabled></td>
+												<td><input class="form-control" type="text" value="${vo.m_name}(${vo.m_code})" disabled></td>
 												<td>학번</td>
 												<td><input class="form-control" type="text" value="${vo.id}" disabled></td>
 												<td>이름</td>

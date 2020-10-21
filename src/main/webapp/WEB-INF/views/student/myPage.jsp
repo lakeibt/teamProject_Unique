@@ -16,7 +16,7 @@ function freeboard() {
 }
 
 function danggenBoard() {
-   var url ="http://192.168.219.132:3000/Input/${sessionScope.memId}";
+   var url ="http://192.168.219.135:3000/Input/${sessionScope.memId}";
    var setting = 'height=800, width=1300';
    window.open(url ,'자유게시판', setting);
 }
@@ -92,9 +92,9 @@ function danggenBoard() {
 								</div>
 								<div class="card-body">
 									<div class="table-responsive"  style="padding-top:20px; height:420px;">
-										<table id="coninfo" style="width: 100%">
+										<div id="coninfo" style="width: 100%">
 										
-										</table>
+										</div>
 									</div>
 								</div>
 							</div>

@@ -22,32 +22,32 @@ function proBoard(){
         <ul class="nav">
           <li class="nav-item  ">
             <a class="nav-link" href="${professor}main">
-              <i class="material-icons">dashboard</i>
-              <p>Home</p>
+              <i class="material-icons" style = "color:white;">dashboard</i>
+              <p style = "color:white; font-size:18px;">Home</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="${professor}myPage">
-              <i class="material-icons">person</i>
-              <p>내정보</p>
+              <i class="material-icons" style = "color:white;">person</i>
+              <p style = "color:white; font-size:18px;">내정보</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="${professor}course">
-              <i class="material-icons">library_books</i>
-              <p>강의관리</p>
+              <i class="material-icons" style = "color:white;">library_books</i>
+              <p style = "color:white; font-size:18px;">강의관리</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="${professor}score">
-              <i class="material-icons">content_paste</i>
-              <p>성적관리</p>
+              <i class="material-icons" style = "color:white;">content_paste</i>
+              <p style = "color:white; font-size:18px;">성적관리</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" onclick="proBoard();">
-              <i class="material-icons">content_paste</i>
-              <p>한마디게시판</p>
+              <i class="material-icons" style = "color:white;">content_paste</i>
+              <p style = "color:white; font-size:18px;">한마디게시판</p>
             </a>
           </li>
           
