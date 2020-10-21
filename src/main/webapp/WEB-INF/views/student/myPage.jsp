@@ -10,13 +10,13 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script>
 function freeboard() {
-   var url ="http://192.168.219.153:3000/Input/${sessionScope.memId}";
+   var url ="http://192.168.219.135:3000/Input/${sessionScope.memId}";
    var setting = 'height=800, width=1300';
    window.open(url ,'자유게시판', setting);
 }
 
 function danggenBoard() {
-   var url ="http://192.168.219.126:3000/Input/${sessionScope.memId}";
+   var url ="http://192.168.219.132:3000/Input/${sessionScope.memId}";
    var setting = 'height=800, width=1300';
    window.open(url ,'자유게시판', setting);
 }

@@ -9,7 +9,7 @@
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
 function calendar(){
-	var url ="http://192.168.219.127:8081/";
+	var url ="http://192.168.219.156:8083/";
 	var setting = 'height=800, width=800';
 	window.open(url ,'캘린더', setting);
 }
@@ -53,7 +53,7 @@ $(document).ready(function() {
 	connectWS();
 });
 function connectWS() {
-	var ws = new WebSocket("ws://192.168.219.101/uni/message/websocket");
+	var ws = new WebSocket("ws://192.168.219.113/uni/message/websocket");
 	socket = ws;
 
 	ws.onopen = function() {

@@ -4,6 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+function proBoard(){
+   var url ="http://192.168.219.120:3000/proboard/${sessionScope.memId}/${sessionScope.name}";
+   var setting = 'height=800, width=1000';
+   window.open(url ,'한마디게시판', setting);
+}
+
+</script>
 </head>
 <body>
     <div class="sidebar" data-color="purple" data-background-color="black" data-image="${assets}img/sidebar-2.jpg">
@@ -34,6 +42,12 @@
             <a class="nav-link" href="${professor}score">
               <i class="material-icons">content_paste</i>
               <p>성적관리</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" onclick="proBoard();">
+              <i class="material-icons">content_paste</i>
+              <p>한마디게시판</p>
             </a>
           </li>
           

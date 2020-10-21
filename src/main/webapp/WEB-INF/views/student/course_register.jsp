@@ -107,7 +107,7 @@ function deleteMyCourse(code) {
 									<script type="text/javascript">
 									function openSyllabus(code) {
 										var param = "code=" + code;
-										var settings = 'toolbar=0, status=0, menubar=0, scrollbars=yes, height=600, width=800';
+										var settings = 'toolbar=0, status=0, menubar=0, scrollbars=yes, height=500, width=400';
 										window.open("course_syllabus2?code="+code, '강의계획서', settings);
 									}
 									</script>
