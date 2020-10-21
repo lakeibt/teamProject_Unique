@@ -80,4 +80,7 @@ public interface AndroidService {
 
 	//급여조회
 	public Map<String, Object> getSalary(HttpServletRequest req);
+	
+	//챗봇 성적 조회
+	public Map<String, Object> getChatGrade(HttpServletRequest req);
 }

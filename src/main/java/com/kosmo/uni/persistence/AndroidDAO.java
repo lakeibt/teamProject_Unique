@@ -10,6 +10,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.ScoreVO;
 import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
@@ -104,4 +105,9 @@ public interface AndroidDAO {
 	
 	//급여조회
 	public Map<String, Object> getSalary(Map<String, Object> map);
+	
+	//챗봇 학생정보조회
+   public StudentVO getMemberInfo(String id);
+   //챗봇 - 성적조회
+   public List<ScoreVO> getChatGrade(Map<String, Object> info);
 }

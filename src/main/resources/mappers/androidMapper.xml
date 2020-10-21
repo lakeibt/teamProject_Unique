@@ -191,4 +191,30 @@
 		AND A.DEPART = D.DEPART 
 		AND S.SALARY_MONTH LIKE #{year}||'/'||#{month}||'%' AND S.ID = #{id}
 	</select>
+	
+	<select id="getMemberInfo" resultType="com.kosmo.uni.vo.StudentVO">
+      select id
+           , m_code
+           , name
+           , jumin1
+           , tel
+           , email
+           , address 
+        from s_student 
+       where id =#{id}
+   </select>
+   
+   <select id="getChatGrade" parameterType="java.util.Map" resultType="com.kosmo.uni.vo.ScoreVO">
+      SELECT C.CO_NAME 
+           , C.P_NAME 
+           , C.CO_YEAR 
+            , C.CO_SEMESTER 
+            , S.GRADES_CODE 
+            , G.GRADES_SCORE 
+        FROM P_STUDENT_SCORE S, A_COURSE C, P_GRADES_SET G, S_STUDENT ST
+       WHERE S.CO_CODE=C.CO_CODE
+         AND S.GRADES_CODE=G.GRADES_CODE
+         AND S.ID=ST.ID
+         AND S.ID=#{id} AND C.CO_YEAR=#{CO_YEAR} AND C.CO_SEMESTER=#{CO_SEMESTER}
+   </select>
 </mapper>

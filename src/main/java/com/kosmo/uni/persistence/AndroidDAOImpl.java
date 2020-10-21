@@ -14,6 +14,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.ScoreVO;
 import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
@@ -225,4 +226,17 @@ public class AndroidDAOImpl implements AndroidDAO{
 		AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
 		return dao.getSalary(map);
 	}
+	
+	@Override
+	   public StudentVO getMemberInfo(String id) {
+	      AndroidDAO dao = sqlSession.getMapper(AndroidDAO.class);
+	      StudentVO m = dao.getMemberInfo(id);      
+	      System.out.println("챗봇 학생 정보  m : " + m);      
+	      return m;
+	   }
+	   
+	   @Override
+	   public List<ScoreVO> getChatGrade(Map<String, Object> info) {
+	      return sqlSession.selectList("com.kosmo.uni.persistence.AndroidDAO.getChatGrade", info);
+	   }
 }

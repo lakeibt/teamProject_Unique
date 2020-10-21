@@ -1,6 +1,7 @@
 package com.kosmo.uni.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -21,6 +22,7 @@ import com.kosmo.uni.persistence.AndroidDAO;
 import com.kosmo.uni.service.AndroidService;
 import com.kosmo.uni.vo.ConsultVO;
 import com.kosmo.uni.vo.InClassHowVO;
+import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.nfcVO;
 
@@ -288,5 +290,29 @@ public class AndroidController {
 		Map<String, Object> map = andService.getSalary(req);
 		return map;
 	}
+	
+	@ResponseBody
+   @RequestMapping("/android/androidMyInfo")
+   public Map<String, Object> androidMyInfo(HttpServletRequest req) {
+      logger.info("androidMyInfo()");
+      String id = req.getParameter("id");
+      
+      StudentVO m = andDao.getMemberInfo(id);
+      Map<String, Object> map = new HashMap<String, Object>();
+      
+      map.put("myInfo", m);
+      map.put("keyword", "myInfo");
+      
+      return map;
+   }
+   //챗봇 - 성적 
+   @ResponseBody
+   @RequestMapping("/android/chatScore")
+   public Map<String, Object> androidchatGrade(HttpServletRequest req) {
+      logger.info("chatScore()");
+      
+      Map<String, Object> map = andService.getChatGrade(req);
+      return map;
+   }
 	
 }

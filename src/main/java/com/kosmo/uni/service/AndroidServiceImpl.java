@@ -31,6 +31,7 @@ import com.kosmo.uni.vo.HumanVO;
 import com.kosmo.uni.vo.InClassHowVO;
 import com.kosmo.uni.vo.Manager;
 import com.kosmo.uni.vo.ParkVO;
+import com.kosmo.uni.vo.ScoreVO;
 import com.kosmo.uni.vo.TableinfoVO;
 import com.kosmo.uni.vo.StudentVO;
 import com.kosmo.uni.vo.nfcVO;
@@ -800,4 +801,31 @@ public class AndroidServiceImpl implements AndroidService {
 		Map<String, Object> map = andDAO.getSalary(info);
 		return map;
 	}
+	
+	@Override
+    public Map<String, Object> getChatGrade(HttpServletRequest req) {
+      String id = req.getParameter("id");
+      String keyword = req.getParameter("keyword");
+      System.out.println("id :"+id);
+      System.out.println("keyword :"+keyword);
+      
+      Map<String, Object> info = new HashMap<>();
+
+      info.put("id", id);
+      info.put("CO_SEMESTER", 2);
+      info.put("CO_YEAR", 2020);
+      //info.put("score", keyword);
+      
+      List<ScoreVO> map = andDAO.getChatGrade(info);
+      
+      
+      Map<String, Object> map2 = new HashMap<String, Object>();
+      map2.put("score", map);
+      map2.put("keyword", "score");
+      for(int i=0; i < map2.size(); i++) {
+         System.out.println("결과 : " + map.get(i));
+      }
+      
+      return map2;
+   }
 }
