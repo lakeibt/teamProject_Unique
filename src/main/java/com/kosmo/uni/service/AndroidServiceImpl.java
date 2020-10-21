@@ -817,13 +817,14 @@ public class AndroidServiceImpl implements AndroidService {
       //info.put("score", keyword);
       
       List<ScoreVO> map = andDAO.getChatGrade(info);
-      
+    
       
       Map<String, Object> map2 = new HashMap<String, Object>();
       map2.put("score", map);
       map2.put("keyword", "score");
-      for(int i=0; i < map2.size(); i++) {
+      for(int i=0; i < map.size(); i++) {
          System.out.println("결과 : " + map.get(i));
+         
       }
       
       return map2;

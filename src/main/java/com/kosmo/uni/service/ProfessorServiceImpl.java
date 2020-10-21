@@ -639,7 +639,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 
 	@Override
 	public void lectureAdd(MultipartHttpServletRequest req, Model model) {
-		
 		int insertCnt = 0;
 		
 		MultipartFile file= req.getFile("le_file");
@@ -648,11 +647,11 @@ public class ProfessorServiceImpl implements ProfessorService {
 		
 		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\";
 		
-		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
+		String realDir = "D:\\Dev65\\android\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
 		
 		String realDir_file = realDir + realDir_detail + "video\\";
 		
-		System.out.println(realDir_file);
+		System.out.println(file.getOriginalFilename());
 		
 		FileInputStream fis = null;
 		FileOutputStream fos = null;

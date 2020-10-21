@@ -53,7 +53,7 @@ $(document).ready(function() {
 	connectWS();
 });
 function connectWS() {
-	var ws = new WebSocket("ws://192.168.219.113/uni/message/websocket");
+	var ws = new WebSocket("ws://localhost/uni/message/websocket");
 	socket = ws;
 
 	ws.onopen = function() {

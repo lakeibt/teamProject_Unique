@@ -943,7 +943,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		String realDir_detail = "teamProject_Unique\\src\\main\\webapp\\resources\\img\\profile_photo\\";
 		
-		String realDir = "D:\\Dev65\\workspace\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
+		String realDir = "D:\\Dev65\\android\\";	// 각자 컴퓨터마다 teamProject_Unique가 있는 곳으로 다르게 설정
 		
 		String realDir_adm = realDir + realDir_detail + "admin\\";
 		String realDir_pro = realDir + realDir_detail + "professor\\";
